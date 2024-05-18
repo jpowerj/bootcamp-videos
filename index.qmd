@@ -1,0 +1,7 @@
+---
+title: "Videos for 2024 DSAN Bootcamp"
+listing:
+  contents: "*.qmd"
+  type: table
+---
+

@@ -1,0 +1,335 @@
+---
+title: "Week 6: Introduction to R + Python = Quarto"
+author: "Jeff Jacobs"
+institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
+format:
+  revealjs:
+    echo: true
+    code-fold: true
+    slide-number: true
+    df-print: kable
+    html-math-method: mathjax
+    scrollable: true
+    theme: ["../_jjslides.scss"]
+    output-file: "slides.html"
+    include-in-header:
+      text: "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+    revealjs-plugins:
+      - simplemenu
+  html:
+    df-print: kable
+    html-math-format: mathjax
+    echo: true
+    code-fold: true
+    output-file: "index.html"
+    include-in-header:
+      text: "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+---
+
+# R and Python as "Building Blocks" {data-stack-name="Building Blocks"}
+
+## Setting Up Your Environment {.smaller}
+
+*Tie yourself to the mast! Please!*
+
+![[*Ulysses and the Sirens*](https://en.wikipedia.org/wiki/Ulysses_and_the_Sirens_(Waterhouse)){target='_blank'}, J. W. Waterhouse (1891)](images/ulysses.jpg){fig-align="center"}
+
+| | | |
+| - | - | - |
+| Dive right into coding<br>(Bc you think data science = coding) | $\implies$ | Spend 75% of your time wrestling with environment issues 😔 |
+| Think about + set up environment before diving into coding | $\implies$ | Spend 25% of your time wrestling with environment issues 😎 |
+
+: {tbl-colwidths="[45, 10, 45]"}
+
+## If You Were Just Coding in Python
+
+::: {#python-only-box style="border: 2px solid black; padding: 10px;"}
+
+{{< include _python-box.qmd >}}
+
+:::
+
+## Python-On-Its-Own Demonstration
+
+* <span class="badge rounded-pill text-bg-light"><i class="bi bi-gear"></i> Environment!</span> Create a `bootcamp-w06` folder, and **open this folder in VSCode!**
+* Create a `hello.py` file, with the following content:
+
+  ``` {.python filename="hello.py"}
+  print("Hello from Python!")
+  ```
+
+* Now open Terminal (in VSCode: Right click in Explorer panel &rarr; "Open in Integrated Terminal") and execute
+
+  ``` {.bash code-line-numbers="false"}
+  python hello.py
+  ```
+
+* You should see the following output:
+
+  ```
+  Hello from Python!
+  ```
+
+## Python-Within-Jupyter Demo
+
+* Still within the Integrated Terminal, type `jupyter` and press Enter...
+* (If Python is correctly set up and Jupyter has been correctly installed) You'll see an interface allowing you to create **Notebooks**
+
+![](images/jupyter_screenshot.jpeg){fig-align="center"}
+
+## Jupyter Notebooks (`.ipynb` Files) {.crunch-title .crunch-ul}
+
+* You saw these in more detail during Python section!
+* All you need to remember here is: this is a **wrapper** around the core `python` executable: all it does is
+  1. **Takes the code you enter into a cell**
+  2. **Runs it** using `python <temporary file>.py`
+  3. **Stores** the output within the `.ipynb` file itself
+
+![*(Make sure to terminate Jupyter using {{< kbd mac=Command-C win=Control-C >}} once you're done using it!)*](images/jupyter_hello.jpeg){fig-align="center"}
+
+## If You Were Just Coding in R
+
+::: {#r-studio-only-box style="border: 2px solid black; padding: 10px;"}
+
+{{< include _r-studio-box.qmd >}}
+
+:::
+
+## R-On-Its-Own Demonstration
+
+* Create a `hello.r` file, with the following content:
+
+  ``` {.r filename="hello.r"}
+  print("Hello from R!")
+  ```
+
+* Now open Terminal (in VSCode: Right click in Explorer panel &rarr; "Open in Integrated Terminal") and execute
+
+  ``` {.bash code-line-numbers="false"}
+  Rscript hello.r
+  ```
+
+* You should see the following output:
+
+  ```
+  [1] "Hello from R!"
+  ```
+
+* *(Plz notice the similarity with Python!)*
+
+# Rewiring Your Brain for Data Science {data-stack-name="Literate Programming"}
+
+::: {style="font-size: 150%"}
+
+| | | | |
+| - |:-:| - | - |
+| Python | *or* | R | ❌😪 |
+| Python | **AND** | R | ✅😎 |
+
+:::
+
+## Literate Programming = Transparent Science!
+
+* Academic papers, video demonstrations, etc., can *hide* more than they *reveal*
+    * Ex: Look at all these [UI Templates](https://www.canva.com/prototypes/templates/mobile/){target='_blank'} on Canva!
+* Given a plot in some paper... How do we know they didn't just "tweak" the settings, for hours on end, to produce the result they wanted? ($\neq$ ethical science)
+* One answer: if they provide the **code** that **produced** the figure, then we can **interrogate** their settings/choices, and change them, to see if the result still holds!
+
+## Markdown + R + Python $\rightarrow$ Quarto
+
+* **Markdown** is basically glorified plaintext: text+basic formatting (bold, italics, headings, links, tables)
+* **R** is just a program that lives on your computer and executes R code
+* **Python** is just a program that lives on your computer and executes Python code
+* **Quarto** is a **wrapper** around R and Python, allowing you to write `.qmd` (**Q**uarto **M**ark**D**own) files: **Markdown documents containing R and Python code!**
+
+
+## Quarto Building Blocks {.smaller .crunch-p .crunch-images}
+
+<!-- start Quarto box -->
+::: {#quarto-box style="border: 2px solid black; padding: 10px;"}
+
+<center>
+<img src="images/quarto_logo.svg" width="20%"></img>
+</center>
+
+<!-- start columns -->
+::: {layout="[48,4,48]" layout-valign="center"}
+
+::: {#r-studio-layout-cell}
+::: {#r-studio style="border: 2px solid black !important; padding: 8px;"}
+
+{{< include _r-studio-box.qmd >}}
+
+:::
+:::
+::: {#quarto-plus-box}
+
+<h3 style="text-align: center;">\+</h3>
+
+:::
+::: {#python-layout-cell}
+<!-- start Jupyter column -->
+::: {#jupyter-col style="border: 2px solid black; padding: 8px;"}
+
+{{< include _python-box.qmd >}}
+
+:::
+:::
+:::
+<!-- end columns -->
+
+:::
+<!-- end quarto box -->
+
+## Reproducibility and Literate Programming {.smaller .small-title}
+
+* **Reproducible document**: includes both the **content** (text, tables, figures) and the **code** or instructions required to **generate** that content.
+  * Designed to ensure that others can reproduce the same document, including its data analysis, results, and visualizations, consistently and accurately.
+  * tldr: If you're copying-and-pasting results from your **code output** to your **results document**, a red flag should go off in your head!
+* **Literate programming** is a coding and documentation approach where **code** and **explanations of the code** are combined in a single document.
+  * Emphasizes clear and understandable code by interleaving **human-readable text** (explanations, comments, and documentation) with **executable code**.
+
+## Single Source, Many Outputs {.smaller}
+
+* We can create content (text, code, results, graphics) within a **source document**, and then use different **weaving engines** to create different **document types**:
+
+::: columns
+::: {.column width="50%"}
+
+* Documents
+  * Web pages (HTML)
+  * Word documents
+  * PDF files
+* Presentations
+  * HTML
+  * PowerPoint
+:::
+::: {.column width="50%"}
+
+* Websites/blogs
+* Books
+* Dashboards
+* Interactive documents
+* Formatted journal articles
+
+:::
+:::
+
+# Demonstrations {data-name="Demonstrations"}
+
+## VSCode Demonstrations
+
+* <span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></img></span>
+* <span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></img></span>
+* <span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></img></span>
+
+## Posit.Cloud Demonstrations
+
+* <span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></img></span>
+* <span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></img></span>
+* <span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></img></span>
+
+# R in Quarto {data-stack-name="R in Quarto"}
+
+## So... What is R?
+
+* Python was created mainly for **software engineers**
+  * Statistical computing functionality requires **3rd-party imports**: `NumPy`, `SciPy`, `scikit-learn`
+* **R** was created mainly for **statisticians**
+  * Software engineering functionality often requires **3rd-party libraries**: e.g., `purrr` (for Python-style `lambda` functions)
+* One key implication for DSAN: **probability distributions** (Normal, Binomial, etc.) are **built into** R! (Available through `NumPy` in Python)
+
+## Probability Distribution Example {.smaller .crunch-details}
+
+Don't worry about the details of the code for now! Just note how...
+
+::: {.columns}
+::: {.column width="50%"}
+
+`rbinom()` is **built into** R, whereas
+
+```{r}
+#| echo: true
+#| code-fold: false
+set.seed(1234)
+coin_results <- rbinom(n=20, size=10, prob=0.5)
+print(coin_results)
+class(coin_results)
+```
+
+```{r}
+library(tidyverse)
+coin_flip_df <- tibble(num_heads = coin_results)
+ggplot(coin_flip_df, aes(x=num_heads)) +
+  geom_bar()
+```
+
+:::
+::: {.column .nostretch width="50%"}
+
+`rng.binomial()` requires **NumPy**
+
+```{python}
+#| echo: true
+#| code-fold: false
+import numpy as np
+rng = np.random.default_rng(seed=1234)
+ten_coin_results = rng.binomial(n=10, p=0.5, size=20)
+print(ten_coin_results)
+type(ten_coin_results)
+```
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+result_plot = plt.figure()
+result_plot.set_figheight(3.5)
+coin_flip_df = pd.DataFrame({'num_heads': ten_coin_results})
+result_plot = sns.histplot(data=coin_flip_df, x='num_heads')
+plt.tight_layout()
+plt.show()
+```
+
+:::
+:::
+
+## The Moment You've Been Waiting For 🤯 {.title-08}
+
+* How did I include **both** R and Python code (and its outputs) in the previous slide?
+* Quarto allows **integration** of R+Python via **code blocks!**
+
+  ::: {.columns}
+  ::: {.column width="47%"}
+
+  ```` {.quarto filename="my_file.qmd"}
+  ```{{python}}
+  print("Hello from Python!")
+  ```
+
+  ```{{r}}
+  print("Hello from R!")
+  ```
+  ````
+
+  :::
+  ::: {.column width="4%"}
+
+  &rarr;
+
+  :::
+  ::: {.column width="47%"}
+
+  ``` {.bash code-line-numbers="false"}
+  Hello from Python!
+
+  Hello from R!
+  ```
+
+  :::
+  :::

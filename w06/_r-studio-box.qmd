@@ -1,0 +1,16 @@
+<center style="margin: 0px !important;">
+<img src="images/RStudio_logo.svg" width="25%"></img>
+</center>
+
+* GUI wrapper around R (Integrated Development Environment = IDE)
+* Run **blocks** of R code (from `.Rmd`)
+
+<!-- start R box inside RStudio box -->
+::: {#r-box style="border: 2px solid black; margin: auto; padding: 2px;"}
+
+**<a href="https://www.r-project.org/" target="_blank">The R Language <i class="fa-brands fa-r-project"></i></a>**<img src="images/r_logo.svg" style="float: right;" width="20%"></img>
+
+* Programming language
+* `Rscript <script>.r`
+
+:::

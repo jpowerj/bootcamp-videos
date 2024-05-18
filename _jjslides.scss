@@ -1,0 +1,354 @@
+/*-- scss:variables --*/
+
+// cb1
+
+//$cb1: #E69F00;
+$cb1: rgb(230, 159, 0);
+//$cb1-alpha: #E69F007F;
+$cb1-alpha: rgba(230, 159, 0, 0.333);
+
+// cb2
+
+//$cb2: #56B4E9;
+$cb2: rgb(86, 180, 233);
+$cb2-alpha: rgba(86, 180, 233, 0.333);
+//$cb2-alpha: #56B4E97F;
+
+// cb3
+
+//$cb3: #009E73;
+$cb3: rgb(0, 158, 115);
+$cb3-alpha: rgba(0, 158, 115, 0.333);
+
+// gray
+
+$cbg: rgb(211, 211, 211);
+$cbg-alpha: rgba(211, 211, 211, 0.333);
+
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+.alg {
+    font-variant-caps: small-caps !important;
+}
+
+.bold-code {
+    font-weight: 800 !important;
+}
+
+.boxed {
+    border: 3px solid black !important;
+    padding: 4px !important;
+}
+
+.caption {
+    text-align: center !important;
+}
+figcaption {
+    text-align: center !important;
+}
+.caption-left .caption {
+    text-align: left !important;
+}
+.caption-left figcaption {
+    text-align: left !important;
+}
+
+
+// Colors: text color, background color, and
+// transparent versions
+.cb1 {
+    color: $cb1 !important;
+}
+.cb1-bg {
+    background-color: $cb1 !important;
+}
+.cb1a-bg {
+    background-color: $cb1-alpha !important;
+    text-align: center !important;
+}
+.cb2 {
+    color: $cb2 !important;
+}
+.cb2-bg {
+    background-color: $cb2 !important;
+}
+.cb2a-bg {
+    background-color: $cb2-alpha !important;
+    text-align: center !important;
+}
+.cb3 {
+    color: $cb3 !important;
+}
+.cb3-bg {
+    background-color: $cb3 !important;
+}
+.cb3a-bg {
+    background-color: $cb3-alpha !important;
+    text-align: center !important;
+}
+.cb4 {
+    color: #F0E442 !important;
+}
+.cbg {
+    color: $cbg !important;
+}
+.cbg-bg {
+    background-color: $cbg !important;
+}
+.cbga-bg {
+    background-color: $cbg-alpha !important;
+    text-align: center !important;
+}
+
+.crunch-col-output .column-output-location {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+// callout blocks
+.crunch-callout .callout {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+//details
+.crunch-details details {
+    margin-bottom: 3px !important;
+}
+
+// figcaption
+
+.crunch-figcaption figcaption {
+    margin: 0px !important;
+}
+
+// footnotes
+.crunch-footnotes .aside-footnotes > * {
+    margin-bottom: 0px !important;
+}
+
+.crunch-footnotes aside {
+    font-size: 0.7em !important;
+    bottom: 0px !important;
+}
+
+// hr
+.crunch-hr hr {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+}
+
+// iframe
+.crunch-iframe iframe {
+    margin-bottom: 0px !important;
+}
+
+// images
+.crunch-images img {
+    margin: 0px !important;
+}
+
+// lists
+.crunch-li li {
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+}
+.crunch-li-3 li {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+}
+.crunch-li-5 li {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.crunch-li-8 li {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+.crunch-ul-0 ul {
+    margin-bottom: 0px !important;
+}
+
+.crunch-ol ol {
+    margin-bottom: 0px !important;
+}
+
+// math
+.crunch-math mjx-container {
+    margin: 3px !important;
+}
+
+.crunch-math-3 mjx-container {
+    margin: 3px !important;
+}
+
+// p
+
+.crunch-p p {
+    margin: 0px !important;
+}
+
+// quarto-figure
+// .crunch-quarto-figure .quarto-figure {
+//     margin: 0px !important;
+// }
+
+.crunch-quarto-figure .quarto-figure {
+    margin-bottom: 0px !important;
+}
+
+// quarto-layout-panel
+.crunch-quarto-layout-panel .quarto-layout-panel {
+    margin-bottom: 0px !important;
+}
+
+// table
+.crunch-table td {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+
+.crunch-table th {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+}
+
+// title
+.crunch-title h1 {
+    margin-bottom: 0px !important;
+}
+.crunch-title h2 {
+    margin-bottom: 0px !important;
+}
+
+.crunch-ul ul {
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+}
+
+.full-width-callout .callout-body {
+    width: 100% !important;
+}
+
+.full-width-callout .callout-content {
+    width: 100% !important;
+}
+
+// math smaller
+.math-85 mjx-container {
+    font-size: 85% !important;
+}
+
+.math-90 mjx-container {
+    font-size: 90% !important;
+}
+
+.math-95 mjx-container {
+    font-size: 95% !important;
+}
+
+.math-95 .math .inline {
+    font-size: 95% !important;
+}
+
+.not-title-slide {
+    display: block !important;
+    top: 0px !important;
+}
+
+.py-comment {
+    font-family: 'Courier New', Courier, monospace;
+    color: #4f6446;
+}
+
+.reveal pre {
+    background-color: unset !important;
+}
+
+.subsubtitle {
+    font-size: 70% !important;
+    line-height: 0.5em !important;
+}
+
+.small-summary summary {
+    font-size: 1.25rem !important;
+}
+
+.smaller-table table {
+    font-size: 1.5rem !important;
+}
+
+// title smaller
+
+.title-06 h2 {
+    font-size: calc(0.6*var(--r-heading2-size)) !important;
+}
+
+.title-06 h1 {
+    font-size: calc(0.6*var(--r-heading2-size)) !important;
+}
+
+.title-07 h2 {
+    font-size: calc(0.7*var(--r-heading2-size)) !important;
+}
+
+.title-07 h1 {
+    font-size: calc(0.7*var(--r-heading2-size)) !important;
+}
+
+.title-08 h2 {
+    font-size: calc(0.8*var(--r-heading2-size)) !important;
+}
+
+.title-08 h1 {
+    font-size: calc(0.8*var(--r-heading2-size)) !important;
+}
+
+.title-09 h2 {
+    font-size: calc(0.9*var(--r-heading2-size)) !important;
+}
+
+.title-09 h1 {
+    font-size: calc(0.9*var(--r-heading2-size)) !important;
+}
+
+.title-10 h2 {
+    font-size: calc(1.0*var(--r-heading2-size)) !important;
+}
+
+.title-10 h1 {
+    font-size: calc(1.0*var(--r-heading2-size)) !important;
+}
+
+.title-11 h2 {
+    font-size: calc(1.1*var(--r-heading2-size)) !important;
+}
+
+.title-11 h1 {
+    font-size: calc(1.1*var(--r-heading2-size)) !important;
+}
+
+.title-115 h2 {
+    font-size: calc(1.15*var(--r-heading2-size)) !important;
+}
+
+.title-115 h1 {
+    font-size: calc(1.15*var(--r-heading2-size)) !important;
+}
+
+.title-12 h2 {
+    font-size: calc(1.2*var(--r-heading2-size)) !important;
+}
+
+.under {
+    text-decoration: underline !important;
+}
+
+.vcenter .cell-output-display {
+    position: absolute !important;
+    top: 25% !important;
+    margin: 0 !important;
+    // background-color: purple !important;
+}
