@@ -5,9 +5,10 @@ project:
 website:
   title: "2024 DSAN Bootcamp Videos"
   sidebar:
-    content:
+    contents:
       - href: index.qmd
         text: Home
+        icon: "home"
 
 format:
   html:
