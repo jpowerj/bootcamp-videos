@@ -254,7 +254,7 @@ format:
 
 # R in Quarto {data-stack-name="R in Quarto"}
 
-## So... What is R?
+## So... What is R? {.crunch-title}
 
 * Python was created mainly for **software engineers**
   * Statistical computing functionality requires **3rd-party imports**: `NumPy`, `SciPy`, `scikit-learn`
