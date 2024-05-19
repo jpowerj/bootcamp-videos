@@ -317,7 +317,7 @@ plt.show()
 :::
 :::
 
-## The Moment You've Been Waiting For 🤯 {.title-08}
+## The Moment You've Been Waiting For 🤯 {.title-08 .valign-cols}
 
 * How did I include **both** R and Python code (and its outputs) in the previous slide?
 * Quarto allows **integration** of R+Python via **code blocks!**
