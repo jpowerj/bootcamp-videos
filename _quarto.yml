@@ -4,8 +4,8 @@ project:
 
 website:
   title: "2024 DSAN Bootcamp Videos"
-  navbar:
-    left:
+  sidebar:
+    content:
       - href: index.qmd
         text: Home
 

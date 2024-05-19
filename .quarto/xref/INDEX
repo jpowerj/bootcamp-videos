@@ -2,5 +2,20 @@
   "w06/index.qmd": {
     "index.html": "748ed34c",
     "slides.html": "12e01219"
+  },
+  "w06-3/index.qmd": {
+    "slides.html": "3a5809ab",
+    "index.html": "9dcc97e3"
+  },
+  "w06-1/index.qmd": {
+    "slides.html": "85bf79c8",
+    "index.html": "f9e77b95"
+  },
+  "index.qmd": {
+    "index.html": "c9ca8340"
+  },
+  "w06-2/index.qmd": {
+    "slides.html": "10755f95",
+    "index.html": "5ba29cda"
   }
 }

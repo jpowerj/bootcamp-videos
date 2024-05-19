@@ -11,7 +11,7 @@
 ::: {#python-box style="border: 2px solid black; margin: auto; padding: 2px;"}
 
 <!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
-<a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></img>
+<b><a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></img></b>
 
 * Programming language
 * `python <script>.py`

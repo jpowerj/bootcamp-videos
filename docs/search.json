@@ -1,254 +1,296 @@
 [
   {
-    "objectID": "w06/index.html#setting-up-your-environment",
-    "href": "w06/index.html#setting-up-your-environment",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-2/slides.html#quarto-projects-in-vscode",
+    "href": "w06-2/slides.html#quarto-projects-in-vscode",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in VSCode",
+    "text": "Quarto Projects in VSCode\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "w06-2/slides.html#quarto-projects-in-posit.cloud",
+    "href": "w06-2/slides.html#quarto-projects-in-posit.cloud",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in Posit.Cloud",
+    "text": "Quarto Projects in Posit.Cloud\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books \n\n\n\n\n2024 DSAN Bootcamp W06-2: Installing Quarto"
+  },
+  {
+    "objectID": "w06-2/index.html",
+    "href": "w06-2/index.html",
+    "title": "Installing Quarto",
+    "section": "",
+    "text": "Mac\nWindows"
+  },
+  {
+    "objectID": "w06-2/index.html#quarto-projects-in-vscode",
+    "href": "w06-2/index.html#quarto-projects-in-vscode",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in VSCode",
+    "text": "Quarto Projects in VSCode\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "w06-2/index.html#quarto-projects-in-posit.cloud",
+    "href": "w06-2/index.html#quarto-projects-in-posit.cloud",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in Posit.Cloud",
+    "text": "Quarto Projects in Posit.Cloud\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Videos for 2024 DSAN Bootcamp",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInstalling Quarto\n\n\nJeff Jacobs\n\n\n\n\nIntroduction to Quarto = Python + R\n\n\nJeff Jacobs\n\n\n\n\nIntroduction to R\n\n\nJeff Jacobs\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "w06-1/index.html",
+    "href": "w06-1/index.html",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "",
+    "text": "Tie yourself to the mast! Please!\n\n\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py\n\n\n\n\n\n\n\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!\n\n\n\n\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks\n\n\n\n\n\n\n\n\n\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)\n\n\n\n\n\nSimilarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)\nYou can (probably should) install RStudio locally, BUT…\nI want to instead use this as an opportunity to introduce you to Posit.Cloud!\nThe resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)\n\n\n\n\n\n(Warning: Soon to be obsolete! Replaced by very similar .qmd, Quarto Markdown 😉)\nChoose “New Blank File” → “R Markdown…” (in the Files Pane, bottom right of RStudio) to create hello.Rmd:\n\n\n\n\nhello.Rmd\n\n---\ntitle: \"Hello from R Markdown!\"\n---\n\n## Introduction\n\nHello here is some R code\n\n```{r}\nprint(\"Hello from R\")\n```\n\n## A Cool Table\n\n| Problem | Solution |\n|:-:|:-:|\n| $3^5$ | 243 |\n\n\n\n→"
+  },
+  {
+    "objectID": "w06-1/index.html#setting-up-your-environment",
+    "href": "w06-1/index.html#setting-up-your-environment",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "Tie yourself to the mast! Please!\n\n\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎"
   },
   {
-    "objectID": "w06/index.html#if-you-were-just-coding-in-python",
-    "href": "w06/index.html#if-you-were-just-coding-in-python",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#if-you-were-just-coding-in-python",
+    "href": "w06-1/index.html#if-you-were-just-coding-in-python",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "GUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
   },
   {
-    "objectID": "w06/index.html#python-on-its-own-demonstration",
-    "href": "w06/index.html#python-on-its-own-demonstration",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#python-on-its-own-demonstration",
+    "href": "w06-1/index.html#python-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!"
   },
   {
-    "objectID": "w06/index.html#python-within-jupyter-demo",
-    "href": "w06/index.html#python-within-jupyter-demo",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#python-within-jupyter-demo",
+    "href": "w06-1/index.html#python-within-jupyter-demo",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "Still within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks"
   },
   {
-    "objectID": "w06/index.html#jupyter-notebooks-.ipynb-files",
-    "href": "w06/index.html#jupyter-notebooks-.ipynb-files",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#jupyter-notebooks-.ipynb-files",
+    "href": "w06-1/index.html#jupyter-notebooks-.ipynb-files",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "You saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)"
   },
   {
-    "objectID": "w06/index.html#if-you-were-just-coding-in-r",
-    "href": "w06/index.html#if-you-were-just-coding-in-r",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#if-you-were-just-coding-in-r",
+    "href": "w06-1/index.html#if-you-were-just-coding-in-r",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "GUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r"
   },
   {
-    "objectID": "w06/index.html#r-on-its-own-demonstration",
-    "href": "w06/index.html#r-on-its-own-demonstration",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#r-on-its-own-demonstration",
+    "href": "w06-1/index.html#r-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
     "section": "",
     "text": "Create a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
   },
   {
-    "objectID": "w06/index.html#literate-programming-transparent-science",
-    "href": "w06/index.html#literate-programming-transparent-science",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#r-in-rstudio-demonstration",
+    "href": "w06-1/index.html#r-in-rstudio-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "",
+    "text": "Similarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)\nYou can (probably should) install RStudio locally, BUT…\nI want to instead use this as an opportunity to introduce you to Posit.Cloud!\nThe resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)"
+  },
+  {
+    "objectID": "w06-1/index.html#r-markdown-.rmd-files",
+    "href": "w06-1/index.html#r-markdown-.rmd-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "",
+    "text": "(Warning: Soon to be obsolete! Replaced by very similar .qmd, Quarto Markdown 😉)\nChoose “New Blank File” → “R Markdown…” (in the Files Pane, bottom right of RStudio) to create hello.Rmd:\n\n\n\n\nhello.Rmd\n\n---\ntitle: \"Hello from R Markdown!\"\n---\n\n## Introduction\n\nHello here is some R code\n\n```{r}\nprint(\"Hello from R\")\n```\n\n## A Cool Table\n\n| Problem | Solution |\n|:-:|:-:|\n| $3^5$ | 243 |\n\n\n\n→"
+  },
+  {
+    "objectID": "w06-1/index.html#literate-programming-transparent-science",
+    "href": "w06-1/index.html#literate-programming-transparent-science",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Literate Programming = Transparent Science!",
     "text": "Literate Programming = Transparent Science!\n\nAcademic papers, video demonstrations, etc., can hide more than they reveal\n\nEx: Look at all these UI Templates on Canva!\n\nGiven a plot in some paper… How do we know they didn’t just “tweak” the settings, for hours on end, to produce the result they wanted? (\\(\\neq\\) ethical science)\nOne answer: if they provide the code that produced the figure, then we can interrogate their settings/choices, and change them, to see if the result still holds!"
   },
   {
-    "objectID": "w06/index.html#markdown-r-python-rightarrow-quarto",
-    "href": "w06/index.html#markdown-r-python-rightarrow-quarto",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#markdown-r-python-rightarrow-quarto",
+    "href": "w06-1/index.html#markdown-r-python-rightarrow-quarto",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Markdown + R + Python \\(\\rightarrow\\) Quarto",
     "text": "Markdown + R + Python \\(\\rightarrow\\) Quarto\n\nMarkdown is basically glorified plaintext: text+basic formatting (bold, italics, headings, links, tables)\nR is just a program that lives on your computer and executes R code\nPython is just a program that lives on your computer and executes Python code\nQuarto is a wrapper around R and Python, allowing you to write .qmd (Quarto MarkDown) files: Markdown documents containing R and Python code!"
   },
   {
-    "objectID": "w06/index.html#quarto-building-blocks",
-    "href": "w06/index.html#quarto-building-blocks",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#quarto-building-blocks",
+    "href": "w06-1/index.html#quarto-building-blocks",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Quarto Building Blocks",
     "text": "Quarto Building Blocks\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n+\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
   },
   {
-    "objectID": "w06/index.html#reproducibility-and-literate-programming",
-    "href": "w06/index.html#reproducibility-and-literate-programming",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#reproducibility-and-literate-programming",
+    "href": "w06-1/index.html#reproducibility-and-literate-programming",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Reproducibility and Literate Programming",
-    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code or instructions required to generate that content.\n\nDesigned to ensure that others can reproduce the same document, including its data analysis, results, and visualizations, consistently and accurately.\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming is a coding and documentation approach where code and explanations of the code are combined in a single document.\n\nEmphasizes clear and understandable code by interleaving human-readable text (explanations, comments, and documentation) with executable code."
+    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code that generated it\n\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming: Human-readable explanations are included alongside code, within a single document."
   },
   {
-    "objectID": "w06/index.html#single-source-many-outputs",
-    "href": "w06/index.html#single-source-many-outputs",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "Single Source, Many Outputs",
-    "text": "Single Source, Many Outputs\n\nWe can create content (text, code, results, graphics) within a source document, and then use different weaving engines to create different document types:\n\n\n\n\nDocuments\n\nWeb pages (HTML)\nWord documents\nPDF files\n\nPresentations\n\nHTML\nPowerPoint\n\n\n\n\nWebsites/blogs\nBooks\nDashboards\nInteractive documents\nFormatted journal articles"
-  },
-  {
-    "objectID": "w06/index.html#vscode-demonstrations",
-    "href": "w06/index.html#vscode-demonstrations",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "VSCode Demonstrations",
-    "text": "VSCode Demonstrations\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
-  },
-  {
-    "objectID": "w06/index.html#posit.cloud-demonstrations",
-    "href": "w06/index.html#posit.cloud-demonstrations",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "Posit.Cloud Demonstrations",
-    "text": "Posit.Cloud Demonstrations\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
-  },
-  {
-    "objectID": "w06/index.html#so-what-is-r",
-    "href": "w06/index.html#so-what-is-r",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#so-what-is-r",
+    "href": "w06-1/index.html#so-what-is-r",
+    "title": "Introduction to Quarto = Python + R",
     "section": "So… What is R?",
     "text": "So… What is R?\n\nPython was created mainly for software engineers\n\nStatistical computing functionality requires 3rd-party imports: NumPy, SciPy, scikit-learn\n\nR was created mainly for statisticians\n\nSoftware engineering functionality often requires 3rd-party libraries: e.g., purrr (for Python-style lambda functions)\n\nOne key implication for DSAN: probability distributions (Normal, Binomial, etc.) are built into R! (Available through NumPy in Python)"
   },
   {
-    "objectID": "w06/index.html#probability-distribution-example",
-    "href": "w06/index.html#probability-distribution-example",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#probability-distribution-example",
+    "href": "w06-1/index.html#probability-distribution-example",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Probability Distribution Example",
     "text": "Probability Distribution Example\nDon’t worry about the details of the code for now! Just note how…\n\n\nrbinom() is built into R, whereas\n\nset.seed(1234)\ncoin_results &lt;- rbinom(n=20, size=10, prob=0.5)\nprint(coin_results)\n\n [1] 3 5 5 6 7 6 1 4 6 5 6 5 4 7 4 7 4 4 4 4\n\nclass(coin_results)\n\n[1] \"integer\"\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ncoin_flip_df &lt;- tibble(num_heads = coin_results)\nggplot(coin_flip_df, aes(x=num_heads)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nrng.binomial() requires NumPy\n\nimport numpy as np\nrng = np.random.default_rng(seed=1234)\nten_coin_results = rng.binomial(n=10, p=0.5, size=20)\nprint(ten_coin_results)\n\n[8 5 7 4 4 3 4 4 8 4 5 5 7 7 6 6 6 4 4 7]\n\ntype(ten_coin_results)\n\n&lt;class 'numpy.ndarray'&gt;\n\n\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nresult_plot = plt.figure()\nresult_plot.set_figheight(3.5)\ncoin_flip_df = pd.DataFrame({'num_heads': ten_coin_results})\nresult_plot = sns.histplot(data=coin_flip_df, x='num_heads')\n\n\n/Users/jpj/.virtualenvs/r-reticulate/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.\n  with pd.option_context('mode.use_inf_as_na', True):\n\n\nCode\nplt.tight_layout()\nplt.show()"
   },
   {
-    "objectID": "w06/index.html#the-moment-youve-been-waiting-for",
-    "href": "w06/index.html#the-moment-youve-been-waiting-for",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/index.html#the-moment-youve-been-waiting-for",
+    "href": "w06-1/index.html#the-moment-youve-been-waiting-for",
+    "title": "Introduction to Quarto = Python + R",
     "section": "The Moment You’ve Been Waiting For 🤯",
     "text": "The Moment You’ve Been Waiting For 🤯\n\nHow did I include both R and Python code (and its outputs) in the previous slide?\nQuarto allows integration of R+Python via code blocks!\n\n\n\n\nmy_file.qmd\n\n```{python}\nprint(\"Hello from Python!\")\n```\n\n```{r}\nprint(\"Hello from R!\")\n```\n\n\n→\n\nHello from Python!\n\nHello from R!"
   },
   {
-    "objectID": "w06/slides.html",
-    "href": "w06/slides.html",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "",
-    "text": "Tie yourself to the mast! Please!\n\n\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py\n\n\n\n\n\n\n\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!\n\n\n\n\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks\n\n\n\n\n\n\n\n\n\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
+    "objectID": "w06-1/index.html#the-takeaway-python-and-r",
+    "href": "w06-1/index.html#the-takeaway-python-and-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Takeaway: Python and R",
+    "text": "The Takeaway: Python and R\n\nQuarto enables switching from Python to R at any point!\nSo, as we start on our R journey, try to identify its strengths and weaknesses relative to Python\nGiven a particular task—web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.—learn how to do it in both Python and R, then evaluate which one “clicks” more with you\n(In other words, my ask: if you already know how to do something in Python, pls be open to learning it in R as well! You might find it’s easier—try your best to consciously avoid getting “locked into” one language)\n\n\nThis also holds for Base R to Tidyverse!"
   },
   {
-    "objectID": "w06/slides.html#setting-up-your-environment",
-    "href": "w06/slides.html#setting-up-your-environment",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#setting-up-your-environment",
+    "href": "w06-1/slides.html#setting-up-your-environment",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Setting Up Your Environment",
     "text": "Setting Up Your Environment\nTie yourself to the mast! Please!\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎"
   },
   {
-    "objectID": "w06/slides.html#if-you-were-just-coding-in-python",
-    "href": "w06/slides.html#if-you-were-just-coding-in-python",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#if-you-were-just-coding-in-python",
+    "href": "w06-1/slides.html#if-you-were-just-coding-in-python",
+    "title": "Introduction to Quarto = Python + R",
     "section": "If You Were Just Coding in Python",
     "text": "If You Were Just Coding in Python\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
   },
   {
-    "objectID": "w06/slides.html#python-on-its-own-demonstration",
-    "href": "w06/slides.html#python-on-its-own-demonstration",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#python-on-its-own-demonstration",
+    "href": "w06-1/slides.html#python-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Python-On-Its-Own Demonstration",
     "text": "Python-On-Its-Own Demonstration\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!"
   },
   {
-    "objectID": "w06/slides.html#python-within-jupyter-demo",
-    "href": "w06/slides.html#python-within-jupyter-demo",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#python-within-jupyter-demo",
+    "href": "w06-1/slides.html#python-within-jupyter-demo",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Python-Within-Jupyter Demo",
     "text": "Python-Within-Jupyter Demo\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks"
   },
   {
-    "objectID": "w06/slides.html#jupyter-notebooks-.ipynb-files",
-    "href": "w06/slides.html#jupyter-notebooks-.ipynb-files",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#jupyter-notebooks-.ipynb-files",
+    "href": "w06-1/slides.html#jupyter-notebooks-.ipynb-files",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Jupyter Notebooks (.ipynb Files)",
     "text": "Jupyter Notebooks (.ipynb Files)\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)"
   },
   {
-    "objectID": "w06/slides.html#if-you-were-just-coding-in-r",
-    "href": "w06/slides.html#if-you-were-just-coding-in-r",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#if-you-were-just-coding-in-r",
+    "href": "w06-1/slides.html#if-you-were-just-coding-in-r",
+    "title": "Introduction to Quarto = Python + R",
     "section": "If You Were Just Coding in R",
     "text": "If You Were Just Coding in R\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r"
   },
   {
-    "objectID": "w06/slides.html#r-on-its-own-demonstration",
-    "href": "w06/slides.html#r-on-its-own-demonstration",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#r-on-its-own-demonstration",
+    "href": "w06-1/slides.html#r-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
     "section": "R-On-Its-Own Demonstration",
     "text": "R-On-Its-Own Demonstration\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
   },
   {
-    "objectID": "w06/slides.html#literate-programming-transparent-science",
-    "href": "w06/slides.html#literate-programming-transparent-science",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#r-in-rstudio-demonstration",
+    "href": "w06-1/slides.html#r-in-rstudio-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R-in-RStudio Demonstration",
+    "text": "R-in-RStudio Demonstration\n\nSimilarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)\nYou can (probably should) install RStudio locally, BUT…\nI want to instead use this as an opportunity to introduce you to Posit.Cloud!\nThe resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)"
+  },
+  {
+    "objectID": "w06-1/slides.html#r-markdown-.rmd-files",
+    "href": "w06-1/slides.html#r-markdown-.rmd-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R Markdown (.rmd) Files",
+    "text": "R Markdown (.rmd) Files\n\n(Warning: Soon to be obsolete! Replaced by very similar .qmd, Quarto Markdown 😉)\nChoose “New Blank File” → “R Markdown…” (in the Files Pane, bottom right of RStudio) to create hello.Rmd:\n\n\n\n\nhello.Rmd\n\n---\ntitle: \"Hello from R Markdown!\"\n---\n\n## Introduction\n\nHello here is some R code\n\n```{r}\nprint(\"Hello from R\")\n```\n\n## A Cool Table\n\n| Problem | Solution |\n|:-:|:-:|\n| $3^5$ | 243 |\n\n\n\n→"
+  },
+  {
+    "objectID": "w06-1/slides.html#literate-programming-transparent-science",
+    "href": "w06-1/slides.html#literate-programming-transparent-science",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Literate Programming = Transparent Science!",
     "text": "Literate Programming = Transparent Science!\n\nAcademic papers, video demonstrations, etc., can hide more than they reveal\n\nEx: Look at all these UI Templates on Canva!\n\nGiven a plot in some paper… How do we know they didn’t just “tweak” the settings, for hours on end, to produce the result they wanted? (\\(\\neq\\) ethical science)\nOne answer: if they provide the code that produced the figure, then we can interrogate their settings/choices, and change them, to see if the result still holds!"
   },
   {
-    "objectID": "w06/slides.html#markdown-r-python-rightarrow-quarto",
-    "href": "w06/slides.html#markdown-r-python-rightarrow-quarto",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#markdown-r-python-rightarrow-quarto",
+    "href": "w06-1/slides.html#markdown-r-python-rightarrow-quarto",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Markdown + R + Python \\(\\rightarrow\\) Quarto",
     "text": "Markdown + R + Python \\(\\rightarrow\\) Quarto\n\nMarkdown is basically glorified plaintext: text+basic formatting (bold, italics, headings, links, tables)\nR is just a program that lives on your computer and executes R code\nPython is just a program that lives on your computer and executes Python code\nQuarto is a wrapper around R and Python, allowing you to write .qmd (Quarto MarkDown) files: Markdown documents containing R and Python code!"
   },
   {
-    "objectID": "w06/slides.html#quarto-building-blocks",
-    "href": "w06/slides.html#quarto-building-blocks",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#quarto-building-blocks",
+    "href": "w06-1/slides.html#quarto-building-blocks",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Quarto Building Blocks",
     "text": "Quarto Building Blocks\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n+\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
   },
   {
-    "objectID": "w06/slides.html#reproducibility-and-literate-programming",
-    "href": "w06/slides.html#reproducibility-and-literate-programming",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#reproducibility-and-literate-programming",
+    "href": "w06-1/slides.html#reproducibility-and-literate-programming",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Reproducibility and Literate Programming",
-    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code or instructions required to generate that content.\n\nDesigned to ensure that others can reproduce the same document, including its data analysis, results, and visualizations, consistently and accurately.\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming is a coding and documentation approach where code and explanations of the code are combined in a single document.\n\nEmphasizes clear and understandable code by interleaving human-readable text (explanations, comments, and documentation) with executable code."
+    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code that generated it\n\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming: Human-readable explanations are included alongside code, within a single document."
   },
   {
-    "objectID": "w06/slides.html#single-source-many-outputs",
-    "href": "w06/slides.html#single-source-many-outputs",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "Single Source, Many Outputs",
-    "text": "Single Source, Many Outputs\n\nWe can create content (text, code, results, graphics) within a source document, and then use different weaving engines to create different document types:\n\n\n\n\nDocuments\n\nWeb pages (HTML)\nWord documents\nPDF files\n\nPresentations\n\nHTML\nPowerPoint\n\n\n\n\nWebsites/blogs\nBooks\nDashboards\nInteractive documents\nFormatted journal articles"
-  },
-  {
-    "objectID": "w06/slides.html#vscode-demonstrations",
-    "href": "w06/slides.html#vscode-demonstrations",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "VSCode Demonstrations",
-    "text": "VSCode Demonstrations\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
-  },
-  {
-    "objectID": "w06/slides.html#posit.cloud-demonstrations",
-    "href": "w06/slides.html#posit.cloud-demonstrations",
-    "title": "Week 6: Introduction to R + Python = Quarto",
-    "section": "Posit.Cloud Demonstrations",
-    "text": "Posit.Cloud Demonstrations\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
-  },
-  {
-    "objectID": "w06/slides.html#so-what-is-r",
-    "href": "w06/slides.html#so-what-is-r",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#so-what-is-r",
+    "href": "w06-1/slides.html#so-what-is-r",
+    "title": "Introduction to Quarto = Python + R",
     "section": "So… What is R?",
     "text": "So… What is R?\n\nPython was created mainly for software engineers\n\nStatistical computing functionality requires 3rd-party imports: NumPy, SciPy, scikit-learn\n\nR was created mainly for statisticians\n\nSoftware engineering functionality often requires 3rd-party libraries: e.g., purrr (for Python-style lambda functions)\n\nOne key implication for DSAN: probability distributions (Normal, Binomial, etc.) are built into R! (Available through NumPy in Python)"
   },
   {
-    "objectID": "w06/slides.html#probability-distribution-example",
-    "href": "w06/slides.html#probability-distribution-example",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#probability-distribution-example",
+    "href": "w06-1/slides.html#probability-distribution-example",
+    "title": "Introduction to Quarto = Python + R",
     "section": "Probability Distribution Example",
     "text": "Probability Distribution Example\nDon’t worry about the details of the code for now! Just note how…\n\n\nrbinom() is built into R, whereas\n\nset.seed(1234)\ncoin_results &lt;- rbinom(n=20, size=10, prob=0.5)\nprint(coin_results)\n\n [1] 3 5 5 6 7 6 1 4 6 5 6 5 4 7 4 7 4 4 4 4\n\nclass(coin_results)\n\n[1] \"integer\"\n\n\n\n\nCode\nlibrary(tidyverse)\ncoin_flip_df &lt;- tibble(num_heads = coin_results)\nggplot(coin_flip_df, aes(x=num_heads)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nrng.binomial() requires NumPy\n\nimport numpy as np\nrng = np.random.default_rng(seed=1234)\nten_coin_results = rng.binomial(n=10, p=0.5, size=20)\nprint(ten_coin_results)\n\n[8 5 7 4 4 3 4 4 8 4 5 5 7 7 6 6 6 4 4 7]\n\ntype(ten_coin_results)\n\n&lt;class 'numpy.ndarray'&gt;\n\n\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nresult_plot = plt.figure()\nresult_plot.set_figheight(3.5)\ncoin_flip_df = pd.DataFrame({'num_heads': ten_coin_results})\nresult_plot = sns.histplot(data=coin_flip_df, x='num_heads')\nplt.tight_layout()\nplt.show()"
   },
   {
-    "objectID": "w06/slides.html#the-moment-youve-been-waiting-for",
-    "href": "w06/slides.html#the-moment-youve-been-waiting-for",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#the-moment-youve-been-waiting-for",
+    "href": "w06-1/slides.html#the-moment-youve-been-waiting-for",
+    "title": "Introduction to Quarto = Python + R",
     "section": "The Moment You’ve Been Waiting For 🤯",
     "text": "The Moment You’ve Been Waiting For 🤯\n\nHow did I include both R and Python code (and its outputs) in the previous slide?\nQuarto allows integration of R+Python via code blocks!\n\n\n\n\nmy_file.qmd\n\n```{python}\nprint(\"Hello from Python!\")\n```\n\n```{r}\nprint(\"Hello from R!\")\n```\n\n\n→\n\nHello from Python!\n\nHello from R!"
   },
   {
-    "objectID": "w06/index.html",
-    "href": "w06/index.html",
-    "title": "Week 6: Introduction to R + Python = Quarto",
+    "objectID": "w06-1/slides.html#the-takeaway-python-and-r",
+    "href": "w06-1/slides.html#the-takeaway-python-and-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Takeaway: Python and R",
+    "text": "The Takeaway: Python and R\n\nQuarto enables switching from Python to R at any point!\nSo, as we start on our R journey, try to identify its strengths and weaknesses relative to Python\nGiven a particular task—web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.—learn how to do it in both Python and R, then evaluate which one “clicks” more with you\n(In other words, my ask: if you already know how to do something in Python, pls be open to learning it in R as well! You might find it’s easier—try your best to consciously avoid getting “locked into” one language)\n\n\nThis also holds for Base R to Tidyverse!\n\n\n\n\n2024 DSAN Bootcamp W6.1: Intro to Quarto"
+  },
+  {
+    "objectID": "w06-3/index.html",
+    "href": "w06-3/index.html",
+    "title": "Introduction to R",
     "section": "",
-    "text": "Tie yourself to the mast! Please!\n\n\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py\n\n\n\n\n\n\n\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!\n\n\n\n\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks\n\n\n\n\n\n\n\n\n\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
+    "text": "R for Pythoners"
   }
 ]

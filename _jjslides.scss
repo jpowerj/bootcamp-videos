@@ -163,6 +163,10 @@ figcaption {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
 }
+.crunch-li-6 li {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+}
 .crunch-li-8 li {
     margin-top: 8px !important;
     margin-bottom: 8px !important;
@@ -344,6 +348,10 @@ figcaption {
 
 .under {
     text-decoration: underline !important;
+}
+
+.valign-cols div.column {
+    vertical-align: middle;
 }
 
 .vcenter .cell-output-display {

@@ -1,0 +1,26 @@
+
+## Single Source, Many Outputs {.smaller}
+
+* We can create content (text, code, results, graphics) within a **source document**, and then use different **weaving engines** to create different **document types**:
+
+::: columns
+::: {.column width="50%"}
+
+* Documents
+  * Web pages (HTML)
+  * Word documents
+  * PDF files
+* Presentations
+  * HTML
+  * PowerPoint
+:::
+::: {.column width="50%"}
+
+* Websites/blogs
+* Books
+* Dashboards
+* Interactive documents
+* Formatted journal articles
+
+:::
+:::

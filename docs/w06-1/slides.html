@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.5.23">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>2024 DSAN Bootcamp Videos – Week 6: Introduction to R + Python = Quarto</title>
+  <title>2024 DSAN Bootcamp Videos – Introduction to Quarto = Python + R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -396,7 +396,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 6: Introduction to R + Python = Quarto</h1>
+  <h1 class="title">Introduction to Quarto = Python + R</h1>
+  <p class="subtitle">Week 6, Part 1</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -452,7 +453,7 @@ Jeff Jacobs
 <!-- start python box inside Jupyter column -->
 <div id="python-box" style="border: 2px solid black; margin: auto; padding: 2px;">
 <!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
-<p><a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></p>
+<p><b><a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></b></p>
 <ul>
 <li>Programming language</li>
 <li><code>python &lt;script&gt;.py</code></li>
@@ -535,6 +536,53 @@ Jeff Jacobs
 <pre><code>[1] "Hello from R!"</code></pre></li>
 <li><p><em>(Plz notice the similarity with Python!)</em></p></li>
 </ul>
+</section>
+<section id="r-in-rstudio-demonstration" class="slide level2">
+<h2>R-in-RStudio Demonstration</h2>
+<ul>
+<li>Similarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)</li>
+<li>You can (probably should) <a href="https://posit.co/download/rstudio-desktop/" target="_blank">install RStudio locally</a>, BUT…</li>
+<li>I want to instead use this as an opportunity to introduce you to <strong><a href="https://posit.cloud/" target="_blank">Posit.Cloud</a>!</strong></li>
+<li>The resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)</li>
+</ul>
+</section>
+<section id="r-markdown-.rmd-files" class="slide level2 smaller valign-cols">
+<h2>R Markdown (<code>.rmd</code>) Files</h2>
+<ul>
+<li><p>(Warning: Soon to be obsolete! Replaced by very similar <code>.qmd</code>, <strong>Quarto</strong> Markdown 😉)</p></li>
+<li><p>Choose “New Blank File” → “R Markdown…” (in the <strong>Files Pane</strong>, bottom right of RStudio) to create <code>hello.Rmd</code>:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>hello.Rmd</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="hello.Rmd"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a></a><span class="co">---</span></span>
+<span id="cb7-2"><a></a><span class="an">title:</span><span class="co"> "Hello from R Markdown!"</span></span>
+<span id="cb7-3"><a></a><span class="co">---</span></span>
+<span id="cb7-4"><a></a></span>
+<span id="cb7-5"><a></a><span class="fu">## Introduction</span></span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a>Hello here is some R code</span>
+<span id="cb7-8"><a></a></span>
+<span id="cb7-9"><a></a><span class="in">```{r}</span></span>
+<span id="cb7-10"><a></a><span class="in">print("Hello from R")</span></span>
+<span id="cb7-11"><a></a><span class="in">```</span></span>
+<span id="cb7-12"><a></a></span>
+<span id="cb7-13"><a></a><span class="fu">## A Cool Table</span></span>
+<span id="cb7-14"><a></a></span>
+<span id="cb7-15"><a></a>| Problem | Solution |</span>
+<span id="cb7-16"><a></a>|:-:|:-:|</span>
+<span id="cb7-17"><a></a>| $3^5$ | 243 |</span>
+<span id="cb7-18"><a></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div id="mid-column" class="column" style="width:5%;">
+<p>→</p>
+</div><div class="column" style="width:45%;">
+<p><img data-src="images/rmd_result.jpeg"></p>
+</div>
+</div></li>
+</ul>
 </section></section>
 <section>
 <section id="rewiring-your-brain-for-data-science" class="title-slide slide level1 center" data-stack-name="Literate Programming">
@@ -558,7 +606,7 @@ Jeff Jacobs
 </table>
 </div>
 </section>
-<section id="literate-programming-transparent-science" class="slide level2">
+<section id="literate-programming-transparent-science" class="slide level2 title-08">
 <h2>Literate Programming = Transparent Science!</h2>
 <ul>
 <li>Academic papers, video demonstrations, etc., can <em>hide</em> more than they <em>reveal</em>
@@ -625,7 +673,7 @@ Jeff Jacobs
 <!-- start python box inside Jupyter column -->
 <div id="python-box" style="border: 2px solid black; margin: auto; padding: 2px;">
 <!-- <img src="/assets/img/python_logo.svg" width="50%" style="margin: 0px !important;"></img> -->
-<p><a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></p>
+<p><b><a href="https://www.python.org/" target="_blank">The Python Language</a><img src="images/python_logo.svg" style="float: right;" width="40%"></b></p>
 <ul>
 <li>Programming language</li>
 <li><code>python &lt;script&gt;.py</code></li>
@@ -640,70 +688,14 @@ Jeff Jacobs
 </div>
 <!-- end quarto box -->
 </section>
-<section id="reproducibility-and-literate-programming" class="slide level2 smaller small-title">
+<section id="reproducibility-and-literate-programming" class="slide level2 title-09">
 <h2>Reproducibility and Literate Programming</h2>
 <ul>
-<li><strong>Reproducible document</strong>: includes both the <strong>content</strong> (text, tables, figures) and the <strong>code</strong> or instructions required to <strong>generate</strong> that content.
+<li><strong>Reproducible document</strong>: includes both the <strong>content</strong> (text, tables, figures) and the <strong>code</strong> that <strong>generated it</strong>
 <ul>
-<li>Designed to ensure that others can reproduce the same document, including its data analysis, results, and visualizations, consistently and accurately.</li>
 <li>tldr: If you’re copying-and-pasting results from your <strong>code output</strong> to your <strong>results document</strong>, a red flag should go off in your head!</li>
 </ul></li>
-<li><strong>Literate programming</strong> is a coding and documentation approach where <strong>code</strong> and <strong>explanations of the code</strong> are combined in a single document.
-<ul>
-<li>Emphasizes clear and understandable code by interleaving <strong>human-readable text</strong> (explanations, comments, and documentation) with <strong>executable code</strong>.</li>
-</ul></li>
-</ul>
-</section>
-<section id="single-source-many-outputs" class="slide level2 smaller">
-<h2>Single Source, Many Outputs</h2>
-<ul>
-<li>We can create content (text, code, results, graphics) within a <strong>source document</strong>, and then use different <strong>weaving engines</strong> to create different <strong>document types</strong>:</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Documents
-<ul>
-<li>Web pages (HTML)</li>
-<li>Word documents</li>
-<li>PDF files</li>
-</ul></li>
-<li>Presentations
-<ul>
-<li>HTML</li>
-<li>PowerPoint</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li>Websites/blogs</li>
-<li>Books</li>
-<li>Dashboards</li>
-<li>Interactive documents</li>
-<li>Formatted journal articles</li>
-</ul>
-</div>
-</div>
-</section></section>
-<section>
-<section id="demonstrations" class="title-slide slide level1 center" data-name="Demonstrations">
-<h1>Demonstrations</h1>
-
-</section>
-<section id="vscode-demonstrations" class="slide level2">
-<h2>VSCode Demonstrations</h2>
-<ul>
-<li><span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></span></li>
-<li><span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></span></li>
-<li><span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></span></li>
-</ul>
-</section>
-<section id="posit.cloud-demonstrations" class="slide level2">
-<h2>Posit.Cloud Demonstrations</h2>
-<ul>
-<li><span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></span></li>
-<li><span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></span></li>
-<li><span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></span></li>
+<li><strong>Literate programming</strong>: Human-readable <strong>explanations</strong> are included alongside <strong>code</strong>, within a single document.</li>
 </ul>
 </section></section>
 <section>
@@ -732,13 +724,13 @@ Jeff Jacobs
 <div class="column" style="width:50%;">
 <p><code>rbinom()</code> is <strong>built into</strong> R, whereas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb7-2"><a></a>coin_results <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">prob=</span><span class="fl">0.5</span>)</span>
-<span id="cb7-3"><a></a><span class="fu">print</span>(coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb8-2"><a></a>coin_results <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n=</span><span class="dv">20</span>, <span class="at">size=</span><span class="dv">10</span>, <span class="at">prob=</span><span class="fl">0.5</span>)</span>
+<span id="cb8-3"><a></a><span class="fu">print</span>(coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 3 5 5 6 7 6 1 4 6 5 6 5 4 7 4 7 4 4 4 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">class</span>(coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">class</span>(coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
@@ -746,10 +738,10 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb11-2"><a></a>coin_flip_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">num_heads =</span> coin_results)</span>
-<span id="cb11-3"><a></a><span class="fu">ggplot</span>(coin_flip_df, <span class="fu">aes</span>(<span class="at">x=</span>num_heads)) <span class="sc">+</span></span>
-<span id="cb11-4"><a></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-2"><a></a>coin_flip_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">num_heads =</span> coin_results)</span>
+<span id="cb12-3"><a></a><span class="fu">ggplot</span>(coin_flip_df, <span class="fu">aes</span>(<span class="at">x=</span>num_heads)) <span class="sc">+</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -762,14 +754,14 @@ Jeff Jacobs
 </div><div class="column nostretch" style="width:50%;">
 <p><code>rng.binomial()</code> requires <strong>NumPy</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb12-2"><a></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1234</span>)</span>
-<span id="cb12-3"><a></a>ten_coin_results <span class="op">=</span> rng.binomial(n<span class="op">=</span><span class="dv">10</span>, p<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb12-4"><a></a><span class="bu">print</span>(ten_coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a></a>rng <span class="op">=</span> np.random.default_rng(seed<span class="op">=</span><span class="dv">1234</span>)</span>
+<span id="cb13-3"><a></a>ten_coin_results <span class="op">=</span> rng.binomial(n<span class="op">=</span><span class="dv">10</span>, p<span class="op">=</span><span class="fl">0.5</span>, size<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb13-4"><a></a><span class="bu">print</span>(ten_coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[8 5 7 4 4 3 4 4 8 4 5 5 7 7 6 6 6 4 4 7]</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="bu">type</span>(ten_coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a><span class="bu">type</span>(ten_coin_results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'numpy.ndarray'&gt;</code></pre>
 </div>
@@ -777,15 +769,15 @@ Jeff Jacobs
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb16-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb16-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb16-4"><a></a>result_plot <span class="op">=</span> plt.figure()</span>
-<span id="cb16-5"><a></a>result_plot.set_figheight(<span class="fl">3.5</span>)</span>
-<span id="cb16-6"><a></a>coin_flip_df <span class="op">=</span> pd.DataFrame({<span class="st">'num_heads'</span>: ten_coin_results})</span>
-<span id="cb16-7"><a></a>result_plot <span class="op">=</span> sns.histplot(data<span class="op">=</span>coin_flip_df, x<span class="op">=</span><span class="st">'num_heads'</span>)</span>
-<span id="cb16-8"><a></a>plt.tight_layout()</span>
-<span id="cb16-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-3"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb17-4"><a></a>result_plot <span class="op">=</span> plt.figure()</span>
+<span id="cb17-5"><a></a>result_plot.set_figheight(<span class="fl">3.5</span>)</span>
+<span id="cb17-6"><a></a>coin_flip_df <span class="op">=</span> pd.DataFrame({<span class="st">'num_heads'</span>: ten_coin_results})</span>
+<span id="cb17-7"><a></a>result_plot <span class="op">=</span> sns.histplot(data<span class="op">=</span>coin_flip_df, x<span class="op">=</span><span class="st">'num_heads'</span>)</span>
+<span id="cb17-8"><a></a>plt.tight_layout()</span>
+<span id="cb17-9"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -809,27 +801,49 @@ Jeff Jacobs
 <div class="code-with-filename-file">
 <pre><strong>my_file.qmd</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="my_file.qmd"><pre class="sourceCode numberSource markdown quarto number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a></a><span class="in">```{python}</span></span>
-<span id="cb17-2"><a></a><span class="in">print("Hello from Python!")</span></span>
-<span id="cb17-3"><a></a><span class="in">```</span></span>
-<span id="cb17-4"><a></a></span>
-<span id="cb17-5"><a></a><span class="in">```{r}</span></span>
-<span id="cb17-6"><a></a><span class="in">print("Hello from R!")</span></span>
-<span id="cb17-7"><a></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="my_file.qmd"><pre class="sourceCode numberSource markdown quarto number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a></a><span class="in">```{python}</span></span>
+<span id="cb18-2"><a></a><span class="in">print("Hello from Python!")</span></span>
+<span id="cb18-3"><a></a><span class="in">```</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="in">```{r}</span></span>
+<span id="cb18-6"><a></a><span class="in">print("Hello from R!")</span></span>
+<span id="cb18-7"><a></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:4%;">
 <p>→</p>
 </div><div class="column" style="width:47%;">
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> from Python!</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> from R!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> from Python!</span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> from R!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></li>
 </ul>
+</section>
+<section id="the-takeaway-python-and-r" class="slide level2 crunch-title crunch-li-6">
+<h2>The Takeaway: Python <em>and</em> R</h2>
+<ul>
+<li>Quarto enables <strong>switching</strong> from Python to R at any point!</li>
+<li>So, as we start on our R journey, try to identify its <strong>strengths</strong> and <strong>weaknesses</strong> relative to Python</li>
+<li>Given a particular task—web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.—learn how to do it in <strong>both</strong> Python and R, then evaluate which one “clicks” more with you</li>
+<li>(In other words, my ask: if you <em>already know</em> how to do something in Python, pls be open to learning it in <em>R as well</em>! You might find it’s easier—try your best to consciously avoid getting “locked into” one language)</li>
+</ul>
+<aside class="notes">
+<p>This also holds for Base R to Tidyverse!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-
+<p>2024 DSAN Bootcamp W6.1: Intro to Quarto</p>
 </div>
 </div>
 </section></section>

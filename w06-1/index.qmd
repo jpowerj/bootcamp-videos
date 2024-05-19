@@ -1,5 +1,6 @@
 ---
-title: "Week 6: Introduction to R + Python = Quarto"
+title: "Introduction to Quarto = Python + R"
+subtitle: "Week 6, Part 1"
 author: "Jeff Jacobs"
 institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
 format:
@@ -10,6 +11,7 @@ format:
     df-print: kable
     html-math-method: mathjax
     scrollable: true
+    footer: "2024 DSAN Bootcamp W6.1: Intro to Quarto"
     theme: ["../_jjslides.scss"]
     output-file: "slides.html"
     include-in-header:
@@ -122,6 +124,56 @@ format:
 
 * *(Plz notice the similarity with Python!)*
 
+## R-in-RStudio Demonstration
+
+* Similarly to Jupyter, you can think of RStudio as a fancy "wrapper" around R (an IDE)
+* You can (probably should) [install RStudio locally](https://posit.co/download/rstudio-desktop/){target='_blank'}, BUT...
+* I want to instead use this as an opportunity to introduce you to **[Posit.Cloud](https://posit.cloud/){target='_blank'}!**
+* The resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee&trade;)
+
+## R Markdown (`.rmd`) Files {.smaller .valign-cols}
+
+* (Warning: Soon to be obsolete! Replaced by very similar `.qmd`, **Quarto** Markdown 😉)
+* Choose "New Blank File" &rarr; "R Markdown..." (in the **Files Pane**, bottom right of RStudio) to create `hello.Rmd`:
+
+  ::: {.columns}
+  ::: {.column width="45%"}
+
+  ```` {filename="hello.Rmd"}
+  ---
+  title: "Hello from R Markdown!"
+  ---
+  
+  ## Introduction
+  
+  Hello here is some R code
+  
+  ```{{r}}
+  print("Hello from R")
+  ```
+  
+  ## A Cool Table
+  
+  | Problem | Solution |
+  |:-:|:-:|
+  | $3^5$ | `r 3^5` |
+  
+  
+  ````
+
+  :::
+  ::: {.column #mid-column width="5%"}
+
+  &rarr;
+
+  :::
+  ::: {.column width="45%"}
+
+  ![](images/rmd_result.jpeg)
+
+  :::
+  :::
+
 # Rewiring Your Brain for Data Science {data-stack-name="Literate Programming"}
 
 ::: {style="font-size: 150%"}
@@ -133,7 +185,7 @@ format:
 
 :::
 
-## Literate Programming = Transparent Science!
+## Literate Programming = Transparent Science! {.title-08}
 
 * Academic papers, video demonstrations, etc., can *hide* more than they *reveal*
     * Ex: Look at all these [UI Templates](https://www.canva.com/prototypes/templates/mobile/){target='_blank'} on Canva!
@@ -186,53 +238,11 @@ format:
 :::
 <!-- end quarto box -->
 
-## Reproducibility and Literate Programming {.smaller .small-title}
+## Reproducibility and Literate Programming {.title-09}
 
-* **Reproducible document**: includes both the **content** (text, tables, figures) and the **code** or instructions required to **generate** that content.
-  * Designed to ensure that others can reproduce the same document, including its data analysis, results, and visualizations, consistently and accurately.
+* **Reproducible document**: includes both the **content** (text, tables, figures) and the **code** that **generated it**
   * tldr: If you're copying-and-pasting results from your **code output** to your **results document**, a red flag should go off in your head!
-* **Literate programming** is a coding and documentation approach where **code** and **explanations of the code** are combined in a single document.
-  * Emphasizes clear and understandable code by interleaving **human-readable text** (explanations, comments, and documentation) with **executable code**.
-
-## Single Source, Many Outputs {.smaller}
-
-* We can create content (text, code, results, graphics) within a **source document**, and then use different **weaving engines** to create different **document types**:
-
-::: columns
-::: {.column width="50%"}
-
-* Documents
-  * Web pages (HTML)
-  * Word documents
-  * PDF files
-* Presentations
-  * HTML
-  * PowerPoint
-:::
-::: {.column width="50%"}
-
-* Websites/blogs
-* Books
-* Dashboards
-* Interactive documents
-* Formatted journal articles
-
-:::
-:::
-
-# Demonstrations {data-name="Demonstrations"}
-
-## VSCode Demonstrations
-
-* <span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></img></span>
-* <span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></img></span>
-* <span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></img></span>
-
-## Posit.Cloud Demonstrations
-
-* <span style="display: inline-flex;">Quarto Websites <img src="images/vscode-globe.svg" width="60" style="margin: 0 0.125em;"></img></span>
-* <span style="display: inline-flex;">Quarto Manuscripts <img src="images/vscode-circuit-board.svg" width="60" style="margin: 0 0.13em;"></img></span>
-* <span style="display: inline-flex;">Quarto Books <img src="images/vscode-book.svg" width="60" style="margin: 0 0.125em;"></img></span>
+* **Literate programming**: Human-readable **explanations** are included alongside **code**, within a single document.
 
 # R in Quarto {data-stack-name="R in Quarto"}
 
@@ -333,3 +343,16 @@ plt.show()
 
   :::
   :::
+
+## The Takeaway: Python *and* R {.crunch-title .crunch-li-6}
+
+* Quarto enables **switching** from Python to R at any point!
+* So, as we start on our R journey, try to identify its **strengths** and **weaknesses** relative to Python
+* Given a particular task---web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.---learn how to do it in **both** Python and R, then evaluate which one "clicks" more with you
+* (In other words, my ask: if you *already know* how to do something in Python, pls be open to learning it in *R as well*! You might find it's easier---try your best to consciously avoid getting "locked into" one language)
+
+::: {.notes}
+
+This also holds for Base R to Tidyverse!
+
+:::
