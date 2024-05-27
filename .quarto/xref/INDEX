@@ -17,5 +17,8 @@
   "w06-2/index.qmd": {
     "slides.html": "10755f95",
     "index.html": "5ba29cda"
+  },
+  "w06-assignment.qmd": {
+    "w06-assignment.html": "9d452e3c"
   }
 }

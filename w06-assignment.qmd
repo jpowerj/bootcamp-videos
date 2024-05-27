@@ -1,0 +1,122 @@
+---
+title: "Assignment 6"
+subtitle: "DSAN Bootcamp 2024"
+output: html
+---
+
+# Problem 1: Generating a Deck of Cards
+
+a. Create a vector for card **suits** with the variable name `suits`, containing the following four elements (as character strings): `"Diamonds"`, `"Clubs"`, `"Hearts"`, `"Spades"`
+
+```{r}
+suits <- c("Diamonds", "Clubs", "Hearts", "Spades")
+```
+
+b. Create a vector for card **numbers** with the variable name `numbers`, containing the character string `"Ace"` followed by the integers 2 through 10
+
+```{r}
+numbers <- c("Ace", seq(2, 10))
+```
+
+c. Create a vector for **face cards** with the variable name `faces`, containing the character strings `"Jack"`, `"Queen"`, and `"King"`
+
+```{r}
+faces <- c("Jack", "Queen", "King")
+```
+
+d. Create a new vector with the variable name `card_names`, formed by concatenating the elements of the `faces` vector to the end of the `numbers` vector.
+
+```{r}
+card_names <- c(numbers, faces)
+card_names
+```
+
+e. Repeat each element in `card_names` four times, and name the new variable `card_names_4`
+
+```{r}
+card_names_4 <- rep(card_names, 4)
+```
+
+g. Repeat each element in `suits` 13 times, naming the new variable `suits_13`
+
+```{r}
+suits_13 <- rep(suits, 13)
+suits_13
+```
+
+h. Create a `data.frame` variable named `card_deck`, constructed so that its first column is named `card_name` and contains the values of `card_names_4`, and its second column is named `suit` and contains the values of `suits_13`.
+
+```{r}
+card_deck <- data.frame(
+    card_name=card_names_4,
+    suit=suits_13
+)
+card_deck
+```
+
+i. Create a new column in `card_deck` named `card` by **pasting** the values in the first column (`card_name`) to the values in the second column (`suit`). Here you can use the built-in R function `paste()` to paste these 2 variables together.
+
+```{r}
+card_deck[,"card"] <- paste(card_deck$card_name, card_deck$suit)
+card_deck
+```
+
+Now you have a deck of cards, and you could use this deck of cards to find probabilities, like the probability of drawing a spade followed by a heart card!
+
+## Part 2: Computing Probabilities
+
+Consider how you might approach the problem a bit differently if you wanted to model the game Blackjack. In Blackjack, the suits are irrelevant, and only the **value** of each card matters. Regardless of suit, for example, if you are dealt an Ace (worth 1 or 11) and a face card (worth 10), this is called a "Natural 21" and you win automatically. We can compute the probability of this happening with a different `data.frame` from the previous question, since here we only care about the values 
+
+a. Create a vector for card numbers with the variable name "other" and add the elements as characters --> "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"
+
+
+k. Now use the function `expand.grid()` to create a data frame of all combinations without going through parts (d)-(i). Name this data frame as "deck 2". Here the first value inside the function as "others" and the second value as "suits".
+
+l. Create a new variable call "deck
+_2" by pasting the first column of the "deck_2" data frame with the second column. Here you can use `paste()` function to paste these 2 variables together. Name the new data frame as "new_deck". Check the length and see if it has 52 cards.
+
+
+m. Assuming you are playing poker, sample 5 cards from the "new_deck (don't forget to put a set.seed()) and see if you get any poker hands. Comment on what you get. Are you any closer to any of the poker hands? 
+
+![](poker.png)
+
+
+## Problem 2
+
+For this problem, rather than creating our own dataset from scratch, we will load and analyze a pre-existing dataset on _global superstore orders_.
+
+a. Import the data set named `Global_Superstore_Orders_2016.csv` using R's built-in `read.csv()` function, storing the result into a `data.frame` variable named `orders`. Read more about the function by typing `??read.csv` in the Console. Here, you have to define the file name and path. But if you have created a R project as mentioned in my first video, and your data set is in that folder, then you don't have to specify the path.
+
+ - Remember to provide the `header = TRUE` argument to the `read.csv()` function.
+ - Also view the head of the dataset using `head()`
+
+b. Use `str()` to check the type of each variable. You'll see that `read.csv()` did not correctly identify the data types for all columns loaded from the `.csv` file. Which variables have inappropriate types, and what should their data types be instead?
+
+c. Create a separate data frame variable named `sales_data`, containing only the following columns from the full : `Order.Date`, `Ship.Date`, `State`, `Country`, `Sales`, `Profit`, and `Order.Priority`
+
+d. Use `str()` to check the type of each variable and correct them to the correct type (factor, Date/Time,..etc.) as necessary.
+
+Hint 1: to convert to Date/Time type us `as.Date()`. You can read more about the function by typing `??as.Date` in Console. one example is done below.
+
+Read more: <https://www.ibm.com/docs/en/cmofz/10.1.0?topic=SSQHWE_10.1.0/com.ibm.ondemand.mp.doc/arsa0257.htm>
+
+Hint 2: Also, you can see that the "Sales" and "Profit" variables are character type and they have a $ sign and a comma in the middle. To remove these and create a numeric variable you can use `gsub()` and `as.numeric()` functions.
+
+-> _gsub(pattern, replacement, string that needs to be changed)_
+
+```{r}
+# Sales.data$Order.Date <- as.Date(Sales.data$Order.Date,"%m/%d/%y")
+```
+
+e. Now again  Use `str()` on the Sales.data to confirm the correct type of each variable.
+
+
+f. Check whether there are any NA/missing values in your "Sales.data".
+
+
+g. Take the names of the variables into a new variable called "VarNames". Also find out how many rows that the dataset has and assign it to the variable "length". We may use this dataset and these variables in your next assignments.
+
+h. Find the mean of Sales when the order priority is "Critical" and "High". Which one is higher?
+
+i. BONUS: (+1) Find the average sales in different states in the USA. Hint: you can use the `aggregate()` function.
+

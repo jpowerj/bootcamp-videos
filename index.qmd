@@ -1,5 +1,6 @@
 ---
-title: "Videos for 2024 DSAN Bootcamp"
+title: "2024 DSAN Bootcamp: Weeks 6-8"
+format: html
 listing:
   contents: "*.qmd"
   type: table

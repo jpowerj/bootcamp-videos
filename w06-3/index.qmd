@@ -41,4 +41,531 @@ format:
 
 :::
 
-# R for Pythoners
+# R for Pythoners {data-stack-name="Key Differences"}
+
+## Everything is a Vector
+
+* Although there are R equivalents for most Python data types, one big difference is that...
+* In R, **everything is a *vector*!**
+
+::: {.columns}
+::: {.column width="33%"}
+
+```{r}
+#| label: initializing-int
+#| echo: true
+#| code-fold: false
+x <- 3
+print(x)
+class(x)
+length(x)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: init-len1-vector
+#| echo: true
+#| code-fold: false
+y <- c(3)
+print(y)
+class(y)
+length(y)
+```
+
+:::
+::: {.column width="33%"}
+
+```{r}
+#| label: init-vector
+#| echo: true
+#| code-fold: false
+z <- c(3, 4, 5)
+print(z)
+class(z)
+length(z)
+```
+
+:::
+:::
+
+## Careful With "Basic" Operators Like `+`! {.smaller}
+
+* If you're used to Python, `+` feels like a natural way to combine things
+* R forces you to think explicitly about *combining* ($\neq$ *adding*): more **restrictive** `+`
+* For **strings**:
+
+  ::: {.columns}
+  ::: {.column width="50%"}
+
+  In Python: `+` means **concatenate**
+
+  ```{python}
+  #| label: py-concat-str
+  #| echo: true
+  #| code-fold: false
+  message = "Hi" + " " + "Jeff"
+  print(message)
+  ```
+
+  :::
+  ::: {.column width="50%"}
+
+  In R: `+` is **not allowed**!
+
+  ```{r}
+  #| label: r-concat-str
+  #| echo: true
+  #| code-fold: false
+  #| error: true
+  my_message <- "Hi" + " " + "Jeff"
+  ```
+
+  :::
+  :::
+
+* For **numeric lists**...
+
+  ::: {.columns}
+  ::: {.column width="50%"}
+
+  In Python: `+` means **concatenate**
+
+  ```{python}
+  #| label: py-concat-lists
+  #| echo: true
+  #| code-fold: false
+  [1, 2] + [3, 4]
+  ```
+
+  :::
+  ::: {.column width="50%"}
+
+  In R: `+` means **vector addition**!
+
+  ```{r}
+  #| label: r-concat-lists
+  #| echo: true
+  #| code-fold: false
+  #| error: true
+  c(1,2) + c(3,4)
+  ```
+
+  :::
+  :::
+
+## Immensely Important Distinction {.smaller}
+
+* Throughout bootcamp, throughout DSAN, throughout your career, you'll use **two different "flavors" of R**:
+
+::: {.columns}
+::: {.column width="50%"}
+
+Base R
+
+```{r}
+#| label: base-r-example
+#| echo: true
+#| code-fold: false
+base_df <- data.frame(
+  x=c(1,2,3),
+  y=c("a","b","c")
+)
+base_df
+class(base_df)
+```
+
+:::
+::: {.column width="50%"}
+
+Tidyverse
+
+```{r}
+#| label: tidyverse-example
+#| echo: true
+#| code-fold: false
+library(tidyverse) # Imports "tibble" library
+tv_df <- tribble(
+  ~x, ~y,
+  1, "a",
+  2, "b",
+  3, "c"
+)
+tv_df
+class(tv_df)
+```
+
+:::
+:::
+
+::: {.notes}
+
+* Note: There are ways to do row-wise and column-wise table creation in both! The key difference here is just `data.frame` vs. `tibble`
+
+:::
+
+## Why Are There Two Ways to Do Everything? {.title-08 .crunch-title .crunch-ul}
+
+* One key reason: tidyverse built on the **pipe operator `|>`**
+* Recognition that data science often involves **pipelines**: chains of operations performed in sequence
+  * E.g., scrape data &rarr; clean data &rarr; save to DB
+* Base R approach:
+
+  ```{.r}
+  result <- saveToDB(cleanData(scrapeData()))
+  ```
+
+* Tidyverse approach:
+
+  ```{.r}
+  result <- scrapeData() |> cleanData() |> saveToDB()
+  ```
+
+* Now imagine pipelines used by giant companies, e.g., training Netflix's recommendation engine!
+
+## `|>`: Good News and Bad News {.smaller}
+
+* `f() |> g()` just means: take the **result** of the call `f()` and pass it as the **first argument** to `g()`
+* Good news: this means `|>` is intuitively "backwards compatible" with many base R functions
+* Bad news: requires **checking the *first* argument**:
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: pipeline-valid
+#| echo: true
+#| code-fold: false
+getSampleSize <- function() {
+  return(20)
+}
+getSampleSize() |> rbinom(10, 0.5)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: pipeline-invalid
+#| echo: true
+#| code-fold: false
+getNumTrials <- function() {
+  return(10)
+}
+getNumTrials() |> rbinom(100, 0.5)
+```
+
+:::
+:::
+
+# Back to Basics {data-stack-name="R Basics"}
+
+## Combining Strings
+
+* Earlier we saw how R doesn't allow `"Hi" + " " + "Jeff"`...
+* So how do we combine strings?
+* `paste()` and `paste0()`!
+
+  ```{r}
+  #| label: r-paste
+  #| echo: true
+  #| code-fold: false
+  paste("Hi", "Jeff")
+  paste0("Hi", " ", "Jeff")
+  ```
+
+## Python Lists $\leftrightarrow$ R Vectors
+
+<center>
+Creation
+</center>
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: py-list
+#| echo: true
+#| code-fold: false
+my_list = [1, 2, 3]
+my_list
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-list
+#| echo: true
+#| code-fold: false
+my_list <- c(1, 2, 3)
+my_list
+```
+
+:::
+:::
+
+<center>
+Insertion
+</center>
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: py-insertion
+#| echo: true
+#| code-fold: false
+my_list.append(4)
+my_list
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-insertion
+#| echo: true
+#| code-fold: false
+my_list <- c(my_list, 4)
+my_list
+```
+
+:::
+:::
+
+<center>
+Replicating Elements
+</center>
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: python-rep
+#| echo: true
+#| code-fold: false
+my_list * 3
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-rep
+#| echo: true
+#| code-fold: false
+rep(my_list, 3)
+```
+
+:::
+:::
+
+<center>
+Python `range()` $\leftrightarrow$ R `seq()`
+</center>
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: py-range
+#| echo: true
+#| code-fold: false
+list(range(5, 10))
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-seq
+#| echo: true
+#| code-fold: false
+seq(5, 10)
+```
+
+:::
+:::
+
+## `paste0()` with Vectors!
+
+```{r}
+#| label: r-paste-vectors
+#| echo: true
+#| code-fold: false
+names <- c("Aaliya", "Brandon", "Cyrus")
+paste0(names, collapse=" ")
+paste0(names, collapse=", ")
+paste(names, collapse=", ")
+```
+
+# DataFrames: Tabular Data Formats {data-stack-name="DataFrames"}
+
+## Pandas `DataFrame` $\leftrightarrow$ R `data.frame`
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: py-dataframe
+#| echo: true
+#| code-fold: false
+#| output: asis
+#| fig-align: center
+import pandas as pd
+x_data = [1, 2, 3]
+y_data = [4, 5, 6]
+df = pd.DataFrame({
+  'x': x_data, 'y': y_data
+})
+print(df.to_markdown())
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-dataframe
+#| echo: true
+#| code-fold: false
+x_data <- c(1, 2, 3)
+y_data <- c(4, 5, 6)
+df <- data.frame(
+  x=x_data,
+  y=y_data
+)
+df
+```
+
+:::
+:::
+
+## The Inevitable Headaches of Missing Data in Python {.smaller .crunch-title .title-09}
+
+::: {.columns}
+::: {.column width="50%"}
+
+Given a `.csv` with missing entries:
+
+``` {.csv filename="my_data.csv"}
+id,name,email
+0,jeff,jeff@jeff.com
+1,,nobody@no.com
+3,zayd,z@email.biz
+```
+
+Python defaults to `object` columns with `NaN` (Not-a-Number) values
+
+```{python}
+#| label: py-missing-data
+#| echo: true
+#| code-fold: false
+import pandas as pd
+df = pd.read_csv("my_data.csv")
+df
+df.dtypes
+```
+
+:::
+::: {.column width="50%"}
+
+Intuitive fix usually **isn't** what you want:
+
+```{python}
+#| label: py-failed-conversion
+#| echo: true
+#| code-fold: false
+df_bad = df.copy()
+df_bad['name'] = df_bad['name'].astype(str)
+df_bad
+df_bad.iloc[1]['name']
+```
+
+This alternative approach ensures missing values are **empty strings**
+
+```{python}
+#| label: py-better-conversion
+#| echo: true
+#| code-fold: false
+df_better = df.copy()
+df_better['name'] = df_better['name'].fillna('').astype(str)
+df_better
+df_better.iloc[1]['name']
+```
+
+:::
+:::
+
+## The Slight-Less-Headachey R Approach! {.smaller .crunch-title}
+
+::: {.columns}
+::: {.column width="50%"}
+
+R reads missing values in `character` columns as empty strings by default
+
+```{r}
+#| label: r-missing-data
+#| echo: true
+#| code-fold: false
+df <- read.csv("my_data.csv")
+df
+df$name
+sapply(df, class)
+```
+
+:::
+::: {.column width="50%"}
+
+...And also has a built-in `NA` value!
+
+```{r}
+#| label: r-na-vals
+#| echo: true
+#| code-fold: false
+df2 <- read.csv("my_data_2.csv")
+df2
+sapply(df2, class)
+```
+
+:::
+:::
+
+## Bonus: Built-In Matrices {.crunch-title .crunch-ul}
+
+* For **data analysis** (cleaning, plotting), `data.frame` is usually the way to go
+* For **linear algebra** (inverting, multiplying matrices)...
+
+::: {.columns}
+::: {.column width="50%"}
+
+Use **2D vectors**!
+
+```{r}
+#| label: r-matrices
+#| echo: true
+#| code-fold: false
+my_matrix <- matrix(
+  data=c(1, 2, 3, 4),
+  nrow=2, ncol=2, byrow=TRUE
+)
+my_matrix
+class(my_matrix)
+```
+
+:::
+::: {.column width="50%"}
+
+But beware! Element-wise vs. matrix multiplication:
+
+```{r}
+#| label: r-matrix-mult
+#| echo: true
+#| code-fold: false
+my_matrix * my_matrix
+my_matrix %*% my_matrix
+```
+
+:::
+:::
