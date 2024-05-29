@@ -43,6 +43,142 @@ format:
 
 # R for Pythoners {data-stack-name="Key Differences"}
 
+## The Most Immediately-Jarring Differences {.smaller .title-11}
+
+::: {.columns}
+::: {.column .center width="20%"}
+
+:::
+::: {.column width="40%"}
+
+<center>
+<u>**Python**</u>
+</center>
+
+:::
+::: {.column width="40%"}
+
+<center>
+<u>**R**</u>
+</center>
+
+:::
+:::
+
+
+::: {.columns}
+::: {.column width="16%"}
+
+**Value Assignment**
+
+:::
+::: {.column width="42%"}
+
+`<varname> = <value>`
+
+```{python}
+#| label: py-assignment
+#| echo: true
+#| code-fold: false
+x = 3
+x
+```
+
+:::
+::: {.column width="42%"}
+
+`<varname> <- <value>`
+
+```{r}
+#| label: r-assignment
+#| echo: true
+#| code-fold: false
+x <- 3
+x
+```
+
+:::
+:::
+
+::: {.columns}
+::: {.column width="16%"}
+
+**Indices**
+
+:::
+::: {.column width="42%"}
+
+Start from **0**
+
+```{python}
+#| label: py-indices-0
+#| echo: true
+#| code-fold: false
+my_list = ["a", "b", "c"]
+my_list[0] # Accesses first element
+my_list[1] # Accesses second element
+```
+
+:::
+::: {.column width="42%"}
+
+Start from **1**
+
+```{r}
+#| label: r-indices-1
+#| echo: true
+#| code-fold: false
+my_vector <- c("a", "b", "c")
+my_vector[0] # Invalid index in R!
+my_vector[1] # Accesses first element
+my_vector[2] # Accesses second element
+```
+
+:::
+:::
+
+
+::: {.columns}
+::: {.column width="16%"}
+
+**Booleans**
+
+:::
+::: {.column width="42%"}
+
+`True`, `False`
+
+```{python}
+#| label: py-booleans
+#| echo: true
+#| code-fold: false
+result = 2 * 2 == 4
+result
+```
+
+:::
+::: {.column width="42%"}
+
+`TRUE` (or `T`), `FALSE` (or `F`)
+
+```{r}
+#| label: r-booleans
+#| echo: true
+#| code-fold: false
+result <- 2 * 2 == 4
+result
+```
+
+:::
+:::
+
+<!-- * In R, **indices** (e.g., slots in a vector) start from **1**, not **0**!
+* **Assignment** operator is `<-`, not `=` (technically you can use `=`, but... try not to?)
+  * Python: `x = 3`
+  * R: `x <- 3`
+* **Booleans**: `True` becomes `TRUE` (can use `T` as shorthand), `False` becomes `FALSE` (can use `F` as shorthand)
+* **Code Blocks**: Python uses **indentation**, whereas R uses **curly braces** -->
+
 ## Everything is a Vector
 
 * Although there are R equivalents for most Python data types, one big difference is that...
@@ -50,6 +186,8 @@ format:
 
 ::: {.columns}
 ::: {.column width="33%"}
+
+Numbers
 
 ```{r}
 #| label: initializing-int
@@ -64,6 +202,8 @@ length(x)
 :::
 ::: {.column width="33%"}
 
+Length-1 Vectors
+
 ```{r}
 #| label: init-len1-vector
 #| echo: true
@@ -76,6 +216,8 @@ length(y)
 
 :::
 ::: {.column width="33%"}
+
+Length-`N` Vectors
 
 ```{r}
 #| label: init-vector
@@ -259,6 +401,12 @@ getNumTrials() |> rbinom(100, 0.5)
 :::
 :::
 
+*[Quick Note:]*
+
+* If you've used R before, you may have seen the `%>%` operator from `tidyverse`
+* ...It got so popular that it is now **built into R** (as of 2023) as `|>`!
+* $\implies$ *Switch from `%>%` to `|>` for instant efficiency boost* 😎
+
 # Back to Basics {data-stack-name="R Basics"}
 
 ## Combining Strings
@@ -296,11 +444,11 @@ my_list
 ::: {.column width="50%"}
 
 ```{r}
-#| label: r-list
+#| label: r-vector
 #| echo: true
 #| code-fold: false
-my_list <- c(1, 2, 3)
-my_list
+my_vector <- c(1, 2, 3)
+my_vector
 ```
 
 :::
@@ -328,8 +476,8 @@ my_list
 #| label: r-insertion
 #| echo: true
 #| code-fold: false
-my_list <- c(my_list, 4)
-my_list
+my_vector <- c(my_vector, 4)
+my_vector
 ```
 
 :::
@@ -356,7 +504,7 @@ my_list * 3
 #| label: r-rep
 #| echo: true
 #| code-fold: false
-rep(my_list, 3)
+rep(my_vector, 3)
 ```
 
 :::
@@ -401,7 +549,32 @@ paste0(names, collapse=", ")
 paste(names, collapse=", ")
 ```
 
+## Semi-Confusing Point: R Also Has Lists... {.title-09 .crunch-title .crunch-ul}
+
+* Rarely used, despite **greater similarity** to Python lists 😵‍💫
+* Key difference: all elements of a **vector** must have same type; elements of a **list** may have different types
+
+  ```{r}
+  #| label: r-list
+  #| echo: true
+  #| code-fold: false
+  my_list <- list("A", 2, TRUE)
+  my_list
+  ```
+
+* (Note how each element is a vector: `character` vector, `integer` vector, and `boolean` vector)
+
 # DataFrames: Tabular Data Formats {data-stack-name="DataFrames"}
+
+::: {#fig-tidy-template}
+
+| | [Col A]{.cb1} | [Col B]{.cb1} |
+| - | - | - |
+| [**Row 1**]{.cb2} | [Val 1A]{.cb3} | [Val 1B]{.cb3} |
+| [**Row 2**]{.cb2} | [Val 2A]{.cb3} | [Val 2B]{.cb3} |
+
+A (tidy) tabular dataset, with **row indices** in [blue]{.cb2}, **column names** in [orange]{.cb1}, and **values** in [green]{.cb3}
+:::
 
 ## Pandas `DataFrame` $\leftrightarrow$ R `data.frame`
 
@@ -447,7 +620,7 @@ df
 ::: {.columns}
 ::: {.column width="50%"}
 
-Given a `.csv` with missing entries:
+<i class='bi bi-1-circle'></i> Given a `.csv` with missing entries:
 
 ``` {.csv filename="my_data.csv"}
 id,name,email
@@ -456,7 +629,7 @@ id,name,email
 3,zayd,z@email.biz
 ```
 
-Python defaults to `object` columns with `NaN` (Not-a-Number) values
+<i class='bi bi-2-circle'></i> Python defaults to `object` columns with `NaN` (Not-a-Number) values
 
 ```{python}
 #| label: py-missing-data
@@ -471,7 +644,7 @@ df.dtypes
 :::
 ::: {.column width="50%"}
 
-Intuitive fix usually **isn't** what you want:
+<i class='bi bi-3-circle'></i> Intuitive fix usually **isn't** what you want:
 
 ```{python}
 #| label: py-failed-conversion
@@ -483,7 +656,7 @@ df_bad
 df_bad.iloc[1]['name']
 ```
 
-This alternative approach ensures missing values are **empty strings**
+<i class='bi bi-4-circle'></i> This alternative approach ensures missing values are **empty strings**
 
 ```{python}
 #| label: py-better-conversion
@@ -512,6 +685,7 @@ R reads missing values in `character` columns as empty strings by default
 df <- read.csv("my_data.csv")
 df
 df$name
+# We'll learn about sapply() next week!
 sapply(df, class)
 ```
 
@@ -537,35 +711,35 @@ sapply(df2, class)
 * For **data analysis** (cleaning, plotting), `data.frame` is usually the way to go
 * For **linear algebra** (inverting, multiplying matrices)...
 
-::: {.columns}
-::: {.column width="50%"}
+  ::: {.columns}
+  ::: {.column width="50%"}
 
-Use **2D vectors**!
+  Use **2D vectors**!
 
-```{r}
-#| label: r-matrices
-#| echo: true
-#| code-fold: false
-my_matrix <- matrix(
-  data=c(1, 2, 3, 4),
-  nrow=2, ncol=2, byrow=TRUE
-)
-my_matrix
-class(my_matrix)
-```
+  ```{r}
+  #| label: r-matrices
+  #| echo: true
+  #| code-fold: false
+  my_matrix <- matrix(
+    data=c(1, 2, 3, 4),
+    nrow=2, ncol=2, byrow=TRUE
+  )
+  my_matrix
+  class(my_matrix)
+  ```
 
-:::
-::: {.column width="50%"}
+  :::
+  ::: {.column width="50%"}
 
-But beware! Element-wise vs. matrix multiplication:
+  Beware! Matrix multiply operator is `%*%`, NOT `*`:
 
-```{r}
-#| label: r-matrix-mult
-#| echo: true
-#| code-fold: false
-my_matrix * my_matrix
-my_matrix %*% my_matrix
-```
+  ```{r}
+  #| label: r-matrix-mult
+  #| echo: true
+  #| code-fold: false
+  my_matrix * my_matrix
+  my_matrix %*% my_matrix
+  ```
 
-:::
-:::
+  :::
+  :::

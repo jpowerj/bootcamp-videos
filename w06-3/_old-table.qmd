@@ -1,0 +1,6 @@
+| | Python | R |
+| - | - | - |
+| **Indices** | Start from **0**<br> | Start from **1** |
+| **Assignment Operator** | `x = 3` | `x <- 3` |
+| **Booleans** | `True`, `False` | `TRUE` (or `T`), `FALSE` (or `F`) |
+| **Code Blocks** | Indentation | Curly Braces |
