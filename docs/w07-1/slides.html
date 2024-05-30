@@ -449,7 +449,7 @@ Jeff Jacobs
 <span id="cb1-2"><a></a>cur_time <span class="op">=</span> datetime.datetime.now()</span>
 <span id="cb1-3"><a></a><span class="bu">print</span>(<span class="ss">f"The current time is </span><span class="sc">{</span>cur_time<span class="sc">.</span>hour<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>cur_time<span class="sc">.</span>minute<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The current time is 0:1</code></pre>
+<pre><code>The current time is 20:41</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="cf">if</span> cur_time.hour <span class="op">&lt;</span> <span class="dv">12</span>:</span>
 <span id="cb3-2"><a></a>    <span class="bu">print</span>(<span class="st">"Good morning!"</span>)</span>
@@ -458,7 +458,7 @@ Jeff Jacobs
 <span id="cb3-5"><a></a><span class="cf">else</span>:</span>
 <span id="cb3-6"><a></a>    <span class="bu">print</span>(<span class="st">"Good evening!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Good morning!</code></pre>
+<pre><code>Good evening!</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -471,7 +471,7 @@ Jeff Jacobs
 <span id="cb5-6"><a></a>    <span class="fu">minute</span>(cur_time)</span>
 <span id="cb5-7"><a></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The current time is 0:1</code></pre>
+<pre><code>The current time is 20:41</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="cf">if</span> (<span class="fu">hour</span>(cur_time) <span class="sc">&lt;</span> <span class="dv">12</span>) {</span>
 <span id="cb7-2"><a></a>    <span class="fu">print</span>(<span class="st">"Good morning!"</span>)</span>
@@ -481,7 +481,7 @@ Jeff Jacobs
 <span id="cb7-6"><a></a>    <span class="fu">print</span>(<span class="st">"Good evening!"</span>)</span>
 <span id="cb7-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Good morning!"</code></pre>
+<pre><code>[1] "Good evening!"</code></pre>
 </div>
 </div>
 </div>
@@ -495,7 +495,7 @@ Jeff Jacobs
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co">"morning"</span> <span class="cf">if</span> cur_time.hour <span class="op">&lt;</span> <span class="dv">12</span> <span class="cf">else</span> <span class="st">"evening"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'morning'</code></pre>
+<pre><code>'evening'</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -506,7 +506,7 @@ Jeff Jacobs
 <span id="cb11-4"><a></a>    <span class="st">"evening"</span></span>
 <span id="cb11-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "morning"</code></pre>
+<pre><code>[1] "evening"</code></pre>
 </div>
 </div>
 </div>
@@ -678,6 +678,50 @@ Jeff Jacobs
 </tbody>
 </table>
 </div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="functions" class="title-slide slide level1 center">
+<h1>Functions</h1>
+
+</section>
+<section id="anonymous-functions" class="slide level2">
+<h2>Anonymous Functions</h2>
+<ul>
+<li>In Python you <strong>declare</strong> the name of a function using <code>def</code></li>
+<li>In R, you make the function <strong>without a name</strong>, then assign it to a variable:</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="kw">def</span> multiply_by_5(num):</span>
+<span id="cb23-2"><a></a>  <span class="cf">return</span> num <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb23-3"><a></a>multiply_by_5(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>50</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>multiply_by_5 <span class="ot">&lt;-</span> <span class="cf">function</span>(num) {</span>
+<span id="cb25-2"><a></a>  <span class="fu">return</span>(num <span class="sc">*</span> <span class="dv">5</span>)</span>
+<span id="cb25-3"><a></a>}</span>
+<span id="cb25-4"><a></a><span class="fu">multiply_by_5</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50</code></pre>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Python also has anonymous functions, via <code>lambda</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a>double_it <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb27-2"><a></a>double_it(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>20</code></pre>
 </div>
 </div>
 

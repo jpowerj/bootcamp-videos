@@ -761,7 +761,7 @@ Jeff Jacobs
 <span id="cb53-3"><a></a>}</span>
 <span id="cb53-4"><a></a><span class="fu">getSampleSize</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 6 9 5 5 2 4 7 4 4 5 5 7 2 8 4 5 4 5 7 6</code></pre>
+<pre><code> [1] 5 6 5 4 4 8 3 5 4 6 5 3 5 7 2 4 4 2 3 4</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -771,7 +771,7 @@ Jeff Jacobs
 <span id="cb55-3"><a></a>}</span>
 <span id="cb55-4"><a></a><span class="fu">getNumTrials</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 52 56 50 50 47 48 48 60 50 48</code></pre>
+<pre><code> [1] 49 37 48 53 60 60 50 59 43 38</code></pre>
 </div>
 </div>
 </div>
@@ -1114,8 +1114,8 @@ dtype: object</code></pre>
 </div>
 </div>
 </section>
-<section id="the-slight-less-headachey-r-approach" class="slide level2 smaller crunch-title">
-<h2>The Slight-Less-Headachey R Approach!</h2>
+<section id="the-slightly-less-headachey-r-approach" class="slide level2 smaller crunch-title title-11">
+<h2>The Slightly-Less-Headachey R Approach!</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>R reads missing values in <code>character</code> columns as empty strings by default</p>
@@ -1165,9 +1165,18 @@ dtype: object</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p>…And also has a built-in <code>NA</code> value!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>my_data_2.csv</strong></pre>
+</div>
+<div class="sourceCode" id="cb105" data-filename="my_data_2.csv"><pre class="sourceCode numberSource csv number-lines code-with-copy"><code class="sourceCode"><span id="cb105-1"><a></a>id,name,email,fav_num</span>
+<span id="cb105-2"><a></a>0,jeff,jeff@jeff.com,3.14</span>
+<span id="cb105-3"><a></a>1,,nobody@no.com,</span>
+<span id="cb105-4"><a></a>3,zayd,z@email.biz,11</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a>df2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"my_data_2.csv"</span>)</span>
-<span id="cb105-2"><a></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a>df2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"my_data_2.csv"</span>)</span>
+<span id="cb106-2"><a></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table>
@@ -1202,7 +1211,7 @@ dtype: object</code></pre>
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a><span class="fu">sapply</span>(df2, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a><span class="fu">sapply</span>(df2, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         id        name       email     fav_num 
   "integer" "character" "character"   "numeric" </code></pre>
@@ -1220,17 +1229,17 @@ dtype: object</code></pre>
 <div class="column" style="width:50%;">
 <p>Use <strong>2D vectors</strong>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb108-2"><a></a>  <span class="at">data=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb108-3"><a></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span></span>
-<span id="cb108-4"><a></a>)</span>
-<span id="cb108-5"><a></a>my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb109-2"><a></a>  <span class="at">data=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb109-3"><a></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span></span>
+<span id="cb109-4"><a></a>)</span>
+<span id="cb109-5"><a></a>my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    1    2
 [2,]    3    4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a></a><span class="fu">class</span>(my_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a></a><span class="fu">class</span>(my_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "matrix" "array" </code></pre>
 </div>
@@ -1238,13 +1247,13 @@ dtype: object</code></pre>
 </div><div class="column" style="width:50%;">
 <p>Beware! Matrix multiply operator is <code>%*%</code>, NOT <code>*</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a></a>my_matrix <span class="sc">*</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a></a>my_matrix <span class="sc">*</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    1    4
 [2,]    9   16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a></a>my_matrix <span class="sc">%*%</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a></a>my_matrix <span class="sc">%*%</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    7   10

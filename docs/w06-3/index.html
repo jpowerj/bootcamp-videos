@@ -209,7 +209,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#pandas-dataframe-leftrightarrow-r-data.frame" id="toc-pandas-dataframe-leftrightarrow-r-data.frame" class="nav-link" data-scroll-target="#pandas-dataframe-leftrightarrow-r-data.frame">Pandas <code>DataFrame</code> <span class="math inline">\(\leftrightarrow\)</span> R <code>data.frame</code></a></li>
   <li><a href="#the-inevitable-headaches-of-missing-data-in-python" id="toc-the-inevitable-headaches-of-missing-data-in-python" class="nav-link" data-scroll-target="#the-inevitable-headaches-of-missing-data-in-python">The Inevitable Headaches of Missing Data in Python</a></li>
-  <li><a href="#the-slight-less-headachey-r-approach" id="toc-the-slight-less-headachey-r-approach" class="nav-link" data-scroll-target="#the-slight-less-headachey-r-approach">The Slight-Less-Headachey R Approach!</a></li>
+  <li><a href="#the-slightly-less-headachey-r-approach" id="toc-the-slightly-less-headachey-r-approach" class="nav-link" data-scroll-target="#the-slightly-less-headachey-r-approach">The Slightly-Less-Headachey R Approach!</a></li>
   <li><a href="#bonus-built-in-matrices" id="toc-bonus-built-in-matrices" class="nav-link" data-scroll-target="#bonus-built-in-matrices">Bonus: Built-In Matrices</a></li>
   </ul></li>
   </ul>
@@ -605,7 +605,7 @@ window.Quarto = {
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getSampleSize</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 3 3 7 2 5 4 6 3 4 6 4 7 5 7 4 7 7 5 8 3</code></pre>
+<pre><code> [1] 7 3 6 4 5 7 7 5 4 5 6 6 6 7 6 6 4 3 3 5</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -615,7 +615,7 @@ window.Quarto = {
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getNumTrials</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 46 53 52 52 53 58 51 57 44 39</code></pre>
+<pre><code> [1] 54 43 50 52 48 49 49 49 52 54</code></pre>
 </div>
 </div>
 </div>
@@ -955,8 +955,8 @@ dtype: object</code></pre>
 </div>
 </div>
 </section>
-<section id="the-slight-less-headachey-r-approach" class="level2 smaller crunch-title">
-<h2 class="smaller crunch-title anchored" data-anchor-id="the-slight-less-headachey-r-approach">The Slight-Less-Headachey R Approach!</h2>
+<section id="the-slightly-less-headachey-r-approach" class="level2 smaller crunch-title title-11">
+<h2 class="smaller crunch-title title-11 anchored" data-anchor-id="the-slightly-less-headachey-r-approach">The Slightly-Less-Headachey R Approach!</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>R reads missing values in <code>character</code> columns as empty strings by default</p>
@@ -1010,13 +1010,22 @@ incomplete final line found by readTableHeader on 'my_data.csv'</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p>…And also has a built-in <code>NA</code> value!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>my_data_2.csv</strong></pre>
+</div>
+<pre class="csv" data-filename="my_data_2.csv"><code>id,name,email,fav_num
+0,jeff,jeff@jeff.com,3.14
+1,,nobody@no.com,
+3,zayd,z@email.biz,11</code></pre>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"my_data_2.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"my_data_2.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in read.table(file = file, header = header, sep = sep, quote = quote, :
 incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1051,7 +1060,7 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </table>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(df2, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(df2, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         id        name       email     fav_num 
   "integer" "character" "character"   "numeric" </code></pre>
@@ -1069,17 +1078,17 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 <div class="column" style="width:50%;">
 <p>Use <strong>2D vectors</strong>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span></span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    1    2
 [2,]    3    4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(my_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "matrix" "array" </code></pre>
 </div>
@@ -1087,13 +1096,13 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </div><div class="column" style="width:50%;">
 <p>Beware! Matrix multiply operator is <code>%*%</code>, NOT <code>*</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="sc">*</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="sc">*</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    1    4
 [2,]    9   16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="sc">%*%</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="sc">%*%</span> my_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    7   10

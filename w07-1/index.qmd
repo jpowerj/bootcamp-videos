@@ -233,3 +233,47 @@ driver_df['mph'] = driver_df$miles / driver_df$hrs
 driver_df
 ```
 
+# Functions
+
+## Anonymous Functions
+
+* In Python you **declare** the name of a function using `def`
+* In R, you make the function **without a name**, then assign it to a variable:
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{python}
+#| label: py-functions
+#| echo: true
+#| code-fold: false
+def multiply_by_5(num):
+  return num * 5
+multiply_by_5(10)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-functions
+#| echo: true
+#| code-fold: false
+multiply_by_5 <- function(num) {
+  return(num * 5)
+}
+multiply_by_5(10)
+```
+
+:::
+:::
+
+* Python also has anonymous functions, via `lambda`:
+
+```{python}
+#| label: py-lambda
+#| echo: true
+#| code-fold: false
+double_it = lambda x: x * 2
+double_it(10)
+```

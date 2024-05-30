@@ -671,7 +671,7 @@ df_better.iloc[1]['name']
 :::
 :::
 
-## The Slight-Less-Headachey R Approach! {.smaller .crunch-title}
+## The Slightly-Less-Headachey R Approach! {.smaller .crunch-title .title-11}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -693,6 +693,13 @@ sapply(df, class)
 ::: {.column width="50%"}
 
 ...And also has a built-in `NA` value!
+
+``` {.csv filename="my_data_2.csv"}
+id,name,email,fav_num
+0,jeff,jeff@jeff.com,3.14
+1,,nobody@no.com,
+3,zayd,z@email.biz,11
+```
 
 ```{r}
 #| label: r-na-vals
