@@ -750,3 +750,93 @@ sapply(df2, class)
 
   :::
   :::
+
+## Filtering (Selecting Rows) {.smaller}
+
+* In Base R, **filtering** involves two steps:
+* **First**, create a **boolean expression** that will evaluate to `TRUE` for the rows/columns you want to keep, and `FALSE` otherwise
+* **Then**, use it in the correct "slot" of R's **access operator** `[]`:
+
+  ``` {.r code-line-numbers="false"}
+  filtered_df <- df[<row filter>, <column filter>] # Note: Either (or both) can be left blank!
+  ```
+
+* R will go through each row, evaluate `<row filter>`, and **keep the row** if and only if `<row filter>` evaluates to `TRUE`
+* Example: Selecting only rows with **odd-numbered** `id` values:
+
+  ```{r}
+  #| label: select-odd-ids
+  #| echo: true
+  #| code-fold: false
+  # Boolean expression which is TRUE for odd-numbered indices
+  my_expression <- df2$id %% 2 == 1
+  filtered_df <- df2[my_expression,]
+  filtered_df
+  ```
+
+::: {.notes}
+
+Now that you know how to set up `data.frame`s, let's **do something** with them!
+
+:::
+
+## Selecting Columns {.crunch-title .smaller-table}
+
+* Create a **vector** with names of columns you want to keep:
+
+  ``` {.r code-line-numbers="false"}
+  cols_to_keep <- c("var1", "var2", "var3")
+  ```
+
+* Use as the **sole** argument to R's **access operator** `[]`:
+
+  ``` {.r code-line-numbers="false"}
+  subset_df <- df[cols_to_keep]
+  ```
+
+* Example: Keeping just the `name` and `fav_num` columns:
+
+  ```{r}
+  #| label: r-select-cols
+  #| echo: true
+  #| code-fold: false
+  cols_to_keep <- c("name", "fav_num")
+  subset_df <- filtered_df[cols_to_keep]
+  subset_df
+  ```
+
+## Sampling {.smaller-table}
+
+* Filtering = choosing rows **deterministically**
+* Sampling = choosing rows **randomly**
+* R has a built-in `sample()` function, but **be careful!** It does **not** work **directly** on `data.frame` objects 😱 Instead:
+
+::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-1-circle'></i> Sample row **indices**:
+
+```{r}
+#| label: r-sample-indices
+#| echo: true
+#| code-fold: false
+set.seed(2024)
+indices <- sample(nrow(df), 2)
+indices
+```
+
+:::
+::: {.column width="50%"}
+
+<i class='bi bi-2-circle'></i> **Select** only these indices:
+
+```{r}
+#| label: r-apply-sample
+#| echo: true
+#| code-fold: false
+sample_df <- df2[indices,]
+sample_df
+```
+
+:::
+:::

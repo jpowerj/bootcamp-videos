@@ -1,122 +1,116 @@
 ---
 title: "Assignment 6"
 subtitle: "DSAN Bootcamp 2024"
-output: html
+output:
+  html:
+    embed-resources: true
+    df-print: kable
+    code-tools:
+      source: true
 ---
 
-# Problem 1: Generating a Deck of Cards
+## Part 1: Generating a Deck of Cards
 
-a. Create a vector for card **suits** with the variable name `suits`, containing the following four elements (as character strings): `"Diamonds"`, `"Clubs"`, `"Hearts"`, `"Spades"`
+### Question 1.1
 
-```{r}
-suits <- c("Diamonds", "Clubs", "Hearts", "Spades")
-```
+Create a vector for card **suits** with the variable name `suits`, containing the following four elements (as character strings): `"Diamonds"`, `"Clubs"`, `"Hearts"`, `"Spades"`. Write `suits` (on its own) as the final line of your code cell, so that the output of the cell shows the contents of the vector you created.
 
-b. Create a vector for card **numbers** with the variable name `numbers`, containing the character string `"Ace"` followed by the integers 2 through 10
+### Question 1.2
 
-```{r}
-numbers <- c("Ace", seq(2, 10))
-```
+Create a vector for card **numbers** with the variable name `numbers`, containing the character string `"Ace"` followed by the integers 2 through 10. Display the contents of `numbers` as the output of your code cell (as you did in Q1.1).
 
-c. Create a vector for **face cards** with the variable name `faces`, containing the character strings `"Jack"`, `"Queen"`, and `"King"`
+### Question 1.3
 
-```{r}
-faces <- c("Jack", "Queen", "King")
-```
+Create a vector for **face cards** with the variable name `faces`, containing the character strings `"Jack"`, `"Queen"`, and `"King"`. Display the contents of `faces` as the output of your code cell.
 
-d. Create a new vector with the variable name `card_names`, formed by concatenating the elements of the `faces` vector to the end of the `numbers` vector.
+### Question 1.4
 
-```{r}
-card_names <- c(numbers, faces)
-card_names
-```
+Create a new vector with the variable name `card_names`, formed by concatenating the elements of the `faces` vector to the end of the `numbers` vector. Display the contents of `card_names` as the output of your code cell.
 
-e. Repeat each element in `card_names` four times, and name the new variable `card_names_4`
+### Question 1.5
 
-```{r}
-card_names_4 <- rep(card_names, 4)
-```
+Repeat each element in `card_names` four times, and name the new variable `card_names_4`. Display the contents of `card_names_4` as the output of your code cell.
 
-g. Repeat each element in `suits` 13 times, naming the new variable `suits_13`
+### Question 1.6
 
-```{r}
-suits_13 <- rep(suits, 13)
-suits_13
-```
+Repeat each element in `suits` 13 times, naming the new variable `suits_13`. Display the contents of `suits_13` as the output of your code cell.
 
-h. Create a `data.frame` variable named `card_deck`, constructed so that its first column is named `card_name` and contains the values of `card_names_4`, and its second column is named `suit` and contains the values of `suits_13`.
+### Question 1.7
 
-```{r}
-card_deck <- data.frame(
-    card_name=card_names_4,
-    suit=suits_13
-)
-card_deck
-```
+Create a `data.frame` variable named `card_deck`, constructed so that its first column is named `card_name` and contains the values of `card_names_4`, and its second column is named `suit` and contains the values of `suits_13`. Display the contents of `card_deck` as the output of your code cell.
 
-i. Create a new column in `card_deck` named `card` by **pasting** the values in the first column (`card_name`) to the values in the second column (`suit`). Here you can use the built-in R function `paste()` to paste these 2 variables together.
+### Question 1.8
 
-```{r}
-card_deck[,"card"] <- paste(card_deck$card_name, card_deck$suit)
-card_deck
-```
+Create a new column in `card_deck` named `card` by **pasting** the values in the first column (`card_name`) to the values in the second column (`suit`). Here you can use the built-in R function `paste()` to paste these 2 variables together. Display the *new* contents of `card_deck` as the output of your code cell.
 
-Now you have a deck of cards, and you could use this deck of cards to find probabilities, like the probability of drawing a spade followed by a heart card!
+### Question 1.9
 
-## Part 2: Computing Probabilities
+Now you have a deck of cards, which you can use to compute probabilities! First, to verify that the deck was successfully created, write code which outputs the **number of rows** in the `card_deck` `data.frame` (it should be 52, if the above steps were carried out correctly)
 
-Consider how you might approach the problem a bit differently if you wanted to model the game Blackjack. In Blackjack, the suits are irrelevant, and only the **value** of each card matters. Regardless of suit, for example, if you are dealt an Ace (worth 1 or 11) and a face card (worth 10), this is called a "Natural 21" and you win automatically. We can compute the probability of this happening with a different `data.frame` from the previous question, since here we only care about the values 
+### Question 1.10
 
-a. Create a vector for card numbers with the variable name "other" and add the elements as characters --> "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"
+Now, use what you know about **filtering** the values in a `data.frame` to compute the probability that a randomly-drawn card from `card_deck` is a Spade, and display this probability as the output of your code cell.
 
+### Question 1.11
 
-k. Now use the function `expand.grid()` to create a data frame of all combinations without going through parts (d)-(i). Name this data frame as "deck 2". Here the first value inside the function as "others" and the second value as "suits".
+Use `card_deck` again to compute the probability that, when drawing *two* cards from the deck, the first is a Spade and the second is a Heart. Display this probability as the output of your code cell.
 
-l. Create a new variable call "deck
-_2" by pasting the first column of the "deck_2" data frame with the second column. Here you can use `paste()` function to paste these 2 variables together. Name the new data frame as "new_deck". Check the length and see if it has 52 cards.
+### Question 1.12
 
+Now let's simulate playing poker! Using what you know about sampling from a `data.frame`, sample 5 cards from `card_deck` (please use `set.seed(2024)` to set the random seed to be 2024, so that results are the same across different submissions). Display the sampled 5-card hand as the output of your code cell. Then, using the following image as a guide if you're unfamiliar with poker, comment on the cards you obtained---did your random draw result in one of the types of hands displayed in the image?
 
-m. Assuming you are playing poker, sample 5 cards from the "new_deck (don't forget to put a set.seed()) and see if you get any poker hands. Comment on what you get. Are you any closer to any of the poker hands? 
+![](images/poker.png)
 
-![](poker.png)
-
-
-## Problem 2
+## Problem 2: Loading and Cleaning Data
 
 For this problem, rather than creating our own dataset from scratch, we will load and analyze a pre-existing dataset on _global superstore orders_.
 
-a. Import the data set named `Global_Superstore_Orders_2016.csv` using R's built-in `read.csv()` function, storing the result into a `data.frame` variable named `orders`. Read more about the function by typing `??read.csv` in the Console. Here, you have to define the file name and path. But if you have created a R project as mentioned in my first video, and your data set is in that folder, then you don't have to specify the path.
+### Question 2.1
 
- - Remember to provide the `header = TRUE` argument to the `read.csv()` function.
- - Also view the head of the dataset using `head()`
+* First, import the file named `Global_Superstore_Orders_2016.csv` using R's built-in `read.csv()` function, storing the result into a `data.frame` variable named `orders`.
+* Next, read more about the `read.csv()` function by typing `??read.csv` in the R Console. Make sure you understand the optional `header` argument, since you'll need to provide the `TRUE` as the value for this argument when you call the `read.csv()` function in the previous step!
+* Finally, display the first six rows of `orders` as the output of your code cell, by using R's built-in `head()` function.
 
-b. Use `str()` to check the type of each variable. You'll see that `read.csv()` did not correctly identify the data types for all columns loaded from the `.csv` file. Which variables have inappropriate types, and what should their data types be instead?
+### Question 2.2
 
-c. Create a separate data frame variable named `sales_data`, containing only the following columns from the full : `Order.Date`, `Ship.Date`, `State`, `Country`, `Sales`, `Profit`, and `Order.Priority`
+Use `str()` to check the type of each variable. You'll see that `read.csv()` did not correctly identify the data types for all columns loaded from the `.csv` file. Which variables have inappropriate types, and what should their data types be instead?
 
-d. Use `str()` to check the type of each variable and correct them to the correct type (factor, Date/Time,..etc.) as necessary.
+### Question 2.3
 
-Hint 1: to convert to Date/Time type us `as.Date()`. You can read more about the function by typing `??as.Date` in Console. one example is done below.
+Create a separate `data.frame` named `sales_data`, containing only the following columns from `orders`: `Order.Date`, `Ship.Date`, `State`, `Country`, `Sales`, `Profit`, and `Order.Priority`. Display the first six rows of `sales_data` (using `head()`) as the output of your code cell.
 
-Read more: <https://www.ibm.com/docs/en/cmofz/10.1.0?topic=SSQHWE_10.1.0/com.ibm.ondemand.mp.doc/arsa0257.htm>
+### Question 2.4
 
-Hint 2: Also, you can see that the "Sales" and "Profit" variables are character type and they have a $ sign and a comma in the middle. To remove these and create a numeric variable you can use `gsub()` and `as.numeric()` functions.
+Update the `sales_data` `data.frame` you created in Q2.3 so that the columns you identified in Q2.2 have the correct types (`factor`, `Date`,..etc.).
 
--> _gsub(pattern, replacement, string that needs to be changed)_
+*Hint*: You'll want to use the `lubridate` library to convert `character` strings into `Date` types. To do so, you'll need to identify what *format* the dates are in, then use the appropriate function from the **Parse Date-Times** section of the [`lubridate` cheat sheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf){target='_blank'}. The following cell provides an example, where we parse the `character` string `"2024-05-01"` into a `Date` object representing the 31st day of December in the year 2024:
 
 ```{r}
-# Sales.data$Order.Date <- as.Date(Sales.data$Order.Date,"%m/%d/%y")
+library(lubridate)
+example_date_str <- "2024-12-31"
+parsed_date <- ymd(example_date_str)
+parsed_date
+class(parsed_date)
 ```
 
-e. Now again  Use `str()` on the Sales.data to confirm the correct type of each variable.
+### Question 2.5
 
+Use `str()` on the updated `sales_data` variable to confirm that each of the variables you identified in Q2.2 now has the correct type.
 
-f. Check whether there are any NA/missing values in your "Sales.data".
+### Question 2.6
 
+Check whether there are any `NA`/missing values in `sales_data`.
 
-g. Take the names of the variables into a new variable called "VarNames". Also find out how many rows that the dataset has and assign it to the variable "length". We may use this dataset and these variables in your next assignments.
+### Question 2.7
 
-h. Find the mean of Sales when the order priority is "Critical" and "High". Which one is higher?
+Store the names of the columns of `sales_data` into a new variable called `sales_col_names`. Also find out how many rows that the dataset has and assign it to the variable `sales_num_rows`. Display the values of both `sales_col_names` and `sales_num_rows` as the output of your code cell. (We may use this dataset and these variables in future assignments)
 
-i. BONUS: (+1) Find the average sales in different states in the USA. Hint: you can use the `aggregate()` function.
+### Question 2.8
 
+**Q2.8**: Write code to compute the mean value of the `Sales` column when the order priority is `"Critical"`, and the mean value of `Sales` when the order priority is `"High"`. Which of the two mean values is greater?
+
+### Question 2.9 (Bonus)
+
+(For +1 bonus point) Compute the mean sales for each of the 50 US states.
+
+*Hint: you should use R's built-in `aggregate()` function to accomplish this, rather than manually entering the names of all 50 states!*
