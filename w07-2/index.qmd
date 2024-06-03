@@ -1,0 +1,361 @@
+---
+title: "Introduction to the Tidyverse"
+subtitle: "Week 7, Part 2"
+author: "Jeff Jacobs"
+institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
+format:
+  revealjs:
+    echo: true
+    code-fold: false
+    slide-number: true
+    df-print: kable
+    html-math-method: mathjax
+    scrollable: true
+    footer: "2024 DSAN Bootcamp W07-2: Tidyverse"
+    theme: ["../_jjslides.scss"]
+    output-file: "slides.html"
+    include-in-header:
+      text: "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+    simplemenu:
+      flat: true
+      barhtml:
+        header: "<div class='menubar'><span style='position: absolute; left: 8; padding-left: 8px;'><a href='./index.html'>&larr; Return to Notes</a></span><ul class='menu'></ul></div>"
+      scale: 0.5
+    revealjs-plugins:
+      - simplemenu
+  html:
+    df-print: kable
+    html-math-format: mathjax
+    echo: true
+    code-fold: true
+    output-file: "index.html"
+    include-in-header:
+      text: "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'></script>"
+---
+
+::: {.content-visible unless-format="revealjs"}
+
+<center>
+<a class="h2" href="./slides.html" target="_blank">Open slides in new window &rarr;</a>
+</center>
+
+:::
+
+
+## Tidyverse {.smaller}
+
+* Think of data science tasks as involving **pipelines**:
+
+```{dot}
+//| fig-height: 1.5
+//| echo: false
+digraph G {
+  rankdir=LR;
+  node[label="Raw Data"] raw;
+  subgraph cluster_00 {
+    label="Data-Processing Pipeline 1"
+    node[label="Transformation A\n(select(), filter())"] tr1;
+    node[label="Transformation B\n(mutate(), summarize())"] tr2;
+    tr1 -> tr2;
+  }
+  raw -> tr1;
+  node [label="Visualization"] viz;
+  tr2 -> viz;
+}
+```
+
+```{dot}
+//| fig-height: 1.5
+//| echo: false
+digraph G {
+  rankdir=LR;
+  node[label="Raw Data"] raw;
+  subgraph cluster_00 {
+    label="Data-Processing Pipeline 2"
+    node[label="Transformation C\n(select(), filter())"] tr1;
+    node[label="Transformation D\n(mutate(), summarize())"] tr2;
+    tr1 -> tr2;
+  }
+  raw -> tr1;
+  node [label="      Result     "] viz;
+  tr2 -> viz;
+}
+```
+
+* Tidyverse lets you **pipe output** from one transformation as the **input** to another:
+
+```r
+raw_data |> select() |> mutate() |> visualize()
+raw_data |> filter() |> summarize() |> check_result()
+```
+
+## *Select*ing Columns {.smaller}
+
+`select()` lets you keep only the **columns** you care about in your current analysis:
+
+::: {layout-ncol=2}
+
+```{r}
+#| label: tidyverse-select-load-data
+library(tidyverse)
+table1
+```
+
+```{r}
+#| label: tidyverse-select
+#| code-fold: show
+table1 |> select(country, year, population)
+```
+
+:::
+
+## *Filter*ing Rows {.smaller}
+
+`filter()` lets you keep only the **rows** you care about in your current analysis:
+
+::: {layout-ncol=2}
+
+```{r}
+#| label: tidyverse-filter-year
+table1 |> filter(year == 2000)
+```
+
+```{r}
+#| label: tidyverse-filter-country
+table1 |> filter(country == "Afghanistan")
+```
+
+:::
+
+## Merging Data {.smaller .crunch-title}
+
+* The task: Analyze relationship between population and GDP (in 2000)
+* The data: One dataset on population in 2000, another on GDP in 2000
+* Let's get the data **ready for merging** using R
+
+::: columns
+::: {.column width="40%"}
+
+```{r}
+#| label: tidyverse-filter-select
+df <- table1 |>
+  select(country, year, population) |>
+  filter(year == 2000)
+df |> write_csv("assets/pop_2000.csv")
+df
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| label: load-gdp-data
+#| code-fold: show
+gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv")
+gdp_df |> head(5)
+```
+
+:::
+
+:::
+
+## Selecting/Filtering in Action {.smaller}
+
+```{r}
+#| label: clean-gdp-data
+#| code-fold: show
+gdp_2000_df <- gdp_df |>
+  select(`Country Name`,Year,Value) |>
+  filter(Year == "2000") |>
+  rename(country=`Country Name`, year=`Year`, gdp=`Value`)
+gdp_2000_df |> write_csv("assets/gdp_2000.csv")
+gdp_2000_df |> head()
+```
+
+## Recommended Language: Python {.smaller .crunch-title .crunch-ul}
+
+Pandas provides an easy-to-use `df.merge(other_df)`!
+
+::: columns
+::: {.column width="50%"}
+
+```{python}
+#| label: py-load-pop-data
+#| echo: false
+#| output: false
+import pandas as pd
+from IPython.display import Markdown
+pop_df = pd.read_csv("assets/pop_2000.csv")
+```
+
+```{python}
+#| label: py-load-gdp-data
+#| echo: false
+gdp_df = pd.read_csv("assets/gdp_2000.csv")
+```
+
+<center>
+**Left Join**
+</center>
+
+```{python}
+#| label: py-merge
+#| code-fold: show
+merged_df = pop_df.merge(gdp_df,
+  on='country', how='left', indicator=True
+)
+Markdown(merged_df.to_markdown())
+```
+
+:::
+::: {.column width="50%"}
+
+<center>
+**Inner join** (&asymp; Intersection ($\cap$))
+</center>
+
+```{python}
+#| label: py-merge-right
+#| code-fold: show
+merged_df = pop_df.merge(gdp_df,
+  on='country', how='inner', indicator=True
+)
+Markdown(merged_df.to_markdown())
+```
+
+:::
+:::
+
+## Reshaping Data {.smaller}
+
+Sometimes you can't merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right
+
+::: columns
+::: {.column width="55%"}
+
+In data-cleaning jargon, this dataset is **long** (more than one row per observation)
+
+```{r}
+#| label: r-long-data
+table2 |> write_csv("assets/long_data.csv")
+table2 |> head()
+```
+
+:::
+::: {.column width="45%"}
+
+In data-cleaning jargon, this dataset is **wide** (one row per obs; usually **tidy**)
+
+```{r}
+#| label: r-wide-data
+table1 |> write_csv("assets/wide_data.csv")
+table1 |> head()
+```
+
+:::
+:::
+
+## Reshaping Long-to-Wide in Python: `pd.pivot()` {.smaller}
+
+::: columns
+::: {.column width="45%"}
+
+```{python}
+#| label: py-load-long-data
+#| echo: false
+#| output: false
+long_df = pd.read_csv("assets/long_data.csv")
+```
+
+Create unique ID for **wide** version:
+
+```{python}
+#| label: py-create-wide-id
+#| code-fold: show
+#| output: asis
+#| fig-align: center
+long_df['id'] = long_df['country'] + '_' + long_df['year'].apply(str)
+# Reorder the columns, so it shows the id first
+long_df = long_df[['id','country','year','type','count']]
+print(long_df.head(6).to_markdown())
+```
+
+:::
+::: {.column width="55%"}
+
+```{python}
+#| label: py-long-to-wide
+#| code-fold: show
+#| output: asis
+#| fig-align: center
+reshaped_df = pd.pivot(long_df,
+  index='id',
+  columns='type',
+  values='count'
+)
+print(reshaped_df.to_markdown())
+```
+
+:::
+:::
+
+## The Other Direction (Wide-to-Long): `pd.melt()` {.smaller}
+
+::: columns
+::: {.column width="40%"}
+
+```{python}
+#| label: py-read-wide
+#| code-fold: show
+#| output: asis
+#| fig-align: center
+wide_df = pd.read_csv("assets/wide_data.csv")
+print(wide_df.to_markdown())
+```
+
+:::
+::: {.column width="60%"}
+
+```{python}
+#| label: py-wide-to-long
+#| code-fold: show
+#| output: asis
+#| fig-align: center
+long_df = pd.melt(wide_df,
+  id_vars=['country','year'],
+  value_vars=['cases','population']
+)
+print(long_df.head(6).to_markdown())
+```
+
+:::
+:::
+
+## Wide-to-Long in R: `gather()` {.smaller}
+
+::: columns
+::: {.column width="40%"}
+
+```{r}
+#| label: r-display-wide-for-reshape
+#| code-fold: show
+table1
+```
+
+:::
+::: {.column width="60%"}
+
+```{r}
+#| label: r-reshape
+#| code-fold: show
+long_df <- gather(table1,
+  key = "variable",
+  value = cases,
+  -c(country, year)
+)
+long_df |> head()
+```
+
+:::
+:::

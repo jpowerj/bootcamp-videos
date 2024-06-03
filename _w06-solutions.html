@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignment 6</title>
+<title>Assignment 6 Solutions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignment 6</h1>
+<h1 class="title">Assignment 6 Solutions</h1>
 <p class="subtitle lead">DSAN Bootcamp 2024</p>
 </div>
 
@@ -102,17 +102,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.1">Question 1.1</h3>
 <p>Create a vector for card <strong>suits</strong> with the variable name <code>suits</code>, containing the following four elements (as character strings): <code>"Diamonds"</code>, <code>"Clubs"</code>, <code>"Hearts"</code>, <code>"Spades"</code>. Write <code>suits</code> (on its own) as the final line of your code cell, so that the output of the cell shows the contents of the vector you created.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>suits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Diamonds"</span>, <span class="st">"Clubs"</span>, <span class="st">"Hearts"</span>, <span class="st">"Spades"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>suits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Diamonds" "Clubs"    "Hearts"   "Spades"  </code></pre>
+</div>
+</div>
 </section>
 <section id="question-1.2" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.2">Question 1.2</h3>
 <p>Create a vector for card <strong>numbers</strong> with the variable name <code>numbers</code>, containing the character string <code>"Ace"</code> followed by the integers 2 through 10. Display the contents of <code>numbers</code> as the output of your code cell (as you did in Q1.1).</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ace"</span>, <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Ace" "2"   "3"   "4"   "5"   "6"   "7"   "8"   "9"   "10" </code></pre>
+</div>
+</div>
 </section>
 <section id="question-1.3" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.3">Question 1.3</h3>
 <p>Create a vector for <strong>face cards</strong> with the variable name <code>faces</code>, containing the character strings <code>"Jack"</code>, <code>"Queen"</code>, and <code>"King"</code>. Display the contents of <code>faces</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>faces <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jack"</span>, <span class="st">"Queen"</span>, <span class="st">"King"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>faces</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>faces <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jack"</span>, <span class="st">"Queen"</span>, <span class="st">"King"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>faces</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Jack"  "Queen" "King" </code></pre>
 </div>
@@ -121,9 +138,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.4" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.4">Question 1.4</h3>
 <p>Create a new vector with the variable name <code>card_names</code>, formed by concatenating the elements of the <code>faces</code> vector to the end of the <code>numbers</code> vector. Display the contents of <code>card_names</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>card_names <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, faces)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>card_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>card_names <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers, faces)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>card_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Ace"   "2"     "3"     "4"     "5"     "6"     "7"     "8"     "9"    
 [10] "10"    "Jack"  "Queen" "King" </code></pre>
@@ -133,9 +151,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.5" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.5">Question 1.5</h3>
 <p>Repeat each element in <code>card_names</code> four times, and name the new variable <code>card_names_4</code>. Display the contents of <code>card_names_4</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>card_names_4 <span class="ot">&lt;-</span> <span class="fu">rep</span>(card_names, <span class="dv">4</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>card_names_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>card_names_4 <span class="ot">&lt;-</span> <span class="fu">rep</span>(card_names, <span class="dv">4</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>card_names_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Ace"   "2"     "3"     "4"     "5"     "6"     "7"     "8"     "9"    
 [10] "10"    "Jack"  "Queen" "King"  "Ace"   "2"     "3"     "4"     "5"    
@@ -149,9 +168,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.6" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.6">Question 1.6</h3>
 <p>Repeat each element in <code>suits</code> 13 times, naming the new variable <code>suits_13</code>. Display the contents of <code>suits_13</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>suits_13 <span class="ot">&lt;-</span> <span class="fu">rep</span>(suits, <span class="dv">13</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>suits_13</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>suits_13 <span class="ot">&lt;-</span> <span class="fu">rep</span>(suits, <span class="dv">13</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>suits_13</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Diamonds" "Clubs"    "Hearts"   "Spades"   "Diamonds" "Clubs"   
  [7] "Hearts"   "Spades"   "Diamonds" "Clubs"    "Hearts"   "Spades"  
@@ -168,12 +188,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.7" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.7">Question 1.7</h3>
 <p>Create a <code>data.frame</code> variable named <code>card_deck</code>, constructed so that its first column is named <code>card_name</code> and contains the values of <code>card_names_4</code>, and its second column is named <code>suit</code> and contains the values of <code>suits_13</code>. Display the contents of <code>card_deck</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>card_deck <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">card_name=</span>card_names_4,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">suit=</span>suits_13</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>card_deck</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>card_deck <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">card_name=</span>card_names_4,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">suit=</span>suits_13</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>card_deck</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   card_name     suit
 1        Ace Diamonds
@@ -234,9 +255,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.8" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.8">Question 1.8</h3>
 <p>Create a new column in <code>card_deck</code> named <code>card</code> by <strong>pasting</strong> the values in the first column (<code>card_name</code>) to the values in the second column (<code>suit</code>). Here you can use the built-in R function <code>paste()</code> to paste these 2 variables together. Display the <em>new</em> contents of <code>card_deck</code> as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>card_deck[,<span class="st">"card"</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(card_deck<span class="sc">$</span>card_name, card_deck<span class="sc">$</span>suit)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>card_deck</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>card_deck[,<span class="st">"card"</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(card_deck<span class="sc">$</span>card_name, card_deck<span class="sc">$</span>suit)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>card_deck</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   card_name     suit           card
 1        Ace Diamonds   Ace Diamonds
@@ -296,9 +318,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-1.9" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.9">Question 1.9</h3>
-<p>Now you have a deck of cards, which you can use to compute probabilities! First, to verify that the deck was successfully created, write code which outputs the <strong>number of rows</strong> in the <code>card_deck</code> <code>data.frame</code> (it should be 52, if the above steps were carried out correctly)</p>
+<p>Now you have a deck of cards, which you can use to compute probabilities! First, to verify that the deck was successfully created, write code which outputs the <strong>number of rows</strong> in the <code>card_deck</code> <code>data.frame</code> (it should be 52, if the above steps were carried out correctly).</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(card_deck)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(card_deck)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 52</code></pre>
 </div>
@@ -307,15 +330,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1.10" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.10">Question 1.10</h3>
 <p>Now, use what you know about <strong>filtering</strong> the values in a <code>data.frame</code> to compute the probability that a randomly-drawn card from <code>card_deck</code> is a Spade, and display this probability as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spade_cards <span class="ot">&lt;-</span> card_deck[card_deck<span class="sc">$</span>suit <span class="sc">==</span> <span class="st">"Spades"</span>,]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>p_spade <span class="ot">&lt;-</span> <span class="fu">nrow</span>(spade_cards) <span class="sc">/</span> <span class="fu">nrow</span>(card_deck)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>p_spade</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.25</code></pre>
+</div>
+</div>
 </section>
 <section id="question-1.11" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.11">Question 1.11</h3>
 <p>Use <code>card_deck</code> again to compute the probability that, when drawing <em>two</em> cards from the deck, the first is a Spade and the second is a Heart. Display this probability as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A few ways to do this, but here's one</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>card_deck_post_spade <span class="ot">&lt;-</span> card_deck[card_deck<span class="sc">$</span>card <span class="sc">!=</span> <span class="st">"Ace Spades"</span>,]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>hearts_post_spade <span class="ot">&lt;-</span> card_deck_post_spade[card_deck_post_spade<span class="sc">$</span>suit <span class="sc">==</span> <span class="st">"Hearts"</span>,]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>p_heart_after_spade <span class="ot">&lt;-</span> <span class="fu">nrow</span>(hearts_post_spade) <span class="sc">/</span> <span class="fu">nrow</span>(card_deck_post_spade)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>p_spade_heart <span class="ot">&lt;-</span> p_spade <span class="sc">*</span> p_heart_after_spade</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>p_spade_heart</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06372549</code></pre>
+</div>
+</div>
 </section>
 <section id="question-1.12" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.12">Question 1.12</h3>
 <p>Now let’s simulate playing poker! Using what you know about sampling from a <code>data.frame</code>, sample 5 cards from <code>card_deck</code> (please use <code>set.seed(2024)</code> to set the random seed to be 2024, so that results are the same across different submissions). Display the sampled 5-card hand as the output of your code cell. Then, using the following image as a guide if you’re unfamiliar with poker, comment on the cards you obtained—did your random draw result in one of the types of hands displayed in the image?</p>
 <p><img src="images/poker.png" class="img-fluid"></p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(card_deck), <span class="dv">5</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sampled_cards <span class="ot">&lt;-</span> card_deck[indices,]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sampled_cards</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   card_name     suit          card
+2          2    Clubs       2 Clubs
+37      Jack Diamonds Jack Diamonds
+45         6 Diamonds    6 Diamonds
+17         4 Diamonds    4 Diamonds
+50      Jack    Clubs    Jack Clubs</code></pre>
+</div>
+</div>
+<p>Using the rankings from the image, we have the following (from “best” to “worst”):</p>
+<ul>
+<li>Pair (Jack of Clubs and Jack of Diamonds)</li>
+<li>High Card (Jack)</li>
+</ul>
 </section>
 </section>
 <section id="problem-2" class="level2">
@@ -328,9 +392,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Next, read more about the <code>read.csv()</code> function by typing <code>??read.csv</code> in the R Console. Make sure you understand the optional <code>header</code> argument, since you’ll need to provide the <code>TRUE</code> as the value for this argument when you call the <code>read.csv()</code> function in the previous step!</li>
 <li>Finally, display the first six rows of <code>orders</code> as the output of your code cell, by using R’s built-in <code>head()</code> function.</li>
 </ul>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>orders <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Global_Superstore_Orders_2016.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>orders <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Global_Superstore_Orders_2016.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Row.ID        Order.ID Order.Date  Ship.Date    Ship.Mode Customer.ID
 1  32298  CA-2012-124891  7/31/2012  7/31/2012     Same Day    RH-19495
@@ -373,8 +438,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-2.2" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.2">Question 2.2</h3>
 <p>Use <code>str()</code> to check the type of each variable. You’ll see that <code>read.csv()</code> did not correctly identify the data types for all columns loaded from the <code>.csv</code> file. Which variables have inappropriate types, and what should their data types be instead?</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(orders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(orders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   51290 obs. of  24 variables:
  $ Row.ID        : int  32298 26341 25330 13524 47221 22732 30570 31192 40155 40936 ...
@@ -403,13 +469,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ Order.Priority: chr  "Critical" "Critical" "Medium" "Medium" ...</code></pre>
 </div>
 </div>
+<ul>
+<li><code>Order.Date</code>: Should be <code>Date</code> instead of <code>character</code></li>
+<li><code>Ship.Date</code>: Should be <code>Date</code> instead of <code>character</code></li>
+<li><code>Order.Priority</code>: Should be <code>factor</code> instead of <code>character</code></li>
+</ul>
 </section>
 <section id="question-2.3" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.3">Question 2.3</h3>
 <p>Create a separate <code>data.frame</code> named <code>sales_data</code>, containing only the following columns from <code>orders</code>: <code>Order.Date</code>, <code>Ship.Date</code>, <code>State</code>, <code>Country</code>, <code>Sales</code>, <code>Profit</code>, and <code>Order.Priority</code>. Display the first six rows of <code>sales_data</code> (using <code>head()</code>) as the output of your code cell.</p>
+<p><strong>Solution:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sales_data <span class="ot">&lt;-</span> orders[<span class="fu">c</span>(<span class="st">"Order.Date"</span>,<span class="st">"Ship.Date"</span>,<span class="st">"State"</span>,<span class="st">"Country"</span>,<span class="st">"Sales"</span>,<span class="st">"Profit"</span>,<span class="st">"Order.Priority"</span>)]</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sales_data <span class="ot">&lt;-</span> orders[<span class="fu">c</span>(<span class="st">"Order.Date"</span>,<span class="st">"Ship.Date"</span>,<span class="st">"State"</span>,<span class="st">"Country"</span>,<span class="st">"Sales"</span>,<span class="st">"Profit"</span>,<span class="st">"Order.Priority"</span>)]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Order.Date  Ship.Date           State       Country    Sales    Profit
 1  7/31/2012  7/31/2012        New York United States 2309.650  762.1845
@@ -430,9 +502,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-2.4" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.4">Question 2.4</h3>
-<p>Update the <code>sales_data</code> <code>data.frame</code> you created in Q2.3 so that the columns you identified in Q2.2 have the correct types (<code>factor</code>, <code>Date</code>,..etc.).</p>
+<p>Update the <code>sales_data</code> <code>data.frame</code> you created in Q2.3 so that the columns you identified in Q2.2 have the correct types (<code>factor</code>, <code>Date</code>, etc.).</p>
+<p><em>Hint</em>: To convert to the <code>Date</code> type, you’ll need to identify what <em>format</em> the dates are in, then use the appropriate function from the <strong>Parse Date-Times</strong> section of the <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank"><code>lubridate</code> cheat sheet</a>. The following cell provides an example, where we parse the <code>character</code> string <code>"2024-05-01"</code> into a <code>Date</code> object representing the 31st day of December in the year 2024:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'lubridate'</code></pre>
@@ -442,54 +515,188 @@ Attaching package: 'lubridate'</code></pre>
 
     date, intersect, setdiff, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sales_data[<span class="st">'Order.Date'</span>] <span class="ot">&lt;-</span> <span class="fu">mdy</span>(sales_data<span class="sc">$</span>Order.Date)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>example_date_str <span class="ot">&lt;-</span> <span class="st">"2024-12-31"</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>parsed_date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(example_date_str)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>parsed_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2024-12-31"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(parsed_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sales_data[<span class="st">'Order.Date'</span>] <span class="ot">&lt;-</span> <span class="fu">mdy</span>(sales_data<span class="sc">$</span>Order.Date)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>sales_data[<span class="st">'Ship.Date'</span>] <span class="ot">&lt;-</span> <span class="fu">mdy</span>(sales_data<span class="sc">$</span>Ship.Date)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>sales_data[<span class="st">'Order.Priority'</span>] <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  sales_data<span class="sc">$</span>Order.Priority,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels=</span><span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>, <span class="st">"Critical"</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   51290 obs. of  7 variables:
  $ Order.Date    : Date, format: "2012-07-31" "2013-02-05" ...
- $ Ship.Date     : chr  "7/31/2012" "2/7/2013" "10/18/2013" "1/30/2013" ...
+ $ Ship.Date     : Date, format: "2012-07-31" "2013-02-07" ...
  $ State         : chr  "New York" "New South Wales" "Queensland" "Berlin" ...
  $ Country       : chr  "United States" "Australia" "Australia" "Germany" ...
  $ Sales         : num  2310 3709 5175 2893 2833 ...
  $ Profit        : num  762.2 -288.8 920 -96.5 311.5 ...
- $ Order.Priority: chr  "Critical" "Critical" "Medium" "Medium" ...</code></pre>
-</div>
-</div>
-<p><em>Hint</em>: To convert to the <code>Date</code> type, you’ll need to identify what <em>format</em> the dates are in, then use the appropriate function from the <strong>Parse Date-Times</strong> section of the <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank"><code>lubridate</code> cheat sheet</a>. The following cell provides an example, where we parse the <code>character</code> string <code>"2024-05-01"</code> into a <code>Date</code> object representing the 31st day of December in the year 2024:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>example_date_str <span class="ot">&lt;-</span> <span class="st">"2024-12-31"</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>parsed_date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(example_date_str)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>parsed_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-12-31"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(parsed_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Date"</code></pre>
+ $ Order.Priority: Factor w/ 4 levels "Low","Medium",..: 4 4 2 2 4 4 4 3 1 4 ...</code></pre>
 </div>
 </div>
 </section>
 <section id="question-2.5" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.5">Question 2.5</h3>
 <p>Use <code>str()</code> on the updated <code>sales_data</code> variable to confirm that each of the variables you identified in Q2.2 now has the correct type.</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   51290 obs. of  7 variables:
+ $ Order.Date    : Date, format: "2012-07-31" "2013-02-05" ...
+ $ Ship.Date     : Date, format: "2012-07-31" "2013-02-07" ...
+ $ State         : chr  "New York" "New South Wales" "Queensland" "Berlin" ...
+ $ Country       : chr  "United States" "Australia" "Australia" "Germany" ...
+ $ Sales         : num  2310 3709 5175 2893 2833 ...
+ $ Profit        : num  762.2 -288.8 920 -96.5 311.5 ...
+ $ Order.Priority: Factor w/ 4 levels "Low","Medium",..: 4 4 2 2 4 4 4 3 1 4 ...</code></pre>
+</div>
+</div>
 </section>
 <section id="question-2.6" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.6">Question 2.6</h3>
 <p>Check whether there are any <code>NA</code>/missing values in <code>sales_data</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sales_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Order.Date           Ship.Date             State          
+ Min.   :2011-01-01   Min.   :2011-01-03   Length:51290      
+ 1st Qu.:2012-06-19   1st Qu.:2012-06-23   Class :character  
+ Median :2013-07-08   Median :2013-07-12   Mode  :character  
+ Mean   :2013-05-11   Mean   :2013-05-15                     
+ 3rd Qu.:2014-05-22   3rd Qu.:2014-05-26                     
+ Max.   :2014-12-31   Max.   :2015-01-07                     
+   Country              Sales               Profit          Order.Priority 
+ Length:51290       Min.   :    0.444   Min.   :-6599.98   Low     : 2424  
+ Class :character   1st Qu.:   30.759   1st Qu.:    0.00   Medium  :29433  
+ Mode  :character   Median :   85.053   Median :    9.24   High    :15501  
+                    Mean   :  246.491   Mean   :   28.61   Critical: 3932  
+                    3rd Qu.:  251.053   3rd Qu.:   36.81                   
+                    Max.   :22638.480   Max.   : 8399.98                   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sales_data[sales_data<span class="sc">$</span>State <span class="sc">==</span> <span class="st">""</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Order.Date     Ship.Date      State          Country        Sales         
+[6] Profit         Order.Priority
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>sales_data[sales_data<span class="sc">$</span>Country <span class="sc">==</span> <span class="st">""</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Order.Date     Ship.Date      State          Country        Sales         
+[6] Profit         Order.Priority
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>The <code>summary()</code> function displays the number of <code>NA</code> values for numeric columns, so we see that there are no <code>NA</code> values in these columns. Then, for the two <code>character</code> columns, we manually checked whether there are any empty-string values, and found that there are none!</p>
 </section>
 <section id="question-2.7" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.7">Question 2.7</h3>
 <p>Store the names of the columns of <code>sales_data</code> into a new variable called <code>sales_col_names</code>. Also find out how many rows that the dataset has and assign it to the variable <code>sales_num_rows</code>. Display the values of both <code>sales_col_names</code> and <code>sales_num_rows</code> as the output of your code cell. (We may use this dataset and these variables in future assignments)</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>sales_col_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(sales_data)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>sales_num_rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(sales_data)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">paste0</span>(sales_col_names, <span class="at">collapse=</span><span class="st">", "</span>), sales_num_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Order.Date, Ship.Date, State, Country, Sales, Profit, Order.Priority"
+[2] "51290"                                                               </code></pre>
+</div>
+</div>
 </section>
 <section id="question-2.8" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.8">Question 2.8</h3>
-<p><strong>Q2.8</strong>: Write code to compute the mean value of the <code>Sales</code> column when the order priority is <code>"Critical"</code>, and the mean value of <code>Sales</code> when the order priority is <code>"High"</code>. Which of the two mean values is greater?</p>
+<p>Write code to compute the mean value of the <code>Sales</code> column when the order priority is <code>"Critical"</code>, and the mean value of <code>Sales</code> when the order priority is <code>"High"</code>. Which of the two mean values is greater?</p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>critical_orders <span class="ot">&lt;-</span> sales_data[sales_data<span class="sc">$</span>Order.Priority <span class="sc">==</span> <span class="st">"Critical"</span>,]</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(critical_orders<span class="sc">$</span>Sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 250.8229</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>high_orders <span class="ot">&lt;-</span> sales_data[sales_data<span class="sc">$</span>Order.Priority <span class="sc">==</span> <span class="st">"High"</span>,]</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(high_orders<span class="sc">$</span>Sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 245.6324</code></pre>
+</div>
+</div>
+<p>The mean value for the <code>"Critical"</code> orders is greater.</p>
 </section>
 <section id="question-2.9-bonus" class="level3">
 <h3 class="anchored" data-anchor-id="question-2.9-bonus">Question 2.9 (Bonus)</h3>
 <p>(For +1 bonus point) Compute the mean sales for each of the 50 US states.</p>
 <p><em>Hint: you should use R’s built-in <code>aggregate()</code> function to accomplish this, rather than manually entering the names of all 50 states!</em></p>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Several ways to use aggregate(), this is the version using formulas</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>us_sales <span class="ot">&lt;-</span> sales_data[sales_data<span class="sc">$</span>Country <span class="sc">==</span> <span class="st">"United States"</span>,]</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(Sales <span class="sc">~</span> State, <span class="at">data=</span>us_sales, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  State     Sales
+1               Alabama  319.8466
+2               Arizona  157.5089
+3              Arkansas  194.6355
+4            California  228.7295
+5              Colorado  176.4182
+6           Connecticut  163.2239
+7              Delaware  285.9486
+8  District of Columbia  286.5020
+9               Florida  233.6128
+10              Georgia  266.8252
+11                Idaho  208.6898
+12             Illinois  162.9392
+13              Indiana  359.4319
+14                 Iowa  152.6587
+15               Kansas  121.4296
+16             Kentucky  263.2500
+17            Louisiana  219.4531
+18                Maine  158.8162
+19             Maryland  225.7669
+20        Massachusetts  212.1069
+21             Michigan  299.0965
+22            Minnesota  335.5410
+23          Mississippi  203.2328
+24             Missouri  336.4417
+25              Montana  372.6235
+26             Nebraska  196.4455
+27               Nevada  428.9513
+28        New Hampshire  270.0935
+29           New Jersey  275.1101
+30           New Mexico  129.2844
+31             New York  275.5995
+32       North Carolina  223.3059
+33         North Dakota  131.4157
+34                 Ohio  166.8617
+35             Oklahoma  298.2332
+36               Oregon  140.5738
+37         Pennsylvania  198.4871
+38         Rhode Island  404.0706
+39       South Carolina  201.9455
+40         South Dakota  109.6300
+41            Tennessee  167.5512
+42                Texas  172.7797
+43                 Utah  211.6992
+44              Vermont  811.7609
+45             Virginia  315.3425
+46           Washington  273.9946
+47        West Virginia  302.4560
+48            Wisconsin  291.9510
+49              Wyoming 1603.1360</code></pre>
+</div>
+</div>
+<p>(Note that Alaska and Hawaii are not included in the original dataset, but DC is, so, we get 49 total observations, for the 48 continental US states plus DC!)</p>
 </section>
 </section>
 
