@@ -1,5 +1,5 @@
 ---
-title: "Bootcamp Week 7"
+title: "Bootcamp Week 7 Lectures"
 format: html
 ---
 
@@ -19,4 +19,3 @@ Welcome to the lectures for Week 7 of the 2024 DSAN Bootcamp! This week we will 
 [**Click to open slides in a separate tab** <i class='bi bi-box-arrow-up-right ps-1'></i>](https://jjacobs.me/bootcamp-videos/w07-2/slides.html#/title-slide){target='_blank' style='font-size: 120%;'}
 
 <iframe src="https://georgetown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=adff57d0-05e8-4c4c-a7e4-b18400781bcf&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&captions=true&interactivity=all" height="380" width="100%" style="border: 1px solid #464646;" allowfullscreen aria-label="Panopto Embedded Video Player" aria-description="DSAN Bootcamp 2024 W7.2: Introduction to the Tidyverse" ></iframe>
-

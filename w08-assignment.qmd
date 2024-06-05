@@ -1,0 +1,70 @@
+---
+title: "Assignment 8"
+subtitle: "DSAN Bootcamp 2024"
+output: html
+---
+
+## Problem 1: `ggplot`
+
+1. Produce 5 different types of data visualizations using ggplot, plotly and ggplotly.
+
+* Produce the ggplotly plot using stock prices. Please produce a graph that is meaningful in comparing certain stock prices as I have done in the lecture. I was comparing the stock prices of the Big Tech Companies. Please try to choose different stocks than what I have used in the lecture note.
+
+To find the ticker of the stock to be used in `getSymbols()` in `quantmod` package; you can google the company stock and it will show you the ticker for that particular stock.
+
+![](stock.png)
+
+```{r}
+# place your ggplotly visualization here
+```
+
+For the rest of the plots, Use the _**Sales.data dataset**_ that you created in Assignment 6 - problem 2 to provide more meaningful plots. Most of the plots should be of a different kind (bar,line,scatter,..etc). That means don't provide all of them as line graphs. :)
+
+```{r}
+# place visualization #2 here
+```
+
+```{r}
+# place visualization #3 here
+```
+
+```{r}
+# place visualization #4 here
+```
+
+```{r}
+# place visualization #5 here
+```
+
+## Problem 2: Wordclouds
+
+a. Produce a wordcloud using the Harry Potter Corpus ("HP_Corpus"). Write one or two sentences explaining what you observe by this WordCloud.
+
+```{r}
+# insert code here
+```
+
+> Insert observations here
+
+b. Using the Harry Potter Corpus, which are the top five most used words in the corpus after stop words were removed? 
+
+> Insert words here
+
+c. Whose name appears more frequently in the Harry Potter Corpus, Ron's or Hermione's?  
+
+> Insert name here
+
+## Problem 3: APIs
+
+Watch this video on Mixtape Medley with Ariana Grande and Kelly Clarkson in Jimmy Fallon's Show.
+<https://www.youtube.com/watch?v=LF_EF8Rj9gs>
+
+Use Spotify's API to do a comparison between Ariana Grande's and Kelly Clarkson's music using several data visualization.
+
+```{r}
+# insert code here
+```
+
+Please provide a description of your observations from the aforementioned video and your data visualization.
+
+> Insert observations here

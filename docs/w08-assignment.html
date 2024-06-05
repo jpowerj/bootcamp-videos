@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2024 DSAN Bootcamp Videos – Bootcamp Week 7 Lectures</title>
+<title>2024 DSAN Bootcamp Videos – Assignment 8</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -124,8 +158,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-control-flow-in-r" id="toc-part-1-control-flow-in-r" class="nav-link active" data-scroll-target="#part-1-control-flow-in-r">Part 1: Control Flow in R</a></li>
-  <li><a href="#part-2-introduction-to-the-tidyverse" id="toc-part-2-introduction-to-the-tidyverse" class="nav-link" data-scroll-target="#part-2-introduction-to-the-tidyverse">Part 2: Introduction to the Tidyverse</a></li>
+  <li><a href="#problem-1-ggplot" id="toc-problem-1-ggplot" class="nav-link active" data-scroll-target="#problem-1-ggplot">Problem 1: <code>ggplot</code></a></li>
+  <li><a href="#problem-2-wordclouds" id="toc-problem-2-wordclouds" class="nav-link" data-scroll-target="#problem-2-wordclouds">Problem 2: Wordclouds</a></li>
+  <li><a href="#problem-3-apis" id="toc-problem-3-apis" class="nav-link" data-scroll-target="#problem-3-apis">Problem 3: APIs</a></li>
   </ul>
 </nav>
     </div>
@@ -134,7 +169,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bootcamp Week 7 Lectures</h1>
+<h1 class="title">Assignment 8</h1>
+<p class="subtitle lead">DSAN Bootcamp 2024</p>
 </div>
 
 
@@ -151,20 +187,68 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the lectures for Week 7 of the 2024 DSAN Bootcamp! This week we will be covering the following topics:</p>
+<section id="problem-1-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="problem-1-ggplot">Problem 1: <code>ggplot</code></h2>
+<ol type="1">
+<li>Produce 5 different types of data visualizations using ggplot, plotly and ggplotly.</li>
+</ol>
 <ul>
-<li>W07.1: <a href="#part-1-control-flow-in-r">Control Flow in R</a></li>
-<li>W07.2: <a href="#part-2-introduction-to-the-tidyverse">Introduction to the Tidyverse</a></li>
+<li>Produce the ggplotly plot using stock prices. Please produce a graph that is meaningful in comparing certain stock prices as I have done in the lecture. I was comparing the stock prices of the Big Tech Companies. Please try to choose different stocks than what I have used in the lecture note.</li>
 </ul>
-<section id="part-1-control-flow-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="part-1-control-flow-in-r">Part 1: Control Flow in R</h3>
-<p><a href="https://jjacobs.me/bootcamp-videos/w07-1/slides.html#/title-slide" target="_blank" style="font-size: 120%;"><strong>Click to open slides in a separate tab</strong> <i class="bi bi-box-arrow-up-right ps-1"></i></a></p>
+<p>To find the ticker of the stock to be used in <code>getSymbols()</code> in <code>quantmod</code> package; you can google the company stock and it will show you the ticker for that particular stock.</p>
+<p><img src="stock.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place your ggplotly visualization here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the rest of the plots, Use the <em><strong>Sales.data dataset</strong></em> that you created in Assignment 6 - problem 2 to provide more meaningful plots. Most of the plots should be of a different kind (bar,line,scatter,..etc). That means don’t provide all of them as line graphs. :)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place visualization #2 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place visualization #3 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place visualization #4 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># place visualization #5 here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="part-2-introduction-to-the-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="part-2-introduction-to-the-tidyverse">Part 2: Introduction to the Tidyverse</h3>
-<p><a href="https://jjacobs.me/bootcamp-videos/w07-2/slides.html#/title-slide" target="_blank" style="font-size: 120%;"><strong>Click to open slides in a separate tab</strong> <i class="bi bi-box-arrow-up-right ps-1"></i></a></p>
-<iframe src="https://georgetown.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=adff57d0-05e8-4c4c-a7e4-b18400781bcf&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=false&amp;captions=true&amp;interactivity=all" height="380" width="100%" style="border: 1px solid #464646;" allowfullscreen="" aria-label="Panopto Embedded Video Player" aria-description="DSAN Bootcamp 2024 W7.2: Introduction to the Tidyverse">
-</iframe>
+<section id="problem-2-wordclouds" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2-wordclouds">Problem 2: Wordclouds</h2>
+<ol type="a">
+<li>Produce a wordcloud using the Harry Potter Corpus (“HP_Corpus”). Write one or two sentences explaining what you observe by this WordCloud.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Insert observations here</p>
+</blockquote>
+<ol start="2" type="a">
+<li>Using the Harry Potter Corpus, which are the top five most used words in the corpus after stop words were removed?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Insert words here</p>
+</blockquote>
+<ol start="3" type="a">
+<li>Whose name appears more frequently in the Harry Potter Corpus, Ron’s or Hermione’s?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Insert name here</p>
+</blockquote>
+</section>
+<section id="problem-3-apis" class="level2">
+<h2 class="anchored" data-anchor-id="problem-3-apis">Problem 3: APIs</h2>
+<p>Watch this video on Mixtape Medley with Ariana Grande and Kelly Clarkson in Jimmy Fallon’s Show. <a href="https://www.youtube.com/watch?v=LF_EF8Rj9gs" class="uri">https://www.youtube.com/watch?v=LF_EF8Rj9gs</a></p>
+<p>Use Spotify’s API to do a comparison between Ariana Grande’s and Kelly Clarkson’s music using several data visualization.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Please provide a description of your observations from the aforementioned video and your data visualization.</p>
+<blockquote class="blockquote">
+<p>Insert observations here</p>
+</blockquote>
 
 
 </section>

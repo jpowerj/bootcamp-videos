@@ -43,5 +43,19 @@
   },
   "w07.qmd": {
     "w07.html": "d1858091"
+  },
+  "w08/index.qmd": {
+    "slides.html": "c47f965e"
+  },
+  "w08-2/index.qmd": {
+    "slides.html": "57a94f0d",
+    "index.html": "9a7338a1"
+  },
+  "w08-1/index.qmd": {
+    "slides.html": "3c740fff",
+    "index.html": "cd1c1f9b"
+  },
+  "w08-assignment.qmd": {
+    "w08-assignment.html": "576c235b"
   }
 }

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.23">
 
   <meta name="author" content="Jeff Jacobs">
-  <title>2024 DSAN Bootcamp Videos – Control Flow in R</title>
+  <title>2024 DSAN Bootcamp Videos – Tidy Data Visualization with GGPlot in R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,8 +394,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Control Flow in R</h1>
-  <p class="subtitle">Week 7, Part 1</p>
+  <h1 class="title">Tidy Data Visualization with GGPlot in R</h1>
+  <p class="subtitle">Week 8, Part 1</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -410,606 +410,124 @@ Jeff Jacobs
 
 </section>
 <section>
-<section id="control-flow" class="title-slide slide level1 crunch-ul center" data-stack-name="Overview">
-<h1>Control Flow</h1>
-<ul>
-<li><p>In case you haven’t heard this term…</p></li>
-<li><p><strong>Control flow</strong> is just the idea of: how do we <strong>control</strong> the <strong>flow</strong> of program execution (individual statements or <em>blocks</em>) in [programming language]</p>
+<section id="why-are-we-starting-with-tidyverse-here" class="title-slide slide level1 crunch-ul center" data-stack-name="Overview">
+<h1>Why Are We <em>Starting</em> with Tidyverse Here?</h1>
+
+</section>
+<section id="base-r-vs.-tidyverse" class="slide level2 smaller crunch-details">
+<h2>Base R vs.&nbsp;Tidyverse</h2>
 <div class="columns">
-<div class="column" style="width:45%;">
-<div class="quarto-figure quarto-figure-center">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">source</span>(<span class="st">"../_globals.r"</span>)</span>
+<span id="cb1-2"><a></a>lexp_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"assets/lexp_by_ward.csv"</span>)</span>
+<span id="cb1-3"><a></a><span class="fu">plot</span>(</span>
+<span id="cb1-4"><a></a>  lexp_df<span class="sc">$</span>ward, lexp_df<span class="sc">$</span>life_exp,</span>
+<span id="cb1-5"><a></a>  <span class="at">main=</span><span class="st">"DC Life Expectancy by Ward (2015)"</span>,</span>
+<span id="cb1-6"><a></a>  <span class="at">xlab=</span><span class="st">"Ward"</span>, <span class="at">ylab=</span><span class="st">"Life Expectancy"</span>,</span>
+<span id="cb1-7"><a></a>  <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex.lab=</span><span class="dv">2</span>, <span class="at">cex.main=</span><span class="dv">2</span>, <span class="at">cex.axis=</span><span class="dv">2</span></span>
+<span id="cb1-8"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
 <figure>
-<p><img data-src="images/control_flow.svg" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+<p><img data-src="index_files/figure-revealjs/base-r-plot-1.png" width="960"></p>
 </figure>
 </div>
-</div><div class="column" style="width:55%;">
-<p><img data-src="images/loops.svg" style="width:100.0%"></p>
-</div>
-</div></li>
-</ul>
-</section>
-<section id="code-blocks" class="slide level2">
-<h2>Code Blocks</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Python uses <strong>Indentation</strong> →→</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb1-2"><a></a>  <span class="bu">print</span>(<span class="st">"Hello"</span>)</span>
-<span id="cb1-3"><a></a>  <span class="bu">print</span>(<span class="st">"Please run this code 5 times"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello
-Please run this code 5 times
-Hello
-Please run this code 5 times
-Hello
-Please run this code 5 times
-Hello
-Please run this code 5 times
-Hello
-Please run this code 5 times</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p>R uses <strong>curly braces <code>{}</code></strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb3-2"><a></a>  <span class="fu">print</span>(<span class="st">"Hello"</span>)</span>
-<span id="cb3-3"><a></a>  <span class="fu">print</span>(<span class="st">"Please run this code 5 times"</span>)</span>
-<span id="cb3-4"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Hello"
-[1] "Please run this code 5 times"
-[1] "Hello"
-[1] "Please run this code 5 times"
-[1] "Hello"
-[1] "Please run this code 5 times"
-[1] "Hello"
-[1] "Please run this code 5 times"
-[1] "Hello"
-[1] "Please run this code 5 times"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="conditional-statements" class="title-slide slide level1 center" data-stack-name="Conditionals">
-<h1>Conditional Statements</h1>
-
-</section>
-<section id="if-statements" class="slide level2">
-<h2>If Statements</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">import</span> datetime</span>
-<span id="cb5-2"><a></a>cur_time <span class="op">=</span> datetime.datetime.now()</span>
-<span id="cb5-3"><a></a><span class="bu">print</span>(<span class="ss">f"The current time is </span><span class="sc">{</span>cur_time<span class="sc">.</span>hour<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>cur_time<span class="sc">.</span>minute<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The current time is 2:58</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="cf">if</span> cur_time.hour <span class="op">&lt;</span> <span class="dv">12</span>:</span>
-<span id="cb7-2"><a></a>    <span class="bu">print</span>(<span class="st">"Good morning!"</span>)</span>
-<span id="cb7-3"><a></a><span class="cf">elif</span> cur_time.hour <span class="op">&lt;</span> <span class="dv">18</span>:</span>
-<span id="cb7-4"><a></a>    <span class="bu">print</span>(<span class="st">"Good afternoon!"</span>)</span>
-<span id="cb7-5"><a></a><span class="cf">else</span>:</span>
-<span id="cb7-6"><a></a>    <span class="bu">print</span>(<span class="st">"Good evening!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Good morning!</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb9-2"><a></a>cur_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb9-3"><a></a><span class="fu">writeLines</span>(<span class="fu">paste0</span>(</span>
-<span id="cb9-4"><a></a>    <span class="st">"The current time is "</span>,</span>
-<span id="cb9-5"><a></a>    <span class="fu">hour</span>(cur_time),<span class="st">":"</span>,</span>
-<span id="cb9-6"><a></a>    <span class="fu">minute</span>(cur_time)</span>
-<span id="cb9-7"><a></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The current time is 2:58</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="cf">if</span> (<span class="fu">hour</span>(cur_time) <span class="sc">&lt;</span> <span class="dv">12</span>) {</span>
-<span id="cb11-2"><a></a>    <span class="fu">print</span>(<span class="st">"Good morning!"</span>)</span>
-<span id="cb11-3"><a></a>} <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">hour</span>(cur_time) <span class="sc">&lt;</span> <span class="dv">18</span>) {</span>
-<span id="cb11-4"><a></a>    <span class="fu">print</span>(<span class="st">"Good afternoon!"</span>)</span>
-<span id="cb11-5"><a></a>} <span class="cf">else</span> {</span>
-<span id="cb11-6"><a></a>    <span class="fu">print</span>(<span class="st">"Good evening!"</span>)</span>
-<span id="cb11-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Good morning!"</code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>(We’ll learn about <a href="https://lubridate.tidyverse.org/" target="_blank"><code>lubridate</code> <i class="bi bi-box-arrow-up-right"></i></a> soon!)</p>
-</section>
-<section id="the-ternary-operator" class="slide level2">
-<h2>The Ternary Operator</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co">"morning"</span> <span class="cf">if</span> cur_time.hour <span class="op">&lt;</span> <span class="dv">12</span> <span class="cf">else</span> <span class="st">"evening"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'morning'</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">ifelse</span>(</span>
-<span id="cb15-2"><a></a>    <span class="fu">hour</span>(cur_time) <span class="sc">&lt;</span> <span class="dv">12</span>,</span>
-<span id="cb15-3"><a></a>    <span class="st">"morning"</span>,</span>
-<span id="cb15-4"><a></a>    <span class="st">"evening"</span></span>
-<span id="cb15-5"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "morning"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="loops" class="title-slide slide level1 center" data-stack-name="Loops">
-<h1>Loops</h1>
-
-</section>
-<section id="for-loops-the-software-engineers-bread-and-butter" class="slide level2">
-<h2>For Loops: The Software Engineer’s Bread and Butter</h2>
-<ul>
-<li>Many different ways to loop (find one that clicks for you!)</li>
-<li><strong>For loops</strong> often the “default” approach (because of <code>C</code>)</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>):</span>
-<span id="cb17-2"><a></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1
-2
-3
-4
-5
-6
-7
-8
-9</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb19-2"><a></a>    <span class="fu">print</span>(i)</span>
-<span id="cb19-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1
-[1] 2
-[1] 3
-[1] 4
-[1] 5
-[1] 6
-[1] 7
-[1] 8
-[1] 9
-[1] 10</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="vectorized-operations-the-data-scientists-bread-and-margarine" class="slide level2 smaller">
-<h2>Vectorized Operations: The Data Scientist’s Bread and Margarine</h2>
-<ul>
-<li>You’ve been hired as the lead data scientist for a food delivery service (congrats!)</li>
-<li>You’re given data on (a) miles traveled and (b) hours driven, for each driver</li>
-<li>Your goal: find the distribution of <strong>average speeds!</strong></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb21-2"><a></a>miles_data <span class="op">=</span> [<span class="dv">11</span>, <span class="dv">52</span>, <span class="dv">13</span>]</span>
-<span id="cb21-3"><a></a>hrs_data <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
-<span id="cb21-4"><a></a>driver_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb21-5"><a></a>    <span class="st">'miles'</span>: miles_data,</span>
-<span id="cb21-6"><a></a>    <span class="st">'hrs'</span>: hrs_data</span>
-<span id="cb21-7"><a></a>})</span>
-<span id="cb21-8"><a></a><span class="bu">print</span>(driver_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;"></th>
-<th style="text-align: right;">miles</th>
-<th style="text-align: right;">hrs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>miles_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">52</span>, <span class="dv">13</span>)</span>
-<span id="cb22-2"><a></a>hrs_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb22-3"><a></a>driver_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb22-4"><a></a>    <span class="at">miles=</span>miles_data,</span>
-<span id="cb22-5"><a></a>    <span class="at">hrs=</span>hrs_data</span>
-<span id="cb22-6"><a></a>)</span>
-<span id="cb22-7"><a></a>driver_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a></a>us_mean <span class="ot">&lt;-</span> <span class="fl">78.69</span></span>
+<span id="cb2-3"><a></a>lexp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"assets/lexp_by_ward.csv"</span>)</span>
+<span id="cb2-4"><a></a>lexp_df <span class="ot">&lt;-</span> lexp_df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb2-5"><a></a>  <span class="at">above_avg =</span> <span class="fu">ifelse</span>(life_exp <span class="sc">&gt;</span> us_mean, <span class="st">"Above Mean"</span>, <span class="st">"Below Mean"</span>)</span>
+<span id="cb2-6"><a></a>)</span>
+<span id="cb2-7"><a></a>lexp_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.factor</span>(ward), <span class="at">y=</span>life_exp, <span class="at">color=</span>above_avg)) <span class="sc">+</span></span>
+<span id="cb2-8"><a></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb2-10"><a></a>    <span class="fu">aes</span>(<span class="at">xend=</span>ward, <span class="at">yend=</span>us_mean),</span>
+<span id="cb2-11"><a></a>    <span class="at">linewidth=</span><span class="fl">1.5</span></span>
+<span id="cb2-12"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-13"><a></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb2-14"><a></a>    <span class="fu">aes</span>(</span>
+<span id="cb2-15"><a></a>      <span class="at">yintercept=</span>us_mean,</span>
+<span id="cb2-16"><a></a>      <span class="at">linetype=</span><span class="st">"National Mean"</span></span>
+<span id="cb2-17"><a></a>    ),</span>
+<span id="cb2-18"><a></a>    <span class="at">linewidth=</span><span class="dv">1</span></span>
+<span id="cb2-19"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-20"><a></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-22"><a></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb2-23"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-24"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-25"><a></a>    <span class="at">x =</span> <span class="st">"Ward"</span>,</span>
+<span id="cb2-26"><a></a>    <span class="at">y =</span> <span class="st">"Life Expectancy"</span>,</span>
+<span id="cb2-27"><a></a>    <span class="at">title =</span> <span class="st">"DC Life Expectancy by Ward (2015)"</span></span>
+<span id="cb2-28"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-29"><a></a>  <span class="fu">scale_linetype_manual</span>(<span class="st">"test"</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">"dashed"</span>)) <span class="sc">+</span></span>
+<span id="cb2-30"><a></a>  <span class="fu">remove_legend_title</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">miles</th>
-<th style="text-align: right;">hrs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-</tr>
-</tbody>
-</table>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="index_files/figure-revealjs/ggplot-ward-lollipop-1.png" width="960"></p>
+<figcaption>Data from <a href="https://disb.dc.gov/sites/default/files/dc/sites/disb/publication/attachments/her_summary_report_final_with_letter_and_table_02_08_2019.pdf">DC Dept. of Health</a></figcaption>
+</figure>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="the-loop-approach" class="slide level2 crunch-title">
-<h2>The Loop Approach <img data-src="images/50.png" width="60"></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(driver_df)) {</span>
-<span id="cb23-2"><a></a>  driver_df[i, <span class="st">'mph'</span>] <span class="ot">&lt;-</span> driver_df[i, <span class="st">'miles'</span>] <span class="sc">/</span> driver_df[i, <span class="st">'hrs'</span>]</span>
-<span id="cb23-3"><a></a>}</span>
-<span id="cb23-4"><a></a>driver_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">miles</th>
-<th style="text-align: right;">hrs</th>
-<th style="text-align: right;">mph</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.50000</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">17.33333</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">2.60000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<ul>
-<li>It works! But CPUs have hyper-optimized <strong>linear algebra</strong></li>
-<li><span class="math inline">\(\implies\)</span> Operations on a <strong>length-1000 vector</strong> significantly faster than a loop performing an operation 1000 times</li>
-</ul>
-</section>
-<section id="the-vectorized-approach" class="slide level2 smaller">
-<h2>The Vectorized Approach 💯</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section id="plus-way-wider-range-of-plot-types" class="slide level2">
+<h2>Plus Way Wider Range of Plot Types!</h2>
+<p>(All using the same syntax)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>driver_df[<span class="st">'mph'</span>] <span class="op">=</span> driver_df[<span class="st">'miles'</span>] <span class="op">/</span> driver_df[<span class="st">'hrs'</span>]</span>
-<span id="cb24-2"><a></a><span class="bu">print</span>(driver_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;"></th>
-<th style="text-align: right;">miles</th>
-<th style="text-align: right;">hrs</th>
-<th style="text-align: right;">mph</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">17.3333</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">2.6</td>
-</tr>
-</tbody>
-</table>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-2"><a></a>my_sf <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"assets/Wards_from_2022.geojson"</span>)</span>
+<span id="cb3-3"><a></a>my_sf_merged <span class="ot">&lt;-</span> my_sf <span class="sc">|&gt;</span> <span class="fu">left_join</span>(</span>
+<span id="cb3-4"><a></a>  lexp_df, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"WARD"</span><span class="ot">=</span><span class="st">"ward"</span>)</span>
+<span id="cb3-5"><a></a>)</span>
+<span id="cb3-6"><a></a>my_sf_merged <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>life_exp)) <span class="sc">+</span></span>
+<span id="cb3-7"><a></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb3-8"><a></a>  <span class="fu">dsan_theme</span>() <span class="sc">+</span></span>
+<span id="cb3-9"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-10"><a></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-11"><a></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-12"><a></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb3-13"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb3-14"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-15"><a></a>    <span class="at">title =</span> <span class="st">"DC Life Expectancy by Ward (2015)"</span>,</span>
+<span id="cb3-16"><a></a>    <span class="at">fill =</span> <span class="st">"Life Exp."</span></span>
+<span id="cb3-17"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb3-18"><a></a>  <span class="fu">scale_fill_viridis_c</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
 </div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>driver_df[<span class="st">'mph'</span>] <span class="ot">=</span> driver_df<span class="sc">$</span>miles <span class="sc">/</span> driver_df<span class="sc">$</span>hrs</span>
-<span id="cb25-2"><a></a>driver_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">miles</th>
-<th style="text-align: right;">hrs</th>
-<th style="text-align: right;">mph</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">5.50000</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">17.33333</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">2.60000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="vectorizing-your-brain" class="slide level2">
-<h2>Vectorizing Your Brain</h2>
-<ul>
-<li>Thinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…</li>
-<li>It will pay off over the course of your career, I promise!</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
-<span id="cb26-2"><a></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
-<span id="cb26-3"><a></a>vec_start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb26-4"><a></a>big_vec1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb26-5"><a></a>big_vec2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb26-6"><a></a>product <span class="ot">&lt;-</span> big_vec1 <span class="sc">*</span> big_vec2</span>
-<span id="cb26-7"><a></a>vec_end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb26-8"><a></a>vec_end_time <span class="sc">-</span> vec_start_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 0.00355196 secs</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>loop_start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb28-2"><a></a>product <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb28-3"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb28-4"><a></a>  elt1 <span class="ot">&lt;-</span> big_vec1[i]</span>
-<span id="cb28-5"><a></a>  elt2 <span class="ot">&lt;-</span> big_vec2[i]</span>
-<span id="cb28-6"><a></a>  product <span class="ot">&lt;-</span> <span class="fu">c</span>(product, elt1 <span class="sc">*</span> elt2)</span>
-<span id="cb28-7"><a></a>}</span>
-<span id="cb28-8"><a></a>loop_end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb28-9"><a></a>loop_end_time <span class="sc">-</span> loop_start_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 2.359036 secs</code></pre>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>(For <span class="math inline">\(N = 100K\)</span>, 0.006 vs.&nbsp;9.08 seconds!)</li>
-</ul>
-</section>
-<section id="how-is-it-that-much-faster" class="slide level2">
-<h2>How is it <em>That</em> Much Faster?</h2>
-<ul>
-<li>The long answer: take DSAN 5500 😜 The short answer:</li>
-<li>Simple math operations (addition, multiplication) are easily <strong>parallelized</strong> under the hood;</li>
-<li><strong>Sequential</strong> memory reads are significantly faster than non-sequential reads—vectors can be stored in contiguous “chunks” of memory that computer can rapidly scan over
-<ul>
-<li>(Think of how it’s easier to count people standing in a line than people scattered around a room!)</li>
-</ul></li>
-</ul>
-</section></section>
+<img data-src="index_files/figure-revealjs/ward-choropleth-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Shapefile from <a href="https://opendata.dc.gov/datasets/c5cd8b40fb784548a6680aead5f919ed/explore">OpenData.DC.gov</a></p></section></section>
 <section>
-<section id="functions" class="title-slide slide level1 center" data-stack-name="Functions">
-<h1>Functions</h1>
+<section id="grammar-of-graphics" class="title-slide slide level1 center" data-stack-name="Grammar of Graphics">
+<h1>Grammar of Graphics</h1>
 
 </section>
-<section id="anonymous-functions" class="slide level2">
-<h2>Anonymous Functions</h2>
+<section id="intuition" class="slide level2">
+<h2>Intuition</h2>
 <ul>
-<li>In Python you <strong>declare</strong> the name of a function using <code>def</code></li>
-<li>In R, you make the function <strong>without a name</strong>, then assign it to a variable:</li>
+<li><strong>Sentences</strong> are made up of <em>subjects</em>, <em>verbs</em>, <em>objects</em> (grammatical structure)</li>
+<li><strong>Visualizations</strong> are made up of <em>encodings</em>, <em>coordinate systems</em>, <em>aesthetic mappings</em></li>
 </ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a></a><span class="kw">def</span> multiply_by_5(num):</span>
-<span id="cb30-2"><a></a>  <span class="cf">return</span> num <span class="op">*</span> <span class="dv">5</span></span>
-<span id="cb30-3"><a></a>multiply_by_5(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>50</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>multiply_by_5 <span class="ot">&lt;-</span> <span class="cf">function</span>(num) {</span>
-<span id="cb32-2"><a></a>  <span class="fu">return</span>(num <span class="sc">*</span> <span class="dv">5</span>)</span>
-<span id="cb32-3"><a></a>}</span>
-<span id="cb32-4"><a></a><span class="fu">multiply_by_5</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 50</code></pre>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>(Python also has anonymous functions, via <code>lambda</code>:)</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>double_it <span class="op">=</span> <span class="kw">lambda</span> x: x <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb34-2"><a></a>double_it(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>20</code></pre>
-</div>
-</div>
-</section>
-<section id="variable-scope" class="slide level2 crunch-title">
-<h2>Variable Scope</h2>
-<ul>
-<li>Huge point (especially for Week 7 Assignment)!</li>
-<li>Think of functions as “mini-programs”, where variables (including arguments) get <strong>created</strong> when the function starts and then <strong>destroyed</strong> when the function finishes. Compare:</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb36-2"><a></a><span class="fu">print</span>(val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>update_val <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb38-2"><a></a>  val <span class="ot">&lt;-</span> val <span class="sc">*</span> <span class="dv">5</span></span>
-<span id="cb38-3"><a></a>}</span>
-<span id="cb38-4"><a></a><span class="fu">update_val</span>()</span>
-<span id="cb38-5"><a></a><span class="fu">print</span>(val) <span class="co"># 😵</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb40-2"><a></a><span class="fu">print</span>(val)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>compute_new_val <span class="ot">&lt;-</span> <span class="cf">function</span>(orig_val) {</span>
-<span id="cb42-2"><a></a>  <span class="fu">return</span>(orig_val <span class="sc">*</span> <span class="dv">5</span>)</span>
-<span id="cb42-3"><a></a>}</span>
-<span id="cb42-4"><a></a>val <span class="ot">&lt;-</span> <span class="fu">compute_new_val</span>(val)</span>
-<span id="cb42-5"><a></a><span class="fu">print</span>(val) <span class="co"># 😎</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  5 10 15</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="positional-vs.-keyword-arguments" class="slide level2">
-<h2>Positional vs.&nbsp;Keyword Arguments</h2>
-<ul>
-<li>Just like Python, R functions can accept two types of arguments…</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Positional</strong> arguments are required (function call will produce error if any positional argument is missing)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>div_by_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(num) {</span>
-<span id="cb44-2"><a></a>  <span class="fu">return</span>(num <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb44-3"><a></a>}</span>
-<span id="cb44-4"><a></a><span class="fu">div_by_2</span>(<span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.5</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><strong>Keyword</strong> arguments are optional</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>div_by_2 <span class="ot">&lt;-</span> <span class="cf">function</span>(num, <span class="at">round=</span><span class="cn">FALSE</span>) {</span>
-<span id="cb46-2"><a></a>  div_result <span class="ot">&lt;-</span> num <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb46-3"><a></a>  final_result <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(round,</span>
-<span id="cb46-4"><a></a>    <span class="fu">round</span>(div_result),</span>
-<span id="cb46-5"><a></a>    div_result</span>
-<span id="cb46-6"><a></a>  )</span>
-<span id="cb46-7"><a></a>  <span class="fu">return</span>(final_result)</span>
-<span id="cb46-8"><a></a>}</span>
-<span id="cb46-9"><a></a><span class="fu">div_by_2</span>(<span class="dv">11</span>, <span class="at">round=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="applying-functions-to-vectors" class="slide level2 crunch-title crunch-ul">
-<h2>Applying Functions to Vectors</h2>
-<ul>
-<li>We’ve been “manually” calling functions, like <code>func(arg)</code></li>
-<li>What if we want to apply a function to a <strong>vector</strong> of elements? Ex: capitalize a big list of names</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li>Base R provides a family of <code>apply()</code> functions: <code>sapply()</code> for vectors; <code>lapply()</code> for lists; <code>apply()</code> for matrices (requires specifying <strong>axis</strong>: columns or rows)</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>capitalize <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
-<span id="cb48-2"><a></a>  <span class="fu">return</span>(tools<span class="sc">::</span><span class="fu">toTitleCase</span>(name))</span>
-<span id="cb48-3"><a></a>}</span>
-<span id="cb48-4"><a></a><span class="fu">capitalize</span>(<span class="st">"jeff"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Jeff"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ali"</span>, <span class="st">"boris"</span>, <span class="st">"chad"</span>)</span>
-<span id="cb50-2"><a></a><span class="fu">sapply</span>(names, capitalize)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    ali   boris    chad 
-  "Ali" "Boris"  "Chad" </code></pre>
-</div>
-</div>
-</div>
-</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>2024 DSAN Bootcamp W07-1: Control Flow</p>
+<p>2024 DSAN Bootcamp W08-1: Visualization</p>
 </div>
 </div>
 </section></section>
