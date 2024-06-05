@@ -1,0 +1,1090 @@
+[
+  {
+    "objectID": "w07-1/slides.html#code-blocks",
+    "href": "w07-1/slides.html#code-blocks",
+    "title": "Control Flow in R",
+    "section": "Code Blocks",
+    "text": "Code Blocks\n\n\nPython uses Indentation →→\n\nfor i in range(5):\n  print(\"Hello\")\n  print(\"Please run this code 5 times\")\n\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\n\n\n\nR uses curly braces {}\n\nfor (i in 1:5) {\n  print(\"Hello\")\n  print(\"Please run this code 5 times\")\n}\n\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\""
+  },
+  {
+    "objectID": "w07-1/slides.html#if-statements",
+    "href": "w07-1/slides.html#if-statements",
+    "title": "Control Flow in R",
+    "section": "If Statements",
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 3:6\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood morning!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 3:6\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good morning!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+  },
+  {
+    "objectID": "w07-1/slides.html#the-ternary-operator",
+    "href": "w07-1/slides.html#the-ternary-operator",
+    "title": "Control Flow in R",
+    "section": "The Ternary Operator",
+    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'morning'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"morning\""
+  },
+  {
+    "objectID": "w07-1/slides.html#for-loops-the-software-engineers-bread-and-butter",
+    "href": "w07-1/slides.html#for-loops-the-software-engineers-bread-and-butter",
+    "title": "Control Flow in R",
+    "section": "For Loops: The Software Engineer’s Bread and Butter",
+    "text": "For Loops: The Software Engineer’s Bread and Butter\n\nMany different ways to loop (find one that clicks for you!)\nFor loops often the “default” approach (because of C)\n\n\n\n\nfor i in range(1, 10):\n    print(i)\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\n\n\n\nfor (i in 1:10) {\n    print(i)\n}\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10"
+  },
+  {
+    "objectID": "w07-1/slides.html#vectorized-operations-the-data-scientists-bread-and-margarine",
+    "href": "w07-1/slides.html#vectorized-operations-the-data-scientists-bread-and-margarine",
+    "title": "Control Flow in R",
+    "section": "Vectorized Operations: The Data Scientist’s Bread and Margarine",
+    "text": "Vectorized Operations: The Data Scientist’s Bread and Margarine\n\nYou’ve been hired as the lead data scientist for a food delivery service (congrats!)\nYou’re given data on (a) miles traveled and (b) hours driven, for each driver\nYour goal: find the distribution of average speeds!\n\n\n\n\nimport pandas as pd\nmiles_data = [11, 52, 13]\nhrs_data = [2, 3, 5]\ndriver_df = pd.DataFrame({\n    'miles': miles_data,\n    'hrs': hrs_data\n})\nprint(driver_df.to_markdown())\n\n\n\n\nmiles\nhrs\n\n\n\n\n0\n11\n2\n\n\n1\n52\n3\n\n\n2\n13\n5\n\n\n\n\n\n\nmiles_data &lt;- c(11, 52, 13)\nhrs_data &lt;- c(2, 3, 5)\ndriver_df &lt;- data.frame(\n    miles=miles_data,\n    hrs=hrs_data\n)\ndriver_df\n\n\n\n\n\nmiles\nhrs\n\n\n\n\n11\n2\n\n\n52\n3\n\n\n13\n5"
+  },
+  {
+    "objectID": "w07-1/slides.html#the-loop-approach",
+    "href": "w07-1/slides.html#the-loop-approach",
+    "title": "Control Flow in R",
+    "section": "The Loop Approach ",
+    "text": "The Loop Approach \n\nfor (i in 1:nrow(driver_df)) {\n  driver_df[i, 'mph'] &lt;- driver_df[i, 'miles'] / driver_df[i, 'hrs']\n}\ndriver_df\n\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n11\n2\n5.50000\n\n\n52\n3\n17.33333\n\n\n13\n5\n2.60000\n\n\n\n\n\n\n\nIt works! But CPUs have hyper-optimized linear algebra\n\\(\\implies\\) Operations on a length-1000 vector significantly faster than a loop performing an operation 1000 times"
+  },
+  {
+    "objectID": "w07-1/slides.html#the-vectorized-approach",
+    "href": "w07-1/slides.html#the-vectorized-approach",
+    "title": "Control Flow in R",
+    "section": "The Vectorized Approach 💯",
+    "text": "The Vectorized Approach 💯\n\n\n\ndriver_df['mph'] = driver_df['miles'] / driver_df['hrs']\nprint(driver_df.to_markdown())\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n0\n11\n2\n5.5\n\n\n1\n52\n3\n17.3333\n\n\n2\n13\n5\n2.6\n\n\n\n\n\n\ndriver_df['mph'] = driver_df$miles / driver_df$hrs\ndriver_df\n\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n11\n2\n5.50000\n\n\n52\n3\n17.33333\n\n\n13\n5\n2.60000"
+  },
+  {
+    "objectID": "w07-1/slides.html#vectorizing-your-brain",
+    "href": "w07-1/slides.html#vectorizing-your-brain",
+    "title": "Control Flow in R",
+    "section": "Vectorizing Your Brain",
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003541946 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.323966 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+  },
+  {
+    "objectID": "w07-1/slides.html#how-is-it-that-much-faster",
+    "href": "w07-1/slides.html#how-is-it-that-much-faster",
+    "title": "Control Flow in R",
+    "section": "How is it That Much Faster?",
+    "text": "How is it That Much Faster?\n\nThe long answer: take DSAN 5500 😜 The short answer:\nSimple math operations (addition, multiplication) are easily parallelized under the hood;\nSequential memory reads are significantly faster than non-sequential reads—vectors can be stored in contiguous “chunks” of memory that computer can rapidly scan over\n\n(Think of how it’s easier to count people standing in a line than people scattered around a room!)"
+  },
+  {
+    "objectID": "w07-1/slides.html#anonymous-functions",
+    "href": "w07-1/slides.html#anonymous-functions",
+    "title": "Control Flow in R",
+    "section": "Anonymous Functions",
+    "text": "Anonymous Functions\n\nIn Python you declare the name of a function using def\nIn R, you make the function without a name, then assign it to a variable:\n\n\n\n\ndef multiply_by_5(num):\n  return num * 5\nmultiply_by_5(10)\n\n50\n\n\n\n\nmultiply_by_5 &lt;- function(num) {\n  return(num * 5)\n}\nmultiply_by_5(10)\n\n[1] 50\n\n\n\n\n\n(Python also has anonymous functions, via lambda:)\n\n\ndouble_it = lambda x: x * 2\ndouble_it(10)\n\n20"
+  },
+  {
+    "objectID": "w07-1/slides.html#variable-scope",
+    "href": "w07-1/slides.html#variable-scope",
+    "title": "Control Flow in R",
+    "section": "Variable Scope",
+    "text": "Variable Scope\n\nHuge point (especially for Week 7 Assignment)!\nThink of functions as “mini-programs”, where variables (including arguments) get created when the function starts and then destroyed when the function finishes. Compare:\n\n\n\n\nval &lt;- c(1, 2, 3)\nprint(val)\n\n[1] 1 2 3\n\nupdate_val &lt;- function() {\n  val &lt;- val * 5\n}\nupdate_val()\nprint(val) # 😵\n\n[1] 1 2 3\n\n\n\n\nval &lt;- c(1, 2, 3)\nprint(val)\n\n[1] 1 2 3\n\ncompute_new_val &lt;- function(orig_val) {\n  return(orig_val * 5)\n}\nval &lt;- compute_new_val(val)\nprint(val) # 😎\n\n[1]  5 10 15"
+  },
+  {
+    "objectID": "w07-1/slides.html#positional-vs.-keyword-arguments",
+    "href": "w07-1/slides.html#positional-vs.-keyword-arguments",
+    "title": "Control Flow in R",
+    "section": "Positional vs. Keyword Arguments",
+    "text": "Positional vs. Keyword Arguments\n\nJust like Python, R functions can accept two types of arguments…\n\n\n\nPositional arguments are required (function call will produce error if any positional argument is missing)\n\ndiv_by_2 &lt;- function(num) {\n  return(num / 2)\n}\ndiv_by_2(11)\n\n[1] 5.5\n\n\n\nKeyword arguments are optional\n\ndiv_by_2 &lt;- function(num, round=FALSE) {\n  div_result &lt;- num / 2\n  final_result &lt;- ifelse(round,\n    round(div_result),\n    div_result\n  )\n  return(final_result)\n}\ndiv_by_2(11, round=TRUE)\n\n[1] 6"
+  },
+  {
+    "objectID": "w07-1/slides.html#applying-functions-to-vectors",
+    "href": "w07-1/slides.html#applying-functions-to-vectors",
+    "title": "Control Flow in R",
+    "section": "Applying Functions to Vectors",
+    "text": "Applying Functions to Vectors\n\nWe’ve been “manually” calling functions, like func(arg)\nWhat if we want to apply a function to a vector of elements? Ex: capitalize a big list of names\n\n\n\n\nBase R provides a family of apply() functions: sapply() for vectors; lapply() for lists; apply() for matrices (requires specifying axis: columns or rows)\n\n\n\ncapitalize &lt;- function(name) {\n  return(tools::toTitleCase(name))\n}\ncapitalize(\"jeff\")\n\n[1] \"Jeff\"\n\nnames &lt;- c(\"ali\", \"boris\", \"chad\")\nsapply(names, capitalize)\n\n    ali   boris    chad \n  \"Ali\" \"Boris\"  \"Chad\" \n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-1: Control Flow"
+  },
+  {
+    "objectID": "w07-1/index.html",
+    "href": "w07-1/index.html",
+    "title": "Control Flow in R",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w07-1/index.html#code-blocks",
+    "href": "w07-1/index.html#code-blocks",
+    "title": "Control Flow in R",
+    "section": "Code Blocks",
+    "text": "Code Blocks\n\n\nPython uses Indentation →→\n\nfor i in range(5):\n  print(\"Hello\")\n  print(\"Please run this code 5 times\")\n\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\nHello\nPlease run this code 5 times\n\n\n\nR uses curly braces {}\n\nfor (i in 1:5) {\n  print(\"Hello\")\n  print(\"Please run this code 5 times\")\n}\n\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\"\n[1] \"Hello\"\n[1] \"Please run this code 5 times\""
+  },
+  {
+    "objectID": "w07-1/index.html#if-statements",
+    "href": "w07-1/index.html#if-statements",
+    "title": "Control Flow in R",
+    "section": "If Statements",
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 3:6\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood morning!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 3:6\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good morning!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+  },
+  {
+    "objectID": "w07-1/index.html#the-ternary-operator",
+    "href": "w07-1/index.html#the-ternary-operator",
+    "title": "Control Flow in R",
+    "section": "The Ternary Operator",
+    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'morning'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"morning\""
+  },
+  {
+    "objectID": "w07-1/index.html#for-loops-the-software-engineers-bread-and-butter",
+    "href": "w07-1/index.html#for-loops-the-software-engineers-bread-and-butter",
+    "title": "Control Flow in R",
+    "section": "For Loops: The Software Engineer’s Bread and Butter",
+    "text": "For Loops: The Software Engineer’s Bread and Butter\n\nMany different ways to loop (find one that clicks for you!)\nFor loops often the “default” approach (because of C)\n\n\n\n\nfor i in range(1, 10):\n    print(i)\n\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\n\n\n\nfor (i in 1:10) {\n    print(i)\n}\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10"
+  },
+  {
+    "objectID": "w07-1/index.html#vectorized-operations-the-data-scientists-bread-and-margarine",
+    "href": "w07-1/index.html#vectorized-operations-the-data-scientists-bread-and-margarine",
+    "title": "Control Flow in R",
+    "section": "Vectorized Operations: The Data Scientist’s Bread and Margarine",
+    "text": "Vectorized Operations: The Data Scientist’s Bread and Margarine\n\nYou’ve been hired as the lead data scientist for a food delivery service (congrats!)\nYou’re given data on (a) miles traveled and (b) hours driven, for each driver\nYour goal: find the distribution of average speeds!\n\n\n\n\nimport pandas as pd\nmiles_data = [11, 52, 13]\nhrs_data = [2, 3, 5]\ndriver_df = pd.DataFrame({\n    'miles': miles_data,\n    'hrs': hrs_data\n})\nprint(driver_df.to_markdown())\n\n\n\n\nmiles\nhrs\n\n\n\n\n0\n11\n2\n\n\n1\n52\n3\n\n\n2\n13\n5\n\n\n\n\n\n\nmiles_data &lt;- c(11, 52, 13)\nhrs_data &lt;- c(2, 3, 5)\ndriver_df &lt;- data.frame(\n    miles=miles_data,\n    hrs=hrs_data\n)\ndriver_df\n\n\n\n\n\nmiles\nhrs\n\n\n\n\n11\n2\n\n\n52\n3\n\n\n13\n5"
+  },
+  {
+    "objectID": "w07-1/index.html#the-loop-approach",
+    "href": "w07-1/index.html#the-loop-approach",
+    "title": "Control Flow in R",
+    "section": "The Loop Approach ",
+    "text": "The Loop Approach \n\nfor (i in 1:nrow(driver_df)) {\n  driver_df[i, 'mph'] &lt;- driver_df[i, 'miles'] / driver_df[i, 'hrs']\n}\ndriver_df\n\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n11\n2\n5.50000\n\n\n52\n3\n17.33333\n\n\n13\n5\n2.60000\n\n\n\n\n\n\n\nIt works! But CPUs have hyper-optimized linear algebra\n\\(\\implies\\) Operations on a length-1000 vector significantly faster than a loop performing an operation 1000 times"
+  },
+  {
+    "objectID": "w07-1/index.html#the-vectorized-approach",
+    "href": "w07-1/index.html#the-vectorized-approach",
+    "title": "Control Flow in R",
+    "section": "The Vectorized Approach 💯",
+    "text": "The Vectorized Approach 💯\n\n\n\ndriver_df['mph'] = driver_df['miles'] / driver_df['hrs']\nprint(driver_df.to_markdown())\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n0\n11\n2\n5.5\n\n\n1\n52\n3\n17.3333\n\n\n2\n13\n5\n2.6\n\n\n\n\n\n\ndriver_df['mph'] = driver_df$miles / driver_df$hrs\ndriver_df\n\n\n\n\n\nmiles\nhrs\nmph\n\n\n\n\n11\n2\n5.50000\n\n\n52\n3\n17.33333\n\n\n13\n5\n2.60000"
+  },
+  {
+    "objectID": "w07-1/index.html#vectorizing-your-brain",
+    "href": "w07-1/index.html#vectorizing-your-brain",
+    "title": "Control Flow in R",
+    "section": "Vectorizing Your Brain",
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003803968 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.300201 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+  },
+  {
+    "objectID": "w07-1/index.html#how-is-it-that-much-faster",
+    "href": "w07-1/index.html#how-is-it-that-much-faster",
+    "title": "Control Flow in R",
+    "section": "How is it That Much Faster?",
+    "text": "How is it That Much Faster?\n\nThe long answer: take DSAN 5500 😜 The short answer:\nSimple math operations (addition, multiplication) are easily parallelized under the hood;\nSequential memory reads are significantly faster than non-sequential reads—vectors can be stored in contiguous “chunks” of memory that computer can rapidly scan over\n\n(Think of how it’s easier to count people standing in a line than people scattered around a room!)"
+  },
+  {
+    "objectID": "w07-1/index.html#anonymous-functions",
+    "href": "w07-1/index.html#anonymous-functions",
+    "title": "Control Flow in R",
+    "section": "Anonymous Functions",
+    "text": "Anonymous Functions\n\nIn Python you declare the name of a function using def\nIn R, you make the function without a name, then assign it to a variable:\n\n\n\n\ndef multiply_by_5(num):\n  return num * 5\nmultiply_by_5(10)\n\n50\n\n\n\n\nmultiply_by_5 &lt;- function(num) {\n  return(num * 5)\n}\nmultiply_by_5(10)\n\n[1] 50\n\n\n\n\n\n(Python also has anonymous functions, via lambda:)\n\n\ndouble_it = lambda x: x * 2\ndouble_it(10)\n\n20"
+  },
+  {
+    "objectID": "w07-1/index.html#variable-scope",
+    "href": "w07-1/index.html#variable-scope",
+    "title": "Control Flow in R",
+    "section": "Variable Scope",
+    "text": "Variable Scope\n\nHuge point (especially for Week 7 Assignment)!\nThink of functions as “mini-programs”, where variables (including arguments) get created when the function starts and then destroyed when the function finishes. Compare:\n\n\n\n\n\nCode\nval &lt;- c(1, 2, 3)\nprint(val)\n\n\n[1] 1 2 3\n\n\nCode\nupdate_val &lt;- function() {\n  val &lt;- val * 5\n}\nupdate_val()\nprint(val) # 😵\n\n\n[1] 1 2 3\n\n\n\n\n\nCode\nval &lt;- c(1, 2, 3)\nprint(val)\n\n\n[1] 1 2 3\n\n\nCode\ncompute_new_val &lt;- function(orig_val) {\n  return(orig_val * 5)\n}\nval &lt;- compute_new_val(val)\nprint(val) # 😎\n\n\n[1]  5 10 15"
+  },
+  {
+    "objectID": "w07-1/index.html#positional-vs.-keyword-arguments",
+    "href": "w07-1/index.html#positional-vs.-keyword-arguments",
+    "title": "Control Flow in R",
+    "section": "Positional vs. Keyword Arguments",
+    "text": "Positional vs. Keyword Arguments\n\nJust like Python, R functions can accept two types of arguments…\n\n\n\nPositional arguments are required (function call will produce error if any positional argument is missing)\n\ndiv_by_2 &lt;- function(num) {\n  return(num / 2)\n}\ndiv_by_2(11)\n\n[1] 5.5\n\n\n\nKeyword arguments are optional\n\ndiv_by_2 &lt;- function(num, round=FALSE) {\n  div_result &lt;- num / 2\n  final_result &lt;- ifelse(round,\n    round(div_result),\n    div_result\n  )\n  return(final_result)\n}\ndiv_by_2(11, round=TRUE)\n\n[1] 6"
+  },
+  {
+    "objectID": "w07-1/index.html#applying-functions-to-vectors",
+    "href": "w07-1/index.html#applying-functions-to-vectors",
+    "title": "Control Flow in R",
+    "section": "Applying Functions to Vectors",
+    "text": "Applying Functions to Vectors\n\nWe’ve been “manually” calling functions, like func(arg)\nWhat if we want to apply a function to a vector of elements? Ex: capitalize a big list of names\n\n\n\n\nBase R provides a family of apply() functions: sapply() for vectors; lapply() for lists; apply() for matrices (requires specifying axis: columns or rows)\n\n\n\ncapitalize &lt;- function(name) {\n  return(tools::toTitleCase(name))\n}\ncapitalize(\"jeff\")\n\n[1] \"Jeff\"\n\nnames &lt;- c(\"ali\", \"boris\", \"chad\")\nsapply(names, capitalize)\n\n    ali   boris    chad \n  \"Ali\" \"Boris\"  \"Chad\""
+  },
+  {
+    "objectID": "w06-3/slides.html#the-most-immediately-jarring-differences",
+    "href": "w06-3/slides.html#the-most-immediately-jarring-differences",
+    "title": "Introduction to R",
+    "section": "The Most Immediately-Jarring Differences",
+    "text": "The Most Immediately-Jarring Differences\n\n\n\n\n\nPython\n\n\n\nR\n\n\n\n\n\nValue Assignment\n\n&lt;varname&gt; = &lt;value&gt;\n\nx = 3\nx\n\n3\n\n\n\n&lt;varname&gt; &lt;- &lt;value&gt;\n\nx &lt;- 3\nx\n\n[1] 3\n\n\n\n\n\n\nIndices\n\nStart from 0\n\nmy_list = [\"a\", \"b\", \"c\"]\nmy_list[0] # Accesses first element\n\n'a'\n\nmy_list[1] # Accesses second element\n\n'b'\n\n\n\nStart from 1\n\nmy_vector &lt;- c(\"a\", \"b\", \"c\")\nmy_vector[0] # Invalid index in R!\n\ncharacter(0)\n\nmy_vector[1] # Accesses first element\n\n[1] \"a\"\n\nmy_vector[2] # Accesses second element\n\n[1] \"b\"\n\n\n\n\n\n\nBooleans\n\nTrue, False\n\nresult = 2 * 2 == 4\nresult\n\nTrue\n\n\n\nTRUE (or T), FALSE (or F)\n\nresult &lt;- 2 * 2 == 4\nresult\n\n[1] TRUE"
+  },
+  {
+    "objectID": "w06-3/slides.html#everything-is-a-vector",
+    "href": "w06-3/slides.html#everything-is-a-vector",
+    "title": "Introduction to R",
+    "section": "Everything is a Vector",
+    "text": "Everything is a Vector\n\nAlthough there are R equivalents for most Python data types, one big difference is that…\nIn R, everything is a vector!\n\n\n\nNumbers\n\nx &lt;- 3\nprint(x)\n\n[1] 3\n\nclass(x)\n\n[1] \"numeric\"\n\nlength(x)\n\n[1] 1\n\n\n\nLength-1 Vectors\n\ny &lt;- c(3)\nprint(y)\n\n[1] 3\n\nclass(y)\n\n[1] \"numeric\"\n\nlength(y)\n\n[1] 1\n\n\n\nLength-N Vectors\n\nz &lt;- c(3, 4, 5)\nprint(z)\n\n[1] 3 4 5\n\nclass(z)\n\n[1] \"numeric\"\n\nlength(z)\n\n[1] 3"
+  },
+  {
+    "objectID": "w06-3/slides.html#careful-with-basic-operators-like",
+    "href": "w06-3/slides.html#careful-with-basic-operators-like",
+    "title": "Introduction to R",
+    "section": "Careful With “Basic” Operators Like +!",
+    "text": "Careful With “Basic” Operators Like +!\n\nIf you’re used to Python, + feels like a natural way to combine things\nR forces you to think explicitly about combining (\\(\\neq\\) adding): more restrictive +\nFor strings:\n\n\nIn Python: + means concatenate\n\nmessage = \"Hi\" + \" \" + \"Jeff\"\nprint(message)\n\nHi Jeff\n\n\n\nIn R: + is not allowed!\n\nmy_message &lt;- \"Hi\" + \" \" + \"Jeff\"\n\nError in \"Hi\" + \" \": non-numeric argument to binary operator\n\n\n\n\nFor numeric lists…\n\n\nIn Python: + means concatenate\n\n[1, 2] + [3, 4]\n\n[1, 2, 3, 4]\n\n\n\nIn R: + means vector addition!\n\nc(1,2) + c(3,4)\n\n[1] 4 6"
+  },
+  {
+    "objectID": "w06-3/slides.html#immensely-important-distinction",
+    "href": "w06-3/slides.html#immensely-important-distinction",
+    "title": "Introduction to R",
+    "section": "Immensely Important Distinction",
+    "text": "Immensely Important Distinction\n\nThroughout bootcamp, throughout DSAN, throughout your career, you’ll use two different “flavors” of R:\n\n\n\nBase R\n\nbase_df &lt;- data.frame(\n  x=c(1,2,3),\n  y=c(\"a\",\"b\",\"c\")\n)\nbase_df\n\n\n\n\n\nx\ny\n\n\n\n\n1\na\n\n\n2\nb\n\n\n3\nc\n\n\n\n\n\nclass(base_df)\n\n[1] \"data.frame\"\n\n\n\nTidyverse\n\nlibrary(tidyverse) # Imports \"tibble\" library\ntv_df &lt;- tribble(\n  ~x, ~y,\n  1, \"a\",\n  2, \"b\",\n  3, \"c\"\n)\ntv_df\n\n\n\n\n\nx\ny\n\n\n\n\n1\na\n\n\n2\nb\n\n\n3\nc\n\n\n\n\n\nclass(tv_df)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\n\n\n\n\nNote: There are ways to do row-wise and column-wise table creation in both! The key difference here is just data.frame vs. tibble"
+  },
+  {
+    "objectID": "w06-3/slides.html#why-are-there-two-ways-to-do-everything",
+    "href": "w06-3/slides.html#why-are-there-two-ways-to-do-everything",
+    "title": "Introduction to R",
+    "section": "Why Are There Two Ways to Do Everything?",
+    "text": "Why Are There Two Ways to Do Everything?\n\nOne key reason: tidyverse built on the pipe operator |&gt;\nRecognition that data science often involves pipelines: chains of operations performed in sequence\n\nE.g., scrape data → clean data → save to DB\n\nBase R approach:\nresult &lt;- saveToDB(cleanData(scrapeData()))\nTidyverse approach:\nresult &lt;- scrapeData() |&gt; cleanData() |&gt; saveToDB()\nNow imagine pipelines used by giant companies, e.g., training Netflix’s recommendation engine!"
+  },
+  {
+    "objectID": "w06-3/slides.html#good-news-and-bad-news",
+    "href": "w06-3/slides.html#good-news-and-bad-news",
+    "title": "Introduction to R",
+    "section": "|>: Good News and Bad News",
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 6 6 6 7 5 5 3 5 1 2 5 7 4 5 7 5 4 6 5 3\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 51 51 53 61 47 47 48 49 50 47\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+  },
+  {
+    "objectID": "w06-3/slides.html#combining-strings",
+    "href": "w06-3/slides.html#combining-strings",
+    "title": "Introduction to R",
+    "section": "Combining Strings",
+    "text": "Combining Strings\n\nEarlier we saw how R doesn’t allow \"Hi\" + \" \" + \"Jeff\"…\nSo how do we combine strings?\npaste() and paste0()!\n\npaste(\"Hi\", \"Jeff\")\n\n[1] \"Hi Jeff\"\n\npaste0(\"Hi\", \" \", \"Jeff\")\n\n[1] \"Hi Jeff\""
+  },
+  {
+    "objectID": "w06-3/slides.html#python-lists-leftrightarrow-r-vectors",
+    "href": "w06-3/slides.html#python-lists-leftrightarrow-r-vectors",
+    "title": "Introduction to R",
+    "section": "Python Lists \\(\\leftrightarrow\\) R Vectors",
+    "text": "Python Lists \\(\\leftrightarrow\\) R Vectors\n\nCreation\n\n\n\n\nmy_list = [1, 2, 3]\nmy_list\n\n[1, 2, 3]\n\n\n\n\nmy_vector &lt;- c(1, 2, 3)\nmy_vector\n\n[1] 1 2 3\n\n\n\n\n\nInsertion\n\n\n\n\nmy_list.append(4)\nmy_list\n\n[1, 2, 3, 4]\n\n\n\n\nmy_vector &lt;- c(my_vector, 4)\nmy_vector\n\n[1] 1 2 3 4\n\n\n\n\n\nReplicating Elements\n\n\n\n\nmy_list * 3\n\n[1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]\n\n\n\n\nrep(my_vector, 3)\n\n [1] 1 2 3 4 1 2 3 4 1 2 3 4\n\n\n\n\n\nPython range() \\(\\leftrightarrow\\) R seq()\n\n\n\n\nlist(range(5, 10))\n\n[5, 6, 7, 8, 9]\n\n\n\n\nseq(5, 10)\n\n[1]  5  6  7  8  9 10"
+  },
+  {
+    "objectID": "w06-3/slides.html#paste0-with-vectors",
+    "href": "w06-3/slides.html#paste0-with-vectors",
+    "title": "Introduction to R",
+    "section": "paste0() with Vectors!",
+    "text": "paste0() with Vectors!\n\nnames &lt;- c(\"Aaliya\", \"Brandon\", \"Cyrus\")\npaste0(names, collapse=\" \")\n\n[1] \"Aaliya Brandon Cyrus\"\n\npaste0(names, collapse=\", \")\n\n[1] \"Aaliya, Brandon, Cyrus\"\n\npaste(names, collapse=\", \")\n\n[1] \"Aaliya, Brandon, Cyrus\""
+  },
+  {
+    "objectID": "w06-3/slides.html#semi-confusing-point-r-also-has-lists",
+    "href": "w06-3/slides.html#semi-confusing-point-r-also-has-lists",
+    "title": "Introduction to R",
+    "section": "Semi-Confusing Point: R Also Has Lists…",
+    "text": "Semi-Confusing Point: R Also Has Lists…\n\nRarely used, despite greater similarity to Python lists 😵‍💫\nKey difference: all elements of a vector must have same type; elements of a list may have different types\n\nmy_list &lt;- list(\"A\", 2, TRUE)\nmy_list\n\n[[1]]\n[1] \"A\"\n\n[[2]]\n[1] 2\n\n[[3]]\n[1] TRUE\n\n\n(Note how each element is a vector: character vector, integer vector, and boolean vector)"
+  },
+  {
+    "objectID": "w06-3/slides.html#pandas-dataframe-leftrightarrow-r-data.frame",
+    "href": "w06-3/slides.html#pandas-dataframe-leftrightarrow-r-data.frame",
+    "title": "Introduction to R",
+    "section": "Pandas DataFrame \\(\\leftrightarrow\\) R data.frame",
+    "text": "Pandas DataFrame \\(\\leftrightarrow\\) R data.frame\n\n\n\nimport pandas as pd\nx_data = [1, 2, 3]\ny_data = [4, 5, 6]\ndf = pd.DataFrame({\n  'x': x_data, 'y': y_data\n})\nprint(df.to_markdown())\n\n\n\n\nx\ny\n\n\n\n\n0\n1\n4\n\n\n1\n2\n5\n\n\n2\n3\n6\n\n\n\n\n\n\nx_data &lt;- c(1, 2, 3)\ny_data &lt;- c(4, 5, 6)\ndf &lt;- data.frame(\n  x=x_data,\n  y=y_data\n)\ndf\n\n\n\n\n\nx\ny\n\n\n\n\n1\n4\n\n\n2\n5\n\n\n3\n6"
+  },
+  {
+    "objectID": "w06-3/slides.html#the-inevitable-headaches-of-missing-data-in-python",
+    "href": "w06-3/slides.html#the-inevitable-headaches-of-missing-data-in-python",
+    "title": "Introduction to R",
+    "section": "The Inevitable Headaches of Missing Data in Python",
+    "text": "The Inevitable Headaches of Missing Data in Python\n\n\n Given a .csv with missing entries:\n\n\nmy_data.csv\n\nid,name,email\n0,jeff,jeff@jeff.com\n1,,nobody@no.com\n3,zayd,z@email.biz\n\n Python defaults to object columns with NaN (Not-a-Number) values\n\nimport pandas as pd\ndf = pd.read_csv(\"my_data.csv\")\ndf\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1   NaN  nobody@no.com\n2   3  zayd    z@email.biz\n\ndf.dtypes\n\nid        int64\nname     object\nemail    object\ndtype: object\n\n\n\n Intuitive fix usually isn’t what you want:\n\ndf_bad = df.copy()\ndf_bad['name'] = df_bad['name'].astype(str)\ndf_bad\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1   nan  nobody@no.com\n2   3  zayd    z@email.biz\n\ndf_bad.iloc[1]['name']\n\n'nan'\n\n\n This alternative approach ensures missing values are empty strings\n\ndf_better = df.copy()\ndf_better['name'] = df_better['name'].fillna('').astype(str)\ndf_better\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1        nobody@no.com\n2   3  zayd    z@email.biz\n\ndf_better.iloc[1]['name']\n\n''"
+  },
+  {
+    "objectID": "w06-3/slides.html#the-slightly-less-headachey-r-approach",
+    "href": "w06-3/slides.html#the-slightly-less-headachey-r-approach",
+    "title": "Introduction to R",
+    "section": "The Slightly-Less-Headachey R Approach!",
+    "text": "The Slightly-Less-Headachey R Approach!\n\n\nR reads missing values in character columns as empty strings by default\n\ndf &lt;- read.csv(\"my_data.csv\")\ndf\n\n\n\n\n\nid\nname\nemail\n\n\n\n\n0\njeff\njeff@jeff.com\n\n\n1\n\nnobody@no.com\n\n\n3\nzayd\nz@email.biz\n\n\n\n\n\ndf$name\n\n[1] \"jeff\" \"\"     \"zayd\"\n\n# We'll learn about sapply() next week!\nsapply(df, class)\n\n         id        name       email \n  \"integer\" \"character\" \"character\" \n\n\n\n…And also has a built-in NA value!\n\n\nmy_data_2.csv\n\nid,name,email,fav_num\n0,jeff,jeff@jeff.com,3.14\n1,,nobody@no.com,\n3,zayd,z@email.biz,11\n\n\ndf2 &lt;- read.csv(\"my_data_2.csv\")\ndf2\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n0\njeff\njeff@jeff.com\n3.14\n\n\n1\n\nnobody@no.com\nNA\n\n\n3\nzayd\nz@email.biz\n11.00\n\n\n\n\n\nsapply(df2, class)\n\n         id        name       email     fav_num \n  \"integer\" \"character\" \"character\"   \"numeric\""
+  },
+  {
+    "objectID": "w06-3/slides.html#bonus-built-in-matrices",
+    "href": "w06-3/slides.html#bonus-built-in-matrices",
+    "title": "Introduction to R",
+    "section": "Bonus: Built-In Matrices",
+    "text": "Bonus: Built-In Matrices\n\nFor data analysis (cleaning, plotting), data.frame is usually the way to go\nFor linear algebra (inverting, multiplying matrices)…\n\n\nUse 2D vectors!\n\nmy_matrix &lt;- matrix(\n  data=c(1, 2, 3, 4),\n  nrow=2, ncol=2, byrow=TRUE\n)\nmy_matrix\n\n     [,1] [,2]\n[1,]    1    2\n[2,]    3    4\n\nclass(my_matrix)\n\n[1] \"matrix\" \"array\" \n\n\n\nBeware! Matrix multiply operator is %*%, NOT *:\n\nmy_matrix * my_matrix\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    9   16\n\nmy_matrix %*% my_matrix\n\n     [,1] [,2]\n[1,]    7   10\n[2,]   15   22"
+  },
+  {
+    "objectID": "w06-3/slides.html#filtering-selecting-rows",
+    "href": "w06-3/slides.html#filtering-selecting-rows",
+    "title": "Introduction to R",
+    "section": "Filtering (Selecting Rows)",
+    "text": "Filtering (Selecting Rows)\n\nIn Base R, filtering involves two steps:\nFirst, create a boolean expression that will evaluate to TRUE for the rows/columns you want to keep, and FALSE otherwise\nThen, use it in the correct “slot” of R’s access operator []:\nfiltered_df &lt;- df[&lt;row filter&gt;, &lt;column filter&gt;] # Note: Either (or both) can be left blank!\nR will go through each row, evaluate &lt;row filter&gt;, and keep the row if and only if &lt;row filter&gt; evaluates to TRUE\nExample: Selecting only rows with odd-numbered id values:\n\n# Boolean expression which is TRUE for odd-numbered indices\nmy_expression &lt;- df2$id %% 2 == 1\nfiltered_df &lt;- df2[my_expression,]\nfiltered_df\n\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n2\n1\n\nnobody@no.com\nNA\n\n\n3\n3\nzayd\nz@email.biz\n11\n\n\n\n\n\n\n\n\nNow that you know how to set up data.frames, let’s do something with them!"
+  },
+  {
+    "objectID": "w06-3/slides.html#selecting-columns",
+    "href": "w06-3/slides.html#selecting-columns",
+    "title": "Introduction to R",
+    "section": "Selecting Columns",
+    "text": "Selecting Columns\n\nCreate a vector with names of columns you want to keep:\ncols_to_keep &lt;- c(\"var1\", \"var2\", \"var3\")\nUse as the sole argument to R’s access operator []:\nsubset_df &lt;- df[cols_to_keep]\nExample: Keeping just the name and fav_num columns:\n\ncols_to_keep &lt;- c(\"name\", \"fav_num\")\nsubset_df &lt;- filtered_df[cols_to_keep]\nsubset_df\n\n\n\n\n\n\nname\nfav_num\n\n\n\n\n2\n\nNA\n\n\n3\nzayd\n11"
+  },
+  {
+    "objectID": "w06-3/slides.html#sampling",
+    "href": "w06-3/slides.html#sampling",
+    "title": "Introduction to R",
+    "section": "Sampling",
+    "text": "Sampling\n\nFiltering = choosing rows deterministically\nSampling = choosing rows randomly\nR has a built-in sample() function, but be careful! It does not work directly on data.frame objects 😱 Instead:\n\n\n\n Sample row indices:\n\nset.seed(2024)\nindices &lt;- sample(nrow(df), 2)\nindices\n\n[1] 2 1\n\n\n\n Select only these indices:\n\nsample_df &lt;- df2[indices,]\nsample_df\n\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n2\n1\n\nnobody@no.com\nNA\n\n\n1\n0\njeff\njeff@jeff.com\n3.14\n\n\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W06-3: Intro to R"
+  },
+  {
+    "objectID": "w06-3/index.html",
+    "href": "w06-3/index.html",
+    "title": "Introduction to R",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w06-3/index.html#the-most-immediately-jarring-differences",
+    "href": "w06-3/index.html#the-most-immediately-jarring-differences",
+    "title": "Introduction to R",
+    "section": "The Most Immediately-Jarring Differences",
+    "text": "The Most Immediately-Jarring Differences\n\n\n\n\n\nPython\n\n\n\nR\n\n\n\n\n\nValue Assignment\n\n&lt;varname&gt; = &lt;value&gt;\n\nx = 3\nx\n\n3\n\n\n\n&lt;varname&gt; &lt;- &lt;value&gt;\n\nx &lt;- 3\nx\n\n[1] 3\n\n\n\n\n\n\nIndices\n\nStart from 0\n\nmy_list = [\"a\", \"b\", \"c\"]\nmy_list[0] # Accesses first element\n\n'a'\n\nmy_list[1] # Accesses second element\n\n'b'\n\n\n\nStart from 1\n\nmy_vector &lt;- c(\"a\", \"b\", \"c\")\nmy_vector[0] # Invalid index in R!\n\ncharacter(0)\n\nmy_vector[1] # Accesses first element\n\n[1] \"a\"\n\nmy_vector[2] # Accesses second element\n\n[1] \"b\"\n\n\n\n\n\n\nBooleans\n\nTrue, False\n\nresult = 2 * 2 == 4\nresult\n\nTrue\n\n\n\nTRUE (or T), FALSE (or F)\n\nresult &lt;- 2 * 2 == 4\nresult\n\n[1] TRUE"
+  },
+  {
+    "objectID": "w06-3/index.html#everything-is-a-vector",
+    "href": "w06-3/index.html#everything-is-a-vector",
+    "title": "Introduction to R",
+    "section": "Everything is a Vector",
+    "text": "Everything is a Vector\n\nAlthough there are R equivalents for most Python data types, one big difference is that…\nIn R, everything is a vector!\n\n\n\nNumbers\n\nx &lt;- 3\nprint(x)\n\n[1] 3\n\nclass(x)\n\n[1] \"numeric\"\n\nlength(x)\n\n[1] 1\n\n\n\nLength-1 Vectors\n\ny &lt;- c(3)\nprint(y)\n\n[1] 3\n\nclass(y)\n\n[1] \"numeric\"\n\nlength(y)\n\n[1] 1\n\n\n\nLength-N Vectors\n\nz &lt;- c(3, 4, 5)\nprint(z)\n\n[1] 3 4 5\n\nclass(z)\n\n[1] \"numeric\"\n\nlength(z)\n\n[1] 3"
+  },
+  {
+    "objectID": "w06-3/index.html#careful-with-basic-operators-like",
+    "href": "w06-3/index.html#careful-with-basic-operators-like",
+    "title": "Introduction to R",
+    "section": "Careful With “Basic” Operators Like +!",
+    "text": "Careful With “Basic” Operators Like +!\n\nIf you’re used to Python, + feels like a natural way to combine things\nR forces you to think explicitly about combining (\\(\\neq\\) adding): more restrictive +\nFor strings:\n\n\nIn Python: + means concatenate\n\nmessage = \"Hi\" + \" \" + \"Jeff\"\nprint(message)\n\nHi Jeff\n\n\n\nIn R: + is not allowed!\n\nmy_message &lt;- \"Hi\" + \" \" + \"Jeff\"\n\nError in \"Hi\" + \" \": non-numeric argument to binary operator\n\n\n\n\nFor numeric lists…\n\n\nIn Python: + means concatenate\n\n[1, 2] + [3, 4]\n\n[1, 2, 3, 4]\n\n\n\nIn R: + means vector addition!\n\nc(1,2) + c(3,4)\n\n[1] 4 6"
+  },
+  {
+    "objectID": "w06-3/index.html#immensely-important-distinction",
+    "href": "w06-3/index.html#immensely-important-distinction",
+    "title": "Introduction to R",
+    "section": "Immensely Important Distinction",
+    "text": "Immensely Important Distinction\n\nThroughout bootcamp, throughout DSAN, throughout your career, you’ll use two different “flavors” of R:\n\n\n\nBase R\n\nbase_df &lt;- data.frame(\n  x=c(1,2,3),\n  y=c(\"a\",\"b\",\"c\")\n)\nbase_df\n\n\n\n\n\nx\ny\n\n\n\n\n1\na\n\n\n2\nb\n\n\n3\nc\n\n\n\n\n\nclass(base_df)\n\n[1] \"data.frame\"\n\n\n\nTidyverse\n\nlibrary(tidyverse) # Imports \"tibble\" library\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\ntv_df &lt;- tribble(\n  ~x, ~y,\n  1, \"a\",\n  2, \"b\",\n  3, \"c\"\n)\ntv_df\n\n\n\n\n\nx\ny\n\n\n\n\n1\na\n\n\n2\nb\n\n\n3\nc\n\n\n\n\n\nclass(tv_df)\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\n\n\n\n\nNote: There are ways to do row-wise and column-wise table creation in both! The key difference here is just data.frame vs. tibble"
+  },
+  {
+    "objectID": "w06-3/index.html#why-are-there-two-ways-to-do-everything",
+    "href": "w06-3/index.html#why-are-there-two-ways-to-do-everything",
+    "title": "Introduction to R",
+    "section": "Why Are There Two Ways to Do Everything?",
+    "text": "Why Are There Two Ways to Do Everything?\n\nOne key reason: tidyverse built on the pipe operator |&gt;\nRecognition that data science often involves pipelines: chains of operations performed in sequence\n\nE.g., scrape data → clean data → save to DB\n\nBase R approach:\nresult &lt;- saveToDB(cleanData(scrapeData()))\nTidyverse approach:\nresult &lt;- scrapeData() |&gt; cleanData() |&gt; saveToDB()\nNow imagine pipelines used by giant companies, e.g., training Netflix’s recommendation engine!"
+  },
+  {
+    "objectID": "w06-3/index.html#good-news-and-bad-news",
+    "href": "w06-3/index.html#good-news-and-bad-news",
+    "title": "Introduction to R",
+    "section": "|>: Good News and Bad News",
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 7 4 5 7 6 6 3 4 7 5 6 2 3 2 3 3 6 5 3 6\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 57 55 51 45 43 53 52 45 44 56\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+  },
+  {
+    "objectID": "w06-3/index.html#combining-strings",
+    "href": "w06-3/index.html#combining-strings",
+    "title": "Introduction to R",
+    "section": "Combining Strings",
+    "text": "Combining Strings\n\nEarlier we saw how R doesn’t allow \"Hi\" + \" \" + \"Jeff\"…\nSo how do we combine strings?\npaste() and paste0()!\n\npaste(\"Hi\", \"Jeff\")\n\n[1] \"Hi Jeff\"\n\npaste0(\"Hi\", \" \", \"Jeff\")\n\n[1] \"Hi Jeff\""
+  },
+  {
+    "objectID": "w06-3/index.html#python-lists-leftrightarrow-r-vectors",
+    "href": "w06-3/index.html#python-lists-leftrightarrow-r-vectors",
+    "title": "Introduction to R",
+    "section": "Python Lists \\(\\leftrightarrow\\) R Vectors",
+    "text": "Python Lists \\(\\leftrightarrow\\) R Vectors\n\nCreation\n\n\n\n\nmy_list = [1, 2, 3]\nmy_list\n\n[1, 2, 3]\n\n\n\n\nmy_vector &lt;- c(1, 2, 3)\nmy_vector\n\n[1] 1 2 3\n\n\n\n\n\nInsertion\n\n\n\n\nmy_list.append(4)\nmy_list\n\n[1, 2, 3, 4]\n\n\n\n\nmy_vector &lt;- c(my_vector, 4)\nmy_vector\n\n[1] 1 2 3 4\n\n\n\n\n\nReplicating Elements\n\n\n\n\nmy_list * 3\n\n[1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]\n\n\n\n\nrep(my_vector, 3)\n\n [1] 1 2 3 4 1 2 3 4 1 2 3 4\n\n\n\n\n\nPython range() \\(\\leftrightarrow\\) R seq()\n\n\n\n\nlist(range(5, 10))\n\n[5, 6, 7, 8, 9]\n\n\n\n\nseq(5, 10)\n\n[1]  5  6  7  8  9 10"
+  },
+  {
+    "objectID": "w06-3/index.html#paste0-with-vectors",
+    "href": "w06-3/index.html#paste0-with-vectors",
+    "title": "Introduction to R",
+    "section": "paste0() with Vectors!",
+    "text": "paste0() with Vectors!\n\nnames &lt;- c(\"Aaliya\", \"Brandon\", \"Cyrus\")\npaste0(names, collapse=\" \")\n\n[1] \"Aaliya Brandon Cyrus\"\n\npaste0(names, collapse=\", \")\n\n[1] \"Aaliya, Brandon, Cyrus\"\n\npaste(names, collapse=\", \")\n\n[1] \"Aaliya, Brandon, Cyrus\""
+  },
+  {
+    "objectID": "w06-3/index.html#semi-confusing-point-r-also-has-lists",
+    "href": "w06-3/index.html#semi-confusing-point-r-also-has-lists",
+    "title": "Introduction to R",
+    "section": "Semi-Confusing Point: R Also Has Lists…",
+    "text": "Semi-Confusing Point: R Also Has Lists…\n\nRarely used, despite greater similarity to Python lists 😵‍💫\nKey difference: all elements of a vector must have same type; elements of a list may have different types\n\nmy_list &lt;- list(\"A\", 2, TRUE)\nmy_list\n\n[[1]]\n[1] \"A\"\n\n[[2]]\n[1] 2\n\n[[3]]\n[1] TRUE\n\n\n(Note how each element is a vector: character vector, integer vector, and boolean vector)"
+  },
+  {
+    "objectID": "w06-3/index.html#pandas-dataframe-leftrightarrow-r-data.frame",
+    "href": "w06-3/index.html#pandas-dataframe-leftrightarrow-r-data.frame",
+    "title": "Introduction to R",
+    "section": "Pandas DataFrame \\(\\leftrightarrow\\) R data.frame",
+    "text": "Pandas DataFrame \\(\\leftrightarrow\\) R data.frame\n\n\n\nimport pandas as pd\nx_data = [1, 2, 3]\ny_data = [4, 5, 6]\ndf = pd.DataFrame({\n  'x': x_data, 'y': y_data\n})\nprint(df.to_markdown())\n\n\n\n\nx\ny\n\n\n\n\n0\n1\n4\n\n\n1\n2\n5\n\n\n2\n3\n6\n\n\n\n\n\n\nx_data &lt;- c(1, 2, 3)\ny_data &lt;- c(4, 5, 6)\ndf &lt;- data.frame(\n  x=x_data,\n  y=y_data\n)\ndf\n\n\n\n\n\nx\ny\n\n\n\n\n1\n4\n\n\n2\n5\n\n\n3\n6"
+  },
+  {
+    "objectID": "w06-3/index.html#the-inevitable-headaches-of-missing-data-in-python",
+    "href": "w06-3/index.html#the-inevitable-headaches-of-missing-data-in-python",
+    "title": "Introduction to R",
+    "section": "The Inevitable Headaches of Missing Data in Python",
+    "text": "The Inevitable Headaches of Missing Data in Python\n\n\n Given a .csv with missing entries:\n\n\nmy_data.csv\n\nid,name,email\n0,jeff,jeff@jeff.com\n1,,nobody@no.com\n3,zayd,z@email.biz\n\n Python defaults to object columns with NaN (Not-a-Number) values\n\nimport pandas as pd\ndf = pd.read_csv(\"my_data.csv\")\ndf\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1   NaN  nobody@no.com\n2   3  zayd    z@email.biz\n\ndf.dtypes\n\nid        int64\nname     object\nemail    object\ndtype: object\n\n\n\n Intuitive fix usually isn’t what you want:\n\ndf_bad = df.copy()\ndf_bad['name'] = df_bad['name'].astype(str)\ndf_bad\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1   nan  nobody@no.com\n2   3  zayd    z@email.biz\n\ndf_bad.iloc[1]['name']\n\n'nan'\n\n\n This alternative approach ensures missing values are empty strings\n\ndf_better = df.copy()\ndf_better['name'] = df_better['name'].fillna('').astype(str)\ndf_better\n\n   id  name          email\n0   0  jeff  jeff@jeff.com\n1   1        nobody@no.com\n2   3  zayd    z@email.biz\n\ndf_better.iloc[1]['name']\n\n''"
+  },
+  {
+    "objectID": "w06-3/index.html#the-slightly-less-headachey-r-approach",
+    "href": "w06-3/index.html#the-slightly-less-headachey-r-approach",
+    "title": "Introduction to R",
+    "section": "The Slightly-Less-Headachey R Approach!",
+    "text": "The Slightly-Less-Headachey R Approach!\n\n\nR reads missing values in character columns as empty strings by default\n\ndf &lt;- read.csv(\"my_data.csv\")\n\nWarning in read.table(file = file, header = header, sep = sep, quote = quote, :\nincomplete final line found by readTableHeader on 'my_data.csv'\n\ndf\n\n\n\n\n\nid\nname\nemail\n\n\n\n\n0\njeff\njeff@jeff.com\n\n\n1\n\nnobody@no.com\n\n\n3\nzayd\nz@email.biz\n\n\n\n\n\ndf$name\n\n[1] \"jeff\" \"\"     \"zayd\"\n\n# We'll learn about sapply() next week!\nsapply(df, class)\n\n         id        name       email \n  \"integer\" \"character\" \"character\" \n\n\n\n…And also has a built-in NA value!\n\n\nmy_data_2.csv\n\nid,name,email,fav_num\n0,jeff,jeff@jeff.com,3.14\n1,,nobody@no.com,\n3,zayd,z@email.biz,11\n\n\ndf2 &lt;- read.csv(\"my_data_2.csv\")\n\nWarning in read.table(file = file, header = header, sep = sep, quote = quote, :\nincomplete final line found by readTableHeader on 'my_data_2.csv'\n\ndf2\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n0\njeff\njeff@jeff.com\n3.14\n\n\n1\n\nnobody@no.com\nNA\n\n\n3\nzayd\nz@email.biz\n11.00\n\n\n\n\n\nsapply(df2, class)\n\n         id        name       email     fav_num \n  \"integer\" \"character\" \"character\"   \"numeric\""
+  },
+  {
+    "objectID": "w06-3/index.html#bonus-built-in-matrices",
+    "href": "w06-3/index.html#bonus-built-in-matrices",
+    "title": "Introduction to R",
+    "section": "Bonus: Built-In Matrices",
+    "text": "Bonus: Built-In Matrices\n\nFor data analysis (cleaning, plotting), data.frame is usually the way to go\nFor linear algebra (inverting, multiplying matrices)…\n\n\nUse 2D vectors!\n\nmy_matrix &lt;- matrix(\n  data=c(1, 2, 3, 4),\n  nrow=2, ncol=2, byrow=TRUE\n)\nmy_matrix\n\n     [,1] [,2]\n[1,]    1    2\n[2,]    3    4\n\nclass(my_matrix)\n\n[1] \"matrix\" \"array\" \n\n\n\nBeware! Matrix multiply operator is %*%, NOT *:\n\nmy_matrix * my_matrix\n\n     [,1] [,2]\n[1,]    1    4\n[2,]    9   16\n\nmy_matrix %*% my_matrix\n\n     [,1] [,2]\n[1,]    7   10\n[2,]   15   22"
+  },
+  {
+    "objectID": "w06-3/index.html#filtering-selecting-rows",
+    "href": "w06-3/index.html#filtering-selecting-rows",
+    "title": "Introduction to R",
+    "section": "Filtering (Selecting Rows)",
+    "text": "Filtering (Selecting Rows)\n\nIn Base R, filtering involves two steps:\nFirst, create a boolean expression that will evaluate to TRUE for the rows/columns you want to keep, and FALSE otherwise\nThen, use it in the correct “slot” of R’s access operator []:\nfiltered_df &lt;- df[&lt;row filter&gt;, &lt;column filter&gt;] # Note: Either (or both) can be left blank!\nR will go through each row, evaluate &lt;row filter&gt;, and keep the row if and only if &lt;row filter&gt; evaluates to TRUE\nExample: Selecting only rows with odd-numbered id values:\n\n# Boolean expression which is TRUE for odd-numbered indices\nmy_expression &lt;- df2$id %% 2 == 1\nfiltered_df &lt;- df2[my_expression,]\nfiltered_df\n\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n2\n1\n\nnobody@no.com\nNA\n\n\n3\n3\nzayd\nz@email.biz\n11\n\n\n\n\n\n\n\n\nNow that you know how to set up data.frames, let’s do something with them!"
+  },
+  {
+    "objectID": "w06-3/index.html#selecting-columns",
+    "href": "w06-3/index.html#selecting-columns",
+    "title": "Introduction to R",
+    "section": "Selecting Columns",
+    "text": "Selecting Columns\n\nCreate a vector with names of columns you want to keep:\ncols_to_keep &lt;- c(\"var1\", \"var2\", \"var3\")\nUse as the sole argument to R’s access operator []:\nsubset_df &lt;- df[cols_to_keep]\nExample: Keeping just the name and fav_num columns:\n\ncols_to_keep &lt;- c(\"name\", \"fav_num\")\nsubset_df &lt;- filtered_df[cols_to_keep]\nsubset_df\n\n\n\n\n\n\nname\nfav_num\n\n\n\n\n2\n\nNA\n\n\n3\nzayd\n11"
+  },
+  {
+    "objectID": "w06-3/index.html#sampling",
+    "href": "w06-3/index.html#sampling",
+    "title": "Introduction to R",
+    "section": "Sampling",
+    "text": "Sampling\n\nFiltering = choosing rows deterministically\nSampling = choosing rows randomly\nR has a built-in sample() function, but be careful! It does not work directly on data.frame objects 😱 Instead:\n\n\n\n Sample row indices:\n\nset.seed(2024)\nindices &lt;- sample(nrow(df), 2)\nindices\n\n[1] 2 1\n\n\n\n Select only these indices:\n\nsample_df &lt;- df2[indices,]\nsample_df\n\n\n\n\n\n\nid\nname\nemail\nfav_num\n\n\n\n\n2\n1\n\nnobody@no.com\nNA\n\n\n1\n0\njeff\njeff@jeff.com\n3.14"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "2024 DSAN Bootcamp: Weeks 6-8",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nControl Flow in R\n\n\nJeff Jacobs\n\n\n\n\nInstalling Quarto\n\n\nJeff Jacobs\n\n\n\n\nIntroduction to Quarto = Python + R\n\n\nJeff Jacobs\n\n\n\n\nIntroduction to R\n\n\nJeff Jacobs\n\n\n\n\nIntroduction to the Tidyverse\n\n\nJeff Jacobs\n\n\n\n\nTidy Data Visualization with GGPlot in R\n\n\nJeff Jacobs\n\n\n\n\nUsing APIs in R\n\n\nJeff Jacobs\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "w06-1/slides.html#setting-up-your-environment",
+    "href": "w06-1/slides.html#setting-up-your-environment",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Setting Up Your Environment",
+    "text": "Setting Up Your Environment\nTie yourself to the mast! Please!\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎"
+  },
+  {
+    "objectID": "w06-1/slides.html#if-you-were-just-coding-in-python",
+    "href": "w06-1/slides.html#if-you-were-just-coding-in-python",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "If You Were Just Coding in Python",
+    "text": "If You Were Just Coding in Python\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
+  },
+  {
+    "objectID": "w06-1/slides.html#python-on-its-own-demonstration",
+    "href": "w06-1/slides.html#python-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Python-On-Its-Own Demonstration",
+    "text": "Python-On-Its-Own Demonstration\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!"
+  },
+  {
+    "objectID": "w06-1/slides.html#python-within-jupyter-demo",
+    "href": "w06-1/slides.html#python-within-jupyter-demo",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Python-Within-Jupyter Demo",
+    "text": "Python-Within-Jupyter Demo\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks"
+  },
+  {
+    "objectID": "w06-1/slides.html#jupyter-notebooks-.ipynb-files",
+    "href": "w06-1/slides.html#jupyter-notebooks-.ipynb-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Jupyter Notebooks (.ipynb Files)",
+    "text": "Jupyter Notebooks (.ipynb Files)\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)"
+  },
+  {
+    "objectID": "w06-1/slides.html#if-you-were-just-coding-in-r",
+    "href": "w06-1/slides.html#if-you-were-just-coding-in-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "If You Were Just Coding in R",
+    "text": "If You Were Just Coding in R\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r"
+  },
+  {
+    "objectID": "w06-1/slides.html#r-on-its-own-demonstration",
+    "href": "w06-1/slides.html#r-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R-On-Its-Own Demonstration",
+    "text": "R-On-Its-Own Demonstration\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
+  },
+  {
+    "objectID": "w06-1/slides.html#r-in-rstudio-demonstration",
+    "href": "w06-1/slides.html#r-in-rstudio-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R-in-RStudio Demonstration",
+    "text": "R-in-RStudio Demonstration\n\nSimilarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)\nYou can (probably should) install RStudio locally, BUT…\nI want to instead use this as an opportunity to introduce you to Posit.Cloud!\nThe resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)"
+  },
+  {
+    "objectID": "w06-1/slides.html#r-markdown-.rmd-files",
+    "href": "w06-1/slides.html#r-markdown-.rmd-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R Markdown (.rmd) Files",
+    "text": "R Markdown (.rmd) Files\n\n(Warning: Soon to be obsolete! Replaced by very similar .qmd, Quarto Markdown 😉)\nChoose “New Blank File” → “R Markdown…” (in the Files Pane, bottom right of RStudio) to create hello.Rmd:\n\n\n\n\nhello.Rmd\n\n---\ntitle: \"Hello from R Markdown!\"\n---\n\n## Introduction\n\nHello here is some R code\n\n```{r}\nprint(\"Hello from R\")\n```\n\n## A Cool Table\n\n| Problem | Solution |\n|:-:|:-:|\n| $3^5$ | 243 |\n\n\n\n→"
+  },
+  {
+    "objectID": "w06-1/slides.html#literate-programming-transparent-science",
+    "href": "w06-1/slides.html#literate-programming-transparent-science",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Literate Programming = Transparent Science!",
+    "text": "Literate Programming = Transparent Science!\n\nAcademic papers, video demonstrations, etc., can hide more than they reveal\n\nEx: Look at all these UI Templates on Canva!\n\nGiven a plot in some paper… How do we know they didn’t just “tweak” the settings, for hours on end, to produce the result they wanted? (\\(\\neq\\) ethical science)\nOne answer: if they provide the code that produced the figure, then we can interrogate their settings/choices, and change them, to see if the result still holds!"
+  },
+  {
+    "objectID": "w06-1/slides.html#markdown-r-python-rightarrow-quarto",
+    "href": "w06-1/slides.html#markdown-r-python-rightarrow-quarto",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Markdown + R + Python \\(\\rightarrow\\) Quarto",
+    "text": "Markdown + R + Python \\(\\rightarrow\\) Quarto\n\nMarkdown is basically glorified plaintext: text+basic formatting (bold, italics, headings, links, tables)\nR is just a program that lives on your computer and executes R code\nPython is just a program that lives on your computer and executes Python code\nQuarto is a wrapper around R and Python, allowing you to write .qmd (Quarto MarkDown) files: Markdown documents containing R and Python code!"
+  },
+  {
+    "objectID": "w06-1/slides.html#quarto-building-blocks",
+    "href": "w06-1/slides.html#quarto-building-blocks",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Quarto Building Blocks",
+    "text": "Quarto Building Blocks\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n+\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
+  },
+  {
+    "objectID": "w06-1/slides.html#reproducibility-and-literate-programming",
+    "href": "w06-1/slides.html#reproducibility-and-literate-programming",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Reproducibility and Literate Programming",
+    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code that generated it\n\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming: Human-readable explanations are included alongside code, within a single document."
+  },
+  {
+    "objectID": "w06-1/slides.html#so-what-is-r",
+    "href": "w06-1/slides.html#so-what-is-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "So… What is R?",
+    "text": "So… What is R?\n\nPython was created mainly for software engineers\n\nStatistical computing functionality requires 3rd-party imports: NumPy, SciPy, scikit-learn\n\nR was created mainly for statisticians\n\nSoftware engineering functionality often requires 3rd-party libraries: e.g., purrr (for Python-style lambda functions)\n\nOne key implication for DSAN: probability distributions (Normal, Binomial, etc.) are built into R! (Available through NumPy in Python)"
+  },
+  {
+    "objectID": "w06-1/slides.html#probability-distribution-example",
+    "href": "w06-1/slides.html#probability-distribution-example",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Probability Distribution Example",
+    "text": "Probability Distribution Example\nDon’t worry about the details of the code for now! Just note how…\n\n\nrbinom() is built into R, whereas\n\nset.seed(1234)\ncoin_results &lt;- rbinom(n=20, size=10, prob=0.5)\nprint(coin_results)\n\n [1] 3 5 5 6 7 6 1 4 6 5 6 5 4 7 4 7 4 4 4 4\n\nclass(coin_results)\n\n[1] \"integer\"\n\n\n\n\nCode\nlibrary(tidyverse)\ncoin_flip_df &lt;- tibble(num_heads = coin_results)\nggplot(coin_flip_df, aes(x=num_heads)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nrng.binomial() requires NumPy\n\nimport numpy as np\nrng = np.random.default_rng(seed=1234)\nten_coin_results = rng.binomial(n=10, p=0.5, size=20)\nprint(ten_coin_results)\n\n[8 5 7 4 4 3 4 4 8 4 5 5 7 7 6 6 6 4 4 7]\n\ntype(ten_coin_results)\n\n&lt;class 'numpy.ndarray'&gt;\n\n\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nresult_plot = plt.figure()\nresult_plot.set_figheight(3.5)\ncoin_flip_df = pd.DataFrame({'num_heads': ten_coin_results})\nresult_plot = sns.histplot(data=coin_flip_df, x='num_heads')\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "w06-1/slides.html#the-moment-youve-been-waiting-for",
+    "href": "w06-1/slides.html#the-moment-youve-been-waiting-for",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Moment You’ve Been Waiting For 🤯",
+    "text": "The Moment You’ve Been Waiting For 🤯\n\nHow did I include both R and Python code (and its outputs) in the previous slide?\nQuarto allows integration of R+Python via code blocks!\n\n\n\n\nmy_file.qmd\n\n```{python}\nprint(\"Hello from Python!\")\n```\n\n```{r}\nprint(\"Hello from R!\")\n```\n\n\n→\n\nHello from Python!\n\nHello from R!"
+  },
+  {
+    "objectID": "w06-1/slides.html#the-takeaway-python-and-r",
+    "href": "w06-1/slides.html#the-takeaway-python-and-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Takeaway: Python and R",
+    "text": "The Takeaway: Python and R\n\nQuarto enables switching from Python to R at any point!\nSo, as we start on our R journey, try to identify its strengths and weaknesses relative to Python\nGiven a particular task—web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.—learn how to do it in both Python and R, then evaluate which one “clicks” more with you\n(In other words, my ask: if you already know how to do something in Python, pls be open to learning it in R as well! You might find it’s easier—try your best to consciously avoid getting “locked into” one language)\n\n\nThis also holds for Base R to Tidyverse!\n\n\n\n\n2024 DSAN Bootcamp W6.1: Intro to Quarto"
+  },
+  {
+    "objectID": "w06-1/index.html",
+    "href": "w06-1/index.html",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w06-1/index.html#setting-up-your-environment",
+    "href": "w06-1/index.html#setting-up-your-environment",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Setting Up Your Environment",
+    "text": "Setting Up Your Environment\nTie yourself to the mast! Please!\n\n\n\nUlysses and the Sirens, J. W. Waterhouse (1891)\n\n\n\n\n\n\n\n\n\n\nDive right into coding(Bc you think data science = coding)\n\\(\\implies\\)\nSpend 75% of your time wrestling with environment issues 😔\n\n\nThink about + set up environment before diving into coding\n\\(\\implies\\)\nSpend 25% of your time wrestling with environment issues 😎"
+  },
+  {
+    "objectID": "w06-1/index.html#if-you-were-just-coding-in-python",
+    "href": "w06-1/index.html#if-you-were-just-coding-in-python",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "If You Were Just Coding in Python",
+    "text": "If You Were Just Coding in Python\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
+  },
+  {
+    "objectID": "w06-1/index.html#python-on-its-own-demonstration",
+    "href": "w06-1/index.html#python-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Python-On-Its-Own Demonstration",
+    "text": "Python-On-Its-Own Demonstration\n\n Environment! Create a bootcamp-w06 folder, and open this folder in VSCode!\nCreate a hello.py file, with the following content:\n\n\nhello.py\n\nprint(\"Hello from Python!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\npython hello.py\nYou should see the following output:\nHello from Python!"
+  },
+  {
+    "objectID": "w06-1/index.html#python-within-jupyter-demo",
+    "href": "w06-1/index.html#python-within-jupyter-demo",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Python-Within-Jupyter Demo",
+    "text": "Python-Within-Jupyter Demo\n\nStill within the Integrated Terminal, type jupyter and press Enter…\n(If Python is correctly set up and Jupyter has been correctly installed) You’ll see an interface allowing you to create Notebooks"
+  },
+  {
+    "objectID": "w06-1/index.html#jupyter-notebooks-.ipynb-files",
+    "href": "w06-1/index.html#jupyter-notebooks-.ipynb-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Jupyter Notebooks (.ipynb Files)",
+    "text": "Jupyter Notebooks (.ipynb Files)\n\nYou saw these in more detail during Python section!\nAll you need to remember here is: this is a wrapper around the core python executable: all it does is\n\nTakes the code you enter into a cell\nRuns it using python &lt;temporary file&gt;.py\nStores the output within the .ipynb file itself\n\n\n\n\n\n(Make sure to terminate Jupyter using  once you’re done using it!)"
+  },
+  {
+    "objectID": "w06-1/index.html#if-you-were-just-coding-in-r",
+    "href": "w06-1/index.html#if-you-were-just-coding-in-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "If You Were Just Coding in R",
+    "text": "If You Were Just Coding in R\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r"
+  },
+  {
+    "objectID": "w06-1/index.html#r-on-its-own-demonstration",
+    "href": "w06-1/index.html#r-on-its-own-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R-On-Its-Own Demonstration",
+    "text": "R-On-Its-Own Demonstration\n\nCreate a hello.r file, with the following content:\n\n\nhello.r\n\nprint(\"Hello from R!\")\n\nNow open Terminal (in VSCode: Right click in Explorer panel → “Open in Integrated Terminal”) and execute\nRscript hello.r\nYou should see the following output:\n[1] \"Hello from R!\"\n(Plz notice the similarity with Python!)"
+  },
+  {
+    "objectID": "w06-1/index.html#r-in-rstudio-demonstration",
+    "href": "w06-1/index.html#r-in-rstudio-demonstration",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R-in-RStudio Demonstration",
+    "text": "R-in-RStudio Demonstration\n\nSimilarly to Jupyter, you can think of RStudio as a fancy “wrapper” around R (an IDE)\nYou can (probably should) install RStudio locally, BUT…\nI want to instead use this as an opportunity to introduce you to Posit.Cloud!\nThe resources provided by the free account will be sufficient for any assignments/projects in my sections! (The Jeff Guarantee™)"
+  },
+  {
+    "objectID": "w06-1/index.html#r-markdown-.rmd-files",
+    "href": "w06-1/index.html#r-markdown-.rmd-files",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "R Markdown (.rmd) Files",
+    "text": "R Markdown (.rmd) Files\n\n(Warning: Soon to be obsolete! Replaced by very similar .qmd, Quarto Markdown 😉)\nChoose “New Blank File” → “R Markdown…” (in the Files Pane, bottom right of RStudio) to create hello.Rmd:\n\n\n\n\nhello.Rmd\n\n---\ntitle: \"Hello from R Markdown!\"\n---\n\n## Introduction\n\nHello here is some R code\n\n```{r}\nprint(\"Hello from R\")\n```\n\n## A Cool Table\n\n| Problem | Solution |\n|:-:|:-:|\n| $3^5$ | 243 |\n\n\n\n→"
+  },
+  {
+    "objectID": "w06-1/index.html#literate-programming-transparent-science",
+    "href": "w06-1/index.html#literate-programming-transparent-science",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Literate Programming = Transparent Science!",
+    "text": "Literate Programming = Transparent Science!\n\nAcademic papers, video demonstrations, etc., can hide more than they reveal\n\nEx: Look at all these UI Templates on Canva!\n\nGiven a plot in some paper… How do we know they didn’t just “tweak” the settings, for hours on end, to produce the result they wanted? (\\(\\neq\\) ethical science)\nOne answer: if they provide the code that produced the figure, then we can interrogate their settings/choices, and change them, to see if the result still holds!"
+  },
+  {
+    "objectID": "w06-1/index.html#markdown-r-python-rightarrow-quarto",
+    "href": "w06-1/index.html#markdown-r-python-rightarrow-quarto",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Markdown + R + Python \\(\\rightarrow\\) Quarto",
+    "text": "Markdown + R + Python \\(\\rightarrow\\) Quarto\n\nMarkdown is basically glorified plaintext: text+basic formatting (bold, italics, headings, links, tables)\nR is just a program that lives on your computer and executes R code\nPython is just a program that lives on your computer and executes Python code\nQuarto is a wrapper around R and Python, allowing you to write .qmd (Quarto MarkDown) files: Markdown documents containing R and Python code!"
+  },
+  {
+    "objectID": "w06-1/index.html#quarto-building-blocks",
+    "href": "w06-1/index.html#quarto-building-blocks",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Quarto Building Blocks",
+    "text": "Quarto Building Blocks\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGUI wrapper around R (Integrated Development Environment = IDE)\nRun blocks of R code (from .Rmd)\n\n\n\nThe R Language \n\nProgramming language\nRscript &lt;script&gt;.r\n\n\n\n\n\n\n+\n\n\n\n\n\n\n\n\n\nGUI wrapper around Python (IDE)\nRun blocks of Python code (from .ipynb)\n\n\n\n\nThe Python Language\n\nProgramming language\npython &lt;script&gt;.py"
+  },
+  {
+    "objectID": "w06-1/index.html#reproducibility-and-literate-programming",
+    "href": "w06-1/index.html#reproducibility-and-literate-programming",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Reproducibility and Literate Programming",
+    "text": "Reproducibility and Literate Programming\n\nReproducible document: includes both the content (text, tables, figures) and the code that generated it\n\ntldr: If you’re copying-and-pasting results from your code output to your results document, a red flag should go off in your head!\n\nLiterate programming: Human-readable explanations are included alongside code, within a single document."
+  },
+  {
+    "objectID": "w06-1/index.html#so-what-is-r",
+    "href": "w06-1/index.html#so-what-is-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "So… What is R?",
+    "text": "So… What is R?\n\nPython was created mainly for software engineers\n\nStatistical computing functionality requires 3rd-party imports: NumPy, SciPy, scikit-learn\n\nR was created mainly for statisticians\n\nSoftware engineering functionality often requires 3rd-party libraries: e.g., purrr (for Python-style lambda functions)\n\nOne key implication for DSAN: probability distributions (Normal, Binomial, etc.) are built into R! (Available through NumPy in Python)"
+  },
+  {
+    "objectID": "w06-1/index.html#probability-distribution-example",
+    "href": "w06-1/index.html#probability-distribution-example",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "Probability Distribution Example",
+    "text": "Probability Distribution Example\nDon’t worry about the details of the code for now! Just note how…\n\n\nrbinom() is built into R, whereas\n\nset.seed(1234)\ncoin_results &lt;- rbinom(n=20, size=10, prob=0.5)\nprint(coin_results)\n\n [1] 3 5 5 6 7 6 1 4 6 5 6 5 4 7 4 7 4 4 4 4\n\nclass(coin_results)\n\n[1] \"integer\"\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ncoin_flip_df &lt;- tibble(num_heads = coin_results)\nggplot(coin_flip_df, aes(x=num_heads)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nrng.binomial() requires NumPy\n\nimport numpy as np\nrng = np.random.default_rng(seed=1234)\nten_coin_results = rng.binomial(n=10, p=0.5, size=20)\nprint(ten_coin_results)\n\n[8 5 7 4 4 3 4 4 8 4 5 5 7 7 6 6 6 4 4 7]\n\ntype(ten_coin_results)\n\n&lt;class 'numpy.ndarray'&gt;\n\n\n\n\nCode\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nresult_plot = plt.figure()\nresult_plot.set_figheight(3.5)\ncoin_flip_df = pd.DataFrame({'num_heads': ten_coin_results})\nresult_plot = sns.histplot(data=coin_flip_df, x='num_heads')\n\n\n/Users/jpj/.virtualenvs/r-reticulate/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.\n  with pd.option_context('mode.use_inf_as_na', True):\n\n\nCode\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "w06-1/index.html#the-moment-youve-been-waiting-for",
+    "href": "w06-1/index.html#the-moment-youve-been-waiting-for",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Moment You’ve Been Waiting For 🤯",
+    "text": "The Moment You’ve Been Waiting For 🤯\n\nHow did I include both R and Python code (and its outputs) in the previous slide?\nQuarto allows integration of R+Python via code blocks!\n\n\n\n\nmy_file.qmd\n\n```{python}\nprint(\"Hello from Python!\")\n```\n\n```{r}\nprint(\"Hello from R!\")\n```\n\n\n→\n\nHello from Python!\n\nHello from R!"
+  },
+  {
+    "objectID": "w06-1/index.html#the-takeaway-python-and-r",
+    "href": "w06-1/index.html#the-takeaway-python-and-r",
+    "title": "Introduction to Quarto = Python + R",
+    "section": "The Takeaway: Python and R",
+    "text": "The Takeaway: Python and R\n\nQuarto enables switching from Python to R at any point!\nSo, as we start on our R journey, try to identify its strengths and weaknesses relative to Python\nGiven a particular task—web scraping, data cleaning, exploratory data analysis, training a machine learning model, etc.—learn how to do it in both Python and R, then evaluate which one “clicks” more with you\n(In other words, my ask: if you already know how to do something in Python, pls be open to learning it in R as well! You might find it’s easier—try your best to consciously avoid getting “locked into” one language)\n\n\nThis also holds for Base R to Tidyverse!"
+  },
+  {
+    "objectID": "w08-1/index.html",
+    "href": "w08-1/index.html",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w08-1/index.html#base-r-vs.-tidyverse",
+    "href": "w08-1/index.html#base-r-vs.-tidyverse",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Base R vs. Tidyverse",
+    "text": "Base R vs. Tidyverse\n\n\n\n\nCode\nsource(\"../_globals.r\")\nlexp_df &lt;- read.csv(\"assets/lexp_by_ward.csv\")\nplot(\n  lexp_df$ward, lexp_df$life_exp,\n  main=\"DC Life Expectancy by Ward (2015)\",\n  xlab=\"Ward\", ylab=\"Life Expectancy\",\n  pch=19, cex.lab=2, cex.main=2, cex.axis=2\n)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.2     ✔ tibble    3.2.1\n✔ purrr     1.0.2     ✔ tidyr     1.3.0\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nus_mean &lt;- 78.69\nlexp_df &lt;- read_csv(\"assets/lexp_by_ward.csv\")\n\n\nRows: 8 Columns: 3\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (3): year, ward, life_exp\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\nlexp_df &lt;- lexp_df |&gt; mutate(\n  above_avg = ifelse(life_exp &gt; us_mean, \"Above Mean\", \"Below Mean\")\n)\nlexp_df |&gt; ggplot(aes(x=as.factor(ward), y=life_exp, color=above_avg)) +\n  geom_point(size=5) +\n  geom_segment(\n    aes(xend=ward, yend=us_mean),\n    linewidth=1.5\n  ) +\n  geom_hline(\n    aes(\n      yintercept=us_mean,\n      linetype=\"National Mean\"\n    ),\n    linewidth=1\n  ) +\n  dsan_theme(\"half\") +\n  theme(\n    plot.title = element_text(hjust = 0.5)\n  ) +\n  labs(\n    x = \"Ward\",\n    y = \"Life Expectancy\",\n    title = \"DC Life Expectancy by Ward (2015)\"\n  ) +\n  scale_linetype_manual(\"test\", values=c(\"dashed\")) +\n  remove_legend_title()\n\n\n\n\n\nData from DC Dept. of Health"
+  },
+  {
+    "objectID": "w08-1/index.html#plus-way-wider-range-of-plot-types",
+    "href": "w08-1/index.html#plus-way-wider-range-of-plot-types",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Plus Way Wider Range of Plot Types!",
+    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\n\n\nShapefile from OpenData.DC.gov"
+  },
+  {
+    "objectID": "w08-1/index.html#intuition",
+    "href": "w08-1/index.html#intuition",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Intuition",
+    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects (grammatical structure)\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings"
+  },
+  {
+    "objectID": "w08-1/slides.html#base-r-vs.-tidyverse",
+    "href": "w08-1/slides.html#base-r-vs.-tidyverse",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Base R vs. Tidyverse",
+    "text": "Base R vs. Tidyverse\n\n\n\n\nCode\nsource(\"../_globals.r\")\nlexp_df &lt;- read.csv(\"assets/lexp_by_ward.csv\")\nplot(\n  lexp_df$ward, lexp_df$life_exp,\n  main=\"DC Life Expectancy by Ward (2015)\",\n  xlab=\"Ward\", ylab=\"Life Expectancy\",\n  pch=19, cex.lab=2, cex.main=2, cex.axis=2\n)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(tidyverse)\nus_mean &lt;- 78.69\nlexp_df &lt;- read_csv(\"assets/lexp_by_ward.csv\")\nlexp_df &lt;- lexp_df |&gt; mutate(\n  above_avg = ifelse(life_exp &gt; us_mean, \"Above Mean\", \"Below Mean\")\n)\nlexp_df |&gt; ggplot(aes(x=as.factor(ward), y=life_exp, color=above_avg)) +\n  geom_point(size=5) +\n  geom_segment(\n    aes(xend=ward, yend=us_mean),\n    linewidth=1.5\n  ) +\n  geom_hline(\n    aes(\n      yintercept=us_mean,\n      linetype=\"National Mean\"\n    ),\n    linewidth=1\n  ) +\n  dsan_theme(\"half\") +\n  theme(\n    plot.title = element_text(hjust = 0.5)\n  ) +\n  labs(\n    x = \"Ward\",\n    y = \"Life Expectancy\",\n    title = \"DC Life Expectancy by Ward (2015)\"\n  ) +\n  scale_linetype_manual(\"test\", values=c(\"dashed\")) +\n  remove_legend_title()\n\n\n\n\n\nData from DC Dept. of Health"
+  },
+  {
+    "objectID": "w08-1/slides.html#plus-way-wider-range-of-plot-types",
+    "href": "w08-1/slides.html#plus-way-wider-range-of-plot-types",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Plus Way Wider Range of Plot Types!",
+    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\nShapefile from OpenData.DC.gov"
+  },
+  {
+    "objectID": "w08-1/slides.html#intuition",
+    "href": "w08-1/slides.html#intuition",
+    "title": "Tidy Data Visualization with GGPlot in R",
+    "section": "Intuition",
+    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects (grammatical structure)\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings\n\n\n\n\n2024 DSAN Bootcamp W08-1: Visualization"
+  },
+  {
+    "objectID": "w07-2/index.html",
+    "href": "w07-2/index.html",
+    "title": "Introduction to the Tidyverse",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w07-2/index.html#tidyverse",
+    "href": "w07-2/index.html#tidyverse",
+    "title": "Introduction to the Tidyverse",
+    "section": "Tidyverse",
+    "text": "Tidyverse\n\nThink of data science tasks as involving pipelines:\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 1\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation A\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation B\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\nVisualization\n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 2\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation C\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation D\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\n      Result     \n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\nTidyverse lets you pipe output from one transformation as the input to another:\n\nraw_data |&gt; select() |&gt; mutate() |&gt; visualize()\nraw_data |&gt; filter() |&gt; summarize() |&gt; check_result()"
+  },
+  {
+    "objectID": "w07-2/index.html#selecting-columns",
+    "href": "w07-2/index.html#selecting-columns",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting Columns",
+    "text": "Selecting Columns\nselect() lets you keep only the columns you care about in your current analysis:\n\nCode\nlibrary(tidyverse)\ntable1\ntable1 |&gt; select(country, year, population)\n\n\n\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n1999\n19987071\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n1999\n172006362\n\n\nBrazil\n2000\n174504898\n\n\nChina\n1999\n1272915272\n\n\nChina\n2000\n1280428583"
+  },
+  {
+    "objectID": "w07-2/index.html#filtering-rows",
+    "href": "w07-2/index.html#filtering-rows",
+    "title": "Introduction to the Tidyverse",
+    "section": "Filtering Rows",
+    "text": "Filtering Rows\nfilter() lets you keep only the rows you care about in your current analysis:\n\nCode\ntable1 |&gt; filter(year == 2000)\ntable1 |&gt; filter(country == \"Afghanistan\")\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360"
+  },
+  {
+    "objectID": "w07-2/index.html#merging-data",
+    "href": "w07-2/index.html#merging-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\n\nCode\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\n\n\nRows: 403 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country Name, Country Code\ndbl (2): Year, Value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+  },
+  {
+    "objectID": "w07-2/index.html#selectingfiltering-in-action",
+    "href": "w07-2/index.html#selectingfiltering-in-action",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting/Filtering in Action",
+    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+  },
+  {
+    "objectID": "w07-2/index.html#recommended-language-python",
+    "href": "w07-2/index.html#recommended-language-python",
+    "title": "Introduction to the Tidyverse",
+    "section": "Recommended Language: Python",
+    "text": "Recommended Language: Python\nPandas provides an easy-to-use df.merge(other_df)!\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+  },
+  {
+    "objectID": "w07-2/index.html#reshaping-data",
+    "href": "w07-2/index.html#reshaping-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\n\nCode\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\n\nCode\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/index.html#reshaping-long-to-wide-in-python-pd.pivot",
+    "href": "w07-2/index.html#reshaping-long-to-wide-in-python-pd.pivot",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Long-to-Wide in Python: pd.pivot()",
+    "text": "Reshaping Long-to-Wide in Python: pd.pivot()\n\n\nCreate unique ID for wide version:\n\n\nCode\nlong_df['id'] = long_df['country'] + '_' + long_df['year'].apply(str)\n# Reorder the columns, so it shows the id first\nlong_df = long_df[['id','country','year','type','count']]\nprint(long_df.head(6).to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\nid\ncountry\nyear\ntype\ncount\n\n\n\n\n0\nAfghanistan_1999\nAfghanistan\n1999\ncases\n745\n\n\n1\nAfghanistan_1999\nAfghanistan\n1999\npopulation\n19987071\n\n\n2\nAfghanistan_2000\nAfghanistan\n2000\ncases\n2666\n\n\n3\nAfghanistan_2000\nAfghanistan\n2000\npopulation\n20595360\n\n\n4\nBrazil_1999\nBrazil\n1999\ncases\n37737\n\n\n5\nBrazil_1999\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nCode\nreshaped_df = pd.pivot(long_df,\n  index='id',\n  columns='type',\n  values='count'\n)\nprint(reshaped_df.to_markdown())\n\n\n\n\nid\ncases\npopulation\n\n\n\n\nAfghanistan_1999\n745\n1.99871e+07\n\n\nAfghanistan_2000\n2666\n2.05954e+07\n\n\nBrazil_1999\n37737\n1.72006e+08\n\n\nBrazil_2000\n80488\n1.74505e+08\n\n\nChina_1999\n212258\n1.27292e+09\n\n\nChina_2000\n213766\n1.28043e+09"
+  },
+  {
+    "objectID": "w07-2/index.html#the-other-direction-wide-to-long-pd.melt",
+    "href": "w07-2/index.html#the-other-direction-wide-to-long-pd.melt",
+    "title": "Introduction to the Tidyverse",
+    "section": "The Other Direction (Wide-to-Long): pd.melt()",
+    "text": "The Other Direction (Wide-to-Long): pd.melt()\n\n\n\n\nCode\nwide_df = pd.read_csv(\"assets/wide_data.csv\")\nprint(wide_df.to_markdown())\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\n0\nAfghanistan\n1999\n745\n19987071\n\n\n1\nAfghanistan\n2000\n2666\n20595360\n\n\n2\nBrazil\n1999\n37737\n172006362\n\n\n3\nBrazil\n2000\n80488\n174504898\n\n\n4\nChina\n1999\n212258\n1272915272\n\n\n5\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\nCode\nlong_df = pd.melt(wide_df,\n  id_vars=['country','year'],\n  value_vars=['cases','population']\n)\nprint(long_df.head(6).to_markdown())\n\n\n\n\n\ncountry\nyear\nvariable\nvalue\n\n\n\n\n0\nAfghanistan\n1999\ncases\n745\n\n\n1\nAfghanistan\n2000\ncases\n2666\n\n\n2\nBrazil\n1999\ncases\n37737\n\n\n3\nBrazil\n2000\ncases\n80488\n\n\n4\nChina\n1999\ncases\n212258\n\n\n5\nChina\n2000\ncases\n213766"
+  },
+  {
+    "objectID": "w07-2/index.html#wide-to-long-in-r-gather",
+    "href": "w07-2/index.html#wide-to-long-in-r-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long in R: gather()",
+    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
+  },
+  {
+    "objectID": "w07-2/slides.html#tidyverse",
+    "href": "w07-2/slides.html#tidyverse",
+    "title": "Introduction to the Tidyverse",
+    "section": "Tidyverse",
+    "text": "Tidyverse\n\nThink of data science tasks as involving pipelines:\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 1\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation A\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation B\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\nVisualization\n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 2\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation C\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation D\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\n      Result     \n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\nTidyverse lets you pipe output from one transformation as the input to another:\n\nraw_data |&gt; select() |&gt; mutate() |&gt; visualize()\nraw_data |&gt; filter() |&gt; summarize() |&gt; check_result()"
+  },
+  {
+    "objectID": "w07-2/slides.html#selecting-columns",
+    "href": "w07-2/slides.html#selecting-columns",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting Columns",
+    "text": "Selecting Columns\nselect() lets you keep only the columns you care about in your current analysis:\nlibrary(tidyverse)\ntable1\ntable1 |&gt; select(country, year, population)\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n1999\n19987071\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n1999\n172006362\n\n\nBrazil\n2000\n174504898\n\n\nChina\n1999\n1272915272\n\n\nChina\n2000\n1280428583"
+  },
+  {
+    "objectID": "w07-2/slides.html#filtering-rows",
+    "href": "w07-2/slides.html#filtering-rows",
+    "title": "Introduction to the Tidyverse",
+    "section": "Filtering Rows",
+    "text": "Filtering Rows\nfilter() lets you keep only the rows you care about in your current analysis:\ntable1 |&gt; filter(year == 2000)\ntable1 |&gt; filter(country == \"Afghanistan\")\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360"
+  },
+  {
+    "objectID": "w07-2/slides.html#merging-data",
+    "href": "w07-2/slides.html#merging-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+  },
+  {
+    "objectID": "w07-2/slides.html#selectingfiltering-in-action",
+    "href": "w07-2/slides.html#selectingfiltering-in-action",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting/Filtering in Action",
+    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+  },
+  {
+    "objectID": "w07-2/slides.html#recommended-language-python",
+    "href": "w07-2/slides.html#recommended-language-python",
+    "title": "Introduction to the Tidyverse",
+    "section": "Recommended Language: Python",
+    "text": "Recommended Language: Python\nPandas provides an easy-to-use df.merge(other_df)!\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+  },
+  {
+    "objectID": "w07-2/slides.html#reshaping-data",
+    "href": "w07-2/slides.html#reshaping-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/slides.html#reshaping-long-to-wide-in-python-pd.pivot",
+    "href": "w07-2/slides.html#reshaping-long-to-wide-in-python-pd.pivot",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Long-to-Wide in Python: pd.pivot()",
+    "text": "Reshaping Long-to-Wide in Python: pd.pivot()\n\n\nCreate unique ID for wide version:\n\n\nCode\nlong_df['id'] = long_df['country'] + '_' + long_df['year'].apply(str)\n# Reorder the columns, so it shows the id first\nlong_df = long_df[['id','country','year','type','count']]\nprint(long_df.head(6).to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\nid\ncountry\nyear\ntype\ncount\n\n\n\n\n0\nAfghanistan_1999\nAfghanistan\n1999\ncases\n745\n\n\n1\nAfghanistan_1999\nAfghanistan\n1999\npopulation\n19987071\n\n\n2\nAfghanistan_2000\nAfghanistan\n2000\ncases\n2666\n\n\n3\nAfghanistan_2000\nAfghanistan\n2000\npopulation\n20595360\n\n\n4\nBrazil_1999\nBrazil\n1999\ncases\n37737\n\n\n5\nBrazil_1999\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nCode\nreshaped_df = pd.pivot(long_df,\n  index='id',\n  columns='type',\n  values='count'\n)\nprint(reshaped_df.to_markdown())\n\n\n\n\nid\ncases\npopulation\n\n\n\n\nAfghanistan_1999\n745\n1.99871e+07\n\n\nAfghanistan_2000\n2666\n2.05954e+07\n\n\nBrazil_1999\n37737\n1.72006e+08\n\n\nBrazil_2000\n80488\n1.74505e+08\n\n\nChina_1999\n212258\n1.27292e+09\n\n\nChina_2000\n213766\n1.28043e+09"
+  },
+  {
+    "objectID": "w07-2/slides.html#the-other-direction-wide-to-long-pd.melt",
+    "href": "w07-2/slides.html#the-other-direction-wide-to-long-pd.melt",
+    "title": "Introduction to the Tidyverse",
+    "section": "The Other Direction (Wide-to-Long): pd.melt()",
+    "text": "The Other Direction (Wide-to-Long): pd.melt()\n\n\n\n\nCode\nwide_df = pd.read_csv(\"assets/wide_data.csv\")\nprint(wide_df.to_markdown())\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\n0\nAfghanistan\n1999\n745\n19987071\n\n\n1\nAfghanistan\n2000\n2666\n20595360\n\n\n2\nBrazil\n1999\n37737\n172006362\n\n\n3\nBrazil\n2000\n80488\n174504898\n\n\n4\nChina\n1999\n212258\n1272915272\n\n\n5\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\nCode\nlong_df = pd.melt(wide_df,\n  id_vars=['country','year'],\n  value_vars=['cases','population']\n)\nprint(long_df.head(6).to_markdown())\n\n\n\n\n\ncountry\nyear\nvariable\nvalue\n\n\n\n\n0\nAfghanistan\n1999\ncases\n745\n\n\n1\nAfghanistan\n2000\ncases\n2666\n\n\n2\nBrazil\n1999\ncases\n37737\n\n\n3\nBrazil\n2000\ncases\n80488\n\n\n4\nChina\n1999\ncases\n212258\n\n\n5\nChina\n2000\ncases\n213766"
+  },
+  {
+    "objectID": "w07-2/slides.html#wide-to-long-in-r-gather",
+    "href": "w07-2/slides.html#wide-to-long-in-r-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long in R: gather()",
+    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766\n\n\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-2: Tidyverse"
+  },
+  {
+    "objectID": "w08-2/index.html",
+    "href": "w08-2/index.html",
+    "title": "Using APIs in R",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w08-2/index.html#web-scraping",
+    "href": "w08-2/index.html#web-scraping",
+    "title": "Using APIs in R",
+    "section": "Web Scraping",
+    "text": "Web Scraping\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
+  },
+  {
+    "objectID": "w08-2/index.html#scraping-difficulty",
+    "href": "w08-2/index.html#scraping-difficulty",
+    "title": "Using APIs in R",
+    "section": "Scraping Difficulty",
+    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\n😊\nEasy\nData in HTML source\n“View Source”\n\n\n\n😐\nMedium\nData loaded dynamically via API\n“View Source”, find API call, scrape programmatically\n\n\n\n😳\nHard\nData loaded dynamically [internally] via web framework\nUse Selenium"
+  },
+  {
+    "objectID": "w08-2/index.html#what-does-an-api-do",
+    "href": "w08-2/index.html#what-does-an-api-do",
+    "title": "Using APIs in R",
+    "section": "What Does an API Do?",
+    "text": "What Does an API Do?\nExposes endpoints for use by developers, without requiring them to know the nuts and bolts of your pipeline/service:\n\n\n\n\n\n\n\n\nExample\nEndpoint\nNot Exposed\n\n\n\n\nElectrical outlet\nSocket\nInternal wiring\n\n\nWater fountain\nAerator\nWater pump\n\n\nCar\nPedals, Steering wheel, etc.\nEngine\n\n\n\n\nWhen I’m teaching programming to students in refugee camps who may have never used a computer before, I try to use the idea of “robots”: a program is a robot trained to sit there and wait for inputs, then process them in some way and spit out some output. APIs really capture this notion, honestly."
+  },
+  {
+    "objectID": "w08-2/index.html#example-math-api",
+    "href": "w08-2/index.html#example-math-api",
+    "title": "Using APIs in R",
+    "section": "Example: Math API",
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nimport requests\nresponse = requests.get(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nprint(response.json())\n\n\n{'operation': 'factor', 'expression': 'x^2-1', 'result': '(x - 1) (x + 1)'}"
+  },
+  {
+    "objectID": "w08-2/index.html#math-api-endpoints",
+    "href": "w08-2/index.html#math-api-endpoints",
+    "title": "Using APIs in R",
+    "section": "Math API Endpoints",
+    "text": "Math API Endpoints\n\n\n\nOperation\nAPI Endpoint\nResult\n\n\n\n\nSimplify\n/simplify/2^2+2(2)\n8\n\n\nFactor\n/factor/x^2 + 2x\nx (x + 2)\n\n\nDerive\n/derive/x^2+2x\n2 x + 2\n\n\nIntegrate\n/integrate/x^2+2x\n1/3 x^3 + x^2 + C\n\n\nFind 0’s\n/zeroes/x^2+2x\n[-2, 0]\n\n\nFind Tangent\n/tangent/2|x^3\n12 x + -16\n\n\nArea Under Curve\n/area/2:4|x^3\n60\n\n\nCosine\n/cos/pi\n-1\n\n\nSine\n/sin/0\n0\n\n\nTangent\n/tan/0\n0"
+  },
+  {
+    "objectID": "w08-2/index.html#authentication",
+    "href": "w08-2/index.html#authentication",
+    "title": "Using APIs in R",
+    "section": "Authentication",
+    "text": "Authentication\n\nUnlike the math API, most APIs do not allow requests to be made by anonymous requesters, and require authentication.\nFor example, you can access public GitHub repos anonymously, but to access private GitHub repos using GitHub’s API, you’ll need to authenticate that you are in fact the one making the request"
+  },
+  {
+    "objectID": "w08-2/index.html#scraping-html-with-httr2-and-xml2",
+    "href": "w08-2/index.html#scraping-html-with-httr2-and-xml2",
+    "title": "Using APIs in R",
+    "section": "Scraping HTML with httr2 and xml2",
+    "text": "Scraping HTML with httr2 and xml2\n`httr2` Documentation | `xml2` Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\n\n\n\nAttaching package: 'xml2'\n\n\nThe following object is masked from 'package:httr2':\n\n    url_parse\n\n\nCode\nhtml_obj &lt;- response_obj %&gt;% resp_body_html()\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
+  },
+  {
+    "objectID": "w08-2/index.html#navigating-html-with-xpath",
+    "href": "w08-2/index.html#navigating-html-with-xpath",
+    "title": "Using APIs in R",
+    "section": "Navigating HTML with XPath",
+    "text": "Navigating HTML with XPath\nXPath Cheatsheet\n\nNotice the last line on the previous slide:\n\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\nThe string passed to xml_find_all() is an XPath selector\n\n\n\nXPath selectors are used by many different libraries, including Selenium (which we’ll look at very soon) and jQuery (a standard extension to plain JavaScript allowing easy searching/manipulation of the DOM), so it’s good to learn it now!"
+  },
+  {
+    "objectID": "w08-2/index.html#xpath-i-selecting-elements",
+    "href": "w08-2/index.html#xpath-i-selecting-elements",
+    "title": "Using APIs in R",
+    "section": "XPath I: Selecting Elements",
+    "text": "XPath I: Selecting Elements\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//div' matches all elements &lt;div&gt; in the document:\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n'//div//img' matches &lt;img&gt; elements which are children of &lt;div&gt; elements:\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;"
+  },
+  {
+    "objectID": "w08-2/index.html#xpath-ii-filtering-by-attributes",
+    "href": "w08-2/index.html#xpath-ii-filtering-by-attributes",
+    "title": "Using APIs in R",
+    "section": "XPath II: Filtering by Attributes",
+    "text": "XPath II: Filtering by Attributes\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//p[id=\"page-content\"]' matches all &lt;p&gt; elements with id page-content1:\n&lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\nMatching classes is a bit trickier:\n'//img[contains(concat(\" \", normalize-space(@class), \" \"), \" footer-image \")]'\nmatches all &lt;img&gt; elements with page-content as one of their classes2\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;"
+  },
+  {
+    "objectID": "w08-2/index.html#example-math-api-1",
+    "href": "w08-2/index.html#example-math-api-1",
+    "title": "Using APIs in R",
+    "section": "Example: Math API",
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj %&gt;% resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}"
+  },
+  {
+    "objectID": "w08-2/index.html#footnotes",
+    "href": "w08-2/index.html#footnotes",
+    "title": "Using APIs in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nIn HTML, ids are required to be unique to particular elements (and elements cannot have more than one id), meaning that this should only return a single element, for valid HTML code (not followed by all webpages!). Also note the double-quotes after id=, which are required in XPath.↩︎\nYour intuition may be to just use '//img[@class=\"footer-image\"]'. Sadly, however, this will match only elements with footer-image as their only class. i.e., it will match &lt;img class=\"footer-image\"&gt; but not &lt;img class=\"footer-image another-class\"&gt;. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using Bootstrap, &lt;p class=\"p-5 m-3\"&gt;&lt;/p&gt; creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.↩︎"
+  },
+  {
+    "objectID": "w08-2/slides.html#web-scraping",
+    "href": "w08-2/slides.html#web-scraping",
+    "title": "Using APIs in R",
+    "section": "Web Scraping",
+    "text": "Web Scraping\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
+  },
+  {
+    "objectID": "w08-2/slides.html#scraping-difficulty",
+    "href": "w08-2/slides.html#scraping-difficulty",
+    "title": "Using APIs in R",
+    "section": "Scraping Difficulty",
+    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\n😊\nEasy\nData in HTML source\n“View Source”\n\n\n\n😐\nMedium\nData loaded dynamically via API\n“View Source”, find API call, scrape programmatically\n\n\n\n😳\nHard\nData loaded dynamically [internally] via web framework\nUse Selenium"
+  },
+  {
+    "objectID": "w08-2/slides.html#what-does-an-api-do",
+    "href": "w08-2/slides.html#what-does-an-api-do",
+    "title": "Using APIs in R",
+    "section": "What Does an API Do?",
+    "text": "What Does an API Do?\nExposes endpoints for use by developers, without requiring them to know the nuts and bolts of your pipeline/service:\n\n\n\n\n\n\n\n\nExample\nEndpoint\nNot Exposed\n\n\n\n\nElectrical outlet\nSocket\nInternal wiring\n\n\nWater fountain\nAerator\nWater pump\n\n\nCar\nPedals, Steering wheel, etc.\nEngine\n\n\n\n\nWhen I’m teaching programming to students in refugee camps who may have never used a computer before, I try to use the idea of “robots”: a program is a robot trained to sit there and wait for inputs, then process them in some way and spit out some output. APIs really capture this notion, honestly."
+  },
+  {
+    "objectID": "w08-2/slides.html#example-math-api",
+    "href": "w08-2/slides.html#example-math-api",
+    "title": "Using APIs in R",
+    "section": "Example: Math API",
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nimport requests\nresponse = requests.get(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nprint(response.json())\n\n\n{'operation': 'factor', 'expression': 'x^2-1', 'result': '(x - 1) (x + 1)'}"
+  },
+  {
+    "objectID": "w08-2/slides.html#math-api-endpoints",
+    "href": "w08-2/slides.html#math-api-endpoints",
+    "title": "Using APIs in R",
+    "section": "Math API Endpoints",
+    "text": "Math API Endpoints\n\n\n\nOperation\nAPI Endpoint\nResult\n\n\n\n\nSimplify\n/simplify/2^2+2(2)\n8\n\n\nFactor\n/factor/x^2 + 2x\nx (x + 2)\n\n\nDerive\n/derive/x^2+2x\n2 x + 2\n\n\nIntegrate\n/integrate/x^2+2x\n1/3 x^3 + x^2 + C\n\n\nFind 0’s\n/zeroes/x^2+2x\n[-2, 0]\n\n\nFind Tangent\n/tangent/2|x^3\n12 x + -16\n\n\nArea Under Curve\n/area/2:4|x^3\n60\n\n\nCosine\n/cos/pi\n-1\n\n\nSine\n/sin/0\n0\n\n\nTangent\n/tan/0\n0"
+  },
+  {
+    "objectID": "w08-2/slides.html#authentication",
+    "href": "w08-2/slides.html#authentication",
+    "title": "Using APIs in R",
+    "section": "Authentication",
+    "text": "Authentication\n\nUnlike the math API, most APIs do not allow requests to be made by anonymous requesters, and require authentication.\nFor example, you can access public GitHub repos anonymously, but to access private GitHub repos using GitHub’s API, you’ll need to authenticate that you are in fact the one making the request"
+  },
+  {
+    "objectID": "w08-2/slides.html#scraping-html-with-httr2-and-xml2",
+    "href": "w08-2/slides.html#scraping-html-with-httr2-and-xml2",
+    "title": "Using APIs in R",
+    "section": "Scraping HTML with httr2 and xml2",
+    "text": "Scraping HTML with httr2 and xml2\n`httr2` Documentation | `xml2` Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\nhtml_obj &lt;- response_obj %&gt;% resp_body_html()\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
+  },
+  {
+    "objectID": "w08-2/slides.html#navigating-html-with-xpath",
+    "href": "w08-2/slides.html#navigating-html-with-xpath",
+    "title": "Using APIs in R",
+    "section": "Navigating HTML with XPath",
+    "text": "Navigating HTML with XPath\nXPath Cheatsheet\n\nNotice the last line on the previous slide:\n\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\nThe string passed to xml_find_all() is an XPath selector\n\n\n\nXPath selectors are used by many different libraries, including Selenium (which we’ll look at very soon) and jQuery (a standard extension to plain JavaScript allowing easy searching/manipulation of the DOM), so it’s good to learn it now!"
+  },
+  {
+    "objectID": "w08-2/slides.html#xpath-i-selecting-elements",
+    "href": "w08-2/slides.html#xpath-i-selecting-elements",
+    "title": "Using APIs in R",
+    "section": "XPath I: Selecting Elements",
+    "text": "XPath I: Selecting Elements\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//div' matches all elements &lt;div&gt; in the document:\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n'//div//img' matches &lt;img&gt; elements which are children of &lt;div&gt; elements:\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;"
+  },
+  {
+    "objectID": "w08-2/slides.html#xpath-ii-filtering-by-attributes",
+    "href": "w08-2/slides.html#xpath-ii-filtering-by-attributes",
+    "title": "Using APIs in R",
+    "section": "XPath II: Filtering by Attributes",
+    "text": "XPath II: Filtering by Attributes\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//p[id=\"page-content\"]' matches all &lt;p&gt; elements with id page-content1:\n&lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\nMatching classes is a bit trickier:\n'//img[contains(concat(\" \", normalize-space(@class), \" \"), \" footer-image \")]'\nmatches all &lt;img&gt; elements with page-content as one of their classes2\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n\nIn HTML, ids are required to be unique to particular elements (and elements cannot have more than one id), meaning that this should only return a single element, for valid HTML code (not followed by all webpages!). Also note the double-quotes after id=, which are required in XPath.Your intuition may be to just use '//img[@class=\"footer-image\"]'. Sadly, however, this will match only elements with footer-image as their only class. i.e., it will match &lt;img class=\"footer-image\"&gt; but not &lt;img class=\"footer-image another-class\"&gt;. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using Bootstrap, &lt;p class=\"p-5 m-3\"&gt;&lt;/p&gt; creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels."
+  },
+  {
+    "objectID": "w08-2/slides.html#example-math-api-1",
+    "href": "w08-2/slides.html#example-math-api-1",
+    "title": "Using APIs in R",
+    "section": "Example: Math API",
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj %&gt;% resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}\n\n\n\n\n\n2024 DSAN Bootcamp W08-2: Using APIs in R"
+  },
+  {
+    "objectID": "w06-2/index.html",
+    "href": "w06-2/index.html",
+    "title": "Installing Quarto",
+    "section": "",
+    "text": "Open slides in new window →"
+  },
+  {
+    "objectID": "w06-2/index.html#quarto-projects-in-vscode",
+    "href": "w06-2/index.html#quarto-projects-in-vscode",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in VSCode",
+    "text": "Quarto Projects in VSCode\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "w06-2/index.html#quarto-projects-in-posit.cloud",
+    "href": "w06-2/index.html#quarto-projects-in-posit.cloud",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in Posit.Cloud",
+    "text": "Quarto Projects in Posit.Cloud\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "w06-2/slides.html#quarto-projects-in-vscode",
+    "href": "w06-2/slides.html#quarto-projects-in-vscode",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in VSCode",
+    "text": "Quarto Projects in VSCode\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books"
+  },
+  {
+    "objectID": "w06-2/slides.html#quarto-projects-in-posit.cloud",
+    "href": "w06-2/slides.html#quarto-projects-in-posit.cloud",
+    "title": "Installing Quarto",
+    "section": "Quarto Projects in Posit.Cloud",
+    "text": "Quarto Projects in Posit.Cloud\n\nQuarto Websites \nQuarto Manuscripts \nQuarto Books \n\n\n\n\n2024 DSAN Bootcamp W06-2: Installing Quarto"
+  }
+]

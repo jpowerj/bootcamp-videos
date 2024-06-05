@@ -2,7 +2,7 @@
 title: "2024 DSAN Bootcamp: Weeks 6-8"
 format: html
 listing:
-  contents: "w*.qmd"
+  contents: "*.qmd"
   type: table
 ---
 
