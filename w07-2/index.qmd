@@ -5,6 +5,7 @@ author: "Jeff Jacobs"
 institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
 format:
   revealjs:
+    tbl-cap-location: bottom
     echo: true
     code-fold: false
     slide-number: true
@@ -41,8 +42,192 @@ format:
 
 :::
 
+# Overview {data-stack-name="Tidy Data"}
+
+* What is "tidy" data? (Next slide)
+* Tidyverse = "universe" of add-on libraries for R, which **assume** tidy data so as to **streamline** data cleaning/analysis!
+
+## Tidy Data {.smaller .crunch-title .crunch-ul .crunch-ol .crunch-p .crunch-hr .crunch-callout}
+
+::: {.columns}
+::: {.column width="50%"}
+
+* Every **row** represents an <span class="cb1">**observation**</span>
+* Every **column** represents an <span class="cb2">**attribute**</span>
+* Every **cell** contains a <span class="cb3">**value**</span> [$V_{{\color{#E69F00}i}{\color{#56B4E9}j}}$]{.cb3} = attribute [$j$]{.cb2} for observation [$i$]{.cb1}
+
+:::
+::: {.column width="50%"}
+
+| | [Var A]{.cb2} | [Var B]{.cb2} |
+| - |:-:|:-:|
+| [**Obs 1**]{.cb1} | [Val 1A]{.cb3} | [Val 1B]{.cb3} |
+| [**Obs 2**]{.cb1} | [Val 2A]{.cb3} | [Val 2B]{.cb3} |
+
+: A tidy dataset, with observation IDs in [orange]{.cb1}, column names in [blue]{.cb2}, and values in [green]{.cb3} {#tbl-tidy}
+
+:::
+:::
+
+<hr>
+
+::: {.columns}
+::: {.column width="50%"}
+
+<center>
+<span class="badge text-bg-light">✅ Tidy!</span>
+</center>
+
+<!-- | id | [name]{.cb2} | [flights]{.cb2} |
+|:-:| - | -:|
+| [**DCA**]{.cb1} | [Reagan National]{.cb3} | [11.55]{.cb3} |
+| [**BWI**]{.cb1} | [Baltimore-Wash Int'l]{.cb3} | [11.15]{.cb3} |
+| [**IAD**]{.cb1} | [Dulles International]{.cb3} | [10.27]{.cb3} | -->
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th>id</th>
+  <th><span class='cb2'>name</span></th>
+  <th><span class='cb2'>flights</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center"><b><span class='cb1'>DCA</span></b></td>
+  <td><span class='cb3'>Reagan National</span></td>
+  <td style="border: 4px solid green !important;"><span class='cb3'>11.55</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>BWI</span></b></td>
+  <td><span class='cb3'>Baltimore-Wash Int'l</span></td>
+  <td><span class='cb3'>11.15</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>IAD</span></b></td>
+  <td><span class='cb3'>Dulles International</span></td>
+  <td><span class='cb3'>10.27</span></td>
+</tr>
+</tbody>
+</table>
+```
+
+::: {.callout-note icon="false" title="<i class='bi bi-lightbulb'></i> Tidy Data Check"}
+
+1. Choose a row, take note of its ID
+2. Go through values in row, asking yourself: **is this the value of some attribute of [observation]?**
+
+:::
+
+:::
+::: {.column width="50%"}
+
+<center>
+<span class="badge text-bg-light">❌ Not Tidy!</span>
+</center>
+
+<!-- | id | var | value |
+| - | - | - |
+| `DCA` | name | Reagan National |
+| `DCA` | flights | 11.55 |
+| `BWI` | name | Baltimore-Wash. Int'l |
+| `BWI` | flights | 11.15 |
+| `IAD` | name | Dulles International |
+| `IAD` | flights | 10.27 | -->
+
+```{=html}
+<table>
+<thead>
+<tr>
+  <th>id</th>
+  <th>var</th>
+  <th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="center"><b><span class='cb1'>DCA</span></b></td>
+  <td style="border: 4px solid red !important;"><span class='cb2'>name</span></td>
+  <td><span class='cb3'>Reagan National</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>DCA</span></b></td>
+  <td><span class='cb2'>flights</span></td>
+  <td><span class='cb3'>11.55</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>BWI</span></b></td>
+  <td><span class='cb2'>name</span></td>
+  <td><span class='cb3'>Baltimore-Wash Int'l</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>BWI</span></b></td>
+  <td><span class='cb2'>flights</span></td>
+  <td><span class='cb3'>11.15</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>IAD</span></b></td>
+  <td><span class='cb2'>name</span></td>
+  <td><span class='cb3'>Dulles International</span></td>
+</tr>
+<tr>
+  <td><b><span class='cb1'>IAD</span></b></td>
+  <td><span class='cb2'>flights</span></td>
+  <td><span class='cb3'>10.27</span></td>
+</tr>
+</tbody>
+</table>
+```
+
+:::
+:::
+
+::: {.notes}
+
+**Above:** <span style='border: 4px solid green;'>11.55</span> is the **value** of an **attribute** of DCA (number of flights in 2022, in millions); **Right:** <span style='border: 4px solid red;'>name</span> is **not** a property of DCA
+
+:::
+
+## Observation IDs Can Be Tuples!
+
+::: {#fig-tidy-table1}
+
+```{r}
+#| label: tidy-table1
+#| classes: some-right-margin
+library(tidyverse)
+table1
+```
+
+An example **panel** dataset in **tidy** format
+:::
+
+::: {#fig-tidy-table2}
+
+```{r}
+#| label: tidy-table2
+#| classes: some-left-margin
+table2 |> head(6)
+```
+
+An example **panel** dataset in **non-tidy** format
+:::
+:::
+
+## So... How Do We Get Our Data Into Tidy Form?
+
 
 ## Tidyverse {.smaller}
+
+::: {.hidden}
+
+```{r}
+#| label: r-source-globals
+source("../_globals.r")
+```
+
+:::
 
 * Think of data science tasks as involving **pipelines**:
 
@@ -88,6 +273,517 @@ digraph G {
 raw_data |> select() |> mutate() |> visualize()
 raw_data |> filter() |> summarize() |> check_result()
 ```
+
+# Tidy
+
+| | | |
+| - | - | - | - |
+| [![](images/dplyr.png){width='100'}](https://dplyr.tidyverse.org){target='_blank'}<br>dplyr | [![](images/ggplot2.png){width='100'}](https://ggplot2.tidyverse.org){target='_blank'}<br>ggplot2 | 3 | 4 |
+| 5 | 6 | 7 | 8 |
+
+# The Tidyverse {.title-08 data-stack-name="The Tidyverse"}
+
+::: columns
+::: {.column width="50%"}
+
+[tidyverse.org <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://www.tidyverse.org/){target='_blank'}
+
+![](images/tidyverse_half.jpeg)
+
+:::
+::: {.column width="50%"}
+
+* <a href="https://dplyr.tidyverse.org/" target="_blank">`dplyr.tidyverse.org` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i></a>
+* <a href="https://ggplot2.tidyverse.org/" target="_blank">`ggplot2.tidyverse.org` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i></a>
+* <a href="https://forcats.tidyverse.org/" target="_blank">forcats <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i></a>
+* <a href="https://tibble.tidyverse.org/" target="_blank">tibble <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i></a>
+* <a href="https://readr.tidyverse.org/" target="_blank">readr <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i></a>
+* <a href="https://stringr.tidyverse.org/" target="_blank">`stringr` <i class='bi bi-box-arrow-up-right'></i></a>
+* <a href="https://tidyr.tidyverse.org/" target="_blank">`tidyr` <i class='bi bi-box-arrow-up-right'></i></a>
+* <a href="https://purrr.tidyverse.org/" target="_blank">`purrr` <i class='bi bi-box-arrow-up-right'></i></a>
+
+:::
+:::
+
+## `tibble` {.smaller}
+
+<a href="https://tibble.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tibbles.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf" target="_blank">Cheatsheet</a>
+
+::: {layout="[30,70]"}
+
+::: {#tibble-backwards}
+
+* Replaces `R`'s built-in `data.frame` objects, but retains syntax for backwards compatibility:
+
+```{r}
+#| label: tibble-backwards
+#| echo: true
+library(tibble)
+data <- c(3.4,1.1,9.6)
+labels <- c(0,1,0)
+supervised_df <- tibble(x=data, y=labels)
+supervised_df
+```
+
+:::
+
+::: {#tribble}
+
+* Provides a surprisingly useful function: `tribble()` (tibble defined row-by-row)
+
+```{r}
+#| label: tribble-example
+#| echo: true
+library(tibble)
+dsan_df <- tibble::tribble(
+    ~code, ~topic, ~credits,
+    "dsan5000", "Data Science", 3,
+    "dsan5100", "Probabilistic Modeling", 3
+)
+dsan_df
+```
+
+:::
+
+:::
+
+## `dplyr`
+
+<a href="https://dplyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" target="_blank">Cheatsheet</a>
+
+::: columns
+::: {.column width="45%"}
+
+**Grammar** of data manipulation (think **verbs**):
+
+* `filter()`
+* `select()`
+* `arrange()`
+* `mutate()`
+* `summarize()`
+
+:::
+::: {.column .smallertext width="55%"}
+
+`filter()`:
+
+```{r}
+#| label: dplyr-filter
+#| echo: true
+#| code-fold: show
+table1 |> filter(year == 2000)
+```
+
+:::
+:::
+
+## {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+`select()`:
+
+```{r}
+#| label: dplyr-select
+#| echo: true
+#| code-fold: show
+table1 |> select(country)
+```
+
+:::
+::: {.column width="50%"}
+
+`arrange()`:
+
+```{r}
+#| label: dplyr-arrange
+#| echo: true
+#| code-fold: show
+table1 |> arrange(population)
+```
+
+:::
+:::
+
+## {.smaller}
+
+`mutate()`:
+
+```{r}
+#| label: dplyr-mutate
+#| echo: true
+#| code-fold: show
+table1 |> mutate(newvar = 300)
+```
+
+## {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+`summarize()`:
+
+```{r}
+#| label: dplyr-summarize
+#| echo: true
+#| code-fold: show
+table1 |> 
+  summarize(
+    avg_cases = mean(cases),
+    avg_pop = mean(population)
+  )
+```
+
+:::
+::: {.column width="50%"}
+
+`summarize()` with **grouping**:
+
+```{r}
+#| label: dplyr-summarize-group
+#| echo: true
+#| code-fold: show
+table1 |>
+  group_by(country) |>
+  summarize(
+    avg_cases = mean(cases),
+    avg_pop = mean(population)
+  )
+```
+
+:::
+:::
+
+## The Rest of the Tidyverse
+
+* `forcats`
+* `readr`
+* `stringr`
+* `tidyr`
+* `purrr`
+* `lubridate`*
+
+## `forcats`
+
+<a href="https://forcats.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/factors.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf" target="_blank">Cheatsheet</a>
+
+* Utilities for working with **factor** variables (`R`'s data structure for **categorical variables**)
+* **factors** = **data** + **levels**:
+
+::: {layout-ncol=2}
+
+```{r}
+#| label: forcats-example
+#| echo: true
+#| code-fold: show
+month_levels <- c(
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec"
+)
+d <- c("Jan","Jan","Feb","Dec")
+print(d)
+```
+
+```{r}
+#| label: forcats-parse-factor
+#| echo: true
+#| code-fold: show
+dataf <- parse_factor(
+    d,
+    levels=month_levels
+)
+print(dataf)
+```
+
+:::
+
+## Factors for Ordering Plot Elements {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| label: relig-data
+relig_summary <- gss_cat %>%
+  group_by(relig) %>%
+  summarise(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
+relig_labs <- labs(
+  x = "TV Hours / Day",
+  y = "Religion"
+)
+```
+
+Without `forcats`:
+
+```{r}
+#| label: relig-plot
+#| fig-height: 7
+#| echo: true
+#| code-fold: show
+relig_summary |>
+  ggplot(aes(tvhours, relig)) +
+  geom_point(size=g_pointsize) +
+  geom_segment(aes(yend = relig, x=0, xend = tvhours)) +
+  dsan_theme("half") +
+  relig_labs
+```
+:::
+::: {.column width="50%"}
+
+With `forcats`:
+
+```{r}
+#| label: relig-plot-factors
+#| fig-height: 7
+#| echo: true
+#| code-fold: show
+relig_summary |>
+  mutate(relig = fct_reorder(relig, tvhours)) |>
+  ggplot(aes(x=tvhours, y=relig)) +
+    geom_point(size=g_pointsize) +
+    geom_segment(aes(yend = relig, x=0, xend = tvhours)) +
+    dsan_theme("half") +
+    relig_labs
+```
+:::
+:::
+
+## Sorting Barplots with `fct_infreq()`
+
+```{r}
+#| label: sorting-barplots-labs
+barplot_labs <- labs(
+  title = "Respondents by Marital Status",
+  x = "Marital Status",
+  y = "Count"
+)
+```
+
+```{r}
+#| label: sorting-barplots
+#| echo: true
+#| code-fold: show
+gss_cat |>
+  mutate(marital = marital |> fct_infreq() |> fct_rev()) |>
+  ggplot(aes(marital)) + geom_bar() + barplot_labs +
+  dsan_theme("full")
+```
+
+## Recoding/Combining Categories
+
+::: columns
+::: {.column width="50%"}
+
+Automatically combining using `fct_lump()`:
+
+```{r}
+#| label: fct-lump
+#| echo: true
+#| code-fold: show
+gss_cat |>
+    mutate(relig = fct_lump(relig)) |>
+    count(relig)
+```
+
+:::
+::: {.column width="50%"}
+
+Manually Combining using `fct_recode()`:
+
+```{r}
+#| label: fct-recode
+#| echo: true
+#| code-fold: true
+gss_cat |>
+    mutate(partyid = fct_recode(partyid,
+    "Republican"  = "Strong republican",
+    "Republican"  = "Not str republican",
+    "Independent" = "Ind,near rep",
+    "Independent" = "Ind,near dem",
+    "Democrat"    = "Not str democrat",
+    "Democrat"    = "Strong democrat",
+    "Other"       = "No answer",
+    "Other"       = "Don't know",
+    "Other"       = "Other party"
+  )) |>
+  count(partyid)
+```
+
+:::
+:::
+
+## `readr` {.shift-footnotes .crunch-title .crunch-ul .smaller}
+
+<a href="https://readr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf" target="_blank">Cheatsheet</a>
+
+* Two key functions: `read_csv()`, `write_csv()`[^delim]
+  
+  ::: {.callout-warning title="Warning! `read_csv()` vs. `read.csv()`"}
+Note that these are **not the same** as `R`'s built-in `read.csv()` and `write.csv()`! The built-in `R` functions will produce a plain `data.frame` object, not a `tibble`
+:::
+
+::: {layout-ncol=2}
+
+* Can handle URLs as well!
+* **Share data+code** in seconds by using in combination with GitHub Gist
+* (No more `read_csv()` path issues either...)
+* [Gist dataset &rarr;](https://gist.github.com/jpowerj/fecd437b96d0954893de727383f2eaf2){target="_blank"}
+
+```{r}
+#| label: read-csv-gist
+gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv")
+gdp_df |> head(6)
+```
+
+:::
+
+[^delim]: Plus a bonus `read_delim()` if `read_csv()` fails
+
+## `purrr`: Functional Programming {.smaller}
+
+<a href="https://purrr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf" target="_blank">Cheatsheet</a> | <a href="https://jennybc.github.io/purrr-tutorial/index.html" target="_blank">Tutorials, with Applications</a>
+
+::: columns
+::: {.column width="50%"}
+
+Provides an **anonymous function** operator `~`, arguments get named `.x`, `.y`:
+
+```{r}
+#| label: purrr-map
+#| echo: true
+#| code-fold: show
+my_points <- c("Midterm"=18, "Final"=300)
+total_points <- c("Midterm"=20, "Final"=400)
+(avg_score <- map2(my_points, total_points,
+  ~ list(frac=.x / .y, pct=(.x/.y)*100)))
+```
+
+:::
+::: {.column width="50%"}
+
+Along with helpful functions for transforming the output
+
+```{r}
+#| label: purrr-flatten
+#| echo: true
+#| code-fold: show
+list_flatten(avg_score)
+```
+
+```{r}
+#| label: purrr-every
+#| echo: true
+#| code-fold: show
+every(avg_score, ~ .x$frac > 0.5)
+```
+
+:::
+:::
+
+## `lubridate`*
+
+<a href="https://lubridate.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/dates-and-times.html" target="_blank">Overview</a> | <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank">Cheatsheet</a>
+
+::: {.callout-caution title="Caution: Importing `lubridate`"}
+Note that `lubridate` **does not** get loaded with the other packages in the `tidyverse` when you call `library(tidyverse)`. It needs to be imported explicitly:
+
+```r
+library(tidyverse)
+library(lubridate)
+```
+
+:::
+
+# Cleaning Text Data {data-stack-name="Text Data"}
+
+## One of the Scariest Papers of All Time {.smaller .crunch-title}
+
+```{=html}
+<style>
+#fig-denny-spirling .caption {
+    text-align: left !important;
+}
+#fig-denny-spirling figcaption {
+    text-align: left !important;
+}
+</style>
+```
+
+*Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It* [@denny_text_2018] ([PDF Link](https://www.cambridge.org/core/journals/political-analysis/article/abs/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E){target="_blank"})
+
+::: {layout-ncol=2}
+
+::: {#fig-denny-spirling}
+
+<img src="images/denny_spirling.gif" width="200" align="center" style="margin-top: 0px !important; margin-bottom: 0px !important;"></img>
+
+A plot where $x$-axis represents UK party manifestos (arranged on left-right ideology dimension, $y$-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was **placed incorrectly** on the ideological dimension when that preprocessing combination was used.
+:::
+
+![An ancient hieroglyph](images/missingno.svg){#fig-missingno fig-align="center" width="200"}
+
+:::
+
+## The Secret Behind All Text Analysis {.smaller .crunch-title .crunch-figures}
+
+::: {layout="[[45],[45,10,45]]" layout-valign="center"}
+
+::: {#fig-corpus}
+::: {layout-ncol=3 layout-valign="center"}
+
+![](images/text_as_data.jpeg){fig-align="center"}
+
+![](images/finnegans_wake_morecrop.jpeg){fig-align="center" width="390"}
+
+![](images/tidytext.jpeg){fig-align="center"}
+
+:::
+
+Excerpts from two data science textbooks, plus another book
+:::
+
+::: {#fig-dtm}
+
+<i class="bi bi-arrow-down" style="padding-top: 10px !important;"></i>
+
+
+| doc_id | `text` | `texts` | `Kékkek` | `voice` |
+| - | - | - | - | - | - |
+| 0 | 0 | 6 | 0 | 1 |
+| 1 | 0 | 0 | 3 | 1 |
+| 2 | 6 | 0 | 0 | 0 |
+
+The **Document-Term Matrix** (**DTM**)
+:::
+
+::: {#cleaning-arrow}
+
+<center>
+<i class="bi bi-arrow-right ps-3"></i>
+</center>
+
+:::
+
+::: {#fig-cleaned-dtm}
+
+<i class="" style="padding-top: 10px !important;">&nbsp;</i>
+
+| doc_id | `text` | `kekkek` | `voice` |
+| - | - | - | - | - | - |
+| 0 | 6 | 0 | 1 |
+| 1 | 0 | 3 | 1 |
+| 2 | 6 | 0 | 0 |
+
+The **cleaned** DTM, after **lowercasing**, **lemmatization**, and **unicode standardization**
+:::
+
+:::
 
 ## *Select*ing Columns {.smaller}
 
@@ -251,82 +947,6 @@ In data-cleaning jargon, this dataset is **wide** (one row per obs; usually **ti
 #| label: r-wide-data
 table1 |> write_csv("assets/wide_data.csv")
 table1 |> head()
-```
-
-:::
-:::
-
-## Reshaping Long-to-Wide in Python: `pd.pivot()` {.smaller}
-
-::: columns
-::: {.column width="45%"}
-
-```{python}
-#| label: py-load-long-data
-#| echo: false
-#| output: false
-long_df = pd.read_csv("assets/long_data.csv")
-```
-
-Create unique ID for **wide** version:
-
-```{python}
-#| label: py-create-wide-id
-#| code-fold: show
-#| output: asis
-#| fig-align: center
-long_df['id'] = long_df['country'] + '_' + long_df['year'].apply(str)
-# Reorder the columns, so it shows the id first
-long_df = long_df[['id','country','year','type','count']]
-print(long_df.head(6).to_markdown())
-```
-
-:::
-::: {.column width="55%"}
-
-```{python}
-#| label: py-long-to-wide
-#| code-fold: show
-#| output: asis
-#| fig-align: center
-reshaped_df = pd.pivot(long_df,
-  index='id',
-  columns='type',
-  values='count'
-)
-print(reshaped_df.to_markdown())
-```
-
-:::
-:::
-
-## The Other Direction (Wide-to-Long): `pd.melt()` {.smaller}
-
-::: columns
-::: {.column width="40%"}
-
-```{python}
-#| label: py-read-wide
-#| code-fold: show
-#| output: asis
-#| fig-align: center
-wide_df = pd.read_csv("assets/wide_data.csv")
-print(wide_df.to_markdown())
-```
-
-:::
-::: {.column width="60%"}
-
-```{python}
-#| label: py-wide-to-long
-#| code-fold: show
-#| output: asis
-#| fig-align: center
-long_df = pd.melt(wide_df,
-  id_vars=['country','year'],
-  value_vars=['cases','population']
-)
-print(long_df.head(6).to_markdown())
 ```
 
 :::

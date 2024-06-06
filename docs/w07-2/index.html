@@ -189,16 +189,42 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link active" data-scroll-target="#tidyverse">Tidyverse</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data">Tidy Data</a></li>
+  <li><a href="#observation-ids-can-be-tuples" id="toc-observation-ids-can-be-tuples" class="nav-link" data-scroll-target="#observation-ids-can-be-tuples">Observation IDs Can Be Tuples!</a></li>
+  <li><a href="#so-how-do-we-get-our-data-into-tidy-form" id="toc-so-how-do-we-get-our-data-into-tidy-form" class="nav-link" data-scroll-target="#so-how-do-we-get-our-data-into-tidy-form">So… How Do We Get Our Data Into Tidy Form?</a></li>
+  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse">Tidyverse</a></li>
+  </ul></li>
+  <li><a href="#tidy" id="toc-tidy" class="nav-link" data-scroll-target="#tidy">Tidy</a></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse">The Tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble"><code>tibble</code></a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr"><code>dplyr</code></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#the-rest-of-the-tidyverse" id="toc-the-rest-of-the-tidyverse" class="nav-link" data-scroll-target="#the-rest-of-the-tidyverse">The Rest of the Tidyverse</a></li>
+  <li><a href="#forcats" id="toc-forcats" class="nav-link" data-scroll-target="#forcats"><code>forcats</code></a></li>
+  <li><a href="#factors-for-ordering-plot-elements" id="toc-factors-for-ordering-plot-elements" class="nav-link" data-scroll-target="#factors-for-ordering-plot-elements">Factors for Ordering Plot Elements</a></li>
+  <li><a href="#sorting-barplots-with-fct_infreq" id="toc-sorting-barplots-with-fct_infreq" class="nav-link" data-scroll-target="#sorting-barplots-with-fct_infreq">Sorting Barplots with <code>fct_infreq()</code></a></li>
+  <li><a href="#recodingcombining-categories" id="toc-recodingcombining-categories" class="nav-link" data-scroll-target="#recodingcombining-categories">Recoding/Combining Categories</a></li>
+  <li><a href="#readr" id="toc-readr" class="nav-link" data-scroll-target="#readr"><code>readr</code></a></li>
+  <li><a href="#purrr-functional-programming" id="toc-purrr-functional-programming" class="nav-link" data-scroll-target="#purrr-functional-programming"><code>purrr</code>: Functional Programming</a></li>
+  <li><a href="#lubridate" id="toc-lubridate" class="nav-link" data-scroll-target="#lubridate"><code>lubridate</code>*</a></li>
+  </ul></li>
+  <li><a href="#cleaning-text-data" id="toc-cleaning-text-data" class="nav-link" data-scroll-target="#cleaning-text-data">Cleaning Text Data</a>
+  <ul class="collapse">
+  <li><a href="#one-of-the-scariest-papers-of-all-time" id="toc-one-of-the-scariest-papers-of-all-time" class="nav-link" data-scroll-target="#one-of-the-scariest-papers-of-all-time">One of the Scariest Papers of All Time</a></li>
+  <li><a href="#the-secret-behind-all-text-analysis" id="toc-the-secret-behind-all-text-analysis" class="nav-link" data-scroll-target="#the-secret-behind-all-text-analysis">The Secret Behind All Text Analysis</a></li>
   <li><a href="#selecting-columns" id="toc-selecting-columns" class="nav-link" data-scroll-target="#selecting-columns"><em>Select</em>ing Columns</a></li>
   <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows"><em>Filter</em>ing Rows</a></li>
   <li><a href="#merging-data" id="toc-merging-data" class="nav-link" data-scroll-target="#merging-data">Merging Data</a></li>
   <li><a href="#selectingfiltering-in-action" id="toc-selectingfiltering-in-action" class="nav-link" data-scroll-target="#selectingfiltering-in-action">Selecting/Filtering in Action</a></li>
   <li><a href="#recommended-language-python" id="toc-recommended-language-python" class="nav-link" data-scroll-target="#recommended-language-python">Recommended Language: Python</a></li>
   <li><a href="#reshaping-data" id="toc-reshaping-data" class="nav-link" data-scroll-target="#reshaping-data">Reshaping Data</a></li>
-  <li><a href="#reshaping-long-to-wide-in-python-pd.pivot" id="toc-reshaping-long-to-wide-in-python-pd.pivot" class="nav-link" data-scroll-target="#reshaping-long-to-wide-in-python-pd.pivot">Reshaping Long-to-Wide in Python: <code>pd.pivot()</code></a></li>
-  <li><a href="#the-other-direction-wide-to-long-pd.melt" id="toc-the-other-direction-wide-to-long-pd.melt" class="nav-link" data-scroll-target="#the-other-direction-wide-to-long-pd.melt">The Other Direction (Wide-to-Long): <code>pd.melt()</code></a></li>
   <li><a href="#wide-to-long-in-r-gather" id="toc-wide-to-long-in-r-gather" class="nav-link" data-scroll-target="#wide-to-long-in-r-gather">Wide-to-Long in R: <code>gather()</code></a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
@@ -241,8 +267,337 @@ window.Quarto = {
 <center>
 <a class="h2" href="./slides.html" target="_blank">Open slides in new window →</a>
 </center>
+<section id="overview" class="level1" data-stack-name="Tidy Data">
+<h1 data-stack-name="Tidy Data">Overview</h1>
+<ul>
+<li>What is “tidy” data? (Next slide)</li>
+<li>Tidyverse = “universe” of add-on libraries for R, which <strong>assume</strong> tidy data so as to <strong>streamline</strong> data cleaning/analysis!</li>
+</ul>
+<section id="tidy-data" class="level2 smaller crunch-title crunch-ul crunch-ol crunch-p crunch-hr crunch-callout">
+<h2 class="smaller crunch-title crunch-ul crunch-ol crunch-p crunch-hr crunch-callout anchored" data-anchor-id="tidy-data">Tidy Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Every <strong>row</strong> represents an <span class="cb1"><strong>observation</strong></span></li>
+<li>Every <strong>column</strong> represents an <span class="cb2"><strong>attribute</strong></span></li>
+<li>Every <strong>cell</strong> contains a <span class="cb3"><strong>value</strong></span> <span class="cb3"><span class="math inline">\(V_{{\color{#E69F00}i}{\color{#56B4E9}j}}\)</span></span> = attribute <span class="cb2"><span class="math inline">\(j\)</span></span> for observation <span class="cb1"><span class="math inline">\(i\)</span></span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div id="tbl-tidy" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: A tidy dataset, with observation IDs in <span class="cb1">orange</span>, column names in <span class="cb2">blue</span>, and values in <span class="cb3">green</span>
+</figcaption>
+<div aria-describedby="tbl-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;"><span class="cb2">Var A</span></th>
+<th style="text-align: center;"><span class="cb2">Var B</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="cb1"><strong>Obs 1</strong></span></td>
+<td style="text-align: center;"><span class="cb3">Val 1A</span></td>
+<td style="text-align: center;"><span class="cb3">Val 1B</span></td>
+</tr>
+<tr class="even">
+<td><span class="cb1"><strong>Obs 2</strong></span></td>
+<td style="text-align: center;"><span class="cb3">Val 2A</span></td>
+<td style="text-align: center;"><span class="cb3">Val 2B</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<span class="badge text-bg-light">✅ Tidy!</span>
+</center>
+<!-- | id | [name]{.cb2} | [flights]{.cb2} |
+|:-:| - | -:|
+| [**DCA**]{.cb1} | [Reagan National]{.cb3} | [11.55]{.cb3} |
+| [**BWI**]{.cb1} | [Baltimore-Wash Int'l]{.cb3} | [11.15]{.cb3} |
+| [**IAD**]{.cb1} | [Dulles International]{.cb3} | [10.27]{.cb3} | -->
+<div>
+<table data-quarto-postprocess="true" class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th"><span class="cb2">name</span></th>
+<th data-quarto-table-cell-role="th"><span class="cb2">flights</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="cb1">DCA</span></strong></td>
+<td><span class="cb3">Reagan National</span></td>
+<td style="border: 4px solid green !important"><span class="cb3">11.55</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="cb1">BWI</span></strong></td>
+<td><span class="cb3">Baltimore-Wash Int'l</span></td>
+<td><span class="cb3">11.15</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="cb1">IAD</span></strong></td>
+<td><span class="cb3">Dulles International</span></td>
+<td><span class="cb3">10.27</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="<i class='bi bi-lightbulb'></i> Tidy Data Check">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<i class="bi bi-lightbulb"></i> Tidy Data Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Choose a row, take note of its ID</li>
+<li>Go through values in row, asking yourself: <strong>is this the value of some attribute of [observation]?</strong></li>
+</ol>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<center>
+<span class="badge text-bg-light">❌ Not Tidy!</span>
+</center>
+<!-- | id | var | value |
+| - | - | - |
+| `DCA` | name | Reagan National |
+| `DCA` | flights | 11.55 |
+| `BWI` | name | Baltimore-Wash. Int'l |
+| `BWI` | flights | 11.15 |
+| `IAD` | name | Dulles International |
+| `IAD` | flights | 10.27 | -->
+<div>
+<table data-quarto-postprocess="true" class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">var</th>
+<th data-quarto-table-cell-role="th">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="cb1">DCA</span></strong></td>
+<td style="border: 4px solid red !important"><span class="cb2">name</span></td>
+<td><span class="cb3">Reagan National</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="cb1">DCA</span></strong></td>
+<td><span class="cb2">flights</span></td>
+<td><span class="cb3">11.55</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="cb1">BWI</span></strong></td>
+<td><span class="cb2">name</span></td>
+<td><span class="cb3">Baltimore-Wash Int'l</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="cb1">BWI</span></strong></td>
+<td><span class="cb2">flights</span></td>
+<td><span class="cb3">11.15</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="cb1">IAD</span></strong></td>
+<td><span class="cb2">name</span></td>
+<td><span class="cb3">Dulles International</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="cb1">IAD</span></strong></td>
+<td><span class="cb2">flights</span></td>
+<td><span class="cb3">10.27</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="notes">
+<p><strong>Above:</strong> <span style="border: 4px solid green;">11.55</span> is the <strong>value</strong> of an <strong>attribute</strong> of DCA (number of flights in 2022, in millions); <strong>Right:</strong> <span style="border: 4px solid red;">name</span> is <strong>not</strong> a property of DCA</p>
+</div>
+</section>
+<section id="observation-ids-can-be-tuples" class="level2">
+<h2 class="anchored" data-anchor-id="observation-ids-can-be-tuples">Observation IDs Can Be Tuples!</h2>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-tidy-table1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tidy-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell some-right-margin">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tidy-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: An example <strong>panel</strong> dataset in <strong>tidy</strong> format
+</figcaption>
+</figure>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-tidy-table2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tidy-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell some-left-margin">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">2666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">cases</td>
+<td style="text-align: right;">37737</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">population</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tidy-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: An example <strong>panel</strong> dataset in <strong>non-tidy</strong> format
+</figcaption>
+</figure>
+</div>
+<p>:::</p>
+</section>
+<section id="so-how-do-we-get-our-data-into-tidy-form" class="level2">
+<h2 class="anchored" data-anchor-id="so-how-do-we-get-our-data-into-tidy-form">So… How Do We Get Our Data Into Tidy Form?</h2>
+</section>
 <section id="tidyverse" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="tidyverse">Tidyverse</h2>
+<div class="hidden">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../_globals.r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
 <ul>
 <li>Think of data science tasks as involving <strong>pipelines</strong>:</li>
 </ul>
@@ -379,33 +734,1061 @@ window.Quarto = {
 <ul>
 <li>Tidyverse lets you <strong>pipe output</strong> from one transformation as the <strong>input</strong> to another:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span> <span class="fu">select</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>() <span class="sc">|&gt;</span> <span class="fu">visualize</span>()</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span> <span class="fu">filter</span>() <span class="sc">|&gt;</span> <span class="fu">summarize</span>() <span class="sc">|&gt;</span> <span class="fu">check_result</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span> <span class="fu">select</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>() <span class="sc">|&gt;</span> <span class="fu">visualize</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span> <span class="fu">filter</span>() <span class="sc">|&gt;</span> <span class="fu">summarize</span>() <span class="sc">|&gt;</span> <span class="fu">check_result</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="tidy" class="level1">
+<h1>Tidy</h1>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><a href="https://dplyr.tidyverse.org" target="_blank"><img src="images/dplyr.png" class="img-fluid" width="100"></a><br>dplyr</td>
+<td><a href="https://ggplot2.tidyverse.org" target="_blank"><img src="images/ggplot2.png" class="img-fluid" width="100"></a><br>ggplot2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-tidyverse" class="level1 title-08" data-stack-name="The Tidyverse">
+<h1 class="title-08" data-stack-name="The Tidyverse">The Tidyverse</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://www.tidyverse.org/" target="_blank">tidyverse.org <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></p>
+<p><img src="images/tidyverse_half.jpeg" class="img-fluid"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><a href="https://dplyr.tidyverse.org/" target="_blank"><code>dplyr.tidyverse.org</code> <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></li>
+<li><a href="https://ggplot2.tidyverse.org/" target="_blank"><code>ggplot2.tidyverse.org</code> <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></li>
+<li><a href="https://forcats.tidyverse.org/" target="_blank">forcats <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></li>
+<li><a href="https://tibble.tidyverse.org/" target="_blank">tibble <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></li>
+<li><a href="https://readr.tidyverse.org/" target="_blank">readr <i class="bi bi-box-arrow-up-right" style="font-size: 2rem;"></i></a></li>
+<li><a href="https://stringr.tidyverse.org/" target="_blank"><code>stringr</code> <i class="bi bi-box-arrow-up-right"></i></a></li>
+<li><a href="https://tidyr.tidyverse.org/" target="_blank"><code>tidyr</code> <i class="bi bi-box-arrow-up-right"></i></a></li>
+<li><a href="https://purrr.tidyverse.org/" target="_blank"><code>purrr</code> <i class="bi bi-box-arrow-up-right"></i></a></li>
+</ul>
+</div>
+</div>
+<section id="tibble" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="tibble"><code>tibble</code></h2>
+<p><a href="https://tibble.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tibbles.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf" target="_blank">Cheatsheet</a></p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.4</span>,<span class="fl">1.1</span>,<span class="fl">9.6</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>supervised_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span>data, <span class="at">y=</span>labels)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>supervised_df</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>dsan_df <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>code, <span class="sc">~</span>topic, <span class="sc">~</span>credits,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dsan5000"</span>, <span class="st">"Data Science"</span>, <span class="dv">3</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dsan5100"</span>, <span class="st">"Probabilistic Modeling"</span>, <span class="dv">3</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>dsan_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="quarto-layout-panel" data-layout="[30,70]">
+<div class="quarto-layout-row">
+<div id="tibble-backwards" class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: center;">
+<ul>
+<li>Replaces <code>R</code>’s built-in <code>data.frame</code> objects, but retains syntax for backwards compatibility:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9.6</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="tribble" class="quarto-layout-cell" style="flex-basis: 70.0%;justify-content: center;">
+<ul>
+<li>Provides a surprisingly useful function: <code>tribble()</code> (tibble defined row-by-row)</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">code</th>
+<th style="text-align: left;">topic</th>
+<th style="text-align: right;">credits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">dsan5000</td>
+<td style="text-align: left;">Data Science</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dsan5100</td>
+<td style="text-align: left;">Probabilistic Modeling</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr"><code>dplyr</code></h2>
+<p><a href="https://dplyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" target="_blank">Cheatsheet</a></p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Grammar</strong> of data manipulation (think <strong>verbs</strong>):</p>
+<ul>
+<li><code>filter()</code></li>
+<li><code>select()</code></li>
+<li><code>arrange()</code></li>
+<li><code>mutate()</code></li>
+<li><code>summarize()</code></li>
+</ul>
+</div><div class="column smallertext" style="width:55%;">
+<p><code>filter()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="section"></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>select()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">select</span>(country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>arrange()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">arrange</span>(population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="section-1" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="section-1"></h2>
+<p><code>mutate()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">newvar =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">cases</th>
+<th style="text-align: right;">population</th>
+<th style="text-align: right;">newvar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">19987071</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">2666</td>
+<td style="text-align: right;">20595360</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">37737</td>
+<td style="text-align: right;">172006362</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">80488</td>
+<td style="text-align: right;">174504898</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">212258</td>
+<td style="text-align: right;">1272915272</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">213766</td>
+<td style="text-align: right;">1280428583</td>
+<td style="text-align: right;">300</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="section-2" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="section-2"></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>summarize()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_cases =</span> <span class="fu">mean</span>(cases),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_pop =</span> <span class="fu">mean</span>(population)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">avg_cases</th>
+<th style="text-align: right;">avg_pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">91276.67</td>
+<td style="text-align: right;">490072924</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><code>summarize()</code> with <strong>grouping</strong>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_cases =</span> <span class="fu">mean</span>(cases),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_pop =</span> <span class="fu">mean</span>(population)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">country</th>
+<th style="text-align: right;">avg_cases</th>
+<th style="text-align: right;">avg_pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: right;">1705.5</td>
+<td style="text-align: right;">20291216</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">59112.5</td>
+<td style="text-align: right;">173255630</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">China</td>
+<td style="text-align: right;">213012.0</td>
+<td style="text-align: right;">1276671928</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-rest-of-the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="the-rest-of-the-tidyverse">The Rest of the Tidyverse</h2>
+<ul>
+<li><code>forcats</code></li>
+<li><code>readr</code></li>
+<li><code>stringr</code></li>
+<li><code>tidyr</code></li>
+<li><code>purrr</code></li>
+<li><code>lubridate</code>*</li>
+</ul>
+</section>
+<section id="forcats" class="level2">
+<h2 class="anchored" data-anchor-id="forcats"><code>forcats</code></h2>
+<p><a href="https://forcats.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/factors.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li>Utilities for working with <strong>factor</strong> variables (<code>R</code>’s data structure for <strong>categorical variables</strong>)</li>
+<li><strong>factors</strong> = <strong>data</strong> + <strong>levels</strong>:</li>
+</ul>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>month_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>,<span class="st">"Jan"</span>,<span class="st">"Feb"</span>,<span class="st">"Dec"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(d)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>dataf <span class="ot">&lt;-</span> <span class="fu">parse_factor</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    d,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels=</span>month_levels</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dataf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Jan" "Jan" "Feb" "Dec"</code></pre>
+</div>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Jan Jan Feb Dec
+Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="factors-for-ordering-plot-elements" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="factors-for-ordering-plot-elements">Factors for Ordering Plot Elements</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="ot">&lt;-</span> gss_cat <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(relig) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tvhours =</span> <span class="fu">mean</span>(tvhours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>relig_labs <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"TV Hours / Day"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Religion"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Without <code>forcats</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(tvhours, relig)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> relig, <span class="at">x=</span><span class="dv">0</span>, <span class="at">xend =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  relig_labs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/relig-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>With <code>forcats</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>relig_summary <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">relig =</span> <span class="fu">fct_reorder</span>(relig, tvhours)) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>tvhours, <span class="at">y=</span>relig)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> relig, <span class="at">x=</span><span class="dv">0</span>, <span class="at">xend =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    relig_labs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/relig-plot-factors-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sorting-barplots-with-fct_infreq" class="level2">
+<h2 class="anchored" data-anchor-id="sorting-barplots-with-fct_infreq">Sorting Barplots with <code>fct_infreq()</code></h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>barplot_labs <span class="ot">&lt;-</span> <span class="fu">labs</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Respondents by Marital Status"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">marital =</span> marital <span class="sc">|&gt;</span> <span class="fu">fct_infreq</span>() <span class="sc">|&gt;</span> <span class="fu">fct_rev</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(marital)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> barplot_labs <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/sorting-barplots-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="recodingcombining-categories" class="level2">
+<h2 class="anchored" data-anchor-id="recodingcombining-categories">Recoding/Combining Categories</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Automatically combining using <code>fct_lump()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">relig =</span> <span class="fu">fct_lump</span>(relig)) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(relig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">relig</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Protestant</td>
+<td style="text-align: right;">10846</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">10637</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Manually Combining using <code>fct_recode()</code>:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>  <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>  <span class="ot">=</span> <span class="st">"Not str republican"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"Ind,near rep"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"Ind,near dem"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>    <span class="ot">=</span> <span class="st">"Not str democrat"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>    <span class="ot">=</span> <span class="st">"Strong democrat"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>       <span class="ot">=</span> <span class="st">"No answer"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>       <span class="ot">=</span> <span class="st">"Don't know"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Other"</span>       <span class="ot">=</span> <span class="st">"Other party"</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(partyid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">partyid</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">548</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Republican</td>
+<td style="text-align: right;">5346</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Independent</td>
+<td style="text-align: right;">8409</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Democrat</td>
+<td style="text-align: right;">7180</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="readr" class="level2 shift-footnotes crunch-title crunch-ul smaller">
+<h2 class="shift-footnotes crunch-title crunch-ul smaller anchored" data-anchor-id="readr"><code>readr</code></h2>
+<p><a href="https://readr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf" target="_blank">Cheatsheet</a></p>
+<ul>
+<li><p>Two key functions: <code>read_csv()</code>, <code>write_csv()</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Warning! `read_csv()` vs. `read.csv()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning! <code>read_csv()</code> vs.&nbsp;<code>read.csv()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that these are <strong>not the same</strong> as <code>R</code>’s built-in <code>read.csv()</code> and <code>write.csv()</code>! The built-in <code>R</code> functions will produce a plain <code>data.frame</code> object, not a <code>tibble</code></p>
+</div>
+</div></li>
+</ul>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<ul>
+<li>Can handle URLs as well!</li>
+<li><strong>Share data+code</strong> in seconds by using in combination with GitHub Gist</li>
+<li>(No more <code>read_csv()</code> path issues either…)</li>
+<li><a href="https://gist.github.com/jpowerj/fecd437b96d0954893de727383f2eaf2" target="_blank">Gist dataset →</a></li>
+</ul>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 204 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): name, code
+dbl (2): year, value
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">code</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Afghanistan</td>
+<td style="text-align: left;">AFG</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">15936800636</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Albania</td>
+<td style="text-align: left;">ALB</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">11926953259</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Algeria</td>
+<td style="text-align: left;">DZA</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">161207268655</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Samoa</td>
+<td style="text-align: left;">ASM</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">576000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Andorra</td>
+<td style="text-align: left;">AND</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">3355695364</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Angola</td>
+<td style="text-align: left;">AGO</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">82470913121</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="purrr-functional-programming" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="purrr-functional-programming"><code>purrr</code>: Functional Programming</h2>
+<p><a href="https://purrr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf" target="_blank">Cheatsheet</a> | <a href="https://jennybc.github.io/purrr-tutorial/index.html" target="_blank">Tutorials, with Applications</a></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Provides an <strong>anonymous function</strong> operator <code>~</code>, arguments get named <code>.x</code>, <code>.y</code>:</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_points <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Midterm"</span><span class="ot">=</span><span class="dv">18</span>, <span class="st">"Final"</span><span class="ot">=</span><span class="dv">300</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>total_points <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Midterm"</span><span class="ot">=</span><span class="dv">20</span>, <span class="st">"Final"</span><span class="ot">=</span><span class="dv">400</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>(avg_score <span class="ot">&lt;-</span> <span class="fu">map2</span>(my_points, total_points,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">list</span>(<span class="at">frac=</span>.x <span class="sc">/</span> .y, <span class="at">pct=</span>(.x<span class="sc">/</span>.y)<span class="sc">*</span><span class="dv">100</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Midterm
+$Midterm$frac
+[1] 0.9
+
+$Midterm$pct
+[1] 90
+
+
+$Final
+$Final$frac
+[1] 0.75
+
+$Final$pct
+[1] 75</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Along with helpful functions for transforming the output</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list_flatten</span>(avg_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Midterm_frac
+[1] 0.9
+
+$Midterm_pct
+[1] 90
+
+$Final_frac
+[1] 0.75
+
+$Final_pct
+[1] 75</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">every</span>(avg_score, <span class="sc">~</span> .x<span class="sc">$</span>frac <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="lubridate" class="level2">
+<h2 class="anchored" data-anchor-id="lubridate"><code>lubridate</code>*</h2>
+<p><a href="https://lubridate.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/dates-and-times.html" target="_blank">Overview</a> | <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf" target="_blank">Cheatsheet</a></p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Caution: Importing `lubridate`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution: Importing <code>lubridate</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that <code>lubridate</code> <strong>does not</strong> get loaded with the other packages in the <code>tidyverse</code> when you call <code>library(tidyverse)</code>. It needs to be imported explicitly:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="cleaning-text-data" class="level1" data-stack-name="Text Data">
+<h1 data-stack-name="Text Data">Cleaning Text Data</h1>
+<section id="one-of-the-scariest-papers-of-all-time" class="level2 smaller crunch-title">
+<h2 class="smaller crunch-title anchored" data-anchor-id="one-of-the-scariest-papers-of-all-time">One of the Scariest Papers of All Time</h2>
+<style>
+#fig-denny-spirling .caption {
+    text-align: left !important;
+}
+#fig-denny-spirling figcaption {
+    text-align: left !important;
+}
+</style>
+<p><em>Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It</em> <span class="citation" data-cites="denny_text_2018">[@denny_text_2018]</span> (<a href="https://www.cambridge.org/core/journals/political-analysis/article/abs/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E" target="_blank">PDF Link</a>)</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-denny-spirling" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-denny-spirling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="images/denny_spirling.gif" width="200" align="center" style="margin-top: 0px !important; margin-bottom: 0px !important;" class="figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-denny-spirling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: A plot where <span class="math inline">\(x\)</span>-axis represents UK party manifestos (arranged on left-right ideology dimension, <span class="math inline">\(y\)</span>-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was <strong>placed incorrectly</strong> on the ideological dimension when that preprocessing combination was used.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-missingno" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-missingno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/missingno.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-missingno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: An ancient hieroglyph
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-secret-behind-all-text-analysis" class="level2 smaller crunch-title crunch-figures">
+<h2 class="smaller crunch-title crunch-figures anchored" data-anchor-id="the-secret-behind-all-text-analysis">The Secret Behind All Text Analysis</h2>
+<div data-layout="[[45],[45,10,45]]" data-layout-valign="center">
+<div id="fig-corpus" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corpus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/text_as_data.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/finnegans_wake_morecrop.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="390"></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidytext.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corpus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Excerpts from two data science textbooks, plus another book
+</figcaption>
+</figure>
+</div>
+<div id="fig-dtm" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dtm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><i class="bi bi-arrow-down" style="padding-top: 10px !important;"></i></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>doc_id</th>
+<th><code>text</code></th>
+<th><code>texts</code></th>
+<th><code>Kékkek</code></th>
+<th><code>voice</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>6</td>
+<td>0</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dtm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: The <strong>Document-Term Matrix</strong> (<strong>DTM</strong>)
+</figcaption>
+</figure>
+</div>
+<div id="cleaning-arrow">
+<center>
+<i class="bi bi-arrow-right ps-3"></i>
+</center>
+</div>
+<div id="fig-cleaned-dtm" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cleaned-dtm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><i class="" style="padding-top: 10px !important;">&nbsp;</i></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>doc_id</th>
+<th><code>text</code></th>
+<th><code>kekkek</code></th>
+<th><code>voice</code></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>6</td>
+<td>0</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cleaned-dtm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: The <strong>cleaned</strong> DTM, after <strong>lowercasing</strong>, <strong>lemmatization</strong>, and <strong>unicode standardization</strong>
+</figcaption>
+</figure>
+</div>
+</div>
 </section>
 <section id="selecting-columns" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="selecting-columns"><em>Select</em>ing Columns</h2>
 <p><code>select()</code> lets you keep only the <strong>columns</strong> you care about in your current analysis:</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>table1</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">select</span>(country, year, population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>table1</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">select</span>(country, year, population)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -514,8 +1897,8 @@ window.Quarto = {
 <p><code>filter()</code> lets you keep only the <strong>rows</strong> you care about in your current analysis:</p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Afghanistan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"Afghanistan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
@@ -597,14 +1980,14 @@ window.Quarto = {
 </ul>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> table1 <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, year, population) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/pop_2000.csv"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> table1 <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, year, population) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/pop_2000.csv"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -638,10 +2021,10 @@ window.Quarto = {
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 403 Columns: 4
@@ -655,7 +2038,7 @@ dbl (2): Year, Value
 </div>
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -709,15 +2092,15 @@ dbl (2): Year, Value
 </section>
 <section id="selectingfiltering-in-action" class="level2 smaller">
 <h2 class="smaller anchored" data-anchor-id="selectingfiltering-in-action">Selecting/Filtering in Action</h2>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="ot">&lt;-</span> gdp_df <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>,Year,Value) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="st">"2000"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">country=</span><span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>, <span class="at">year=</span><span class="st">`</span><span class="at">Year</span><span class="st">`</span>, <span class="at">gdp=</span><span class="st">`</span><span class="at">Value</span><span class="st">`</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/gdp_2000.csv"</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="ot">&lt;-</span> gdp_df <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>,Year,Value) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="st">"2000"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">country=</span><span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>, <span class="at">year=</span><span class="st">`</span><span class="at">Year</span><span class="st">`</span>, <span class="at">gdp=</span><span class="st">`</span><span class="at">Value</span><span class="st">`</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/gdp_2000.csv"</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -774,13 +2157,13 @@ dbl (2): Year, Value
 <center>
 <strong>Left Join</strong>
 </center>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pop_df.merge(gdp_df,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">'country'</span>, how<span class="op">=</span><span class="st">'left'</span>, indicator<span class="op">=</span><span class="va">True</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Markdown(merged_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pop_df.merge(gdp_df,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">'country'</span>, how<span class="op">=</span><span class="st">'left'</span>, indicator<span class="op">=</span><span class="va">True</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>Markdown(merged_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -840,13 +2223,13 @@ dbl (2): Year, Value
 <center>
 <strong>Inner join</strong> (≈ Intersection (<span class="math inline">\(\cap\)</span>))
 </center>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pop_df.merge(gdp_df,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">'country'</span>, how<span class="op">=</span><span class="st">'inner'</span>, indicator<span class="op">=</span><span class="va">True</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Markdown(merged_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pop_df.merge(gdp_df,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  on<span class="op">=</span><span class="st">'country'</span>, how<span class="op">=</span><span class="st">'inner'</span>, indicator<span class="op">=</span><span class="va">True</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>Markdown(merged_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -902,11 +2285,11 @@ dbl (2): Year, Value
 <div class="columns">
 <div class="column" style="width:55%;">
 <p>In data-cleaning jargon, this dataset is <strong>long</strong> (more than one row per observation)</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/long_data.csv"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/long_data.csv"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -963,11 +2346,11 @@ dbl (2): Year, Value
 </div>
 </div><div class="column" style="width:45%;">
 <p>In data-cleaning jargon, this dataset is <strong>wide</strong> (one row per obs; usually <strong>tidy</strong>)</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/wide_data.csv"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/wide_data.csv"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>table1 <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1021,281 +2404,6 @@ dbl (2): Year, Value
 </table>
 </div>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="reshaping-long-to-wide-in-python-pd.pivot" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="reshaping-long-to-wide-in-python-pd.pivot">Reshaping Long-to-Wide in Python: <code>pd.pivot()</code></h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<p>Create unique ID for <strong>wide</strong> version:</p>
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'id'</span>] <span class="op">=</span> long_df[<span class="st">'country'</span>] <span class="op">+</span> <span class="st">'_'</span> <span class="op">+</span> long_df[<span class="st">'year'</span>].<span class="bu">apply</span>(<span class="bu">str</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder the columns, so it shows the id first</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> long_df[[<span class="st">'id'</span>,<span class="st">'country'</span>,<span class="st">'year'</span>,<span class="st">'type'</span>,<span class="st">'count'</span>]]</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(long_df.head(<span class="dv">6</span>).to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 27%">
-<col style="width: 19%">
-<col style="width: 12%">
-<col style="width: 18%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;"></th>
-<th style="text-align: left;">id</th>
-<th style="text-align: left;">country</th>
-<th style="text-align: right;">year</th>
-<th style="text-align: left;">type</th>
-<th style="text-align: right;">count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">Afghanistan_1999</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">745</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">Afghanistan_1999</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">population</td>
-<td style="text-align: right;">19987071</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">Afghanistan_2000</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">2666</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">Afghanistan_2000</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">population</td>
-<td style="text-align: right;">20595360</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">Brazil_1999</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">37737</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">Brazil_1999</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">population</td>
-<td style="text-align: right;">172006362</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div><div class="column" style="width:55%;">
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>reshaped_df <span class="op">=</span> pd.pivot(long_df,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  index<span class="op">=</span><span class="st">'id'</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  columns<span class="op">=</span><span class="st">'type'</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  values<span class="op">=</span><span class="st">'count'</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reshaped_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">id</th>
-<th style="text-align: right;">cases</th>
-<th style="text-align: right;">population</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Afghanistan_1999</td>
-<td style="text-align: right;">745</td>
-<td style="text-align: right;">1.99871e+07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Afghanistan_2000</td>
-<td style="text-align: right;">2666</td>
-<td style="text-align: right;">2.05954e+07</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Brazil_1999</td>
-<td style="text-align: right;">37737</td>
-<td style="text-align: right;">1.72006e+08</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Brazil_2000</td>
-<td style="text-align: right;">80488</td>
-<td style="text-align: right;">1.74505e+08</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">China_1999</td>
-<td style="text-align: right;">212258</td>
-<td style="text-align: right;">1.27292e+09</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">China_2000</td>
-<td style="text-align: right;">213766</td>
-<td style="text-align: right;">1.28043e+09</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="the-other-direction-wide-to-long-pd.melt" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="the-other-direction-wide-to-long-pd.melt">The Other Direction (Wide-to-Long): <code>pd.melt()</code></h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wide_df <span class="op">=</span> pd.read_csv(<span class="st">"assets/wide_data.csv"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wide_df.to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;"></th>
-<th style="text-align: left;">country</th>
-<th style="text-align: right;">year</th>
-<th style="text-align: right;">cases</th>
-<th style="text-align: right;">population</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: right;">745</td>
-<td style="text-align: right;">19987071</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: right;">2666</td>
-<td style="text-align: right;">20595360</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: right;">37737</td>
-<td style="text-align: right;">172006362</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: right;">80488</td>
-<td style="text-align: right;">174504898</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: right;">212258</td>
-<td style="text-align: right;">1272915272</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: right;">213766</td>
-<td style="text-align: right;">1280428583</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div><div class="column" style="width:60%;">
-<div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> pd.melt(wide_df,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  id_vars<span class="op">=</span>[<span class="st">'country'</span>,<span class="st">'year'</span>],</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  value_vars<span class="op">=</span>[<span class="st">'cases'</span>,<span class="st">'population'</span>]</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(long_df.head(<span class="dv">6</span>).to_markdown())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;"></th>
-<th style="text-align: left;">country</th>
-<th style="text-align: right;">year</th>
-<th style="text-align: left;">variable</th>
-<th style="text-align: right;">value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">745</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">Afghanistan</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">2666</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">37737</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">Brazil</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">80488</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: right;">1999</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">212258</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">China</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: left;">cases</td>
-<td style="text-align: right;">213766</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -1304,10 +2412,10 @@ dbl (2): Year, Value
 <h2 class="smaller anchored" data-anchor-id="wide-to-long-in-r-gather">Wide-to-Long in R: <code>gather()</code></h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1363,15 +2471,15 @@ dbl (2): Year, Value
 </div>
 </div>
 </div><div class="column" style="width:60%;">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">gather</span>(table1,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">"variable"</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> cases,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">c</span>(country, year)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>long_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">gather</span>(table1,</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">"variable"</span>,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> cases,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">c</span>(country, year)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>long_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="kable-table">
@@ -1431,8 +2539,15 @@ dbl (2): Year, Value
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Plus a bonus <code>read_delim()</code> if <code>read_csv()</code> fails<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
