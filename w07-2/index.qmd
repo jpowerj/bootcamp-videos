@@ -359,7 +359,7 @@ raw_data |> filter() |> summarize() |> check_result()
 
 ## `readr` {.crunch-title .crunch-ul .smaller .crunch-callout .smaller-table}
 
-[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://readr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.had.co.nz/data-import.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf){target='_blank'}
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://readr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.hadley.nz/data-import.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf){target='_blank'}
 
 Two key functions: `read_csv()`, `write_csv()` (Bonus: `read_delim()` if others fail)
   
@@ -391,7 +391,7 @@ gdp_df |> head(6)
 
 ## `tibble` {.smaller}
 
-[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://tibble.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.had.co.nz/tibbles.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf){target='_blank'}
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://tibble.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.hadley.nz/data-import#data-entry){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf){target='_blank'}
 
 ::: {.columns}
 ::: {.column width="50%"}
@@ -434,7 +434,7 @@ dsan_df
 
 ## `dplyr` {.smaller-table-18}
 
-[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://dplyr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://r4ds.had.co.nz/transform.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){target='_blank'}
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://dplyr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://r4ds.hadley.nz/data-transform.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){target='_blank'}
 
 ::: columns
 ::: {.column width="45%"}
