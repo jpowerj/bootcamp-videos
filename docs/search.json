@@ -11,14 +11,14 @@
     "href": "w07-1/slides.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 0:51\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood morning!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 0:51\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good morning!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 20:44\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 20:44\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/slides.html#the-ternary-operator",
     "href": "w07-1/slides.html#the-ternary-operator",
     "title": "Control Flow in R",
     "section": "The Ternary Operator",
-    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'morning'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"morning\""
+    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'evening'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"evening\""
   },
   {
     "objectID": "w07-1/slides.html#for-loops-the-software-engineers-bread-and-butter",
@@ -53,7 +53,7 @@
     "href": "w07-1/slides.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003452063 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.258944 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003503799 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.196399 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/slides.html#how-is-it-that-much-faster",
@@ -109,14 +109,14 @@
     "href": "w07-1/index.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 0:52\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood morning!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 0:52\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good morning!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 20:44\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 20:44\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/index.html#the-ternary-operator",
     "href": "w07-1/index.html#the-ternary-operator",
     "title": "Control Flow in R",
     "section": "The Ternary Operator",
-    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'morning'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"morning\""
+    "text": "The Ternary Operator\n\n\n\n\"morning\" if cur_time.hour &lt; 12 else \"evening\"\n\n'evening'\n\n\n\n\nifelse(\n    hour(cur_time) &lt; 12,\n    \"morning\",\n    \"evening\"\n)\n\n[1] \"evening\""
   },
   {
     "objectID": "w07-1/index.html#for-loops-the-software-engineers-bread-and-butter",
@@ -151,7 +151,7 @@
     "href": "w07-1/index.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003679991 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.255974 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003609896 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.236824 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/index.html#how-is-it-that-much-faster",
@@ -228,7 +228,7 @@
     "href": "w06-3/slides.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 9 5 4 6 6 6 5 6 6 6 2 3 5 5 4 4 6 3 5 6\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 51 39 48 51 56 46 45 47 49 50\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 8 7 2 5 3 5 2 3 5 2 7 5 4 7 8 5 6 6 4 5\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 51 42 49 48 47 52 46 54 52 35\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/slides.html#combining-strings",
@@ -354,7 +354,7 @@
     "href": "w06-3/index.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 4 5 3 7 6 5 7 5 6 7 3 5 6 6 6 4 5 6 5 4\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 45 54 58 51 52 59 56 59 55 51\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 6 7 5 7 2 5 3 6 4 6 5 2 7 3 3 5 6 3 7 5\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 42 51 50 57 62 54 52 51 50 51\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/index.html#combining-strings",
@@ -756,63 +756,91 @@
     "href": "w07-2/index.html#observation-ids-can-be-tuples",
     "title": "Introduction to the Tidyverse",
     "section": "Observation IDs Can Be Tuples!",
-    "text": "Observation IDs Can Be Tuples!\n\nCode\nlibrary(tidyverse)\n\n\nCode\ntable1\n\n\n\n\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\nFigure 1: An example panel dataset in tidy format\n\n\n\n\nCode\ntable2 |&gt; head(6)\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\n\nFigure 2: An example panel dataset in non-tidy format\n\n\n\n:::"
+    "text": "Observation IDs Can Be Tuples!\n\n\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n✅ Tidy! Here we pass the “Tidy Data Check” since 745 is a property of [Afghanistan in 1999]: its number of TB cases\n\n\n\nCode\nlibrary(tidyverse)\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n❌ Not Tidy! Here we fail the Tidy Data Check since cases is not a property of [Afghanistan in 1999]"
   },
   {
-    "objectID": "w07-2/index.html#so-how-do-we-get-our-data-into-tidy-form",
-    "href": "w07-2/index.html#so-how-do-we-get-our-data-into-tidy-form",
+    "objectID": "w07-2/index.html#the-tidyverse",
+    "href": "w07-2/index.html#the-tidyverse",
     "title": "Introduction to the Tidyverse",
-    "section": "So… How Do We Get Our Data Into Tidy Form?",
-    "text": "So… How Do We Get Our Data Into Tidy Form?"
+    "section": "The Tidyverse",
+    "text": "The Tidyverse\n\n\n\ndplyr \nggplot2 \nforcats \ntibble \n\n\nreadr \nstringr \ntidyr \npurrr"
   },
   {
-    "objectID": "w07-2/index.html#tidyverse",
-    "href": "w07-2/index.html#tidyverse",
+    "objectID": "w07-2/index.html#readr",
+    "href": "w07-2/index.html#readr",
     "title": "Introduction to the Tidyverse",
-    "section": "Tidyverse",
-    "text": "Tidyverse\n\n\n\nCode\nsource(\"../_globals.r\")\n\n\n\n\nThink of data science tasks as involving pipelines:\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 1\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation A\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation B\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\nVisualization\n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 2\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation C\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation D\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\n      Result     \n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\nTidyverse lets you pipe output from one transformation as the input to another:\n\nraw_data |&gt; select() |&gt; mutate() |&gt; visualize()\nraw_data |&gt; filter() |&gt; summarize() |&gt; check_result()"
+    "section": "readr",
+    "text": "readr\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \nTwo key functions: read_csv(), write_csv() (Bonus: read_delim() if others fail)\n\n\n\n\n\n\n Warning! read_csv() vs. read.csv()\n\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, not a tibble\n\n\n\n\n\nCan handle URLs as well!\nShare data+code in seconds by using in combination with GitHub Gist\n(No read_csv() path issues either 😉)\nGist dataset \n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv\")\n\n\nRows: 204 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): name, code\ndbl (2): year, value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(6)\n\n\n\n\n\n\nname\ncode\nyear\nvalue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2010\n161207268655\n\n\nAmerican Samoa\nASM\n2010\n576000000\n\n\nAndorra\nAND\n2010\n3355695364\n\n\nAngola\nAGO\n2010\n82470913121"
   },
   {
     "objectID": "w07-2/index.html#tibble",
     "href": "w07-2/index.html#tibble",
     "title": "Introduction to the Tidyverse",
     "section": "tibble",
-    "text": "tibble\nHomepage | Overview | Cheatsheet\n\nCode\nlibrary(tibble)\ndata &lt;- c(3.4,1.1,9.6)\nlabels &lt;- c(0,1,0)\nsupervised_df &lt;- tibble(x=data, y=labels)\nsupervised_df\nlibrary(tibble)\ndsan_df &lt;- tibble::tribble(\n    ~code, ~topic, ~credits,\n    \"dsan5000\", \"Data Science\", 3,\n    \"dsan5100\", \"Probabilistic Modeling\", 3\n)\ndsan_df\n\n\n\n\n\nReplaces R’s built-in data.frame objects, but retains syntax for backwards compatibility:\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n3.4\n0\n\n\n1.1\n1\n\n\n9.6\n0\n\n\n\n\n\n\n\n\n\nProvides a surprisingly useful function: tribble() (tibble defined row-by-row)\n\n\n\n\n\n\n\ncode\ntopic\ncredits\n\n\n\n\ndsan5000\nData Science\n3\n\n\ndsan5100\nProbabilistic Modeling\n3"
+    "text": "tibble\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \n\n\nReplaces R’s built-in data.frame, but retains syntax for backwards compatibility:\n\n\nCode\nlibrary(tibble)\ndata &lt;- c(3.4,1.1,9.6)\nlabels &lt;- c(0,1,0)\nsupervised_df &lt;- tibble::tibble(\n  x=data,\n  y=labels\n)\nsupervised_df\n\n\n\n\n\n\nx\ny\n\n\n\n\n3.4\n0\n\n\n1.1\n1\n\n\n9.6\n0\n\n\n\n\n\n\n\n\nProvides a surprisingly useful function: tribble() (tibble defined row-by-row)\n\n\n\nCode\nlibrary(tibble)\ndsan_df &lt;- tibble::tribble(\n    ~code, ~topic, ~credits,\n    \"dsan5000\", \"Data Science\", 3,\n    \"dsan5100\", \"Probability\", 3,\n    \"dsan5200\", \"Visualization\", 3\n)\ndsan_df\n\n\n\n\n\n\ncode\ntopic\ncredits\n\n\n\n\ndsan5000\nData Science\n3\n\n\ndsan5100\nProbability\n3\n\n\ndsan5200\nVisualization\n3"
   },
   {
     "objectID": "w07-2/index.html#dplyr",
     "href": "w07-2/index.html#dplyr",
     "title": "Introduction to the Tidyverse",
     "section": "dplyr",
-    "text": "dplyr\nHomepage | Overview | Cheatsheet\n\n\nGrammar of data manipulation (think verbs):\n\nfilter()\nselect()\narrange()\nmutate()\nsummarize()\n\n\nfilter():\n\n\nCode\ntable1 |&gt; filter(year == 2000)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583"
+    "text": "dplyr\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \n\n\nGrammar of data manipulation (verbs):\n filter()\n select()\n arrange()\n mutate()\n summarize()\n\n filter(): Keep rows matching a boolean condition\n\n\nCode\ntable1 |&gt; filter(year == 2000)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583"
   },
   {
-    "objectID": "w07-2/index.html#section",
-    "href": "w07-2/index.html#section",
+    "objectID": "w07-2/index.html#dplyr-1",
+    "href": "w07-2/index.html#dplyr-1",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "select():\n\n\nCode\ntable1 |&gt; select(country)\n\n\n\n\n\n\ncountry\n\n\n\n\nAfghanistan\n\n\nAfghanistan\n\n\nBrazil\n\n\nBrazil\n\n\nChina\n\n\nChina\n\n\n\n\n\n\n\narrange():\n\n\nCode\ntable1 |&gt; arrange(population)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+    "section": "dplyr",
+    "text": "dplyr\n\n\n select():\n\n\nCode\ntable1 |&gt; select(country)\n\n\n\n\n\n\ncountry\n\n\n\n\nAfghanistan\n\n\nAfghanistan\n\n\nBrazil\n\n\nBrazil\n\n\nChina\n\n\nChina\n\n\n\n\n\n\nCode\ntable1 |&gt; select(-country) |&gt; head(3)\n\n\n\n\n\n\nyear\ncases\npopulation\n\n\n\n\n1999\n745\n19987071\n\n\n2000\n2666\n20595360\n\n\n1999\n37737\n172006362\n\n\n\n\n\n\n\n arrange():\n\n\nCode\ntable1 |&gt; arrange(population)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\nCode\ntable1 |&gt; arrange(desc(population)) |&gt; head(3)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nChina\n2000\n213766\n1280428583\n\n\nChina\n1999\n212258\n1272915272\n\n\nBrazil\n2000\n80488\n174504898"
   },
   {
-    "objectID": "w07-2/index.html#section-1",
-    "href": "w07-2/index.html#section-1",
+    "objectID": "w07-2/index.html#dplyr-2",
+    "href": "w07-2/index.html#dplyr-2",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "mutate():\n\n\nCode\ntable1 |&gt; mutate(newvar = 300)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\nnewvar\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n300\n\n\nAfghanistan\n2000\n2666\n20595360\n300\n\n\nBrazil\n1999\n37737\n172006362\n300\n\n\nBrazil\n2000\n80488\n174504898\n300\n\n\nChina\n1999\n212258\n1272915272\n300\n\n\nChina\n2000\n213766\n1280428583\n300"
+    "section": "dplyr",
+    "text": "dplyr\n mutate():\n\n\nCode\ntable1 |&gt; mutate(newvar = 300)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\nnewvar\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n300\n\n\nAfghanistan\n2000\n2666\n20595360\n300\n\n\nBrazil\n1999\n37737\n172006362\n300\n\n\nBrazil\n2000\n80488\n174504898\n300\n\n\nChina\n1999\n212258\n1272915272\n300\n\n\nChina\n2000\n213766\n1280428583\n300"
   },
   {
-    "objectID": "w07-2/index.html#section-2",
-    "href": "w07-2/index.html#section-2",
+    "objectID": "w07-2/index.html#dplyr-3",
+    "href": "w07-2/index.html#dplyr-3",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "summarize():\n\n\nCode\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\navg_cases\navg_pop\n\n\n\n\n91276.67\n490072924\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\ncountry\navg_cases\navg_pop\n\n\n\n\nAfghanistan\n1705.5\n20291216\n\n\nBrazil\n59112.5\n173255630\n\n\nChina\n213012.0\n1276671928"
+    "section": "dplyr",
+    "text": "dplyr\n\n\n summarize():\n\n\nCode\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\navg_cases\navg_pop\n\n\n\n\n91276.67\n490072924\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\ncountry\navg_cases\navg_pop\n\n\n\n\nAfghanistan\n1705.5\n20291216\n\n\nBrazil\n59112.5\n173255630\n\n\nChina\n213012.0\n1276671928"
   },
   {
-    "objectID": "w07-2/index.html#the-rest-of-the-tidyverse",
-    "href": "w07-2/index.html#the-rest-of-the-tidyverse",
+    "objectID": "w07-2/index.html#merging-data",
+    "href": "w07-2/index.html#merging-data",
     "title": "Introduction to the Tidyverse",
-    "section": "The Rest of the Tidyverse",
-    "text": "The Rest of the Tidyverse\n\nforcats\nreadr\nstringr\ntidyr\npurrr\nlubridate*"
+    "section": "Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\n\nCode\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\n\n\nRows: 403 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country Name, Country Code\ndbl (2): Year, Value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+  },
+  {
+    "objectID": "w07-2/index.html#selectingfiltering-in-action",
+    "href": "w07-2/index.html#selectingfiltering-in-action",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting/Filtering in Action",
+    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+  },
+  {
+    "objectID": "w07-2/index.html#recommended-language-python",
+    "href": "w07-2/index.html#recommended-language-python",
+    "title": "Introduction to the Tidyverse",
+    "section": "Recommended Language: Python",
+    "text": "Recommended Language: Python\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df)\n(see Appendix Slides for merging via Tidyverse)\n\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+  },
+  {
+    "objectID": "w07-2/index.html#reshaping-data",
+    "href": "w07-2/index.html#reshaping-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\n\nCode\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\n\nCode\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/index.html#wide-to-long-in-r-gather",
+    "href": "w07-2/index.html#wide-to-long-in-r-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long in R: gather()",
+    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
   },
   {
     "objectID": "w07-2/index.html#forcats",
@@ -843,13 +871,6 @@
     "text": "Recoding/Combining Categories\n\n\nAutomatically combining using fct_lump():\n\n\nCode\ngss_cat |&gt;\n    mutate(relig = fct_lump(relig)) |&gt;\n    count(relig)\n\n\n\n\n\n\nrelig\nn\n\n\n\n\nProtestant\n10846\n\n\nOther\n10637\n\n\n\n\n\n\n\nManually Combining using fct_recode():\n\n\nCode\ngss_cat |&gt;\n    mutate(partyid = fct_recode(partyid,\n    \"Republican\"  = \"Strong republican\",\n    \"Republican\"  = \"Not str republican\",\n    \"Independent\" = \"Ind,near rep\",\n    \"Independent\" = \"Ind,near dem\",\n    \"Democrat\"    = \"Not str democrat\",\n    \"Democrat\"    = \"Strong democrat\",\n    \"Other\"       = \"No answer\",\n    \"Other\"       = \"Don't know\",\n    \"Other\"       = \"Other party\"\n  )) |&gt;\n  count(partyid)\n\n\n\n\n\n\npartyid\nn\n\n\n\n\nOther\n548\n\n\nRepublican\n5346\n\n\nIndependent\n8409\n\n\nDemocrat\n7180"
   },
   {
-    "objectID": "w07-2/index.html#readr",
-    "href": "w07-2/index.html#readr",
-    "title": "Introduction to the Tidyverse",
-    "section": "readr",
-    "text": "readr\nHomepage | Overview | Cheatsheet\n\nTwo key functions: read_csv(), write_csv()1\n\n\n\n\n\n\nWarning! read_csv() vs. read.csv()\n\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, not a tibble\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv\")\ngdp_df |&gt; head(6)\n\n\n\n\n\nCan handle URLs as well!\nShare data+code in seconds by using in combination with GitHub Gist\n(No more read_csv() path issues either…)\nGist dataset →\n\n\n\n\nRows: 204 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): name, code\ndbl (2): year, value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\nname\ncode\nyear\nvalue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2010\n161207268655\n\n\nAmerican Samoa\nASM\n2010\n576000000\n\n\nAndorra\nAND\n2010\n3355695364\n\n\nAngola\nAGO\n2010\n82470913121"
-  },
-  {
     "objectID": "w07-2/index.html#purrr-functional-programming",
     "href": "w07-2/index.html#purrr-functional-programming",
     "title": "Introduction to the Tidyverse",
@@ -864,76 +885,6 @@
     "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
   },
   {
-    "objectID": "w07-2/index.html#one-of-the-scariest-papers-of-all-time",
-    "href": "w07-2/index.html#one-of-the-scariest-papers-of-all-time",
-    "title": "Introduction to the Tidyverse",
-    "section": "One of the Scariest Papers of All Time",
-    "text": "One of the Scariest Papers of All Time\n\nText Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It [@denny_text_2018] (PDF Link)\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: A plot where \\(x\\)-axis represents UK party manifestos (arranged on left-right ideology dimension, \\(y\\)-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was placed incorrectly on the ideological dimension when that preprocessing combination was used.\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: An ancient hieroglyph"
-  },
-  {
-    "objectID": "w07-2/index.html#the-secret-behind-all-text-analysis",
-    "href": "w07-2/index.html#the-secret-behind-all-text-analysis",
-    "title": "Introduction to the Tidyverse",
-    "section": "The Secret Behind All Text Analysis",
-    "text": "The Secret Behind All Text Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Excerpts from two data science textbooks, plus another book\n\n\n\n\n\n\n\n\n\n\ndoc_id\ntext\ntexts\nKékkek\nvoice\n\n\n\n\n\n0\n0\n6\n0\n1\n\n\n\n1\n0\n0\n3\n1\n\n\n\n2\n6\n0\n0\n0\n\n\n\n\n\n\nFigure 6: The Document-Term Matrix (DTM)\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\ndoc_id\ntext\nkekkek\nvoice\n\n\n\n\n\n\n0\n6\n0\n1\n\n\n\n\n1\n0\n3\n1\n\n\n\n\n2\n6\n0\n0\n\n\n\n\n\n\n\nFigure 7: The cleaned DTM, after lowercasing, lemmatization, and unicode standardization"
-  },
-  {
-    "objectID": "w07-2/index.html#selecting-columns",
-    "href": "w07-2/index.html#selecting-columns",
-    "title": "Introduction to the Tidyverse",
-    "section": "Selecting Columns",
-    "text": "Selecting Columns\nselect() lets you keep only the columns you care about in your current analysis:\n\nCode\nlibrary(tidyverse)\ntable1\ntable1 |&gt; select(country, year, population)\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n1999\n19987071\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n1999\n172006362\n\n\nBrazil\n2000\n174504898\n\n\nChina\n1999\n1272915272\n\n\nChina\n2000\n1280428583"
-  },
-  {
-    "objectID": "w07-2/index.html#filtering-rows",
-    "href": "w07-2/index.html#filtering-rows",
-    "title": "Introduction to the Tidyverse",
-    "section": "Filtering Rows",
-    "text": "Filtering Rows\nfilter() lets you keep only the rows you care about in your current analysis:\n\nCode\ntable1 |&gt; filter(year == 2000)\ntable1 |&gt; filter(country == \"Afghanistan\")\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360"
-  },
-  {
-    "objectID": "w07-2/index.html#merging-data",
-    "href": "w07-2/index.html#merging-data",
-    "title": "Introduction to the Tidyverse",
-    "section": "Merging Data",
-    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\n\nCode\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\n\n\nRows: 403 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country Name, Country Code\ndbl (2): Year, Value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
-  },
-  {
-    "objectID": "w07-2/index.html#selectingfiltering-in-action",
-    "href": "w07-2/index.html#selectingfiltering-in-action",
-    "title": "Introduction to the Tidyverse",
-    "section": "Selecting/Filtering in Action",
-    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
-  },
-  {
-    "objectID": "w07-2/index.html#recommended-language-python",
-    "href": "w07-2/index.html#recommended-language-python",
-    "title": "Introduction to the Tidyverse",
-    "section": "Recommended Language: Python",
-    "text": "Recommended Language: Python\nPandas provides an easy-to-use df.merge(other_df)!\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
-  },
-  {
-    "objectID": "w07-2/index.html#reshaping-data",
-    "href": "w07-2/index.html#reshaping-data",
-    "title": "Introduction to the Tidyverse",
-    "section": "Reshaping Data",
-    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\n\nCode\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\n\nCode\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
-  },
-  {
-    "objectID": "w07-2/index.html#wide-to-long-in-r-gather",
-    "href": "w07-2/index.html#wide-to-long-in-r-gather",
-    "title": "Introduction to the Tidyverse",
-    "section": "Wide-to-Long in R: gather()",
-    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
-  },
-  {
-    "objectID": "w07-2/index.html#footnotes",
-    "href": "w07-2/index.html#footnotes",
-    "title": "Introduction to the Tidyverse",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nPlus a bonus read_delim() if read_csv() fails↩︎"
-  },
-  {
     "objectID": "w07-2/slides.html#tidy-data",
     "href": "w07-2/slides.html#tidy-data",
     "title": "Introduction to the Tidyverse",
@@ -945,63 +896,91 @@
     "href": "w07-2/slides.html#observation-ids-can-be-tuples",
     "title": "Introduction to the Tidyverse",
     "section": "Observation IDs Can Be Tuples!",
-    "text": "Observation IDs Can Be Tuples!\n\n\n\n\nlibrary(tidyverse)\ntable1\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\nFigure 1: An example panel dataset in tidy format\n\n\n\n\n\n\n\ntable2 |&gt; head(6)\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\n\nFigure 2: An example panel dataset in non-tidy format\n\n\n\n:::"
+    "text": "Observation IDs Can Be Tuples!\n\n\n\n\nlibrary(tidyverse)\ntable1\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n✅ Tidy! Here we pass the “Tidy Data Check” since 745 is a property of [Afghanistan in 1999]: its number of TB cases\n\n\nlibrary(tidyverse)\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n❌ Not Tidy! Here we fail the Tidy Data Check since cases is not a property of [Afghanistan in 1999]"
   },
   {
-    "objectID": "w07-2/slides.html#so-how-do-we-get-our-data-into-tidy-form",
-    "href": "w07-2/slides.html#so-how-do-we-get-our-data-into-tidy-form",
+    "objectID": "w07-2/slides.html#the-tidyverse",
+    "href": "w07-2/slides.html#the-tidyverse",
     "title": "Introduction to the Tidyverse",
-    "section": "So… How Do We Get Our Data Into Tidy Form?",
-    "text": "So… How Do We Get Our Data Into Tidy Form?"
+    "section": "The Tidyverse",
+    "text": "The Tidyverse\n\n\n\ndplyr \nggplot2 \nforcats \ntibble \n\n\nreadr \nstringr \ntidyr \npurrr"
   },
   {
-    "objectID": "w07-2/slides.html#tidyverse",
-    "href": "w07-2/slides.html#tidyverse",
+    "objectID": "w07-2/slides.html#readr",
+    "href": "w07-2/slides.html#readr",
     "title": "Introduction to the Tidyverse",
-    "section": "Tidyverse",
-    "text": "Tidyverse\n\n\nsource(\"../_globals.r\")\n\n\n\nThink of data science tasks as involving pipelines:\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 1\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation A\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation B\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\nVisualization\n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\ncluster_00\n\nData-Processing Pipeline 2\n\n\n\nraw\n\nRaw Data\n\n\n\ntr1\n\nTransformation C\n(select(), filter())\n\n\n\nraw-&gt;tr1\n\n\n\n\n\ntr2\n\nTransformation D\n(mutate(), summarize())\n\n\n\ntr1-&gt;tr2\n\n\n\n\n\nviz\n\n      Result     \n\n\n\ntr2-&gt;viz\n\n\n\n\n\n\n\n\n\n\n\nTidyverse lets you pipe output from one transformation as the input to another:\n\nraw_data |&gt; select() |&gt; mutate() |&gt; visualize()\nraw_data |&gt; filter() |&gt; summarize() |&gt; check_result()"
+    "section": "readr",
+    "text": "readr\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \nTwo key functions: read_csv(), write_csv() (Bonus: read_delim() if others fail)\n\n\n\n\n Warning! read_csv() vs. read.csv()\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, not a tibble\n\n\n\n\n\n\n\nCan handle URLs as well!\nShare data+code in seconds by using in combination with GitHub Gist\n(No read_csv() path issues either 😉)\nGist dataset \n\n\n\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv\")\ngdp_df |&gt; head(6)\n\n\n\n\n\nname\ncode\nyear\nvalue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2010\n161207268655\n\n\nAmerican Samoa\nASM\n2010\n576000000\n\n\nAndorra\nAND\n2010\n3355695364\n\n\nAngola\nAGO\n2010\n82470913121"
   },
   {
     "objectID": "w07-2/slides.html#tibble",
     "href": "w07-2/slides.html#tibble",
     "title": "Introduction to the Tidyverse",
     "section": "tibble",
-    "text": "tibble\nHomepage | Overview | Cheatsheet\nlibrary(tibble)\ndata &lt;- c(3.4,1.1,9.6)\nlabels &lt;- c(0,1,0)\nsupervised_df &lt;- tibble(x=data, y=labels)\nsupervised_df\nlibrary(tibble)\ndsan_df &lt;- tibble::tribble(\n    ~code, ~topic, ~credits,\n    \"dsan5000\", \"Data Science\", 3,\n    \"dsan5100\", \"Probabilistic Modeling\", 3\n)\ndsan_df\n\n\n\n\nReplaces R’s built-in data.frame objects, but retains syntax for backwards compatibility:\n\n\n\n\n\n\n\nx\ny\n\n\n\n\n3.4\n0\n\n\n1.1\n1\n\n\n9.6\n0\n\n\n\n\n\n\n\n\n\nProvides a surprisingly useful function: tribble() (tibble defined row-by-row)\n\n\n\n\n\n\n\ncode\ntopic\ncredits\n\n\n\n\ndsan5000\nData Science\n3\n\n\ndsan5100\nProbabilistic Modeling\n3"
+    "text": "tibble\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \n\n\nReplaces R’s built-in data.frame, but retains syntax for backwards compatibility:\n\nlibrary(tibble)\ndata &lt;- c(3.4,1.1,9.6)\nlabels &lt;- c(0,1,0)\nsupervised_df &lt;- tibble::tibble(\n  x=data,\n  y=labels\n)\nsupervised_df\n\n\n\n\n\nx\ny\n\n\n\n\n3.4\n0\n\n\n1.1\n1\n\n\n9.6\n0\n\n\n\n\n\n\n\n\nProvides a surprisingly useful function: tribble() (tibble defined row-by-row)\n\n\nlibrary(tibble)\ndsan_df &lt;- tibble::tribble(\n    ~code, ~topic, ~credits,\n    \"dsan5000\", \"Data Science\", 3,\n    \"dsan5100\", \"Probability\", 3,\n    \"dsan5200\", \"Visualization\", 3\n)\ndsan_df\n\n\n\n\n\ncode\ntopic\ncredits\n\n\n\n\ndsan5000\nData Science\n3\n\n\ndsan5100\nProbability\n3\n\n\ndsan5200\nVisualization\n3"
   },
   {
     "objectID": "w07-2/slides.html#dplyr",
     "href": "w07-2/slides.html#dplyr",
     "title": "Introduction to the Tidyverse",
     "section": "dplyr",
-    "text": "dplyr\nHomepage | Overview | Cheatsheet\n\n\nGrammar of data manipulation (think verbs):\n\nfilter()\nselect()\narrange()\nmutate()\nsummarize()\n\n\nfilter():\n\n\nCode\ntable1 |&gt; filter(year == 2000)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583"
+    "text": "dplyr\nHomepage  | Overview (R4DS)  | PDF Cheatsheet \n\n\nGrammar of data manipulation (verbs):\n filter()\n select()\n arrange()\n mutate()\n summarize()\n\n filter(): Keep rows matching a boolean condition\n\ntable1 |&gt; filter(year == 2000)\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583"
   },
   {
-    "objectID": "w07-2/slides.html#section",
-    "href": "w07-2/slides.html#section",
+    "objectID": "w07-2/slides.html#dplyr-1",
+    "href": "w07-2/slides.html#dplyr-1",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "select():\n\n\nCode\ntable1 |&gt; select(country)\n\n\n\n\n\n\ncountry\n\n\n\n\nAfghanistan\n\n\nAfghanistan\n\n\nBrazil\n\n\nBrazil\n\n\nChina\n\n\nChina\n\n\n\n\n\n\n\narrange():\n\n\nCode\ntable1 |&gt; arrange(population)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+    "section": "dplyr",
+    "text": "dplyr\n\n\n select():\n\ntable1 |&gt; select(country)\n\n\n\n\n\ncountry\n\n\n\n\nAfghanistan\n\n\nAfghanistan\n\n\nBrazil\n\n\nBrazil\n\n\nChina\n\n\nChina\n\n\n\n\n\ntable1 |&gt; select(-country) |&gt; head(3)\n\n\n\n\n\nyear\ncases\npopulation\n\n\n\n\n1999\n745\n19987071\n\n\n2000\n2666\n20595360\n\n\n1999\n37737\n172006362\n\n\n\n\n\n\n\n arrange():\n\ntable1 |&gt; arrange(population)\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\ntable1 |&gt; arrange(desc(population)) |&gt; head(3)\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nChina\n2000\n213766\n1280428583\n\n\nChina\n1999\n212258\n1272915272\n\n\nBrazil\n2000\n80488\n174504898"
   },
   {
-    "objectID": "w07-2/slides.html#section-1",
-    "href": "w07-2/slides.html#section-1",
+    "objectID": "w07-2/slides.html#dplyr-2",
+    "href": "w07-2/slides.html#dplyr-2",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "mutate():\n\n\nCode\ntable1 |&gt; mutate(newvar = 300)\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\nnewvar\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n300\n\n\nAfghanistan\n2000\n2666\n20595360\n300\n\n\nBrazil\n1999\n37737\n172006362\n300\n\n\nBrazil\n2000\n80488\n174504898\n300\n\n\nChina\n1999\n212258\n1272915272\n300\n\n\nChina\n2000\n213766\n1280428583\n300"
+    "section": "dplyr",
+    "text": "dplyr\n mutate():\n\ntable1 |&gt; mutate(newvar = 300)\n\n\n\n\n\ncountry\nyear\ncases\npopulation\nnewvar\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n300\n\n\nAfghanistan\n2000\n2666\n20595360\n300\n\n\nBrazil\n1999\n37737\n172006362\n300\n\n\nBrazil\n2000\n80488\n174504898\n300\n\n\nChina\n1999\n212258\n1272915272\n300\n\n\nChina\n2000\n213766\n1280428583\n300"
   },
   {
-    "objectID": "w07-2/slides.html#section-2",
-    "href": "w07-2/slides.html#section-2",
+    "objectID": "w07-2/slides.html#dplyr-3",
+    "href": "w07-2/slides.html#dplyr-3",
     "title": "Introduction to the Tidyverse",
-    "section": "",
-    "text": "summarize():\n\n\nCode\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\navg_cases\navg_pop\n\n\n\n\n91276.67\n490072924\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\ncountry\navg_cases\navg_pop\n\n\n\n\nAfghanistan\n1705.5\n20291216\n\n\nBrazil\n59112.5\n173255630\n\n\nChina\n213012.0\n1276671928"
+    "section": "dplyr",
+    "text": "dplyr\n\n\n summarize():\n\n\nCode\ntable1 |&gt; \n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\navg_cases\navg_pop\n\n\n\n\n91276.67\n490072924\n\n\n\n\n\n\n\nsummarize() with grouping:\n\n\nCode\ntable1 |&gt;\n  group_by(country) |&gt;\n  summarize(\n    avg_cases = mean(cases),\n    avg_pop = mean(population)\n  )\n\n\n\n\n\n\ncountry\navg_cases\navg_pop\n\n\n\n\nAfghanistan\n1705.5\n20291216\n\n\nBrazil\n59112.5\n173255630\n\n\nChina\n213012.0\n1276671928"
   },
   {
-    "objectID": "w07-2/slides.html#the-rest-of-the-tidyverse",
-    "href": "w07-2/slides.html#the-rest-of-the-tidyverse",
+    "objectID": "w07-2/slides.html#merging-data",
+    "href": "w07-2/slides.html#merging-data",
     "title": "Introduction to the Tidyverse",
-    "section": "The Rest of the Tidyverse",
-    "text": "The Rest of the Tidyverse\n\nforcats\nreadr\nstringr\ntidyr\npurrr\nlubridate*"
+    "section": "Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+  },
+  {
+    "objectID": "w07-2/slides.html#selectingfiltering-in-action",
+    "href": "w07-2/slides.html#selectingfiltering-in-action",
+    "title": "Introduction to the Tidyverse",
+    "section": "Selecting/Filtering in Action",
+    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+  },
+  {
+    "objectID": "w07-2/slides.html#recommended-language-python",
+    "href": "w07-2/slides.html#recommended-language-python",
+    "title": "Introduction to the Tidyverse",
+    "section": "Recommended Language: Python",
+    "text": "Recommended Language: Python\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df)\n(see Appendix Slides for merging via Tidyverse)\n\n\n\n\nLeft Join\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+  },
+  {
+    "objectID": "w07-2/slides.html#reshaping-data",
+    "href": "w07-2/slides.html#reshaping-data",
+    "title": "Introduction to the Tidyverse",
+    "section": "Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/slides.html#wide-to-long-in-r-gather",
+    "href": "w07-2/slides.html#wide-to-long-in-r-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long in R: gather()",
+    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
   },
   {
     "objectID": "w07-2/slides.html#forcats",
@@ -1032,13 +1011,6 @@
     "text": "Recoding/Combining Categories\n\n\nAutomatically combining using fct_lump():\n\n\nCode\ngss_cat |&gt;\n    mutate(relig = fct_lump(relig)) |&gt;\n    count(relig)\n\n\n\n\n\n\nrelig\nn\n\n\n\n\nProtestant\n10846\n\n\nOther\n10637\n\n\n\n\n\n\n\nManually Combining using fct_recode():\n\n\nCode\ngss_cat |&gt;\n    mutate(partyid = fct_recode(partyid,\n    \"Republican\"  = \"Strong republican\",\n    \"Republican\"  = \"Not str republican\",\n    \"Independent\" = \"Ind,near rep\",\n    \"Independent\" = \"Ind,near dem\",\n    \"Democrat\"    = \"Not str democrat\",\n    \"Democrat\"    = \"Strong democrat\",\n    \"Other\"       = \"No answer\",\n    \"Other\"       = \"Don't know\",\n    \"Other\"       = \"Other party\"\n  )) |&gt;\n  count(partyid)\n\n\n\n\n\n\npartyid\nn\n\n\n\n\nOther\n548\n\n\nRepublican\n5346\n\n\nIndependent\n8409\n\n\nDemocrat\n7180"
   },
   {
-    "objectID": "w07-2/slides.html#readr",
-    "href": "w07-2/slides.html#readr",
-    "title": "Introduction to the Tidyverse",
-    "section": "readr",
-    "text": "readr\nHomepage | Overview | Cheatsheet\n\nTwo key functions: read_csv(), write_csv()1\n\n\n\n\n\n\n\nWarning! read_csv() vs. read.csv()\n\n\nNote that these are not the same as R’s built-in read.csv() and write.csv()! The built-in R functions will produce a plain data.frame object, not a tibble\n\n\n\n\n\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv\")\ngdp_df |&gt; head(6)\n\n\n\n\nCan handle URLs as well!\nShare data+code in seconds by using in combination with GitHub Gist\n(No more read_csv() path issues either…)\nGist dataset →\n\n\n\n\n\n\n\n\nname\ncode\nyear\nvalue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2010\n161207268655\n\n\nAmerican Samoa\nASM\n2010\n576000000\n\n\nAndorra\nAND\n2010\n3355695364\n\n\nAngola\nAGO\n2010\n82470913121\n\n\n\n\n\n\n\n\nPlus a bonus read_delim() if read_csv() fails"
-  },
-  {
     "objectID": "w07-2/slides.html#purrr-functional-programming",
     "href": "w07-2/slides.html#purrr-functional-programming",
     "title": "Introduction to the Tidyverse",
@@ -1050,70 +1022,7 @@
     "href": "w07-2/slides.html#lubridate",
     "title": "Introduction to the Tidyverse",
     "section": "lubridate*",
-    "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
-  },
-  {
-    "objectID": "w07-2/slides.html#one-of-the-scariest-papers-of-all-time",
-    "href": "w07-2/slides.html#one-of-the-scariest-papers-of-all-time",
-    "title": "Introduction to the Tidyverse",
-    "section": "One of the Scariest Papers of All Time",
-    "text": "One of the Scariest Papers of All Time\n\nText Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It [@denny_text_2018] (PDF Link)\n\n\n\n\n\n\n\n\n\nFigure 3: A plot where \\(x\\)-axis represents UK party manifestos (arranged on left-right ideology dimension, \\(y\\)-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was placed incorrectly on the ideological dimension when that preprocessing combination was used.\n\n\n\n\n\n\n\n\n\n\n\nFigure 4: An ancient hieroglyph"
-  },
-  {
-    "objectID": "w07-2/slides.html#the-secret-behind-all-text-analysis",
-    "href": "w07-2/slides.html#the-secret-behind-all-text-analysis",
-    "title": "Introduction to the Tidyverse",
-    "section": "The Secret Behind All Text Analysis",
-    "text": "The Secret Behind All Text Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Excerpts from two data science textbooks, plus another book\n\n\n\n\n\n\n\n\n\n\ndoc_id\ntext\ntexts\nKékkek\nvoice\n\n\n\n\n\n0\n0\n6\n0\n1\n\n\n\n1\n0\n0\n3\n1\n\n\n\n2\n6\n0\n0\n0\n\n\n\n\n\n\nFigure 6: The Document-Term Matrix (DTM)\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\ndoc_id\ntext\nkekkek\nvoice\n\n\n\n\n\n\n0\n6\n0\n1\n\n\n\n\n1\n0\n3\n1\n\n\n\n\n2\n6\n0\n0\n\n\n\n\n\n\n\nFigure 7: The cleaned DTM, after lowercasing, lemmatization, and unicode standardization"
-  },
-  {
-    "objectID": "w07-2/slides.html#selecting-columns",
-    "href": "w07-2/slides.html#selecting-columns",
-    "title": "Introduction to the Tidyverse",
-    "section": "Selecting Columns",
-    "text": "Selecting Columns\nselect() lets you keep only the columns you care about in your current analysis:\nlibrary(tidyverse)\ntable1\ntable1 |&gt; select(country, year, population)\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n1999\n19987071\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n1999\n172006362\n\n\nBrazil\n2000\n174504898\n\n\nChina\n1999\n1272915272\n\n\nChina\n2000\n1280428583"
-  },
-  {
-    "objectID": "w07-2/slides.html#filtering-rows",
-    "href": "w07-2/slides.html#filtering-rows",
-    "title": "Introduction to the Tidyverse",
-    "section": "Filtering Rows",
-    "text": "Filtering Rows\nfilter() lets you keep only the rows you care about in your current analysis:\ntable1 |&gt; filter(year == 2000)\ntable1 |&gt; filter(country == \"Afghanistan\")\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360"
-  },
-  {
-    "objectID": "w07-2/slides.html#merging-data",
-    "href": "w07-2/slides.html#merging-data",
-    "title": "Introduction to the Tidyverse",
-    "section": "Merging Data",
-    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
-  },
-  {
-    "objectID": "w07-2/slides.html#selectingfiltering-in-action",
-    "href": "w07-2/slides.html#selectingfiltering-in-action",
-    "title": "Introduction to the Tidyverse",
-    "section": "Selecting/Filtering in Action",
-    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
-  },
-  {
-    "objectID": "w07-2/slides.html#recommended-language-python",
-    "href": "w07-2/slides.html#recommended-language-python",
-    "title": "Introduction to the Tidyverse",
-    "section": "Recommended Language: Python",
-    "text": "Recommended Language: Python\nPandas provides an easy-to-use df.merge(other_df)!\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
-  },
-  {
-    "objectID": "w07-2/slides.html#reshaping-data",
-    "href": "w07-2/slides.html#reshaping-data",
-    "title": "Introduction to the Tidyverse",
-    "section": "Reshaping Data",
-    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
-  },
-  {
-    "objectID": "w07-2/slides.html#wide-to-long-in-r-gather",
-    "href": "w07-2/slides.html#wide-to-long-in-r-gather",
-    "title": "Introduction to the Tidyverse",
-    "section": "Wide-to-Long in R: gather()",
-    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766\n\n\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-2: Tidyverse"
+    "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-2: Tidyverse"
   },
   {
     "objectID": "w08-2/index.html",

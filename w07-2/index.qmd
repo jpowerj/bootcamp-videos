@@ -189,36 +189,92 @@ format:
 
 :::
 
-## Observation IDs Can Be Tuples!
+## Observation IDs Can Be Tuples! {.smaller-table-16 .smaller .crunch-title}
 
-::: {#fig-tidy-table1}
+```{=html}
+<style>
+/* Tidy table */
+.tidy-table table tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(3) {
+  border: 4px solid green !important;
+}
+.tidy-table table tbody:nth-child(2) > tr > td:nth-child(1) {
+  color: #E69F00;
+  font-weight: bold;
+}
+.tidy-table table tbody:nth-child(2) > tr > td:nth-child(2) {
+  color: #E69F00;
+  font-weight: bold;
+}
+.tidy-table table tbody:nth-child(2) > tr > td:nth-child(3) {
+  color: #009E73;
+}
+.tidy-table table tbody:nth-child(2) > tr > td:nth-child(4) {
+  color: #009E73;
+}
+/* cases + population */
+.tidy-table thead > tr > th:nth-child(3) {
+  color: #56B4E9;
+}
+.tidy-table thead > tr > th:nth-child(4) {
+  color: #56B4E9;
+}
+
+/* Non-tidy table */
+.non-tidy-table table tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(3) {
+  border: 4px solid red !important;
+}
+.non-tidy-table table tbody:nth-child(2) > tr > td:nth-child(1) {
+  color: #E69F00;
+  font-weight: bold;
+}
+.non-tidy-table table tbody:nth-child(2) > tr > td:nth-child(2) {
+  color: #E69F00;
+  font-weight: bold;
+}
+.non-tidy-table table tbody:nth-child(2) > tr > td:nth-child(3) {
+  color: #56B4E9;
+}
+.non-tidy-table table tbody:nth-child(2) > tr > td:nth-child(4) {
+  color: #009E73;
+}
+/* cases + population */
+.tidy-table thead > tr > th:nth-child(3) {
+  color: #56B4E9;
+}
+.tidy-table thead > tr > th:nth-child(4) {
+  color: #56B4E9;
+}
+</style>
+```
+
+::: {.columns}
+::: {.column width="50%"}
 
 ```{r}
 #| label: tidy-table1
-#| classes: some-right-margin
+#| classes: tidy-table
 library(tidyverse)
 table1
 ```
 
-An example **panel** dataset in **tidy** format
-:::
+<span class="badge text-bg-light">✅ Tidy!</span> Here we pass the "Tidy Data Check" since [745]{.cb3 style='border: 3px solid green; padding: 3px;'} is a property of [Afghanistan in 1999]: its number of TB cases
 
-::: {#fig-tidy-table2}
+:::
+::: {.column width="50%"}
 
 ```{r}
-#| label: tidy-table2
-#| classes: some-left-margin
-table2 |> head(6)
+#| label: non-tidy-table
+#| classes: non-tidy-table
+library(tidyverse)
+table2 |> head()
 ```
 
-An example **panel** dataset in **non-tidy** format
+<span class="badge text-bg-light">❌ Not Tidy!</span> Here we fail the Tidy Data Check since <span class='cb2' style='border: 3px solid red; padding: 3px;'>cases</span> is **not** a property of [Afghanistan in 1999]
+
 :::
 :::
 
-## So... How Do We Get Our Data Into Tidy Form?
-
-
-## Tidyverse {.smaller}
+# So... How Do We Get Our Data Into Tidy Form? {.title-11 .smaller .not-title-slide data-stack-name="The Tidyverse"}
 
 ::: {.hidden}
 
@@ -228,8 +284,6 @@ source("../_globals.r")
 ```
 
 :::
-
-* Think of data science tasks as involving **pipelines**:
 
 ```{dot}
 //| fig-height: 1.5
@@ -267,22 +321,19 @@ digraph G {
 }
 ```
 
-* Tidyverse lets you **pipe output** from one transformation as the **input** to another:
-
-```r
+``` {.r}
 raw_data |> select() |> mutate() |> visualize()
 raw_data |> filter() |> summarize() |> check_result()
 ```
 
-# Tidy
+## The Tidyverse
 
 | | | |
-| - | - | - | - |
-| [![](images/dplyr.png){width='100'}](https://dplyr.tidyverse.org){target='_blank'}<br>dplyr | [![](images/ggplot2.png){width='100'}](https://ggplot2.tidyverse.org){target='_blank'}<br>ggplot2 | 3 | 4 |
-| 5 | 6 | 7 | 8 |
+|:-:|:-:|:-:|:-:|
+| [![](images/dplyr.png){#fig-dplyr width='180' fig-caption='test'}](https://dplyr.tidyverse.org){target='_blank'}<br>[`dplyr` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://dplyr.tidyverse.org){target='_blank'} | [![](images/ggplot2.png){width='180'}](https://ggplot2.tidyverse.org){target='_blank'}<br>[`ggplot2` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://ggplot2.tidyverse.org){target='_blank'} | [![](images/forcats.png){width='180'}](https://forcats.tidyverse.org){target='_blank'}<br>[`forcats` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://forcats.tidyverse.org){target='_blank'} | [![](images/tibble.png){width='180'}](https://tibble.tidyverse.org){target='_blank'}<br>[`tibble` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://tibble.tidyverse.org){target='_blank'} |
+| [![](images/readr.png){width='180'}](https://readr.tidyverse.org){target='_blank'}<br>[`readr` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://readr.tidyverse.org){target='_blank'} | [![](images/stringr.png){width='180'}](https://stringr.tidyverse.org){target='_blank'}<br>[`stringr` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://stringr.tidyverse.org){target='_blank'} | [![](images/tidyr.png){width='180'}](https://tidyr.tidyverse.org){target='_blank'}<br>[`tidyr` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://tidyr.tidyverse.org){target='_blank'} | [![](images/purrr.png){width='180'}](https://purrr.tidyverse.org){target='_blank'}<br>[`purrr` <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://purrr.tidyverse.org){target='_blank'} |
 
-# The Tidyverse {.title-08 data-stack-name="The Tidyverse"}
-
+<!-- 
 ::: columns
 ::: {.column width="50%"}
 
@@ -303,17 +354,49 @@ raw_data |> filter() |> summarize() |> check_result()
 * <a href="https://purrr.tidyverse.org/" target="_blank">`purrr` <i class='bi bi-box-arrow-up-right'></i></a>
 
 :::
+::: -->
+
+
+## `readr` {.crunch-title .crunch-ul .smaller .crunch-callout .smaller-table}
+
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://readr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.had.co.nz/data-import.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf){target='_blank'}
+
+Two key functions: `read_csv()`, `write_csv()` (Bonus: `read_delim()` if others fail)
+  
+::: {.callout-warning icon="false" title="<i class='bi bi-exclamation-triangle'></i> Warning! `read_csv()` vs. `read.csv()`"}
+
+Note that these are **not the same** as `R`'s built-in `read.csv()` and `write.csv()`! The built-in `R` functions will produce a plain `data.frame` object, not a `tibble`
+
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+
+* Can handle URLs as well!
+* **Share data+code** in seconds by using in combination with [GitHub Gist](https://gist.github.com/){target='_blank'}
+* (No `read_csv()` path issues either 😉)
+* [Gist dataset <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://gist.github.com/jpowerj/fecd437b96d0954893de727383f2eaf2){target="_blank"}
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: read-csv-gist
+gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv")
+gdp_df |> head(6)
+```
+
+:::
 :::
 
 ## `tibble` {.smaller}
 
-<a href="https://tibble.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/tibbles.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf" target="_blank">Cheatsheet</a>
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://tibble.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://r4ds.had.co.nz/tibbles.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf){target='_blank'}
 
-::: {layout="[30,70]"}
+::: {.columns}
+::: {.column width="50%"}
 
-::: {#tibble-backwards}
-
-* Replaces `R`'s built-in `data.frame` objects, but retains syntax for backwards compatibility:
+Replaces `R`'s built-in `data.frame`, but retains syntax for backwards compatibility:
 
 ```{r}
 #| label: tibble-backwards
@@ -321,13 +404,15 @@ raw_data |> filter() |> summarize() |> check_result()
 library(tibble)
 data <- c(3.4,1.1,9.6)
 labels <- c(0,1,0)
-supervised_df <- tibble(x=data, y=labels)
+supervised_df <- tibble::tibble(
+  x=data,
+  y=labels
+)
 supervised_df
 ```
 
 :::
-
-::: {#tribble}
+::: {.column width="50%"}
 
 * Provides a surprisingly useful function: `tribble()` (tibble defined row-by-row)
 
@@ -338,91 +423,93 @@ library(tibble)
 dsan_df <- tibble::tribble(
     ~code, ~topic, ~credits,
     "dsan5000", "Data Science", 3,
-    "dsan5100", "Probabilistic Modeling", 3
+    "dsan5100", "Probability", 3,
+    "dsan5200", "Visualization", 3
 )
 dsan_df
 ```
 
 :::
-
 :::
 
-## `dplyr`
+## `dplyr` {.smaller-table-18}
 
-<a href="https://dplyr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/transform.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" target="_blank">Cheatsheet</a>
+[Homepage <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://dplyr.tidyverse.org){target='_blank'} | [Overview (*R4DS*) <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://r4ds.had.co.nz/transform.html){target='_blank'} | [PDF Cheatsheet <i class='bi bi-box-arrow-up-right' style='font-size: 2rem;'></i>](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf){target='_blank'}
 
 ::: columns
 ::: {.column width="45%"}
 
-**Grammar** of data manipulation (think **verbs**):
+**Grammar** of data manipulation (**verbs**):
 
-* `filter()`
-* `select()`
-* `arrange()`
-* `mutate()`
-* `summarize()`
+<i class='bi bi-1-circle'></i> `filter()`
+
+<i class='bi bi-2-circle'></i> `select()`
+
+<i class='bi bi-3-circle'></i> `arrange()`
+
+<i class='bi bi-4-circle'></i> `mutate()`
+
+<i class='bi bi-5-circle'></i> `summarize()`
 
 :::
-::: {.column .smallertext width="55%"}
+::: {.column width="55%"}
 
-`filter()`:
+<i class='bi bi-1-circle'></i> `filter()`: Keep **rows** matching a boolean condition
 
 ```{r}
 #| label: dplyr-filter
 #| echo: true
-#| code-fold: show
 table1 |> filter(year == 2000)
 ```
 
 :::
 :::
 
-## {.smaller}
+## `dplyr` {.crunch-title .smaller .smaller-table}
 
 ::: columns
-::: {.column width="50%"}
+::: {.column width="45%"}
 
-`select()`:
+<i class='bi bi-2-circle'></i> `select()`:
 
 ```{r}
 #| label: dplyr-select
 #| echo: true
-#| code-fold: show
 table1 |> select(country)
+table1 |> select(-country) |> head(3)
 ```
 
 :::
-::: {.column width="50%"}
+::: {.column width="55%"}
 
-`arrange()`:
+<i class='bi bi-3-circle'></i> `arrange()`:
 
 ```{r}
 #| label: dplyr-arrange
 #| echo: true
-#| code-fold: show
 table1 |> arrange(population)
+table1 |> arrange(desc(population)) |> head(3)
 ```
 
 :::
 :::
 
-## {.smaller}
+## `dplyr` {.smaller}
 
-`mutate()`:
+<i class='bi bi-4-circle'></i> `mutate()`:
 
 ```{r}
 #| label: dplyr-mutate
 #| echo: true
-#| code-fold: show
 table1 |> mutate(newvar = 300)
 ```
 
-## {.smaller}
+## `dplyr` {.smaller}
 
 ::: columns
 ::: {.column width="50%"}
 
-`summarize()`:
+<i class='bi bi-5-circle'></i> `summarize()`:
 
 ```{r}
 #| label: dplyr-summarize
@@ -455,7 +542,170 @@ table1 |>
 :::
 :::
 
-## The Rest of the Tidyverse
+# The Tidyverse in Action {data-stack-name="Tidyverse in Action"}
+
+* Let's walk through a common data-analysis task (data cleaning and merging), seeing how the `readr`, `tibble` and `dplyr` functions help us!
+
+## Merging Data {.smaller .crunch-title}
+
+* The task: Analyze relationship between population and GDP (in 2000)
+* The data: One dataset on population in 2000, another on GDP in 2000
+* Let's get the data **ready for merging** using R
+
+::: columns
+::: {.column width="40%"}
+
+```{r}
+#| label: tidyverse-filter-select
+df <- table1 |>
+  select(country, year, population) |>
+  filter(year == 2000)
+df |> write_csv("assets/pop_2000.csv")
+df
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| label: load-gdp-data
+#| code-fold: show
+gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv")
+gdp_df |> head(5)
+```
+
+:::
+
+:::
+
+## Selecting/Filtering in Action {.smaller}
+
+```{r}
+#| label: clean-gdp-data
+#| code-fold: show
+gdp_2000_df <- gdp_df |>
+  select(`Country Name`,Year,Value) |>
+  filter(Year == "2000") |>
+  rename(country=`Country Name`, year=`Year`, gdp=`Value`)
+gdp_2000_df |> write_csv("assets/gdp_2000.csv")
+gdp_2000_df |> head()
+```
+
+## Recommended Language: Python {.smaller .crunch-title .crunch-ul .smaller-table}
+
+* Remember that we're using **Quarto**, so we can switch to Python whenever we'd like!
+* Pandas provides an easy-to-use `df.merge(other_df)`
+* *(see [Appendix Slides](#appendix-the-rest-of-the-tidyverse) for merging via Tidyverse)*
+
+::: columns
+::: {.column width="50%"}
+
+```{python}
+#| label: py-load-pop-data
+#| echo: false
+#| output: false
+import pandas as pd
+from IPython.display import Markdown
+pop_df = pd.read_csv("assets/pop_2000.csv")
+```
+
+```{python}
+#| label: py-load-gdp-data
+#| echo: false
+gdp_df = pd.read_csv("assets/gdp_2000.csv")
+```
+
+<center>
+**Left Join**
+</center>
+
+```{python}
+#| label: py-merge
+#| echo: true
+merged_df = pop_df.merge(gdp_df,
+  on='country', how='left', indicator=True
+)
+Markdown(merged_df.to_markdown())
+```
+
+:::
+::: {.column width="50%"}
+
+<center>
+**Inner join** (&asymp; Intersection ($\cap$))
+</center>
+
+```{python}
+#| label: py-merge-right
+#| echo: true
+merged_df = pop_df.merge(gdp_df,
+  on='country', how='inner', indicator=True
+)
+Markdown(merged_df.to_markdown())
+```
+
+:::
+:::
+
+## Reshaping Data {.smaller}
+
+Sometimes you can't merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right
+
+::: columns
+::: {.column width="55%"}
+
+In data-cleaning jargon, this dataset is **long** (more than one row per observation)
+
+```{r}
+#| label: r-long-data
+table2 |> write_csv("assets/long_data.csv")
+table2 |> head()
+```
+
+:::
+::: {.column width="45%"}
+
+In data-cleaning jargon, this dataset is **wide** (one row per obs; usually **tidy**)
+
+```{r}
+#| label: r-wide-data
+table1 |> write_csv("assets/wide_data.csv")
+table1 |> head()
+```
+
+:::
+:::
+
+## Wide-to-Long in R: `gather()` {.smaller}
+
+::: columns
+::: {.column width="40%"}
+
+```{r}
+#| label: r-display-wide-for-reshape
+#| code-fold: show
+table1
+```
+
+:::
+::: {.column width="60%"}
+
+```{r}
+#| label: r-reshape
+#| code-fold: show
+long_df <- gather(table1,
+  key = "variable",
+  value = cases,
+  -c(country, year)
+)
+long_df |> head()
+```
+
+:::
+:::
+
+# Appendix: The Rest of the Tidyverse {data-stack-name="Appendix"}
 
 * `forcats`
 * `readr`
@@ -618,33 +868,6 @@ gss_cat |>
 :::
 :::
 
-## `readr` {.shift-footnotes .crunch-title .crunch-ul .smaller}
-
-<a href="https://readr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/data-import.html" target="_blank">Overview</a> | <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf" target="_blank">Cheatsheet</a>
-
-* Two key functions: `read_csv()`, `write_csv()`[^delim]
-  
-  ::: {.callout-warning title="Warning! `read_csv()` vs. `read.csv()`"}
-Note that these are **not the same** as `R`'s built-in `read.csv()` and `write.csv()`! The built-in `R` functions will produce a plain `data.frame` object, not a `tibble`
-:::
-
-::: {layout-ncol=2}
-
-* Can handle URLs as well!
-* **Share data+code** in seconds by using in combination with GitHub Gist
-* (No more `read_csv()` path issues either...)
-* [Gist dataset &rarr;](https://gist.github.com/jpowerj/fecd437b96d0954893de727383f2eaf2){target="_blank"}
-
-```{r}
-#| label: read-csv-gist
-gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/fecd437b96d0954893de727383f2eaf2/raw/fec58507f7095cb8341b229d6eb74ce53232d663/gdp_2010.csv")
-gdp_df |> head(6)
-```
-
-:::
-
-[^delim]: Plus a bonus `read_delim()` if `read_csv()` fails
-
 ## `purrr`: Functional Programming {.smaller}
 
 <a href="https://purrr.tidyverse.org/" target="_blank">Homepage</a> | <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">Overview</a> | <a href="https://github.com/rstudio/cheatsheets/blob/main/purrr.pdf" target="_blank">Cheatsheet</a> | <a href="https://jennybc.github.io/purrr-tutorial/index.html" target="_blank">Tutorials, with Applications</a>
@@ -698,284 +921,4 @@ library(tidyverse)
 library(lubridate)
 ```
 
-:::
-
-# Cleaning Text Data {data-stack-name="Text Data"}
-
-## One of the Scariest Papers of All Time {.smaller .crunch-title}
-
-```{=html}
-<style>
-#fig-denny-spirling .caption {
-    text-align: left !important;
-}
-#fig-denny-spirling figcaption {
-    text-align: left !important;
-}
-</style>
-```
-
-*Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It* [@denny_text_2018] ([PDF Link](https://www.cambridge.org/core/journals/political-analysis/article/abs/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E){target="_blank"})
-
-::: {layout-ncol=2}
-
-::: {#fig-denny-spirling}
-
-<img src="images/denny_spirling.gif" width="200" align="center" style="margin-top: 0px !important; margin-bottom: 0px !important;"></img>
-
-A plot where $x$-axis represents UK party manifestos (arranged on left-right ideology dimension, $y$-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was **placed incorrectly** on the ideological dimension when that preprocessing combination was used.
-:::
-
-![An ancient hieroglyph](images/missingno.svg){#fig-missingno fig-align="center" width="200"}
-
-:::
-
-## The Secret Behind All Text Analysis {.smaller .crunch-title .crunch-figures}
-
-::: {layout="[[45],[45,10,45]]" layout-valign="center"}
-
-::: {#fig-corpus}
-::: {layout-ncol=3 layout-valign="center"}
-
-![](images/text_as_data.jpeg){fig-align="center"}
-
-![](images/finnegans_wake_morecrop.jpeg){fig-align="center" width="390"}
-
-![](images/tidytext.jpeg){fig-align="center"}
-
-:::
-
-Excerpts from two data science textbooks, plus another book
-:::
-
-::: {#fig-dtm}
-
-<i class="bi bi-arrow-down" style="padding-top: 10px !important;"></i>
-
-
-| doc_id | `text` | `texts` | `Kékkek` | `voice` |
-| - | - | - | - | - | - |
-| 0 | 0 | 6 | 0 | 1 |
-| 1 | 0 | 0 | 3 | 1 |
-| 2 | 6 | 0 | 0 | 0 |
-
-The **Document-Term Matrix** (**DTM**)
-:::
-
-::: {#cleaning-arrow}
-
-<center>
-<i class="bi bi-arrow-right ps-3"></i>
-</center>
-
-:::
-
-::: {#fig-cleaned-dtm}
-
-<i class="" style="padding-top: 10px !important;">&nbsp;</i>
-
-| doc_id | `text` | `kekkek` | `voice` |
-| - | - | - | - | - | - |
-| 0 | 6 | 0 | 1 |
-| 1 | 0 | 3 | 1 |
-| 2 | 6 | 0 | 0 |
-
-The **cleaned** DTM, after **lowercasing**, **lemmatization**, and **unicode standardization**
-:::
-
-:::
-
-## *Select*ing Columns {.smaller}
-
-`select()` lets you keep only the **columns** you care about in your current analysis:
-
-::: {layout-ncol=2}
-
-```{r}
-#| label: tidyverse-select-load-data
-library(tidyverse)
-table1
-```
-
-```{r}
-#| label: tidyverse-select
-#| code-fold: show
-table1 |> select(country, year, population)
-```
-
-:::
-
-## *Filter*ing Rows {.smaller}
-
-`filter()` lets you keep only the **rows** you care about in your current analysis:
-
-::: {layout-ncol=2}
-
-```{r}
-#| label: tidyverse-filter-year
-table1 |> filter(year == 2000)
-```
-
-```{r}
-#| label: tidyverse-filter-country
-table1 |> filter(country == "Afghanistan")
-```
-
-:::
-
-## Merging Data {.smaller .crunch-title}
-
-* The task: Analyze relationship between population and GDP (in 2000)
-* The data: One dataset on population in 2000, another on GDP in 2000
-* Let's get the data **ready for merging** using R
-
-::: columns
-::: {.column width="40%"}
-
-```{r}
-#| label: tidyverse-filter-select
-df <- table1 |>
-  select(country, year, population) |>
-  filter(year == 2000)
-df |> write_csv("assets/pop_2000.csv")
-df
-```
-
-:::
-
-::: {.column width="60%"}
-
-```{r}
-#| label: load-gdp-data
-#| code-fold: show
-gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv")
-gdp_df |> head(5)
-```
-
-:::
-
-:::
-
-## Selecting/Filtering in Action {.smaller}
-
-```{r}
-#| label: clean-gdp-data
-#| code-fold: show
-gdp_2000_df <- gdp_df |>
-  select(`Country Name`,Year,Value) |>
-  filter(Year == "2000") |>
-  rename(country=`Country Name`, year=`Year`, gdp=`Value`)
-gdp_2000_df |> write_csv("assets/gdp_2000.csv")
-gdp_2000_df |> head()
-```
-
-## Recommended Language: Python {.smaller .crunch-title .crunch-ul}
-
-Pandas provides an easy-to-use `df.merge(other_df)`!
-
-::: columns
-::: {.column width="50%"}
-
-```{python}
-#| label: py-load-pop-data
-#| echo: false
-#| output: false
-import pandas as pd
-from IPython.display import Markdown
-pop_df = pd.read_csv("assets/pop_2000.csv")
-```
-
-```{python}
-#| label: py-load-gdp-data
-#| echo: false
-gdp_df = pd.read_csv("assets/gdp_2000.csv")
-```
-
-<center>
-**Left Join**
-</center>
-
-```{python}
-#| label: py-merge
-#| code-fold: show
-merged_df = pop_df.merge(gdp_df,
-  on='country', how='left', indicator=True
-)
-Markdown(merged_df.to_markdown())
-```
-
-:::
-::: {.column width="50%"}
-
-<center>
-**Inner join** (&asymp; Intersection ($\cap$))
-</center>
-
-```{python}
-#| label: py-merge-right
-#| code-fold: show
-merged_df = pop_df.merge(gdp_df,
-  on='country', how='inner', indicator=True
-)
-Markdown(merged_df.to_markdown())
-```
-
-:::
-:::
-
-## Reshaping Data {.smaller}
-
-Sometimes you can't merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right
-
-::: columns
-::: {.column width="55%"}
-
-In data-cleaning jargon, this dataset is **long** (more than one row per observation)
-
-```{r}
-#| label: r-long-data
-table2 |> write_csv("assets/long_data.csv")
-table2 |> head()
-```
-
-:::
-::: {.column width="45%"}
-
-In data-cleaning jargon, this dataset is **wide** (one row per obs; usually **tidy**)
-
-```{r}
-#| label: r-wide-data
-table1 |> write_csv("assets/wide_data.csv")
-table1 |> head()
-```
-
-:::
-:::
-
-## Wide-to-Long in R: `gather()` {.smaller}
-
-::: columns
-::: {.column width="40%"}
-
-```{r}
-#| label: r-display-wide-for-reshape
-#| code-fold: show
-table1
-```
-
-:::
-::: {.column width="60%"}
-
-```{r}
-#| label: r-reshape
-#| code-fold: show
-long_df <- gather(table1,
-  key = "variable",
-  value = cases,
-  -c(country, year)
-)
-long_df |> head()
-```
-
-:::
 :::

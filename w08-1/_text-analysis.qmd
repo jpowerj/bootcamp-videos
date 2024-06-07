@@ -1,0 +1,85 @@
+
+# Cleaning Text Data {data-stack-name="Text Data"}
+
+## One of the Scariest Papers of All Time {.smaller .crunch-title}
+
+```{=html}
+<style>
+#fig-denny-spirling .caption {
+    text-align: left !important;
+}
+#fig-denny-spirling figcaption {
+    text-align: left !important;
+}
+</style>
+```
+
+*Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It* [@denny_text_2018] ([PDF Link](https://www.cambridge.org/core/journals/political-analysis/article/abs/text-preprocessing-for-unsupervised-learning-why-it-matters-when-it-misleads-and-what-to-do-about-it/AA7D4DE0AA6AB208502515AE3EC6989E){target="_blank"})
+
+::: {layout-ncol=2}
+
+::: {#fig-denny-spirling}
+
+<img src="images/denny_spirling.gif" width="200" align="center" style="margin-top: 0px !important; margin-bottom: 0px !important;"></img>
+
+A plot where $x$-axis represents UK party manifestos (arranged on left-right ideology dimension, $y$-axis slots represent an ordering of preprocessing steps, and a filled bar means the manifesto was **placed incorrectly** on the ideological dimension when that preprocessing combination was used.
+:::
+
+![An ancient hieroglyph](images/missingno.svg){#fig-missingno fig-align="center" width="200"}
+
+:::
+
+## The Secret Behind All Text Analysis {.smaller .crunch-title .crunch-figures}
+
+::: {layout="[[45],[45,10,45]]" layout-valign="center"}
+
+::: {#fig-corpus}
+::: {layout-ncol=3 layout-valign="center"}
+
+![](images/text_as_data.jpeg){fig-align="center"}
+
+![](images/finnegans_wake_morecrop.jpeg){fig-align="center" width="390"}
+
+![](images/tidytext.jpeg){fig-align="center"}
+
+:::
+
+Excerpts from two data science textbooks, plus another book
+:::
+
+::: {#fig-dtm}
+
+<i class="bi bi-arrow-down" style="padding-top: 10px !important;"></i>
+
+
+| doc_id | `text` | `texts` | `Kékkek` | `voice` |
+| - | - | - | - | - | - |
+| 0 | 0 | 6 | 0 | 1 |
+| 1 | 0 | 0 | 3 | 1 |
+| 2 | 6 | 0 | 0 | 0 |
+
+The **Document-Term Matrix** (**DTM**)
+:::
+
+::: {#cleaning-arrow}
+
+<center>
+<i class="bi bi-arrow-right ps-3"></i>
+</center>
+
+:::
+
+::: {#fig-cleaned-dtm}
+
+<i class="" style="padding-top: 10px !important;">&nbsp;</i>
+
+| doc_id | `text` | `kekkek` | `voice` |
+| - | - | - | - | - | - |
+| 0 | 6 | 0 | 1 |
+| 1 | 0 | 3 | 1 |
+| 2 | 6 | 0 | 0 |
+
+The **cleaned** DTM, after **lowercasing**, **lemmatization**, and **unicode standardization**
+:::
+
+:::
