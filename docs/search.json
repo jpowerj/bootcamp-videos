@@ -11,7 +11,7 @@
     "href": "w07-1/slides.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 22:9\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 22:9\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 14:4\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood afternoon!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 14:4\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good afternoon!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/slides.html#the-ternary-operator",
@@ -53,7 +53,7 @@
     "href": "w07-1/slides.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003496885 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.332576 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003725052 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.458429 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/slides.html#how-is-it-that-much-faster",
@@ -109,7 +109,7 @@
     "href": "w07-1/index.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 22:9\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 22:9\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 14:4\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood afternoon!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 14:4\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good afternoon!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/index.html#the-ternary-operator",
@@ -151,7 +151,7 @@
     "href": "w07-1/index.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003641844 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.409084 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003483057 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.364588 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/index.html#how-is-it-that-much-faster",
@@ -228,7 +228,7 @@
     "href": "w06-3/slides.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 5 5 6 1 5 7 6 4 2 5 3 6 7 2 4 4 5 7 5 7\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 49 41 50 57 50 52 52 53 56 56\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 5 7 8 5 6 7 6 3 7 8 8 9 2 7 3 7 7 5 6 4\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 49 53 51 58 55 50 49 52 50 54\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/slides.html#combining-strings",
@@ -354,7 +354,7 @@
     "href": "w06-3/index.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 6 5 3 3 5 4 5 2 4 7 4 0 5 4 1 3 4 5 5 6\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 55 43 59 57 51 45 46 51 43 54\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 5 4 7 5 6 6 5 5 5 4 3 3 4 6 4 6 5 5 6 5\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 44 59 46 53 50 43 48 36 54 53\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/index.html#combining-strings",
@@ -707,14 +707,98 @@
     "href": "w08-1/index.html#plus-way-wider-range-of-plot-types",
     "title": "Data Visualization in R",
     "section": "Plus Way Wider Range of Plot Types!",
-    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\n\n\nShapefile from OpenData.DC.gov"
+    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\n\n\nLinking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE\n\n\nCode\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\n\n\n\n\n\nFigure 1: Life expectancy by ward; Shapefile from OpenData.DC.gov"
+  },
+  {
+    "objectID": "w08-1/index.html#cant-we-just-use-fancy-statistical-methods",
+    "href": "w08-1/index.html#cant-we-just-use-fancy-statistical-methods",
+    "title": "Data Visualization in R",
+    "section": "…Can’t We Just Use Fancy Statistical Methods?",
+    "text": "…Can’t We Just Use Fancy Statistical Methods?\n\n…Enter Anscombe’s Quartet\n\n\n\nCode\nlibrary(tidyverse)\nlibrary(datasets)\nanscombe_df &lt;- datasets::anscombe |&gt;\n  #mutate(id = row_number()) |&gt;\n  pivot_longer(\n    everything(),\n    cols_vary = \"slowest\",\n    names_to = c(\".value\", \"Dataset\"),\n    names_pattern = \"(.)(.)\"\n  )\nanscombe_plot_base &lt;- anscombe_df |&gt;\n  ggplot(aes(x=x, y=y, color=Dataset)) +\n  geom_point(size=g_pointsize / 2) +\n  geom_smooth(method=\"lm\", se=FALSE, fullrange=TRUE) +\n  dsan_theme(\"full\") +\n  xlim(c(4, 20)) + ylim(c(2, 14))\nanscombe_plot_base +\n  facet_wrap(vars(Dataset), nrow=2, scales=\"free\")\n\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "w08-1/index.html#the-scariest-dataset-of-all-time",
+    "href": "w08-1/index.html#the-scariest-dataset-of-all-time",
+    "title": "Data Visualization in R",
+    "section": "The Scariest Dataset of All Time",
+    "text": "The Scariest Dataset of All Time\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\n\n\nMeans\n\n\n\nCode\nanscombe_df |&gt; group_by(Dataset) |&gt;\n  summarize(\n    x_mean = round(mean(x), 2),\n    y_mean = round(mean(y), 2)\n  )\n\n\n\n\n\n\n\n\nDataset\nx_mean\ny_mean\n\n\n\n\n1\n9\n7.5\n\n\n2\n9\n7.5\n\n\n3\n9\n7.5\n\n\n4\n9\n7.5\n\n\n\n\n\n\nFigure 2: Column means for each dataset\n\n\n\n\n\n\nStandard Deviations\n\n\n\nCode\nanscombe_df |&gt; group_by(Dataset) |&gt;\n  summarize(\n    x_sd = round(sd(x), 2),\n    y_sd = round(sd(y), 2)\n  )\n\n\n\n\n\n\n\n\nDataset\nx_sd\ny_sd\n\n\n\n\n1\n3.32\n2.03\n\n\n2\n3.32\n2.03\n\n\n3\n3.32\n2.03\n\n\n4\n3.32\n2.03\n\n\n\n\n\n\nFigure 3: Standard deviations for each dataset\n\n\n\n\n\n\nCorrelations\n\n\n\nCode\nlibrary(corrr)\ncorr_df &lt;- anscombe_df |&gt;\n  group_by(Dataset) |&gt;\n  summarize(\n    r = round(cor(x, y), 2)\n  )\ncorr_df\n\n\n\n\n\n\n\n\nDataset\nr\n\n\n\n\n1\n0.82\n\n\n2\n0.82\n\n\n3\n0.82\n\n\n4\n0.82\n\n\n\n\n\n\nFigure 4: Correlation between \\(x\\) and \\(y\\) for each dataset"
+  },
+  {
+    "objectID": "w08-1/index.html#it-gets-worse",
+    "href": "w08-1/index.html#it-gets-worse",
+    "title": "Data Visualization in R",
+    "section": "It Gets Worse…",
+    "text": "It Gets Worse…\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\n\nCode\nlibrary(broom)\nlm_df &lt;- anscombe_df |&gt; group_by(Dataset) |&gt;\n  do(tidy(lm(y ~ x, data = .))) |&gt;\n  mutate(across(where(is.numeric), round, 2)) |&gt;\n  ungroup() |&gt;\n  mutate(\n    term = gsub(\"Intercept\",\"Int\", term)\n  )\n\n\nWarning: There was 1 warning in `mutate()`.\nℹ In argument: `across(where(is.numeric), round, 2)`.\nℹ In group 1: `Dataset = \"1\"`.\nCaused by warning:\n! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.\nSupply arguments directly to `.fns` through an anonymous function instead.\n\n  # Previously\n  across(a:b, mean, na.rm = TRUE)\n\n  # Now\n  across(a:b, \\(x) mean(x, na.rm = TRUE))\n\n\n\n\n\n\nCode\nlm_df |&gt; filter(Dataset == 1) |&gt; select(!Dataset)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\n\nCode\nlm_df |&gt; filter(Dataset == 2) |&gt; select(!Dataset)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.13\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nlm_df |&gt; filter(Dataset == 3) |&gt; select(!Dataset)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\n\nCode\nlm_df |&gt; filter(Dataset == 4) |&gt; select(!Dataset)\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00"
   },
   {
     "objectID": "w08-1/index.html#intuition",
     "href": "w08-1/index.html#intuition",
     "title": "Data Visualization in R",
     "section": "Intuition",
-    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects (grammatical structure)\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings"
+    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects\n\n\n\n\n\n\n\nG\n\n\ncluster_2\n\nBiko\n\n\ncluster_1\n\nhugged\n\n\ncluster_0\n\nJeff\n\n\n\ndata\n\nSubject\n\n\n\naes\n\nVerb\n\n\n\ndata-&gt;aes\n\n\n\n\n\ngeom\n\nObject\n\n\n\naes-&gt;geom\n\n\n\n\n\n\n\n\n\n\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings\n\n\n\n\n\n\n\nG\n\n\ncluster_2\n\ngeom_point()\n\n\ncluster_0\n\nmy_data |&gt;\n\n\ncluster_1\n\nggplot(aes(x=year, y=height)) |&gt;\n\n\n\ndata\n\nData\n\n\n\naes\n\nAesthetics\n\n\n\ndata-&gt;aes\n\n\n\n\n\ngeom\n\nGeometry\n\n\n\naes-&gt;geom"
+  },
+  {
+    "objectID": "w08-1/index.html#graphical-primitives",
+    "href": "w08-1/index.html#graphical-primitives",
+    "title": "Data Visualization in R",
+    "section": "Graphical Primitives",
+    "text": "Graphical Primitives\nSplit the visualization task into discrete steps, joined by |&gt;!\n\n\n\n\nLayer\nFunction\nExplanation\n\n\n\n\nData\nggplot(df)\nRaw data you want to visualize\n\n\nAesthetics\naes(x=xcol,y=ycol)\nMapping of df columns onto geometries\n\n\nGeometries\ngeom_*()\nWhich geometric objects to use\n\n\nFacets\nfacet_*()\nArrangement of plots into a grid\n\n\nTheme\ntheme(), labs()\nOverall visual defaults, titles, axis labels\n\n\n\n\n(See the official ggplot2 book for more!)"
+  },
+  {
+    "objectID": "w08-1/index.html#ggplot2-in-practice",
+    "href": "w08-1/index.html#ggplot2-in-practice",
+    "title": "Data Visualization in R",
+    "section": "ggplot2 In Practice",
+    "text": "ggplot2 In Practice\n(In practice, a few central graphical primitives you’ll use over and over again)\n\n\n\ngeom_bar()\n\n\n\nCode\nbar_data &lt;- tribble(\n  ~Category, ~Value,\n  \"A\", 100,\n  \"B\", 200\n)\nggplot(bar_data, aes(x=Category, y=Value)) +\n  geom_bar(stat=\"identity\") +\n  dsan_theme(\"quarter\")\n\n\n\n\n\n\n\n\n\n\n\nstat_function()\n\n\n\nCode\nggplot(data.frame(x=c(-4,4)), aes(x=x)) +\n  stat_function(fun=dnorm, linewidth=g_linewidth) +\n  dsan_theme(\"quarter\")"
+  },
+  {
+    "objectID": "w08-1/index.html#common-geometries",
+    "href": "w08-1/index.html#common-geometries",
+    "title": "Data Visualization in R",
+    "section": "Common Geometries",
+    "text": "Common Geometries\n\n\ngeom_point() for scatterplots\n\n\nCode\nN_scatter &lt;- 50\nrandom_points &lt;- data.frame(x=runif(N_scatter,0,1),y=runif(N_scatter,0,1))\nggplot(random_points, aes(x=x, y=y)) +\n  geom_point(size = g_pointsize) +\n  dsan_theme(\"quarter\")\n\n\n\n\n\n\n\n\n\n\nand geom_line() for line graphs\n\n\nCode\nN_line &lt;- 15\nrand_line &lt;- data.frame(x=seq(1,N_line),y=runif(N_line,0,10))\nggplot(rand_line, aes(x=x, y=y)) +\n  geom_line(linewidth = g_linewidth) +\n  dsan_theme(\"quarter\")"
+  },
+  {
+    "objectID": "w08-1/index.html#combining-geometries",
+    "href": "w08-1/index.html#combining-geometries",
+    "title": "Data Visualization in R",
+    "section": "Combining Geometries",
+    "text": "Combining Geometries\n…Which can be used together in a single plot:\n\n\nCode\nggplot(rand_line, aes(x=x, y=y)) +\n  geom_line(linewidth=g_linewidth) +\n  geom_point(size=g_pointsize/2) +\n  dsan_theme(\"full\")"
+  },
+  {
+    "objectID": "w08-1/index.html#titles-axis-labels",
+    "href": "w08-1/index.html#titles-axis-labels",
+    "title": "Data Visualization in R",
+    "section": "Titles + Axis Labels",
+    "text": "Titles + Axis Labels\nCan all be accomplished using the labs() function!\n\n\n\n\nCode\nrand_plot &lt;- rand_line |&gt;\n  ggplot(aes(x=x, y=y)) +\n  geom_line(linewidth=g_linewidth) +\n  geom_point(size=g_pointsize/2) +\n  dsan_theme(\"quarter\") +\n  labs(\n    title = \"My Cool Plot\",\n    x = \"The x value\",\n    y = \"The y value\"\n  )\n\n\n\n\n\nCode\nrand_plot"
+  },
+  {
+    "objectID": "w08-1/index.html#categorical-variables",
+    "href": "w08-1/index.html#categorical-variables",
+    "title": "Data Visualization in R",
+    "section": "Categorical Variables",
+    "text": "Categorical Variables\nUse the color aesthetic with factor() to differentiate categories\n\n\n(Clustered data generation code)\nset.seed(2024)\ncentroids &lt;- list(c(0,0),c(0,1),c(1,0),c(1,1))\ncluster_df &lt;- tibble()\nN &lt;- 50\nSigma &lt;- matrix(c(0.05, 0, 0, 0.05), nrow=2, ncol=2, byrow=TRUE)\nfor (i in 1:length(centroids)) {\n  cur_centroid &lt;- centroids[[i]]\n  # Generate N points from this centroid\n  cur_data &lt;- MASS::mvrnorm(N, cur_centroid, Sigma)\n  colnames(cur_data) &lt;- c(\"x\", \"y\")\n  cur_df &lt;- as_tibble(cur_data)\n  cur_df &lt;- cur_df |&gt; mutate(\n    cluster = i\n  )\n  cluster_df &lt;- rbind(cluster_df, cur_df)\n}\n\n\n\n\nWithout factor() \n\n\nCode\ncluster_df |&gt; ggplot(aes(x=x, y=y, color=cluster)) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\")\n\n\n\n\n\n\n\n\n\n\nWith factor() 💯\n\n\nCode\ncluster_df |&gt; ggplot(aes(x=x, y=y, color=factor(cluster))) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\")"
+  },
+  {
+    "objectID": "w08-1/index.html#facets",
+    "href": "w08-1/index.html#facets",
+    "title": "Data Visualization in R",
+    "section": "Facets",
+    "text": "Facets\nIf individual plot gets too busy, facets provide an easy way to split data into multiple (automatically-labeled) plots!\n\n\n\n\nCode\nfacet_plot &lt;- cluster_df |&gt;\n  ggplot(aes(\n    x=x, y=y,\n    color=factor(cluster)\n  )) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\") +\n  facet_wrap(vars(cluster),nrow=2)\n\n\n\n\nfacet_plot\n\n\n\n\n\n\n\n\n\n\n(Much more on this in DSAN 5200: Advanced Data Visualization 😉)"
+  },
+  {
+    "objectID": "w08-1/index.html#wordclouds-in-r",
+    "href": "w08-1/index.html#wordclouds-in-r",
+    "title": "Data Visualization in R",
+    "section": "Wordclouds in R",
+    "text": "Wordclouds in R\nUsing the ggwordcloud add-on to ggplot2!\n\n\nCode\nlibrary(showtext)\n\n\nLoading required package: sysfonts\n\n\nLoading required package: showtextdb\n\n\nCode\nshowtext_auto()\nlibrary(ggwordcloud)\n\n\nWarning: package 'ggwordcloud' was built under R version 4.3.3\n\n\nCode\ndata(\"love_words_latin\")\nlove_words_latin\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_639_3\nword\nname\nnative_speakers\nspeakers\n\n\n\n\neng\nLove\nEnglish\n400.0000\n800.0000\n\n\nspa\nAmor\nSpanish\n480.0000\n555.0000\n\n\nfra\nAmour\nFrench\n76.8000\n350.8000\n\n\nmsa\nCinta\nMalay\n77.0000\n277.0000\n\n\npor\nAmor\nPortuguese\n220.0000\n243.0000\n\n\nind\nCinta\nIndonesian\n43.0000\n199.0000\n\n\nita\nAmore\nItalian\n90.0000\n114.0000\n\n\ndeu\nLiebe\nGerman\n95.0000\n107.5000\n\n\nswa\nPendo\nSwahili\n8.0000\n98.0000\n\n\ntur\nAsk\nTurkish\n78.5000\n88.0000\n\n\njav\nTresna\nJavanese\n82.0000\n82.0000\n\n\nvie\nTinh yeu\nVietnamese\n75.0000\n75.0000\n\n\ntgl\nPag-ibig\nTagalog\n28.0000\n73.0000\n\n\nhau\nSoyayya\nHausa\n43.7000\n63.2000\n\n\nibo\nIhunanya\nIgbo\n50.0000\n50.0000\n\n\npol\nMilosc\nPolish\n45.0000\n50.0000\n\n\nhak\nOi\nHakka Chinese\n47.8000\n47.8000\n\n\nuzb\nSevgi\nUzbek\n32.0000\n32.0000\n\n\nron\nDragoste\nRomanian\n25.0000\n29.0000\n\n\nnld\nLiefde\nDutch\n22.0000\n28.0000\n\n\nkur\nEvin\nKurdish\n25.0000\n25.0000\n\n\nhbs\nLjubav\nSerbo-Croatian\n21.0000\n21.0000\n\n\nafr\nLiefde\nAfrikaans\n7.2000\n17.5000\n\n\ntso\nRirhandzu\nTsonga\n12.0000\n15.4000\n\n\nsom\nJacayl\nSomali\n15.0000\n15.0000\n\n\nbar\nLiab\nBavarian\n14.0000\n14.0000\n\n\nhun\nSzeretet\nHungarian\n13.0000\n13.0000\n\n\nlin\nBolingo\nLingala\n5.5000\n12.5000\n\n\naze\nSevgi\nAzerbaijani\n12.0000\n12.0000\n\n\nilo\nAyat\nIloko\n9.1000\n11.1000\n\n\nces\nLaska\nCzech\n10.7000\n10.7000\n\n\ncat\nAmor\nCatalan\n4.1000\n10.1000\n\n\nswe\nKarlek\nSwedish\n9.6000\n9.6000\n\n\ncdo\nAi\nMin Dong Chinese\n9.5000\n9.5000\n\n\nque\nKhuyay\nQuechua\n9.0000\n9.0000\n\n\ntuk\nSoygi\nTurkmen\n6.7000\n6.7000\n\n\nhrv\nLjubav\nCroatian\n5.6000\n5.6000\n\n\ndan\nKarlighed\nDanish\n5.5000\n5.5000\n\n\nfij\nRakkaus\nFijian\n5.4000\n5.4000\n\n\nsqi\nDashuria\nAlbanian\n5.4000\n5.4000\n\n\nslk\nLaska\nSlovak\n5.2000\n5.2000\n\n\ngug\nMborayhu\nParaguayan Guaraní\n4.8500\n4.8500\n\n\nscn\nAmuri\nSicilian\n4.7000\n4.7000\n\n\nssw\nLutsandvo\nSwati\n2.3000\n4.7000\n\n\nlmo\nAmor\nLombard\n3.9000\n3.9000\n\n\njam\nLob\nJamaican Creole English\n3.2000\n3.2000\n\n\nbos\nLjubav\nBosnian\n3.0000\n3.0000\n\n\nlit\nMeile\nLithuanian\n3.0000\n3.0000\n\n\nnno\nKjarleik\nNorwegian Nynorsk\n2.6000\n2.6000\n\n\nnob\nKjarlighet\nNorwegian Bokmål\n2.6000\n2.6000\n\n\nwar\nHigugma\nWaray\n2.6000\n2.6000\n\n\nslv\nLjubezen\nSlovenian\n2.5000\n2.5000\n\n\ngom\nMog\nGoan Konkani\n2.3000\n2.3000\n\n\nepo\nAmo\nEsperanto\n0.0001\n2.0001\n\n\neus\nMaitasun\nBasque\n0.7500\n1.8500\n\n\nals\nLiebe\nTosk Albanian\n1.8000\n1.8000\n\n\nlav\nMilestiba\nLatvian\n1.7500\n1.7500\n\n\nnah\nTlazohtiliztli\nNahuatl languages\n1.7400\n1.7400\n\n\nsco\nLuve\nScots\n0.1200\n1.6200\n\n\nglg\nAmor\nGalician\n1.5600\n1.5600\n\n\nlim\nLeefde\nLimburgan\n1.3000\n1.3000\n\n\nest\nArmastus\nEstonian\n1.1000\n1.1000\n\n\nsrd\nAmore\nSardinian\n1.0000\n1.0000\n\n\ncym\nCariad\nWelsh\n0.7000\n0.7000\n\n\npms\nAmor\nPiemontese\n0.7000\n0.7000\n\n\nast\nAmor\nAsturian\n0.3500\n0.6400\n\n\nisl\nAst\nIcelandic\n0.3500\n0.6400\n\n\nwln\nAmour\nWalloon\n0.6000\n0.6000\n\n\nmlt\nImhabba\nMaltese\n0.5200\n0.5200\n\n\nlij\nAmo\nLigurian\n0.5000\n0.5000\n\n\noci\nAmor\nOccitan\n0.5000\n0.5000\n\n\nfry\nLeafde\nWestern Frisian\n0.4700\n0.4700\n\n\nhif\nPyar\nFiji Hindi\n0.4600\n0.4600\n\n\nlad\nAmor\nLadino\n0.1000\n0.4500\n\n\nltz\nLeift\nLuxembourgish\n0.3900\n0.3900\n\n\ncos\nAmore\nCorsican\n0.3250\n0.3250\n\n\nksh\nLeevde\nKölsch\n0.2500\n0.2500\n\n\nbre\nKarantez\nBreton\n0.2200\n0.2200\n\n\next\nAmol\nExtremaduran\n0.2000\n0.2000\n\n\ngla\nGradh\nScottish Gaelic\n0.0570\n0.0570\n\n\narg\nAimor\nAragonese\n0.0250\n0.0250\n\n\nmwl\nAmor\nMirandese\n0.0150\n0.0150\n\n\nvep\nArmastuz\nVeps\n0.0016\n0.0016\n\n\nina\nAmor\nInterlingua\n0.0015\n0.0015\n\n\nang\nLufu\nOld English\n0.0000\n0.0000\n\n\nsgs\nMeile\nSamogitian\n0.0000\n0.0000\n\n\nlat\nAmor\nLatin\n0.0000\n0.0000\n\n\n\n\n\n\nCode\nset.seed(2024)\nggplot(love_words_latin, aes(label = word, size = speakers)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 40) +\n  theme_minimal()\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :\nSome words could not fit on page. They have been placed at their original\npositions."
+  },
+  {
+    "objectID": "w08-1/index.html#custom-text",
+    "href": "w08-1/index.html#custom-text",
+    "title": "Data Visualization in R",
+    "section": "Custom Text",
+    "text": "Custom Text\n\n\nCode\nlibrary(tidytext)\nresult &lt;- tibble(read_lines(\"assets/finn.txt\"))\n# |&gt;\n#  unnest_tokens(word, text)\nhead(result)\n\n\n\n\n\n\nread_lines(“assets/finn.txt”)\n\n\n\n\nriverrun, past Eve and Adam’s, from swerve of shore to bend\n\n\nof bay, brings us by a commodius vicus of recirculation back to\n\n\nHowth Castle and Environs.\n\n\n\n\n\nSir Tristram, violer d’amores, fr’over the short sea, had passencore\n\n\nrearrived from North Armorica on this side the scraggy"
   },
   {
     "objectID": "w08-1/slides.html#base-r-vs.-tidyverse",
@@ -728,14 +812,98 @@
     "href": "w08-1/slides.html#plus-way-wider-range-of-plot-types",
     "title": "Data Visualization in R",
     "section": "Plus Way Wider Range of Plot Types!",
-    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\nShapefile from OpenData.DC.gov"
+    "text": "Plus Way Wider Range of Plot Types!\n(All using the same syntax)\n\n\nCode\nlibrary(sf)\nmy_sf &lt;- read_sf(\"assets/Wards_from_2022.geojson\")\nmy_sf_merged &lt;- my_sf |&gt; left_join(\n  lexp_df, by=c(\"WARD\"=\"ward\")\n)\nmy_sf_merged |&gt; ggplot(aes(fill=life_exp)) +\n  geom_sf() +\n  dsan_theme() +\n  theme(\n    axis.line = element_blank(),\n    axis.text = element_blank(),\n    axis.ticks = element_blank()\n  ) +\n  labs(\n    title = \"DC Life Expectancy by Ward (2015)\",\n    fill = \"Life Exp.\"\n  ) +\n  scale_fill_viridis_c()\n\n\n\n\nFigure 1: Life expectancy by ward; Shapefile from OpenData.DC.gov"
+  },
+  {
+    "objectID": "w08-1/slides.html#cant-we-just-use-fancy-statistical-methods",
+    "href": "w08-1/slides.html#cant-we-just-use-fancy-statistical-methods",
+    "title": "Data Visualization in R",
+    "section": "…Can’t We Just Use Fancy Statistical Methods?",
+    "text": "…Can’t We Just Use Fancy Statistical Methods?\n\n…Enter Anscombe’s Quartet\n\n\n\nCode\nlibrary(tidyverse)\nlibrary(datasets)\nanscombe_df &lt;- datasets::anscombe |&gt;\n  #mutate(id = row_number()) |&gt;\n  pivot_longer(\n    everything(),\n    cols_vary = \"slowest\",\n    names_to = c(\".value\", \"Dataset\"),\n    names_pattern = \"(.)(.)\"\n  )\nanscombe_plot_base &lt;- anscombe_df |&gt;\n  ggplot(aes(x=x, y=y, color=Dataset)) +\n  geom_point(size=g_pointsize / 2) +\n  geom_smooth(method=\"lm\", se=FALSE, fullrange=TRUE) +\n  dsan_theme(\"full\") +\n  xlim(c(4, 20)) + ylim(c(2, 14))\nanscombe_plot_base +\n  facet_wrap(vars(Dataset), nrow=2, scales=\"free\")"
+  },
+  {
+    "objectID": "w08-1/slides.html#the-scariest-dataset-of-all-time",
+    "href": "w08-1/slides.html#the-scariest-dataset-of-all-time",
+    "title": "Data Visualization in R",
+    "section": "The Scariest Dataset of All Time",
+    "text": "The Scariest Dataset of All Time\n\n\n\n\nMeans\n\n\n\nCode\nanscombe_df |&gt; group_by(Dataset) |&gt;\n  summarize(\n    x_mean = round(mean(x), 2),\n    y_mean = round(mean(y), 2)\n  )\n\n\n\n\n\n\n\n\nDataset\nx_mean\ny_mean\n\n\n\n\n1\n9\n7.5\n\n\n2\n9\n7.5\n\n\n3\n9\n7.5\n\n\n4\n9\n7.5\n\n\n\n\n\n\nFigure 2: Column means for each dataset\n\n\n\n\n\n\nStandard Deviations\n\n\n\nCode\nanscombe_df |&gt; group_by(Dataset) |&gt;\n  summarize(\n    x_sd = round(sd(x), 2),\n    y_sd = round(sd(y), 2)\n  )\n\n\n\n\n\n\n\n\nDataset\nx_sd\ny_sd\n\n\n\n\n1\n3.32\n2.03\n\n\n2\n3.32\n2.03\n\n\n3\n3.32\n2.03\n\n\n4\n3.32\n2.03\n\n\n\n\n\n\nFigure 3: Standard deviations for each dataset\n\n\n\n\n\n\nCorrelations\n\n\n\nCode\nlibrary(corrr)\ncorr_df &lt;- anscombe_df |&gt;\n  group_by(Dataset) |&gt;\n  summarize(\n    r = round(cor(x, y), 2)\n  )\ncorr_df\n\n\n\n\n\n\n\n\nDataset\nr\n\n\n\n\n1\n0.82\n\n\n2\n0.82\n\n\n3\n0.82\n\n\n4\n0.82\n\n\n\n\n\n\nFigure 4: Correlation between \\(x\\) and \\(y\\) for each dataset"
+  },
+  {
+    "objectID": "w08-1/slides.html#it-gets-worse",
+    "href": "w08-1/slides.html#it-gets-worse",
+    "title": "Data Visualization in R",
+    "section": "It Gets Worse…",
+    "text": "It Gets Worse…\n\n\n\nCode\nlibrary(broom)\nlm_df &lt;- anscombe_df |&gt; group_by(Dataset) |&gt;\n  do(tidy(lm(y ~ x, data = .))) |&gt;\n  mutate(across(where(is.numeric), round, 2)) |&gt;\n  ungroup() |&gt;\n  mutate(\n    term = gsub(\"Intercept\",\"Int\", term)\n  )\n\n\n\n\n\nlm_df |&gt; filter(Dataset == 1) |&gt; select(!Dataset)\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\nlm_df |&gt; filter(Dataset == 2) |&gt; select(!Dataset)\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.13\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\n\n\n\nlm_df |&gt; filter(Dataset == 3) |&gt; select(!Dataset)\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00\n\n\n\n\n\n\n\n\nlm_df |&gt; filter(Dataset == 4) |&gt; select(!Dataset)\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Int)\n3.0\n1.12\n2.67\n0.03\n\n\nx\n0.5\n0.12\n4.24\n0.00"
   },
   {
     "objectID": "w08-1/slides.html#intuition",
     "href": "w08-1/slides.html#intuition",
     "title": "Data Visualization in R",
     "section": "Intuition",
-    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects (grammatical structure)\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings\n\n\n\n\n2024 DSAN Bootcamp W08-1: Visualization"
+    "text": "Intuition\n\nSentences are made up of subjects, verbs, objects\n\n\n\n\n\n\n\nG\n\n\ncluster_0\n\nJeff\n\n\ncluster_1\n\nhugged\n\n\ncluster_2\n\nBiko\n\n\n\ndata\n\nSubject\n\n\n\naes\n\nVerb\n\n\n\ndata-&gt;aes\n\n\n\n\n\ngeom\n\nObject\n\n\n\naes-&gt;geom\n\n\n\n\n\n\n\n\n\n\nVisualizations are made up of encodings, coordinate systems, aesthetic mappings\n\n\n\n\n\n\n\nG\n\n\ncluster_0\n\nmy_data |&gt;\n\n\ncluster_1\n\nggplot(aes(x=year, y=height)) |&gt;\n\n\ncluster_2\n\ngeom_point()\n\n\n\ndata\n\nData\n\n\n\naes\n\nAesthetics\n\n\n\ndata-&gt;aes\n\n\n\n\n\ngeom\n\nGeometry\n\n\n\naes-&gt;geom"
+  },
+  {
+    "objectID": "w08-1/slides.html#graphical-primitives",
+    "href": "w08-1/slides.html#graphical-primitives",
+    "title": "Data Visualization in R",
+    "section": "Graphical Primitives",
+    "text": "Graphical Primitives\nSplit the visualization task into discrete steps, joined by |&gt;!\n\n\n\n\nLayer\nFunction\nExplanation\n\n\n\n\nData\nggplot(df)\nRaw data you want to visualize\n\n\nAesthetics\naes(x=xcol,y=ycol)\nMapping of df columns onto geometries\n\n\nGeometries\ngeom_*()\nWhich geometric objects to use\n\n\nFacets\nfacet_*()\nArrangement of plots into a grid\n\n\nTheme\ntheme(), labs()\nOverall visual defaults, titles, axis labels\n\n\n\n\n(See the official ggplot2 book for more!)"
+  },
+  {
+    "objectID": "w08-1/slides.html#ggplot2-in-practice",
+    "href": "w08-1/slides.html#ggplot2-in-practice",
+    "title": "Data Visualization in R",
+    "section": "ggplot2 In Practice",
+    "text": "ggplot2 In Practice\n(In practice, a few central graphical primitives you’ll use over and over again)\n\n\n\ngeom_bar()\n\n\nbar_data &lt;- tribble(\n  ~Category, ~Value,\n  \"A\", 100,\n  \"B\", 200\n)\nggplot(bar_data, aes(x=Category, y=Value)) +\n  geom_bar(stat=\"identity\") +\n  dsan_theme(\"quarter\")\n\n\n\n\n\n\n\n\n\n\nstat_function()\n\n\nggplot(data.frame(x=c(-4,4)), aes(x=x)) +\n  stat_function(fun=dnorm, linewidth=g_linewidth) +\n  dsan_theme(\"quarter\")"
+  },
+  {
+    "objectID": "w08-1/slides.html#common-geometries",
+    "href": "w08-1/slides.html#common-geometries",
+    "title": "Data Visualization in R",
+    "section": "Common Geometries",
+    "text": "Common Geometries\n\n\ngeom_point() for scatterplots\n\nN_scatter &lt;- 50\nrandom_points &lt;- data.frame(x=runif(N_scatter,0,1),y=runif(N_scatter,0,1))\nggplot(random_points, aes(x=x, y=y)) +\n  geom_point(size = g_pointsize) +\n  dsan_theme(\"quarter\")\n\n\n\n\n\n\n\n\n\nand geom_line() for line graphs\n\nN_line &lt;- 15\nrand_line &lt;- data.frame(x=seq(1,N_line),y=runif(N_line,0,10))\nggplot(rand_line, aes(x=x, y=y)) +\n  geom_line(linewidth = g_linewidth) +\n  dsan_theme(\"quarter\")"
+  },
+  {
+    "objectID": "w08-1/slides.html#combining-geometries",
+    "href": "w08-1/slides.html#combining-geometries",
+    "title": "Data Visualization in R",
+    "section": "Combining Geometries",
+    "text": "Combining Geometries\n…Which can be used together in a single plot:\n\nggplot(rand_line, aes(x=x, y=y)) +\n  geom_line(linewidth=g_linewidth) +\n  geom_point(size=g_pointsize/2) +\n  dsan_theme(\"full\")"
+  },
+  {
+    "objectID": "w08-1/slides.html#titles-axis-labels",
+    "href": "w08-1/slides.html#titles-axis-labels",
+    "title": "Data Visualization in R",
+    "section": "Titles + Axis Labels",
+    "text": "Titles + Axis Labels\nCan all be accomplished using the labs() function!\n\n\n\nrand_plot &lt;- rand_line |&gt;\n  ggplot(aes(x=x, y=y)) +\n  geom_line(linewidth=g_linewidth) +\n  geom_point(size=g_pointsize/2) +\n  dsan_theme(\"quarter\") +\n  labs(\n    title = \"My Cool Plot\",\n    x = \"The x value\",\n    y = \"The y value\"\n  )\n\n\n\nrand_plot"
+  },
+  {
+    "objectID": "w08-1/slides.html#categorical-variables",
+    "href": "w08-1/slides.html#categorical-variables",
+    "title": "Data Visualization in R",
+    "section": "Categorical Variables",
+    "text": "Categorical Variables\nUse the color aesthetic with factor() to differentiate categories\n\n\n(Clustered data generation code)\nset.seed(2024)\ncentroids &lt;- list(c(0,0),c(0,1),c(1,0),c(1,1))\ncluster_df &lt;- tibble()\nN &lt;- 50\nSigma &lt;- matrix(c(0.05, 0, 0, 0.05), nrow=2, ncol=2, byrow=TRUE)\nfor (i in 1:length(centroids)) {\n  cur_centroid &lt;- centroids[[i]]\n  # Generate N points from this centroid\n  cur_data &lt;- MASS::mvrnorm(N, cur_centroid, Sigma)\n  colnames(cur_data) &lt;- c(\"x\", \"y\")\n  cur_df &lt;- as_tibble(cur_data)\n  cur_df &lt;- cur_df |&gt; mutate(\n    cluster = i\n  )\n  cluster_df &lt;- rbind(cluster_df, cur_df)\n}\n\n\n\n\nWithout factor() \n\n\nCode\ncluster_df |&gt; ggplot(aes(x=x, y=y, color=cluster)) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\")\n\n\n\n\n\n\n\n\n\n\nWith factor() 💯\n\n\nCode\ncluster_df |&gt; ggplot(aes(x=x, y=y, color=factor(cluster))) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\")"
+  },
+  {
+    "objectID": "w08-1/slides.html#facets",
+    "href": "w08-1/slides.html#facets",
+    "title": "Data Visualization in R",
+    "section": "Facets",
+    "text": "Facets\nIf individual plot gets too busy, facets provide an easy way to split data into multiple (automatically-labeled) plots!\n\n\n\n\nCode\nfacet_plot &lt;- cluster_df |&gt;\n  ggplot(aes(\n    x=x, y=y,\n    color=factor(cluster)\n  )) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\") +\n  facet_wrap(vars(cluster),nrow=2)\n\n\n\n\nfacet_plot\n\n\n\n\n\n\n\n\n\n\n(Much more on this in DSAN 5200: Advanced Data Visualization 😉)"
+  },
+  {
+    "objectID": "w08-1/slides.html#wordclouds-in-r",
+    "href": "w08-1/slides.html#wordclouds-in-r",
+    "title": "Data Visualization in R",
+    "section": "Wordclouds in R",
+    "text": "Wordclouds in R\nUsing the ggwordcloud add-on to ggplot2!\n\nlibrary(showtext)\nshowtext_auto()\nlibrary(ggwordcloud)\ndata(\"love_words_latin\")\nlove_words_latin\n\n\n\n\n\n\n\n\n\n\n\n\niso_639_3\nword\nname\nnative_speakers\nspeakers\n\n\n\n\neng\nLove\nEnglish\n400.0000\n800.0000\n\n\nspa\nAmor\nSpanish\n480.0000\n555.0000\n\n\nfra\nAmour\nFrench\n76.8000\n350.8000\n\n\nmsa\nCinta\nMalay\n77.0000\n277.0000\n\n\npor\nAmor\nPortuguese\n220.0000\n243.0000\n\n\nind\nCinta\nIndonesian\n43.0000\n199.0000\n\n\nita\nAmore\nItalian\n90.0000\n114.0000\n\n\ndeu\nLiebe\nGerman\n95.0000\n107.5000\n\n\nswa\nPendo\nSwahili\n8.0000\n98.0000\n\n\ntur\nAsk\nTurkish\n78.5000\n88.0000\n\n\njav\nTresna\nJavanese\n82.0000\n82.0000\n\n\nvie\nTinh yeu\nVietnamese\n75.0000\n75.0000\n\n\ntgl\nPag-ibig\nTagalog\n28.0000\n73.0000\n\n\nhau\nSoyayya\nHausa\n43.7000\n63.2000\n\n\nibo\nIhunanya\nIgbo\n50.0000\n50.0000\n\n\npol\nMilosc\nPolish\n45.0000\n50.0000\n\n\nhak\nOi\nHakka Chinese\n47.8000\n47.8000\n\n\nuzb\nSevgi\nUzbek\n32.0000\n32.0000\n\n\nron\nDragoste\nRomanian\n25.0000\n29.0000\n\n\nnld\nLiefde\nDutch\n22.0000\n28.0000\n\n\nkur\nEvin\nKurdish\n25.0000\n25.0000\n\n\nhbs\nLjubav\nSerbo-Croatian\n21.0000\n21.0000\n\n\nafr\nLiefde\nAfrikaans\n7.2000\n17.5000\n\n\ntso\nRirhandzu\nTsonga\n12.0000\n15.4000\n\n\nsom\nJacayl\nSomali\n15.0000\n15.0000\n\n\nbar\nLiab\nBavarian\n14.0000\n14.0000\n\n\nhun\nSzeretet\nHungarian\n13.0000\n13.0000\n\n\nlin\nBolingo\nLingala\n5.5000\n12.5000\n\n\naze\nSevgi\nAzerbaijani\n12.0000\n12.0000\n\n\nilo\nAyat\nIloko\n9.1000\n11.1000\n\n\nces\nLaska\nCzech\n10.7000\n10.7000\n\n\ncat\nAmor\nCatalan\n4.1000\n10.1000\n\n\nswe\nKarlek\nSwedish\n9.6000\n9.6000\n\n\ncdo\nAi\nMin Dong Chinese\n9.5000\n9.5000\n\n\nque\nKhuyay\nQuechua\n9.0000\n9.0000\n\n\ntuk\nSoygi\nTurkmen\n6.7000\n6.7000\n\n\nhrv\nLjubav\nCroatian\n5.6000\n5.6000\n\n\ndan\nKarlighed\nDanish\n5.5000\n5.5000\n\n\nfij\nRakkaus\nFijian\n5.4000\n5.4000\n\n\nsqi\nDashuria\nAlbanian\n5.4000\n5.4000\n\n\nslk\nLaska\nSlovak\n5.2000\n5.2000\n\n\ngug\nMborayhu\nParaguayan Guaraní\n4.8500\n4.8500\n\n\nscn\nAmuri\nSicilian\n4.7000\n4.7000\n\n\nssw\nLutsandvo\nSwati\n2.3000\n4.7000\n\n\nlmo\nAmor\nLombard\n3.9000\n3.9000\n\n\njam\nLob\nJamaican Creole English\n3.2000\n3.2000\n\n\nbos\nLjubav\nBosnian\n3.0000\n3.0000\n\n\nlit\nMeile\nLithuanian\n3.0000\n3.0000\n\n\nnno\nKjarleik\nNorwegian Nynorsk\n2.6000\n2.6000\n\n\nnob\nKjarlighet\nNorwegian Bokmål\n2.6000\n2.6000\n\n\nwar\nHigugma\nWaray\n2.6000\n2.6000\n\n\nslv\nLjubezen\nSlovenian\n2.5000\n2.5000\n\n\ngom\nMog\nGoan Konkani\n2.3000\n2.3000\n\n\nepo\nAmo\nEsperanto\n0.0001\n2.0001\n\n\neus\nMaitasun\nBasque\n0.7500\n1.8500\n\n\nals\nLiebe\nTosk Albanian\n1.8000\n1.8000\n\n\nlav\nMilestiba\nLatvian\n1.7500\n1.7500\n\n\nnah\nTlazohtiliztli\nNahuatl languages\n1.7400\n1.7400\n\n\nsco\nLuve\nScots\n0.1200\n1.6200\n\n\nglg\nAmor\nGalician\n1.5600\n1.5600\n\n\nlim\nLeefde\nLimburgan\n1.3000\n1.3000\n\n\nest\nArmastus\nEstonian\n1.1000\n1.1000\n\n\nsrd\nAmore\nSardinian\n1.0000\n1.0000\n\n\ncym\nCariad\nWelsh\n0.7000\n0.7000\n\n\npms\nAmor\nPiemontese\n0.7000\n0.7000\n\n\nast\nAmor\nAsturian\n0.3500\n0.6400\n\n\nisl\nAst\nIcelandic\n0.3500\n0.6400\n\n\nwln\nAmour\nWalloon\n0.6000\n0.6000\n\n\nmlt\nImhabba\nMaltese\n0.5200\n0.5200\n\n\nlij\nAmo\nLigurian\n0.5000\n0.5000\n\n\noci\nAmor\nOccitan\n0.5000\n0.5000\n\n\nfry\nLeafde\nWestern Frisian\n0.4700\n0.4700\n\n\nhif\nPyar\nFiji Hindi\n0.4600\n0.4600\n\n\nlad\nAmor\nLadino\n0.1000\n0.4500\n\n\nltz\nLeift\nLuxembourgish\n0.3900\n0.3900\n\n\ncos\nAmore\nCorsican\n0.3250\n0.3250\n\n\nksh\nLeevde\nKölsch\n0.2500\n0.2500\n\n\nbre\nKarantez\nBreton\n0.2200\n0.2200\n\n\next\nAmol\nExtremaduran\n0.2000\n0.2000\n\n\ngla\nGradh\nScottish Gaelic\n0.0570\n0.0570\n\n\narg\nAimor\nAragonese\n0.0250\n0.0250\n\n\nmwl\nAmor\nMirandese\n0.0150\n0.0150\n\n\nvep\nArmastuz\nVeps\n0.0016\n0.0016\n\n\nina\nAmor\nInterlingua\n0.0015\n0.0015\n\n\nang\nLufu\nOld English\n0.0000\n0.0000\n\n\nsgs\nMeile\nSamogitian\n0.0000\n0.0000\n\n\nlat\nAmor\nLatin\n0.0000\n0.0000\n\n\n\n\n\nset.seed(2024)\nggplot(love_words_latin, aes(label = word, size = speakers)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 40) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "w08-1/slides.html#custom-text",
+    "href": "w08-1/slides.html#custom-text",
+    "title": "Data Visualization in R",
+    "section": "Custom Text",
+    "text": "Custom Text\n\nlibrary(tidytext)\nresult &lt;- tibble(read_lines(\"assets/finn.txt\"))\n# |&gt;\n#  unnest_tokens(word, text)\nhead(result)\n\n\n\n\n\nread_lines(“assets/finn.txt”)\n\n\n\n\nriverrun, past Eve and Adam’s, from swerve of shore to bend\n\n\nof bay, brings us by a commodius vicus of recirculation back to\n\n\nHowth Castle and Environs.\n\n\n\n\n\nSir Tristram, violer d’amores, fr’over the short sea, had passencore\n\n\nrearrived from North Armorica on this side the scraggy\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W08-1: Visualization"
   },
   {
     "objectID": "w07-2/index.html",
@@ -811,36 +979,43 @@
     "objectID": "w07-2/index.html#merging-data",
     "href": "w07-2/index.html#merging-data",
     "title": "Introduction to the Tidyverse",
-    "section": "Merging Data",
-    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\n\nCode\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\n\n\nRows: 403 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country Name, Country Code\ndbl (2): Year, Value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+    "section": " Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000 and 2010\nLet’s get the data ready for merging using R\n\n\n\n\n\nCode\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\n\n\nRows: 403 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Country Name, Country Code\ndbl (2): Year, Value\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nCode\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
   },
   {
     "objectID": "w07-2/index.html#selectingfiltering-in-action",
     "href": "w07-2/index.html#selectingfiltering-in-action",
     "title": "Introduction to the Tidyverse",
     "section": "Selecting/Filtering in Action",
-    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+    "text": "Selecting/Filtering in Action\nLet’s keep just the rows containing data from 2000, drop extraneous columns, and then rename the remaining columns to get rid of the spaces\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
   },
   {
-    "objectID": "w07-2/index.html#recommended-language-python",
-    "href": "w07-2/index.html#recommended-language-python",
+    "objectID": "w07-2/index.html#switching-to-python-for-merging",
+    "href": "w07-2/index.html#switching-to-python-for-merging",
     "title": "Introduction to the Tidyverse",
-    "section": "Recommended Language: Python",
-    "text": "Recommended Language: Python\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df)\n(see Appendix Slides for merging via Tidyverse)\n\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+    "section": "Switching to Python for Merging!",
+    "text": "Switching to Python for Merging!\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df), let’s use it 😎\n\n\n\nCode\nimport pandas as pd\nfrom IPython.display import Markdown\npop_df = pd.read_csv(\"assets/pop_2000.csv\")\ngdp_df = pd.read_csv(\"assets/gdp_2000.csv\")\n\n\n\n\n\nLeft Join\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\n\nCode\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\n(see Appendix Slides → for merging via Tidyverse)"
   },
   {
     "objectID": "w07-2/index.html#reshaping-data",
     "href": "w07-2/index.html#reshaping-data",
     "title": "Introduction to the Tidyverse",
-    "section": "Reshaping Data",
-    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\n\nCode\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\n\nCode\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+    "section": " Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left (non-tidy), but we need it to look like the table on the right (tidy)…\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\n\nCode\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\n\nCode\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
   },
   {
-    "objectID": "w07-2/index.html#wide-to-long-in-r-gather",
-    "href": "w07-2/index.html#wide-to-long-in-r-gather",
+    "objectID": "w07-2/index.html#long-to-wide-pivot_wider",
+    "href": "w07-2/index.html#long-to-wide-pivot_wider",
     "title": "Introduction to the Tidyverse",
-    "section": "Wide-to-Long in R: gather()",
-    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
+    "section": "Long-to-Wide: pivot_wider()",
+    "text": "Long-to-Wide: pivot_wider()\npivot_wider() Documentation (part of tidyr) \n\n\n\n\nCode\ntable2 |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\n\n\nCode\nwide_df &lt;- table2 |&gt; pivot_wider(\n  id_cols = c(country, year),\n  names_from = type,\n  values_from = count\n)\nwide_df\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/index.html#wide-to-long-pivot_longer",
+    "href": "w07-2/index.html#wide-to-long-pivot_longer",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long: pivot_longer()",
+    "text": "Wide-to-Long: pivot_longer()\npivot_longer() Documentation (part of tidyr) \n\n\n\n\nCode\nwide_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- wide_df |&gt; pivot_longer(\n  cols = c(cases, population),\n  names_to = \"var\",\n  values_to = \"val\"\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvar\nval\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362"
   },
   {
     "objectID": "w07-2/index.html#forcats",
@@ -883,6 +1058,13 @@
     "title": "Introduction to the Tidyverse",
     "section": "lubridate*",
     "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
+  },
+  {
+    "objectID": "w07-2/index.html#appendix-2-wide-to-long-in-base-r-with-gather",
+    "href": "w07-2/index.html#appendix-2-wide-to-long-in-base-r-with-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Appendix 2: Wide-to-Long in Base R with gather()",
+    "text": "Appendix 2: Wide-to-Long in Base R with gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
   },
   {
     "objectID": "w07-2/slides.html#tidy-data",
@@ -951,36 +1133,43 @@
     "objectID": "w07-2/slides.html#merging-data",
     "href": "w07-2/slides.html#merging-data",
     "title": "Introduction to the Tidyverse",
-    "section": "Merging Data",
-    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+    "section": " Merging Data",
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000 and 2010\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
   },
   {
     "objectID": "w07-2/slides.html#selectingfiltering-in-action",
     "href": "w07-2/slides.html#selectingfiltering-in-action",
     "title": "Introduction to the Tidyverse",
     "section": "Selecting/Filtering in Action",
-    "text": "Selecting/Filtering in Action\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+    "text": "Selecting/Filtering in Action\nLet’s keep just the rows containing data from 2000, drop extraneous columns, and then rename the remaining columns to get rid of the spaces\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
   },
   {
-    "objectID": "w07-2/slides.html#recommended-language-python",
-    "href": "w07-2/slides.html#recommended-language-python",
+    "objectID": "w07-2/slides.html#switching-to-python-for-merging",
+    "href": "w07-2/slides.html#switching-to-python-for-merging",
     "title": "Introduction to the Tidyverse",
-    "section": "Recommended Language: Python",
-    "text": "Recommended Language: Python\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df)\n(see Appendix Slides for merging via Tidyverse)\n\n\n\n\nLeft Join\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth"
+    "section": "Switching to Python for Merging!",
+    "text": "Switching to Python for Merging!\n\nRemember that we’re using Quarto, so we can switch to Python whenever we’d like!\nPandas provides an easy-to-use df.merge(other_df), let’s use it 😎\n\n\nimport pandas as pd\nfrom IPython.display import Markdown\npop_df = pd.read_csv(\"assets/pop_2000.csv\")\ngdp_df = pd.read_csv(\"assets/gdp_2000.csv\")\n\n\n\n\nLeft Join\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='left', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nAfghanistan\n2000\n20595360\nnan\nnan\nleft_only\n\n\n1\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n2\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\nInner join (≈ Intersection (\\(\\cap\\)))\n\n\nmerged_df = pop_df.merge(gdp_df,\n  on='country', how='inner', indicator=True\n)\nMarkdown(merged_df.to_markdown())\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry\nyear_x\npopulation\nyear_y\ngdp\n_merge\n\n\n\n\n0\nBrazil\n2000\n174504898\n2000\n6.55421e+11\nboth\n\n\n1\nChina\n2000\n1280428583\n2000\n1.21135e+12\nboth\n\n\n\n\n\n\n\n(see Appendix Slides → for merging via Tidyverse)"
   },
   {
     "objectID": "w07-2/slides.html#reshaping-data",
     "href": "w07-2/slides.html#reshaping-data",
     "title": "Introduction to the Tidyverse",
-    "section": "Reshaping Data",
-    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+    "section": " Reshaping Data",
+    "text": "Reshaping Data\nSometimes you can’t merge because one of the datasets looks like the table on the left (non-tidy), but we need it to look like the table on the right (tidy)…\n\n\nIn data-cleaning jargon, this dataset is long (more than one row per observation)\n\ntable2 |&gt; write_csv(\"assets/long_data.csv\")\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\nIn data-cleaning jargon, this dataset is wide (one row per obs; usually tidy)\n\ntable1 |&gt; write_csv(\"assets/wide_data.csv\")\ntable1 |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
   },
   {
-    "objectID": "w07-2/slides.html#wide-to-long-in-r-gather",
-    "href": "w07-2/slides.html#wide-to-long-in-r-gather",
+    "objectID": "w07-2/slides.html#long-to-wide-pivot_wider",
+    "href": "w07-2/slides.html#long-to-wide-pivot_wider",
     "title": "Introduction to the Tidyverse",
-    "section": "Wide-to-Long in R: gather()",
-    "text": "Wide-to-Long in R: gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766"
+    "section": "Long-to-Wide: pivot_wider()",
+    "text": "Long-to-Wide: pivot_wider()\npivot_wider() Documentation (part of tidyr) \n\n\n\ntable2 |&gt; head()\n\n\n\n\n\ncountry\nyear\ntype\ncount\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362\n\n\n\n\n\n\n\n\nwide_df &lt;- table2 |&gt; pivot_wider(\n  id_cols = c(country, year),\n  names_from = type,\n  values_from = count\n)\nwide_df\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583"
+  },
+  {
+    "objectID": "w07-2/slides.html#wide-to-long-pivot_longer",
+    "href": "w07-2/slides.html#wide-to-long-pivot_longer",
+    "title": "Introduction to the Tidyverse",
+    "section": "Wide-to-Long: pivot_longer()",
+    "text": "Wide-to-Long: pivot_longer()\npivot_longer() Documentation (part of tidyr) \n\n\n\nwide_df |&gt; head()\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\nlong_df &lt;- wide_df |&gt; pivot_longer(\n  cols = c(cases, population),\n  names_to = \"var\",\n  values_to = \"val\"\n)\nlong_df |&gt; head()\n\n\n\n\n\ncountry\nyear\nvar\nval\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n1999\npopulation\n19987071\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nAfghanistan\n2000\npopulation\n20595360\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n1999\npopulation\n172006362"
   },
   {
     "objectID": "w07-2/slides.html#forcats",
@@ -1022,7 +1211,14 @@
     "href": "w07-2/slides.html#lubridate",
     "title": "Introduction to the Tidyverse",
     "section": "lubridate*",
-    "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-2: Tidyverse"
+    "text": "lubridate*\nHomepage | Overview | Cheatsheet\n\n\n\n\n\n\n\nCaution: Importing lubridate\n\n\nNote that lubridate does not get loaded with the other packages in the tidyverse when you call library(tidyverse). It needs to be imported explicitly:\nlibrary(tidyverse)\nlibrary(lubridate)"
+  },
+  {
+    "objectID": "w07-2/slides.html#appendix-2-wide-to-long-in-base-r-with-gather",
+    "href": "w07-2/slides.html#appendix-2-wide-to-long-in-base-r-with-gather",
+    "title": "Introduction to the Tidyverse",
+    "section": "Appendix 2: Wide-to-Long in Base R with gather()",
+    "text": "Appendix 2: Wide-to-Long in Base R with gather()\n\n\n\n\nCode\ntable1\n\n\n\n\n\n\ncountry\nyear\ncases\npopulation\n\n\n\n\nAfghanistan\n1999\n745\n19987071\n\n\nAfghanistan\n2000\n2666\n20595360\n\n\nBrazil\n1999\n37737\n172006362\n\n\nBrazil\n2000\n80488\n174504898\n\n\nChina\n1999\n212258\n1272915272\n\n\nChina\n2000\n213766\n1280428583\n\n\n\n\n\n\n\n\n\nCode\nlong_df &lt;- gather(table1,\n  key = \"variable\",\n  value = cases,\n  -c(country, year)\n)\nlong_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\nvariable\ncases\n\n\n\n\nAfghanistan\n1999\ncases\n745\n\n\nAfghanistan\n2000\ncases\n2666\n\n\nBrazil\n1999\ncases\n37737\n\n\nBrazil\n2000\ncases\n80488\n\n\nChina\n1999\ncases\n212258\n\n\nChina\n2000\ncases\n213766\n\n\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W07-2: Tidyverse"
   },
   {
     "objectID": "w08-2/index.html",
@@ -1032,18 +1228,53 @@
     "text": "Open slides in new window →"
   },
   {
-    "objectID": "w08-2/index.html#web-scraping",
-    "href": "w08-2/index.html#web-scraping",
+    "objectID": "w08-2/index.html#from-easy-mode-to-hard-mode",
+    "href": "w08-2/index.html#from-easy-mode-to-hard-mode",
     "title": "Using APIs in R",
-    "section": "Web Scraping",
-    "text": "Web Scraping\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
+    "section": "From Easy Mode to Hard Mode",
+    "text": "From Easy Mode to Hard Mode\n\n\n\n\n\n\n\n\nDifficulty\nScenario\nSolution\n\n\n\n\nEasy😊\nDataset already exists in desired format\nDirect download (e.g., as .csv)\n\n\nMedium😐\nData exists in structured form on website\nWeb scraping\n\n\nHard😳\nThe dataset doesn’t exist and isn’t directly presented on a website\nUse an API (if it exists)"
+  },
+  {
+    "objectID": "w08-2/index.html#web-scraping-overview",
+    "href": "w08-2/index.html#web-scraping-overview",
+    "title": "Using APIs in R",
+    "section": "Web Scraping Overview",
+    "text": "Web Scraping Overview\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
   },
   {
     "objectID": "w08-2/index.html#scraping-difficulty",
     "href": "w08-2/index.html#scraping-difficulty",
     "title": "Using APIs in R",
     "section": "Scraping Difficulty",
-    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\n😊\nEasy\nData in HTML source\n“View Source”\n\n\n\n😐\nMedium\nData loaded dynamically via API\n“View Source”, find API call, scrape programmatically\n\n\n\n😳\nHard\nData loaded dynamically [internally] via web framework\nUse Selenium"
+    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\nEasy😊\nWithin HTML source\nView Source\n\n\n\nMedium😐\nDynamically via internal API\nView Source, find API call, scrape via R\n\n\n\nHard😳\nDynamically via web framework\nUse Selenium"
+  },
+  {
+    "objectID": "w08-2/index.html#easy-mode-wikipedia",
+    "href": "w08-2/index.html#easy-mode-wikipedia",
+    "title": "Using APIs in R",
+    "section": "Easy Mode (Wikipedia)",
+    "text": "Easy Mode (Wikipedia)\nFrom List of United States cities by population  (via View Source)\n\n\n\n\n→"
+  },
+  {
+    "objectID": "w08-2/index.html#this-means-it-can-be-scraped-immediately",
+    "href": "w08-2/index.html#this-means-it-can-be-scraped-immediately",
+    "title": "Using APIs in R",
+    "section": "This Means It Can Be Scraped “Immediately”!",
+    "text": "This Means It Can Be Scraped “Immediately”!\nHere we use mini-language XPath to extract portions of the HTML containing our data (see Appendix for more!)\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\n\n\n\nAttaching package: 'xml2'\n\n\nThe following object is masked from 'package:httr2':\n\n    url_parse\n\n\nCode\nhtml_obj &lt;- response_obj |&gt; resp_body_html()\nhtml_obj |&gt; xml_find_all('//table[3]//td[1]') |&gt; head()\n\n\n{xml_nodeset (6)}\n[1] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/New_York_City\" t ...\n[2] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Los_Angeles\" tit ...\n[3] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Chicago\" title=\" ...\n[4] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Houston\" title=\" ...\n[5] &lt;td style=\"background-color:#ccff99\"&gt;\\n&lt;i&gt;&lt;b&gt;&lt;a href=\"/wiki/Phoenix,_Ariz ...\n[6] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Philadelphia\" ti ..."
+  },
+  {
+    "objectID": "w08-2/index.html#medium-mode",
+    "href": "w08-2/index.html#medium-mode",
+    "title": "Using APIs in R",
+    "section": "Medium Mode",
+    "text": "Medium Mode\nOften more of an art than a science, but the Developer Console’s “Network” tab is your friend!\n\n\n\n\n\nThe contents of the Network tab after scrolling a bit through Zyte’s Quotes to Scrape web-scraping sandbox (which we use a bunch in DSAN 5500 😉)\n\n\n\n→\n\n\n\n\nThe .json file (after right-click on quotes?page=5, “Open in New Tab”)"
+  },
+  {
+    "objectID": "w08-2/index.html#apis",
+    "href": "w08-2/index.html#apis",
+    "title": "Using APIs in R",
+    "section": "APIs",
+    "text": "APIs\nApplication Programming Interfaces: developer-facing part of data pipeline/service. Abstracts unnecessary details:\n\n\n\n\n\n\n\n\nExample\nCare about\nDon’t care about\n\n\n\n\nElectrical outlet\nElectricity\nDetails of Alternating/Direct Currents\n\n\nWater fountain\nWater\nDetails of how it’s pumped into the fountain\n\n\nCar\nAccelerate, brake, reverse\nDetails of combustion engine"
   },
   {
     "objectID": "w08-2/index.html#what-does-an-api-do",
@@ -1057,7 +1288,7 @@
     "href": "w08-2/index.html#example-math-api",
     "title": "Using APIs in R",
     "section": "Example: Math API",
-    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nimport requests\nresponse = requests.get(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nprint(response.json())\n\n\n{'operation': 'factor', 'expression': 'x^2-1', 'result': '(x - 1) (x + 1)'}"
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj |&gt; resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}"
   },
   {
     "objectID": "w08-2/index.html#math-api-endpoints",
@@ -1067,18 +1298,32 @@
     "text": "Math API Endpoints\n\n\n\nOperation\nAPI Endpoint\nResult\n\n\n\n\nSimplify\n/simplify/2^2+2(2)\n8\n\n\nFactor\n/factor/x^2 + 2x\nx (x + 2)\n\n\nDerive\n/derive/x^2+2x\n2 x + 2\n\n\nIntegrate\n/integrate/x^2+2x\n1/3 x^3 + x^2 + C\n\n\nFind 0’s\n/zeroes/x^2+2x\n[-2, 0]\n\n\nFind Tangent\n/tangent/2|x^3\n12 x + -16\n\n\nArea Under Curve\n/area/2:4|x^3\n60\n\n\nCosine\n/cos/pi\n-1\n\n\nSine\n/sin/0\n0\n\n\nTangent\n/tan/0\n0"
   },
   {
-    "objectID": "w08-2/index.html#authentication",
-    "href": "w08-2/index.html#authentication",
+    "objectID": "w08-2/index.html#spotify-api",
+    "href": "w08-2/index.html#spotify-api",
     "title": "Using APIs in R",
-    "section": "Authentication",
-    "text": "Authentication\n\nUnlike the math API, most APIs do not allow requests to be made by anonymous requesters, and require authentication.\nFor example, you can access public GitHub repos anonymously, but to access private GitHub repos using GitHub’s API, you’ll need to authenticate that you are in fact the one making the request"
+    "section": "Spotify API",
+    "text": "Spotify API\n\n\n Create an App\n\n\n\n\n\n\n Go to “Settings”\n\n\n\n\n\n Copy Client ID + secret to secure location"
+  },
+  {
+    "objectID": "w08-2/index.html#managing-secrets-with-.env",
+    "href": "w08-2/index.html#managing-secrets-with-.env",
+    "title": "Using APIs in R",
+    "section": "Managing Secrets with .env",
+    "text": "Managing Secrets with .env\n\n🚨 Sensitive data (like the client secret) should never be included directly in your code! 🚨\nInstead, use .env file to define environment vars, then load via library(dotenv) [documentation ]\nJust make sure to include .env in your .gitignore file! (More on .gitignore next week 🙂)\n\n\n\n\n\n.env\n\nSECRET_PASSWORD=plsdonttell\n\n\n\n\n\nCode\n\nmycode.r\n\nlibrary(dotenv)\n\n\n\nWarning in readLines(file): incomplete final line found on '.env'\n\n\nCode\nSys.getenv(\"SECRET_PASSWORD\")\n\n\n[1] \"plsdonttell\"\n\n\n\n\n(Now you can share mycode.r without revealing password!)"
+  },
+  {
+    "objectID": "w08-2/index.html#spotifyr-spotify-api-continued",
+    "href": "w08-2/index.html#spotifyr-spotify-api-continued",
+    "title": "Using APIs in R",
+    "section": "spotifyr: Spotify API Continued",
+    "text": "spotifyr: Spotify API Continued\n\nAfter storing your client ID+secret in .env, as SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET (respectively), the spotifyr library  can be used as an R “wrapper” around Spotify’s Web API (see spotifyr list of functions )\n\n\n\n\nCode\nlibrary(dotenv) # Loads the client ID+secret from .env\nlibrary(spotifyr)\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter()   masks stats::filter()\n✖ dplyr::lag()      masks stats::lag()\n✖ xml2::url_parse() masks httr2::url_parse()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\n#access_token &lt;- get_spotify_access_token()\nnba_id &lt;- search_spotify(\"nba youngboy\", type=\"artist\", limit=1) |&gt; pull(id)\nget_artist_top_tracks(nba_id) |&gt; select(id, name) |&gt; head(5)\n\n\n\n\n\n\n\n\n\n\nid\nname\n\n\n\n\n1cMMVJ4FDqhCci9efd1BU6\nNeed It (feat. YoungBoy Never Broke Again)\n\n\n1oWM79mUVdZGCGYjSirHZR\nBandit (with YoungBoy Never Broke Again)\n\n\n6klLvorLoo1sxvZcjJIY8I\nMake No Sense\n\n\n5B0kgjHULYJhAQkK5XsMoC\nWUSYANAME (feat. Youngboy Never Broke Again & Ty Dolla $ign)\n\n\n3sA7HKGzcKTVscdiTCrWpX\nOutside Today"
   },
   {
     "objectID": "w08-2/index.html#scraping-html-with-httr2-and-xml2",
     "href": "w08-2/index.html#scraping-html-with-httr2-and-xml2",
     "title": "Using APIs in R",
     "section": "Scraping HTML with httr2 and xml2",
-    "text": "Scraping HTML with httr2 and xml2\n`httr2` Documentation | `xml2` Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\n\n\n\nAttaching package: 'xml2'\n\n\nThe following object is masked from 'package:httr2':\n\n    url_parse\n\n\nCode\nhtml_obj &lt;- response_obj %&gt;% resp_body_html()\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
+    "text": "Scraping HTML with httr2 and xml2\nhttr2 Documentation | xml2 Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\nhtml_obj &lt;- response_obj |&gt; resp_body_html()\nhtml_obj |&gt; xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
   },
   {
     "objectID": "w08-2/index.html#navigating-html-with-xpath",
@@ -1102,13 +1347,6 @@
     "text": "XPath II: Filtering by Attributes\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//p[id=\"page-content\"]' matches all &lt;p&gt; elements with id page-content1:\n&lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\nMatching classes is a bit trickier:\n'//img[contains(concat(\" \", normalize-space(@class), \" \"), \" footer-image \")]'\nmatches all &lt;img&gt; elements with page-content as one of their classes2\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;"
   },
   {
-    "objectID": "w08-2/index.html#example-math-api-1",
-    "href": "w08-2/index.html#example-math-api-1",
-    "title": "Using APIs in R",
-    "section": "Example: Math API",
-    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj %&gt;% resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}"
-  },
-  {
     "objectID": "w08-2/index.html#footnotes",
     "href": "w08-2/index.html#footnotes",
     "title": "Using APIs in R",
@@ -1116,18 +1354,53 @@
     "text": "Footnotes\n\n\nIn HTML, ids are required to be unique to particular elements (and elements cannot have more than one id), meaning that this should only return a single element, for valid HTML code (not followed by all webpages!). Also note the double-quotes after id=, which are required in XPath.↩︎\nYour intuition may be to just use '//img[@class=\"footer-image\"]'. Sadly, however, this will match only elements with footer-image as their only class. i.e., it will match &lt;img class=\"footer-image\"&gt; but not &lt;img class=\"footer-image another-class\"&gt;. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using Bootstrap, &lt;p class=\"p-5 m-3\"&gt;&lt;/p&gt; creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.↩︎"
   },
   {
-    "objectID": "w08-2/slides.html#web-scraping",
-    "href": "w08-2/slides.html#web-scraping",
+    "objectID": "w08-2/slides.html#from-easy-mode-to-hard-mode",
+    "href": "w08-2/slides.html#from-easy-mode-to-hard-mode",
     "title": "Using APIs in R",
-    "section": "Web Scraping",
-    "text": "Web Scraping\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
+    "section": "From Easy Mode to Hard Mode",
+    "text": "From Easy Mode to Hard Mode\n\n\n\n\n\n\n\n\nDifficulty\nScenario\nSolution\n\n\n\n\nEasy😊\nDataset already exists in desired format\nDirect download (e.g., as .csv)\n\n\nMedium😐\nData exists in structured form on website\nWeb scraping\n\n\nHard😳\nThe dataset doesn’t exist and isn’t directly presented on a website\nUse an API (if it exists)"
+  },
+  {
+    "objectID": "w08-2/slides.html#web-scraping-overview",
+    "href": "w08-2/slides.html#web-scraping-overview",
+    "title": "Using APIs in R",
+    "section": "Web Scraping Overview",
+    "text": "Web Scraping Overview\n\nFun fact: you can view a webpage’s HTML source code by right-clicking on the page and selecting “View Source”\n\nOn older websites, this means we can just request page and parse the returned HTML\n\nLess fun fact: modern web frameworks (React, Next.js) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source\n\nData scraping still possible for these sites! Using browser automation tools like Selenium"
   },
   {
     "objectID": "w08-2/slides.html#scraping-difficulty",
     "href": "w08-2/slides.html#scraping-difficulty",
     "title": "Using APIs in R",
     "section": "Scraping Difficulty",
-    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\n😊\nEasy\nData in HTML source\n“View Source”\n\n\n\n😐\nMedium\nData loaded dynamically via API\n“View Source”, find API call, scrape programmatically\n\n\n\n😳\nHard\nData loaded dynamically [internally] via web framework\nUse Selenium"
+    "text": "Scraping Difficulty\n\n\n\n\n\n\n\n\n\n\n\nHow is data loaded?\nSolution\nExample\n\n\n\n\nEasy😊\nWithin HTML source\nView Source\n\n\n\nMedium😐\nDynamically via internal API\nView Source, find API call, scrape via R\n\n\n\nHard😳\nDynamically via web framework\nUse Selenium"
+  },
+  {
+    "objectID": "w08-2/slides.html#easy-mode-wikipedia",
+    "href": "w08-2/slides.html#easy-mode-wikipedia",
+    "title": "Using APIs in R",
+    "section": "Easy Mode (Wikipedia)",
+    "text": "Easy Mode (Wikipedia)\nFrom List of United States cities by population  (via View Source)\n\n\n\n\n→"
+  },
+  {
+    "objectID": "w08-2/slides.html#this-means-it-can-be-scraped-immediately",
+    "href": "w08-2/slides.html#this-means-it-can-be-scraped-immediately",
+    "title": "Using APIs in R",
+    "section": "This Means It Can Be Scraped “Immediately”!",
+    "text": "This Means It Can Be Scraped “Immediately”!\nHere we use mini-language XPath to extract portions of the HTML containing our data (see Appendix for more!)\n\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\nhtml_obj &lt;- response_obj |&gt; resp_body_html()\nhtml_obj |&gt; xml_find_all('//table[3]//td[1]') |&gt; head()\n\n{xml_nodeset (6)}\n[1] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/New_York_City\" t ...\n[2] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Los_Angeles\" tit ...\n[3] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Chicago\" title=\" ...\n[4] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Houston\" title=\" ...\n[5] &lt;td style=\"background-color:#ccff99\"&gt;\\n&lt;i&gt;&lt;b&gt;&lt;a href=\"/wiki/Phoenix,_Ariz ...\n[6] &lt;td style=\"background-color:#cfecec\"&gt;\\n&lt;i&gt;&lt;a href=\"/wiki/Philadelphia\" ti ..."
+  },
+  {
+    "objectID": "w08-2/slides.html#medium-mode",
+    "href": "w08-2/slides.html#medium-mode",
+    "title": "Using APIs in R",
+    "section": "Medium Mode",
+    "text": "Medium Mode\nOften more of an art than a science, but the Developer Console’s “Network” tab is your friend!\n\n\n\n\n\nThe contents of the Network tab after scrolling a bit through Zyte’s Quotes to Scrape web-scraping sandbox (which we use a bunch in DSAN 5500 😉)\n\n\n\n→\n\n\n\n\nThe .json file (after right-click on quotes?page=5, “Open in New Tab”)"
+  },
+  {
+    "objectID": "w08-2/slides.html#apis",
+    "href": "w08-2/slides.html#apis",
+    "title": "Using APIs in R",
+    "section": "APIs",
+    "text": "APIs\nApplication Programming Interfaces: developer-facing part of data pipeline/service. Abstracts unnecessary details:\n\n\n\n\n\n\n\n\nExample\nCare about\nDon’t care about\n\n\n\n\nElectrical outlet\nElectricity\nDetails of Alternating/Direct Currents\n\n\nWater fountain\nWater\nDetails of how it’s pumped into the fountain\n\n\nCar\nAccelerate, brake, reverse\nDetails of combustion engine"
   },
   {
     "objectID": "w08-2/slides.html#what-does-an-api-do",
@@ -1141,7 +1414,7 @@
     "href": "w08-2/slides.html#example-math-api",
     "title": "Using APIs in R",
     "section": "Example: Math API",
-    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nimport requests\nresponse = requests.get(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nprint(response.json())\n\n\n{'operation': 'factor', 'expression': 'x^2-1', 'result': '(x - 1) (x + 1)'}"
+    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj |&gt; resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}"
   },
   {
     "objectID": "w08-2/slides.html#math-api-endpoints",
@@ -1151,18 +1424,32 @@
     "text": "Math API Endpoints\n\n\n\nOperation\nAPI Endpoint\nResult\n\n\n\n\nSimplify\n/simplify/2^2+2(2)\n8\n\n\nFactor\n/factor/x^2 + 2x\nx (x + 2)\n\n\nDerive\n/derive/x^2+2x\n2 x + 2\n\n\nIntegrate\n/integrate/x^2+2x\n1/3 x^3 + x^2 + C\n\n\nFind 0’s\n/zeroes/x^2+2x\n[-2, 0]\n\n\nFind Tangent\n/tangent/2|x^3\n12 x + -16\n\n\nArea Under Curve\n/area/2:4|x^3\n60\n\n\nCosine\n/cos/pi\n-1\n\n\nSine\n/sin/0\n0\n\n\nTangent\n/tan/0\n0"
   },
   {
-    "objectID": "w08-2/slides.html#authentication",
-    "href": "w08-2/slides.html#authentication",
+    "objectID": "w08-2/slides.html#spotify-api",
+    "href": "w08-2/slides.html#spotify-api",
     "title": "Using APIs in R",
-    "section": "Authentication",
-    "text": "Authentication\n\nUnlike the math API, most APIs do not allow requests to be made by anonymous requesters, and require authentication.\nFor example, you can access public GitHub repos anonymously, but to access private GitHub repos using GitHub’s API, you’ll need to authenticate that you are in fact the one making the request"
+    "section": "Spotify API",
+    "text": "Spotify API\n\n\n Create an App\n\n\n\n\n\n\n Go to “Settings”\n\n\n\n\n\n Copy Client ID + secret to secure location"
+  },
+  {
+    "objectID": "w08-2/slides.html#managing-secrets-with-.env",
+    "href": "w08-2/slides.html#managing-secrets-with-.env",
+    "title": "Using APIs in R",
+    "section": "Managing Secrets with .env",
+    "text": "Managing Secrets with .env\n\n🚨 Sensitive data (like the client secret) should never be included directly in your code! 🚨\nInstead, use .env file to define environment vars, then load via library(dotenv) [documentation ]\nJust make sure to include .env in your .gitignore file! (More on .gitignore next week 🙂)\n\n\n\n\n\n.env\n\nSECRET_PASSWORD=plsdonttell\n\n\n\n\n\nmycode.r\n\nlibrary(dotenv)\nSys.getenv(\"SECRET_PASSWORD\")\n\n\n[1] \"plsdonttell\"\n\n\n\n\n(Now you can share mycode.r without revealing password!)"
+  },
+  {
+    "objectID": "w08-2/slides.html#spotifyr-spotify-api-continued",
+    "href": "w08-2/slides.html#spotifyr-spotify-api-continued",
+    "title": "Using APIs in R",
+    "section": "spotifyr: Spotify API Continued",
+    "text": "spotifyr: Spotify API Continued\n\nAfter storing your client ID+secret in .env, as SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET (respectively), the spotifyr library  can be used as an R “wrapper” around Spotify’s Web API (see spotifyr list of functions )\n\n\n\nlibrary(dotenv) # Loads the client ID+secret from .env\nlibrary(spotifyr)\nlibrary(tidyverse)\n#access_token &lt;- get_spotify_access_token()\nnba_id &lt;- search_spotify(\"nba youngboy\", type=\"artist\", limit=1) |&gt; pull(id)\nget_artist_top_tracks(nba_id) |&gt; select(id, name) |&gt; head(5)\n\n\n\n\n\n\n\n\n\nid\nname\n\n\n\n\n1cMMVJ4FDqhCci9efd1BU6\nNeed It (feat. YoungBoy Never Broke Again)\n\n\n1oWM79mUVdZGCGYjSirHZR\nBandit (with YoungBoy Never Broke Again)\n\n\n6klLvorLoo1sxvZcjJIY8I\nMake No Sense\n\n\n5B0kgjHULYJhAQkK5XsMoC\nWUSYANAME (feat. Youngboy Never Broke Again & Ty Dolla $ign)\n\n\n3sA7HKGzcKTVscdiTCrWpX\nOutside Today"
   },
   {
     "objectID": "w08-2/slides.html#scraping-html-with-httr2-and-xml2",
     "href": "w08-2/slides.html#scraping-html-with-httr2-and-xml2",
     "title": "Using APIs in R",
     "section": "Scraping HTML with httr2 and xml2",
-    "text": "Scraping HTML with httr2 and xml2\n`httr2` Documentation | `xml2` Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\nhtml_obj &lt;- response_obj %&gt;% resp_body_html()\nhtml_obj %&gt;% xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
+    "text": "Scraping HTML with httr2 and xml2\nhttr2 Documentation | xml2 Documentation\n\n\nCode\n# Get HTML\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://en.wikipedia.org/wiki/Data_science\")\nresponse_obj &lt;- req_perform(request_obj)\n# Parse HTML\nlibrary(xml2)\nhtml_obj &lt;- response_obj |&gt; resp_body_html()\nhtml_obj |&gt; xml_find_all('//h2//span[@class=\"mw-headline\"]')\n\n\n{xml_nodeset (7)}\n[1] &lt;span class=\"mw-headline\" id=\"Foundations\"&gt;Foundations&lt;/span&gt;\n[2] &lt;span class=\"mw-headline\" id=\"Etymology\"&gt;Etymology&lt;/span&gt;\n[3] &lt;span class=\"mw-headline\" id=\"Data_science_and_data_analysis\"&gt;Data scienc ...\n[4] &lt;span class=\"mw-headline\" id=\"Cloud_Computing_for_Data_Science\"&gt;Cloud Com ...\n[5] &lt;span class=\"mw-headline\" id=\"Ethical_consideration_in_Data_Science\"&gt;Ethi ...\n[6] &lt;span class=\"mw-headline\" id=\"See_also\"&gt;See also&lt;/span&gt;\n[7] &lt;span class=\"mw-headline\" id=\"References\"&gt;References&lt;/span&gt;\n\n\n\nNote: httr2 is a re-written version of the original httr package, which is now deprecated. You’ll still see lots of code using httr, however, so it’s good to know how both versions work. Click here for a helpful vignette on the original httr library."
   },
   {
     "objectID": "w08-2/slides.html#navigating-html-with-xpath",
@@ -1184,13 +1471,6 @@
     "title": "Using APIs in R",
     "section": "XPath II: Filtering by Attributes",
     "text": "XPath II: Filtering by Attributes\n\n\nmypage.html\n\n&lt;div class=\"container\"&gt;\n  &lt;h1&gt;Header&lt;/h1&gt;\n  &lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\n  &lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n&lt;/div&gt;\n\n\n'//p[id=\"page-content\"]' matches all &lt;p&gt; elements with id page-content1:\n&lt;p id=\"page-content\"&gt;Content&lt;/p&gt;\nMatching classes is a bit trickier:\n'//img[contains(concat(\" \", normalize-space(@class), \" \"), \" footer-image \")]'\nmatches all &lt;img&gt; elements with page-content as one of their classes2\n&lt;img class=\"footer-image m-5\" src=\"footer.png\"&gt;\n\nIn HTML, ids are required to be unique to particular elements (and elements cannot have more than one id), meaning that this should only return a single element, for valid HTML code (not followed by all webpages!). Also note the double-quotes after id=, which are required in XPath.Your intuition may be to just use '//img[@class=\"footer-image\"]'. Sadly, however, this will match only elements with footer-image as their only class. i.e., it will match &lt;img class=\"footer-image\"&gt; but not &lt;img class=\"footer-image another-class\"&gt;. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using Bootstrap, &lt;p class=\"p-5 m-3\"&gt;&lt;/p&gt; creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels."
-  },
-  {
-    "objectID": "w08-2/slides.html#example-math-api-1",
-    "href": "w08-2/slides.html#example-math-api-1",
-    "title": "Using APIs in R",
-    "section": "Example: Math API",
-    "text": "Example: Math API\n\nBase URL: https://newton.vercel.app/api/v2/\nThe endpoint: factor\nThe argument: \"x^2 - 1\"\nThe request: https://newton.vercel.app/api/v2/factor/x^2-1\n\n\n\nCode\nlibrary(httr2)\nrequest_obj &lt;- request(\"https://newton.vercel.app/api/v2/factor/x^2-1\")\nresponse_obj &lt;- req_perform(request_obj)\nwriteLines(response_obj %&gt;% resp_body_string())\n\n\n{\"operation\":\"factor\",\"expression\":\"x^2-1\",\"result\":\"(x - 1) (x + 1)\"}\n\n\n\n\n\n2024 DSAN Bootcamp W08-2: Using APIs in R"
   },
   {
     "objectID": "w06-2/index.html",

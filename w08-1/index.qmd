@@ -2,7 +2,7 @@
 title: "Data Visualization in R"
 subtitle: "Week 8, Part 1"
 author: "Jeff Jacobs"
-institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
+institute: "<a href='mailto:jj1088@georgetown.edu'>`jj1088@georgetown.edu`</a><br>DSAN Summer Bootcamp 2024<br>Georgetown University"
 format:
   revealjs:
     echo: true
@@ -105,15 +105,15 @@ lexp_df |> ggplot(aes(x=as.factor(ward), y=life_exp, color=above_avg)) +
 :::
 :::
 
-## Plus Way Wider Range of Plot Types!
+## Plus Way Wider Range of Plot Types! {.crunch-title .smaller .crunch-details}
 
 (All using the same syntax)
 
 
 ```{r}
-#| label: ward-choropleth
+#| label: fig-ward-choropleth
 #| code-fold: true
-#| fig-cap: "Shapefile from [OpenData.DC.gov](https://opendata.dc.gov/datasets/c5cd8b40fb784548a6680aead5f919ed/explore)"
+#| fig-cap: "Life expectancy by ward; Shapefile from [OpenData.DC.gov](https://opendata.dc.gov/datasets/c5cd8b40fb784548a6680aead5f919ed/explore)"
 library(sf)
 my_sf <- read_sf("assets/Wards_from_2022.geojson")
 my_sf_merged <- my_sf |> left_join(
@@ -134,10 +134,539 @@ my_sf_merged |> ggplot(aes(fill=life_exp)) +
   scale_fill_viridis_c()
 ```
 
+# Why Do Data Scientists Have To Know Visualization? {data-stack-name="Why Visualize?"}
+
+## ...Can't We Just Use Fancy Statistical Methods? {.title-10 .smaller}
+
+* ...Enter <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">Anscombe's Quartet</a>
+
+```{r}
+#| label: r-anscombe
+#| echo: true
+#| code-fold: true
+library(tidyverse)
+library(datasets)
+anscombe_df <- datasets::anscombe |>
+  #mutate(id = row_number()) |>
+  pivot_longer(
+    everything(),
+    cols_vary = "slowest",
+    names_to = c(".value", "Dataset"),
+    names_pattern = "(.)(.)"
+  )
+anscombe_plot_base <- anscombe_df |>
+  ggplot(aes(x=x, y=y, color=Dataset)) +
+  geom_point(size=g_pointsize / 2) +
+  geom_smooth(method="lm", se=FALSE, fullrange=TRUE) +
+  dsan_theme("full") +
+  xlim(c(4, 20)) + ylim(c(2, 14))
+anscombe_plot_base +
+  facet_wrap(vars(Dataset), nrow=2, scales="free")
+```
+
+## The Scariest Dataset of All Time {.smaller .crunch-title .crunch-details .small-captions}
+
+```{r}
+#| label: anscombe-again
+#| echo: false
+#| fig-height: 3
+anscombe_one_row <- anscombe_plot_base +
+  facet_wrap(vars(Dataset), nrow=1)
+anscombe_one_row
+```
+
+::: {.columns}
+::: {.column width="33%"}
+
+<center>
+**Means**
+</center>
+
+```{r}
+#| label: fig-anscombe-means
+#| code-fold: true
+#| fig-cap: "Column means for each dataset"
+anscombe_df |> group_by(Dataset) |>
+  summarize(
+    x_mean = round(mean(x), 2),
+    y_mean = round(mean(y), 2)
+  )
+```
+
+:::
+::: {.column width="33%"}
+
+<center>
+**Standard Deviations**
+</center>
+
+```{r}
+#| label: fig-anscombe-sds
+#| code-fold: true
+#| fig-cap: "Standard deviations for each dataset"
+anscombe_df |> group_by(Dataset) |>
+  summarize(
+    x_sd = round(sd(x), 2),
+    y_sd = round(sd(y), 2)
+  )
+```
+
+:::
+::: {.column width="33%"}
+
+<center>
+**Correlations**
+</center>
+
+```{r}
+#| label: fig-anscombe-corrs
+#| code-fold: true
+#| fig-cap: "Correlation between $x$ and $y$ for each dataset"
+library(corrr)
+corr_df <- anscombe_df |>
+  group_by(Dataset) |>
+  summarize(
+    r = round(cor(x, y), 2)
+  )
+corr_df
+```
+
+:::
+:::
+
+## It Gets Worse... {.smaller .crunch-title .smaller-table .crunch-details}
+
+```{r}
+#| label: anscombe-yet-again
+#| echo: false
+#| fig-height: 3
+anscombe_one_row
+```
+
+```{r}
+#| label: anscombe-reg-0
+#| echo: true
+#| code-fold: true
+library(broom)
+lm_df <- anscombe_df |> group_by(Dataset) |>
+  do(tidy(lm(y ~ x, data = .))) |>
+  mutate(across(where(is.numeric), round, 2)) |>
+  ungroup() |>
+  mutate(
+    term = gsub("Intercept","Int", term)
+  )
+```
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: anscombe-reg-1
+lm_df |> filter(Dataset == 1) |> select(!Dataset)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: anscombe-reg-2
+lm_df |> filter(Dataset == 2) |> select(!Dataset)
+```
+
+:::
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: anscombe-reg-3
+lm_df |> filter(Dataset == 3) |> select(!Dataset)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: anscombe-reg-4
+lm_df |> filter(Dataset == 4) |> select(!Dataset)
+```
+
+:::
+:::
+
 # Grammar of Graphics {data-stack-name="Grammar of Graphics"}
 
-## Intuition
+![](images/grammar-of-graphics.png){fig-align="center"}
 
-* **Sentences** are made up of *subjects*, *verbs*, *objects* (grammatical structure)
+## Intuition {.crunch-title .crunch-ul-0}
+
+* **Sentences** are made up of *subjects*, *verbs*, *objects*
+
+```{dot}
+//| label: sentence-diagram
+//| echo: false
+//| fig-height: 1.5
+digraph G {
+  rankdir=LR;
+  node[shape="box"];
+  subgraph cluster_0 {
+    penwidth=0;
+    fontname="Courier";
+    label="Jeff";
+    labelloc="b";
+    data[label="Subject",fontname="Times"];
+  }
+  subgraph cluster_1 {
+    penwidth=0;
+    fontname="Courier";
+    label="hugged";
+    labelloc="b";
+    aes[label="Verb"];
+  }
+  subgraph cluster_2 {
+    penwidth=0;
+    fontname="Courier";
+    label="Biko";
+    labelloc="b";
+    geom[label="Object"];
+  }
+  data -> aes;
+  aes -> geom;
+}
+```
+
 * **Visualizations** are made up of *encodings*, *coordinate systems*, *aesthetic mappings*
 
+```{dot}
+//| label: ggplot-diagram
+//| echo: false
+//| fig-height: 2
+digraph G {
+  rankdir=LR;
+  node[shape="box"];
+  subgraph cluster_0 {
+    penwidth=0;
+    fontname="Courier";
+    label="my_data |>";
+    labelloc="b";
+    data[label="Data",fontname="Times"];
+  }
+  subgraph cluster_1 {
+    penwidth=0;
+    fontname="Courier";
+    label="ggplot(aes(x=year, y=height)) |>";
+    labelloc="b";
+    aes[label="Aesthetics"];
+  }
+  subgraph cluster_2 {
+    penwidth=0;
+    fontname="Courier";
+    label="geom_point()";
+    labelloc="b";
+    geom[label="Geometry"];
+  }
+  data -> aes;
+  aes -> geom;
+}
+```
+
+## Graphical Primitives {.crunch-title .smaller-table-18}
+
+[Split the visualization task into discrete steps, joined by `|>`!]{style="font-size: 90%"}
+
+```{=html}
+<table style="width: 100%;">
+<thead>
+<tr>
+  <th style="width: 18%;">Layer</th>
+  <th style="width: 30%;">Function</th>
+  <th style="width: 52%;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="width: 18%;">Data</td>
+  <td><span data-qmd="`ggplot(df)`"></span></td>
+  <td>Raw data you want to visualize</td>
+</tr>
+<tr>
+  <td>Aesthetics</td>
+  <td><span data-qmd="`aes(x=xcol,y=ycol)`"></span></td>
+  <td><span data-qmd="Mapping of `df` columns onto geometries"></span></td>
+</tr>
+<tr>
+  <td>Geometries</td>
+  <td><span data-qmd="`geom_*()`"></span></td>
+  <td>Which geometric objects to use</td>
+</tr>
+<tr>
+  <td>Facets</td>
+  <td><span data-qmd="`facet_*()`"></span></td>
+  <td>Arrangement of plots into a grid</td>
+</tr>
+<tr>
+  <td>Theme</td>
+  <td><span data-qmd="`theme()`, `labs()`"></span></td>
+  <td>Overall visual defaults, titles, axis labels</td>
+</tr>
+</tbody>
+</table>
+```
+
+[*(See the official [`ggplot2` book](https://ggplot2-book.org){target='_blank'} for more!)*]{style="font-size: 90%"}
+
+## `ggplot2` In Practice {.smaller .crunch-p}
+
+*(In practice, a few central graphical primitives you'll use over and over again)*
+
+::: {.columns}
+::: {.column width="50%"}
+
+<center>
+`geom_bar()`
+</center>
+
+```{r}
+#| fig-height: 6
+#| echo: true
+#| label: geom-bar-demo
+bar_data <- tribble(
+  ~Category, ~Value,
+  "A", 100,
+  "B", 200
+)
+ggplot(bar_data, aes(x=Category, y=Value)) +
+  geom_bar(stat="identity") +
+  dsan_theme("quarter")
+```
+
+:::
+::: {.column width="50%"}
+
+<center>
+`stat_function()`
+</center>
+
+```{r}
+#| echo: true
+#| label: stat-function-demo
+#| fig-height: 7
+ggplot(data.frame(x=c(-4,4)), aes(x=x)) +
+  stat_function(fun=dnorm, linewidth=g_linewidth) +
+  dsan_theme("quarter")
+```
+
+:::
+:::
+
+## Common Geometries {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+`geom_point()` for scatterplots
+
+```{r}
+#| label: geom-point-demo
+#| fig-height: 8
+#| echo: true
+N_scatter <- 50
+random_points <- data.frame(x=runif(N_scatter,0,1),y=runif(N_scatter,0,1))
+ggplot(random_points, aes(x=x, y=y)) +
+  geom_point(size = g_pointsize) +
+  dsan_theme("quarter")
+```
+:::
+::: {.column width="50%"}
+
+and `geom_line()` for line graphs
+
+```{r}
+#| label: geom-line-demo
+#| fig-height: 8
+#| echo: true
+N_line <- 15
+rand_line <- data.frame(x=seq(1,N_line),y=runif(N_line,0,10))
+ggplot(rand_line, aes(x=x, y=y)) +
+  geom_line(linewidth = g_linewidth) +
+  dsan_theme("quarter")
+```
+
+:::
+:::
+
+## Combining Geometries {.smaller}
+
+...Which can be used together in a single plot:
+
+```{r}
+#| label: geom-line-point-demo
+#| echo: true
+ggplot(rand_line, aes(x=x, y=y)) +
+  geom_line(linewidth=g_linewidth) +
+  geom_point(size=g_pointsize/2) +
+  dsan_theme("full")
+```
+
+## Titles + Axis Labels
+
+Can all be accomplished using the `labs()` function!
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: ggplot-labs
+#| echo: true
+rand_plot <- rand_line |>
+  ggplot(aes(x=x, y=y)) +
+  geom_line(linewidth=g_linewidth) +
+  geom_point(size=g_pointsize/2) +
+  dsan_theme("quarter") +
+  labs(
+    title = "My Cool Plot",
+    x = "The x value",
+    y = "The y value"
+  )
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: ggplot-labs-output
+#| echo: true
+rand_plot
+```
+
+:::
+:::
+
+## Categorical Variables {.smaller .crunch-details}
+
+Use the **color** aesthetic with `factor()` to differentiate categories
+
+```{r}
+#| label: ggplot-gen-clusters
+#| code-fold: true
+#| code-summary: "(Clustered data generation code)"
+set.seed(2024)
+centroids <- list(c(0,0),c(0,1),c(1,0),c(1,1))
+cluster_df <- tibble()
+N <- 50
+Sigma <- matrix(c(0.05, 0, 0, 0.05), nrow=2, ncol=2, byrow=TRUE)
+for (i in 1:length(centroids)) {
+  cur_centroid <- centroids[[i]]
+  # Generate N points from this centroid
+  cur_data <- MASS::mvrnorm(N, cur_centroid, Sigma)
+  colnames(cur_data) <- c("x", "y")
+  cur_df <- as_tibble(cur_data)
+  cur_df <- cur_df |> mutate(
+    cluster = i
+  )
+  cluster_df <- rbind(cluster_df, cur_df)
+}
+```
+
+::: {.columns}
+::: {.column width="50%"}
+
+Without `factor()` ![](images/50.png){width="25"}
+
+```{r}
+#| label: ggplot-plot-clusters-nofactor
+#| echo: true
+#| code-fold: show
+cluster_df |> ggplot(aes(x=x, y=y, color=cluster)) +
+  geom_point(size=g_pointsize / 2) +
+  dsan_theme("half") +
+  labs(color="Cluster")
+```
+
+:::
+::: {.column width="50%"}
+
+With `factor()` 💯
+
+```{r}
+#| label: ggplot-plot-clusters
+#| echo: true
+#| code-fold: show
+cluster_df |> ggplot(aes(x=x, y=y, color=factor(cluster))) +
+  geom_point(size=g_pointsize / 2) +
+  dsan_theme("half") +
+  labs(color="Cluster")
+```
+
+:::
+:::
+
+## Facets
+
+If individual plot gets too busy, **facets** provide an easy way to split data into multiple (automatically-labeled) plots!
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: ggplot-facets
+#| echo: true
+#| code-fold: show
+facet_plot <- cluster_df |>
+  ggplot(aes(
+    x=x, y=y,
+    color=factor(cluster)
+  )) +
+  geom_point(size=g_pointsize / 2) +
+  dsan_theme("half") +
+  labs(color="Cluster") +
+  facet_wrap(vars(cluster),nrow=2)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: ggplot-show-facets
+#| echo: true
+#| code-fold: false
+#| fig-height: 6
+facet_plot
+```
+
+:::
+:::
+
+[*(Much more on this in DSAN 5200: Advanced Data Visualization* 😉*)*]{style="font-size: 80%"}
+
+# Visualizing Text Data {data-stack-name="Wordclouds"}
+
+## Wordclouds in R
+
+Using the `ggwordcloud` add-on to `ggplot2`!
+
+```{r}
+#| label: r-wordcloud
+library(showtext)
+showtext_auto()
+library(ggwordcloud)
+data("love_words_latin")
+love_words_latin
+set.seed(2024)
+ggplot(love_words_latin, aes(label = word, size = speakers)) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 40) +
+  theme_minimal()
+```
+
+## Custom Text
+
+```{r}
+#| label: r-custom-wordcloud
+library(tidytext)
+result <- tibble(read_lines("assets/finn.txt"))
+# |>
+#  unnest_tokens(word, text)
+head(result)
+```

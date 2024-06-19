@@ -2,7 +2,7 @@
 title: "Using APIs in R"
 subtitle: "Week 8, Part 2"
 author: "Jeff Jacobs"
-institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
+institute: "<a href='mailto:jj1088@georgetown.edu'>`jj1088@georgetown.edu`</a><br>DSAN Summer Bootcamp 2024<br>Georgetown University"
 format:
   revealjs:
     echo: true
@@ -41,29 +41,102 @@ format:
 
 :::
 
+# Getting Information From Internet $\rightarrow$ Dataset {data-stack-name="Overview"}
 
-## Web Scraping
+## From Easy Mode to Hard Mode
+
+| Difficulty | Scenario | Solution |
+|:-:| - | - |
+| **Easy**<br>😊 | Dataset already exists in desired format | **Direct download** (e.g., as `.csv`) |
+| **Medium**<br>😐 | Data exists in structured form on website | **Web scraping** |
+| **Hard**<br>😳 | The dataset doesn't exist and isn't directly presented on a website | Use an **API** (if it exists) |
+
+: {tbl-colwidths="[18,44,28]"}
+
+# Web Scraping {data-stack-name="Web Scraping"}
+
+## Web Scraping Overview
 
 * Fun fact: you can view a webpage's **HTML source code** by right-clicking on the page and selecting "View Source"
   * On older websites, this means we can just request page and parse the returned HTML
 * Less fun fact: modern web frameworks (**React**, **Next.js**) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source
-  * Data scraping still possible for these sites! Using browser automation tools like <a href="https://www.selenium.dev/" target="_blank">**Selenium**</a>
+  * Data scraping still possible for these sites! Using **browser automation tools** like [**Selenium**](https://www.selenium.dev/){target='_blank'}
 
 ## Scraping Difficulty {.crunch-title}
 
 ::: {.smallish}
 
-| | | How is data loaded? | Solution | Example |
-|:-:|-|-|-|:-:|
-| 😊 | **Easy** | Data in HTML source | "View Source" | [<i class="bi bi-box-arrow-up-right"></i>](https://ivanstat.com/en/gdp/ao.html){target="_blank"}
-| 😐 | **Medium** | Data loaded dynamically via API | "View Source", find API call, scrape programmatically | [<i class="bi bi-box-arrow-up-right"></i>](https://archive.org/details/killinghopeusmil0000blum/page/n3/mode/2up){target="_blank"}
-| 😳 | **Hard** | Data loaded dynamically [internally] via web framework | Use <a href="https://www.selenium.dev/" target="_blank">Selenium</a> | [<i class="bi bi-box-arrow-up-right"></i>](https://www.google.com/books/edition/Killing_Hope/-IbQvd13uToC?hl=en&gbpv=1&dq=killing%20hope&pg=PA215&printsec=frontcover){target="_blank"}
+| | How is data loaded? | Solution | Example |
+|:-:|-|-|:-:|
+| **Easy**<br>😊 | Within HTML source | *View Source* | [<i class="bi bi-box-arrow-up-right"></i>](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population#50_states_and_Washington,_D.C.){target="_blank"}
+| **Medium**<br>😐 | Dynamically via **internal API** | *View Source*, find API call, scrape via R | [<i class="bi bi-box-arrow-up-right"></i>](https://ivanstat.com/en/gdp/ao.html){target="_blank"}
+| **Hard**<br>😳 | Dynamically via **web framework** | Use <a href="https://www.selenium.dev/" target="_blank">Selenium</a> | [<i class="bi bi-box-arrow-up-right"></i>](https://www.google.com/books/edition/Killing_Hope/-IbQvd13uToC?hl=en&gbpv=1&dq=killing%20hope&pg=PA215&printsec=frontcover){target="_blank"}
 
-: {tbl-colwidths="[5,10,45,35,5]"}
+: {tbl-colwidths="[18,42,35,5]"}
 
 :::
 
-# APIs {.small-title .not-title-slide data-stack-name="APIs"}
+## Easy Mode (Wikipedia) {.smaller .crunch-title .crunch-p .valign-cols}
+
+From [List of United States cities by population <i class='bi bi-box-arrow-up-right'></i>](https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population#50_states_and_Washington,_D.C.){target='_blank'} (via *View Source*)
+
+::: {.columns}
+::: {.column width="48%"}
+
+![](images/wiki_table.jpeg)
+
+:::
+::: {.column width="4%"}
+
+&rarr;
+
+:::
+::: {.column width="48%"}
+
+![](images/wiki_source.jpeg)
+
+:::
+:::
+
+## This Means It Can Be Scraped "Immediately"! {.crunch-title .title-08}
+
+Here we use mini-language XPath to extract **portions** of the HTML containing our data (see [Appendix](#appendix-1-web-scraping-via-xpath) for more!)
+
+```{r}
+library(httr2)
+request_obj <- request("https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population")
+response_obj <- req_perform(request_obj)
+# Parse HTML
+library(xml2)
+html_obj <- response_obj |> resp_body_html()
+html_obj |> xml_find_all('//table[3]//td[1]') |> head()
+```
+
+## Medium Mode {.crunch-title .valign-cols}
+
+Often more of an art than a science, but the **Developer Console's "Network" tab is your friend!**
+
+::: {.columns}
+::: {.column width="40%"}
+
+![The contents of the Network tab after scrolling a bit through Zyte's [Quotes to Scrape](http://quotes.toscrape.com/scroll){target='_blank'} web-scraping sandbox (which we use a bunch in DSAN 5500 😉)](images/quotes_json.jpeg){fig-align="center"}
+
+:::
+::: {.column width="4%"}
+
+&rarr;
+
+:::
+::: {.column width="56%"}
+
+![The `.json` file (after right-click on `quotes?page=5`, "Open in New Tab")](images/json_contents.jpeg){width="65%"}
+
+:::
+:::
+
+# APIs: The Less-Hackish Alternative {data-stack-name="APIs"}
+
+## APIs
 
 **A**pplication **P**rogramming **I**nterfaces: **developer-facing** part of data pipeline/service. **Abstracts unnecessary details**:
 
@@ -99,19 +172,21 @@ When I'm teaching programming to students in refugee camps who may have never us
 
 :::
 
-## Example: Math API
+## Example: Math API {.crunch-title .crunch-details}
 
 * Base URL: <a href="https://newton.vercel.app/api/v2/" target="_blank">`https://newton.vercel.app/api/v2/`</a>
 * The **endpoint**: `factor`
 * The **argument**: `"x^2 - 1"`
 * The **request**: <a href="https://newton.vercel.app/api/v2/factor/x^2-1" target="_blank">`https://newton.vercel.app/api/v2/factor/x^2-1`</a>
-```{python}
-#| label: math-api-call
+
+```{r}
+#| label: math-api-call-r
 #| echo: true
 #| code-fold: show
-import requests
-response = requests.get("https://newton.vercel.app/api/v2/factor/x^2-1")
-print(response.json())
+library(httr2)
+request_obj <- request("https://newton.vercel.app/api/v2/factor/x^2-1")
+response_obj <- req_perform(request_obj)
+writeLines(response_obj |> resp_body_string())
 ```
 
 ## Math API Endpoints {.smaller}
@@ -135,17 +210,82 @@ Inverse Tangent 	/arctan/0 	0
 Absolute Value 	/abs/-1 	1
 Logarithm 	/log/2l8 	3 -->
 
-
-## Authentication
+# Authentication {data-stack-name="Authentication"}
 
 * Unlike the math API, most APIs do not allow requests to be made by **anonymous** requesters, and require **authentication**.
-* For example, you can access **public GitHub repos** anonymously, but to access **private GitHub repos** using GitHub's API, you'll need to authenticate that you are in fact the one making the request
+* Ex: Can access **public** GitHub repos anonymously, but to access **private** GitHub repos using GitHub's API, you need to **authenticate** that **you** are making the request
 
-## Scraping HTML with `httr2` and `xml2`
+## Spotify API {.smaller .crunch-title .crunch-p .crunch-images}
 
-```{=html}
-<a href="https://httr2.r-lib.org/" target="_blank">`httr2` Documentation</a> | <a href="https://xml2.r-lib.org/" target="_blank">`xml2` Documentation</a>
+::: {.columns}
+::: {.column width="50%"}
+
+<i class='bi bi-1-circle pe-1'></i> Create an App
+
+![](images/spotify_app.jpeg){width="80%" fig-align="center"}
+
+:::
+::: {.column width="50%"}
+
+<i class='bi bi-2-circle'></i> Go to "Settings"
+
+![](images/spotify_settings_button.jpeg){width="75%" fig-align="center"}
+
+<i class='bi bi-3-circle'></i> Copy Client ID + secret to secure location
+
+![](images/spotify_settings.jpeg){width="75%" fig-align="center"}
+
+:::
+:::
+
+## Managing Secrets with `.env` {.crunch-title}
+
+* 🚨 **Sensitive data (like the *client secret*) should never be included directly in your code!** 🚨
+* Instead, use `.env` file to define **environment vars**, then load via `library(dotenv)` [[documentation <i class='bi bi-box-arrow-up-right' style='font-size: 75%;'></i>](https://github.com/gaborcsardi/dotenv){target='_blank'}]
+* Just make sure to include `.env` in your `.gitignore` file! (More on `.gitignore` next week 🙂)
+
+::: {.columns}
+::: {.column width="50%"}
+
+``` {.bash filename=".env"}
+SECRET_PASSWORD=plsdonttell
 ```
+
+:::
+::: {.column width="50%"}
+
+```{r filename="mycode.r"}
+library(dotenv)
+Sys.getenv("SECRET_PASSWORD")
+```
+
+:::
+:::
+
+*(Now you can share `mycode.r` without revealing password!)*
+
+## `spotifyr`: Spotify API Continued {.smaller}
+
+* After storing your client ID+secret in `.env`, as `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` (respectively), the [`spotifyr` library <i class='bi bi-box-arrow-up-right'></i>](https://www.rcharlie.com/spotifyr/){target='_blank'} can be used as an R "wrapper" around Spotify's Web API (see [`spotifyr` list of functions <i class='bi bi-box-arrow-up-right'></i>](https://www.rcharlie.com/spotifyr/reference/){target='_blank'})
+
+<!-- you can use them to obtain an **Acccess Token** (or, just start using `spotifyr`, which will obtain this token for you automatically) -->
+
+```{r}
+#| label: spotifyr-access-token
+#| echo: true
+library(dotenv) # Loads the client ID+secret from .env
+library(spotifyr)
+library(tidyverse)
+#access_token <- get_spotify_access_token()
+nba_id <- search_spotify("nba youngboy", type="artist", limit=1) |> pull(id)
+get_artist_top_tracks(nba_id) |> select(id, name) |> head(5)
+```
+
+# Appendix 1: Web Scraping via XPath {data-stack-name="Appendix"}
+
+## Scraping HTML with `httr2` and `xml2` {.smaller .crunch-title .crunch-details}
+
+[`httr2` Documentation](https://httr2.r-lib.org/){target='_blank'} | [`xml2` Documentation](https://xml2.r-lib.org/){target='_blank'}
 
 ```{r}
 #| label: httr2-example
@@ -157,11 +297,11 @@ request_obj <- request("https://en.wikipedia.org/wiki/Data_science")
 response_obj <- req_perform(request_obj)
 # Parse HTML
 library(xml2)
-html_obj <- response_obj %>% resp_body_html()
-html_obj %>% xml_find_all('//h2//span[@class="mw-headline"]')
+html_obj <- response_obj |> resp_body_html()
+html_obj |> xml_find_all('//h2//span[@class="mw-headline"]')
 ```
 
-::: {.aside}
+::: {.notes}
 
 Note: `httr2` is a re-written version of the original `httr` package, which is now deprecated. You'll still see lots of code using `httr`, however, so it's good to know how both versions work. <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" target="_blank">Click here for a helpful vignette</a> on the original `httr` library.
 
@@ -212,9 +352,7 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
 ## XPath II: Filtering by Attributes {.smaller}
 
-
-
-```html {filename="mypage.html"}
+``` {.html filename="mypage.html"}
 <div class="container">
   <h1>Header</h1>
   <p id="page-content">Content</p>
@@ -224,7 +362,7 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
 * `'//p[id="page-content"]'` matches all `<p>` elements with id `page-content`[^unique-id]:
 
-    ```html
+    ``` {.html}
     <p id="page-content">Content</p>
     ```
 * Matching **classes** is a bit trickier:
@@ -233,7 +371,7 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
     matches all `<img>` elements with `page-content` as one of their classes[^multi-class]
 
-    ```html
+    ``` {.html}
     <img class="footer-image m-5" src="footer.png">
     ```
 
@@ -241,18 +379,10 @@ XPath selectors are used by many different libraries, including **Selenium** (wh
 
 [^multi-class]: Your intuition may be to just use `'//img[@class="footer-image"]'`. Sadly, however, this will match only elements with `footer-image` as their **only** class. i.e., it will match `<img class="footer-image">` but not `<img class="footer-image another-class">`. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap</a>, `<p class="p-5 m-3"></p>` creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.
 
-## Example: Math API
+# Appendix 2: Python versions of R code
 
-* Base URL: <a href="https://newton.vercel.app/api/v2/" target="_blank">`https://newton.vercel.app/api/v2/`</a>
-* The **endpoint**: `factor`
-* The **argument**: `"x^2 - 1"`
-* The **request**: <a href="https://newton.vercel.app/api/v2/factor/x^2-1" target="_blank">`https://newton.vercel.app/api/v2/factor/x^2-1`</a>
-```{r}
-#| label: math-api-call-r
-#| echo: true
-#| code-fold: show
-library(httr2)
-request_obj <- request("https://newton.vercel.app/api/v2/factor/x^2-1")
-response_obj <- req_perform(request_obj)
-writeLines(response_obj %>% resp_body_string())
+``` {.python}
+import requests
+response = requests.get("https://newton.vercel.app/api/v2/factor/x^2-1")
+print(response.json())
 ```

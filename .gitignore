@@ -1,1 +1,4 @@
 /.quarto/
+.env
+w08-2/.env
+**/.env

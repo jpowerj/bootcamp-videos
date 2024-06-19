@@ -403,14 +403,58 @@
 Jeff Jacobs 
 </div>
         <p class="quarto-title-affiliation">
-            DSAN Summer Bootcamp 2024<br>Georgetown University
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a><br>DSAN Summer Bootcamp 2024<br>Georgetown University
           </p>
     </div>
 </div>
 
 </section>
-<section id="web-scraping" class="slide level2">
-<h2>Web Scraping</h2>
+<section>
+<section id="getting-information-from-internet-rightarrow-dataset" class="title-slide slide level1 center" data-stack-name="Overview">
+<h1>Getting Information From Internet <span class="math inline">\(\rightarrow\)</span> Dataset</h1>
+
+</section>
+<section id="from-easy-mode-to-hard-mode" class="slide level2">
+<h2>From Easy Mode to Hard Mode</h2>
+<table style="width:90%;">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 44%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Difficulty</th>
+<th>Scenario</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Easy</strong><br>😊</td>
+<td>Dataset already exists in desired format</td>
+<td><strong>Direct download</strong> (e.g., as <code>.csv</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Medium</strong><br>😐</td>
+<td>Data exists in structured form on website</td>
+<td><strong>Web scraping</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Hard</strong><br>😳</td>
+<td>The dataset doesn’t exist and isn’t directly presented on a website</td>
+<td>Use an <strong>API</strong> (if it exists)</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="web-scraping" class="title-slide slide level1 center" data-stack-name="Web Scraping">
+<h1>Web Scraping</h1>
+
+</section>
+<section id="web-scraping-overview" class="slide level2">
+<h2>Web Scraping Overview</h2>
 <ul>
 <li>Fun fact: you can view a webpage’s <strong>HTML source code</strong> by right-clicking on the page and selecting “View Source”
 <ul>
@@ -418,7 +462,7 @@ Jeff Jacobs
 </ul></li>
 <li>Less fun fact: modern web frameworks (<strong>React</strong>, <strong>Next.js</strong>) generate pages dynamically using JS, meaning that what you see on the page will not be visible in the HTML source
 <ul>
-<li>Data scraping still possible for these sites! Using browser automation tools like <a href="https://www.selenium.dev/" target="_blank"><strong>Selenium</strong></a></li>
+<li>Data scraping still possible for these sites! Using <strong>browser automation tools</strong> like <a href="https://www.selenium.dev/" target="_blank"><strong>Selenium</strong></a></li>
 </ul></li>
 </ul>
 </section>
@@ -427,16 +471,14 @@ Jeff Jacobs
 <div class="smallish">
 <table>
 <colgroup>
-<col style="width: 5%">
-<col style="width: 10%">
-<col style="width: 45%">
+<col style="width: 18%">
+<col style="width: 42%">
 <col style="width: 35%">
 <col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;"></th>
-<th></th>
 <th>How is data loaded?</th>
 <th>Solution</th>
 <th style="text-align: center;">Example</th>
@@ -444,23 +486,20 @@ Jeff Jacobs
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">😊</td>
-<td><strong>Easy</strong></td>
-<td>Data in HTML source</td>
-<td>“View Source”</td>
-<td style="text-align: center;"><a href="https://ivanstat.com/en/gdp/ao.html" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></td>
+<td style="text-align: center;"><strong>Easy</strong><br>😊</td>
+<td>Within HTML source</td>
+<td><em>View Source</em></td>
+<td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population#50_states_and_Washington,_D.C." target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">😐</td>
-<td><strong>Medium</strong></td>
-<td>Data loaded dynamically via API</td>
-<td>“View Source”, find API call, scrape programmatically</td>
-<td style="text-align: center;"><a href="https://archive.org/details/killinghopeusmil0000blum/page/n3/mode/2up" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></td>
+<td style="text-align: center;"><strong>Medium</strong><br>😐</td>
+<td>Dynamically via <strong>internal API</strong></td>
+<td><em>View Source</em>, find API call, scrape via R</td>
+<td style="text-align: center;"><a href="https://ivanstat.com/en/gdp/ao.html" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">😳</td>
-<td><strong>Hard</strong></td>
-<td>Data loaded dynamically [internally] via web framework</td>
+<td style="text-align: center;"><strong>Hard</strong><br>😳</td>
+<td>Dynamically via <strong>web framework</strong></td>
 <td>Use <a href="https://www.selenium.dev/" target="_blank">Selenium</a></td>
 <td style="text-align: center;"><a href="https://www.google.com/books/edition/Killing_Hope/-IbQvd13uToC?hl=en&amp;gbpv=1&amp;dq=killing%20hope&amp;pg=PA215&amp;printsec=frontcover" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></td>
 </tr>
@@ -468,9 +507,71 @@ Jeff Jacobs
 </table>
 </div>
 </section>
+<section id="easy-mode-wikipedia" class="slide level2 smaller crunch-title crunch-p valign-cols">
+<h2>Easy Mode (Wikipedia)</h2>
+<p>From <a href="https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population#50_states_and_Washington,_D.C." target="_blank">List of United States cities by population <i class="bi bi-box-arrow-up-right"></i></a> (via <em>View Source</em>)</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img data-src="images/wiki_table.jpeg"></p>
+</div><div class="column" style="width:4%;">
+<p>→</p>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/wiki_source.jpeg"></p>
+</div>
+</div>
+</section>
+<section id="this-means-it-can-be-scraped-immediately" class="slide level2 crunch-title title-08">
+<h2>This Means It Can Be Scraped “Immediately”!</h2>
+<p>Here we use mini-language XPath to extract <strong>portions</strong> of the HTML containing our data (see <a href="#/appendix-1-web-scraping-via-xpath">Appendix</a> for more!)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(httr2)</span>
+<span id="cb1-2"><a></a>request_obj <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population"</span>)</span>
+<span id="cb1-3"><a></a>response_obj <span class="ot">&lt;-</span> <span class="fu">req_perform</span>(request_obj)</span>
+<span id="cb1-4"><a></a><span class="co"># Parse HTML</span></span>
+<span id="cb1-5"><a></a><span class="fu">library</span>(xml2)</span>
+<span id="cb1-6"><a></a>html_obj <span class="ot">&lt;-</span> response_obj <span class="sc">|&gt;</span> <span class="fu">resp_body_html</span>()</span>
+<span id="cb1-7"><a></a>html_obj <span class="sc">|&gt;</span> <span class="fu">xml_find_all</span>(<span class="st">'//table[3]//td[1]'</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{xml_nodeset (6)}
+[1] &lt;td style="background-color:#cfecec"&gt;\n&lt;i&gt;&lt;a href="/wiki/New_York_City" t ...
+[2] &lt;td style="background-color:#cfecec"&gt;\n&lt;i&gt;&lt;a href="/wiki/Los_Angeles" tit ...
+[3] &lt;td style="background-color:#cfecec"&gt;\n&lt;i&gt;&lt;a href="/wiki/Chicago" title=" ...
+[4] &lt;td style="background-color:#cfecec"&gt;\n&lt;i&gt;&lt;a href="/wiki/Houston" title=" ...
+[5] &lt;td style="background-color:#ccff99"&gt;\n&lt;i&gt;&lt;b&gt;&lt;a href="/wiki/Phoenix,_Ariz ...
+[6] &lt;td style="background-color:#cfecec"&gt;\n&lt;i&gt;&lt;a href="/wiki/Philadelphia" ti ...</code></pre>
+</div>
+</div>
+</section>
+<section id="medium-mode" class="slide level2 crunch-title valign-cols">
+<h2>Medium Mode</h2>
+<p>Often more of an art than a science, but the <strong>Developer Console’s “Network” tab is your friend!</strong></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/quotes_json.jpeg"></p>
+<figcaption>The contents of the Network tab after scrolling a bit through Zyte’s <a href="http://quotes.toscrape.com/scroll" target="_blank">Quotes to Scrape</a> web-scraping sandbox (which we use a bunch in DSAN 5500 😉)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:4%;">
+<p>→</p>
+</div><div class="column" style="width:56%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/json_contents.jpeg" style="width:65.0%"></p>
+<figcaption>The <code>.json</code> file (after right-click on <code>quotes?page=5</code>, “Open in New Tab”)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section></section>
 <section>
-<section id="apis" class="title-slide slide level1 small-title not-title-slide center" data-stack-name="APIs">
-<h1>APIs</h1>
+<section id="apis-the-less-hackish-alternative" class="title-slide slide level1 center" data-stack-name="APIs">
+<h1>APIs: The Less-Hackish Alternative</h1>
+
+</section>
+<section id="apis" class="slide level2">
+<h2>APIs</h2>
 <p><strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterfaces: <strong>developer-facing</strong> part of data pipeline/service. <strong>Abstracts unnecessary details</strong>:</p>
 <table>
 <colgroup>
@@ -557,7 +658,7 @@ Jeff Jacobs
           display:block!important;
       }</style></aside>
 </section>
-<section id="example-math-api" class="slide level2">
+<section id="example-math-api" class="slide level2 crunch-title crunch-details">
 <h2>Example: Math API</h2>
 <ul>
 <li>Base URL: <a href="https://newton.vercel.app/api/v2/" target="_blank"><code>https://newton.vercel.app/api/v2/</code></a></li>
@@ -568,12 +669,13 @@ Jeff Jacobs
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> requests</span>
-<span id="cb1-2"><a></a>response <span class="op">=</span> requests.get(<span class="st">"https://newton.vercel.app/api/v2/factor/x^2-1"</span>)</span>
-<span id="cb1-3"><a></a><span class="bu">print</span>(response.json())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(httr2)</span>
+<span id="cb3-2"><a></a>request_obj <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://newton.vercel.app/api/v2/factor/x^2-1"</span>)</span>
+<span id="cb3-3"><a></a>response_obj <span class="ot">&lt;-</span> <span class="fu">req_perform</span>(request_obj)</span>
+<span id="cb3-4"><a></a><span class="fu">writeLines</span>(response_obj <span class="sc">|&gt;</span> <span class="fu">resp_body_string</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'operation': 'factor', 'expression': 'x^2-1', 'result': '(x - 1) (x + 1)'}</code></pre>
+<pre><code>{"operation":"factor","expression":"x^2-1","result":"(x - 1) (x + 1)"}</code></pre>
 </div>
 </div>
 </section>
@@ -645,28 +747,145 @@ Inverse Sine    /arcsin/0   0
 Inverse Tangent     /arctan/0   0
 Absolute Value  /abs/-1     1
 Logarithm   /log/2l8    3 -->
-</section>
-<section id="authentication" class="slide level2">
-<h2>Authentication</h2>
+</section></section>
+<section>
+<section id="authentication" class="title-slide slide level1 center" data-stack-name="Authentication">
+<h1>Authentication</h1>
 <ul>
 <li>Unlike the math API, most APIs do not allow requests to be made by <strong>anonymous</strong> requesters, and require <strong>authentication</strong>.</li>
-<li>For example, you can access <strong>public GitHub repos</strong> anonymously, but to access <strong>private GitHub repos</strong> using GitHub’s API, you’ll need to authenticate that you are in fact the one making the request</li>
+<li>Ex: Can access <strong>public</strong> GitHub repos anonymously, but to access <strong>private</strong> GitHub repos using GitHub’s API, you need to <strong>authenticate</strong> that <strong>you</strong> are making the request</li>
 </ul>
 </section>
-<section id="scraping-html-with-httr2-and-xml2" class="slide level2">
+<section id="spotify-api" class="slide level2 smaller crunch-title crunch-p crunch-images">
+<h2>Spotify API</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><i class="bi bi-1-circle pe-1"></i> Create an App</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/spotify_app.jpeg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p><i class="bi bi-2-circle"></i> Go to “Settings”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/spotify_settings_button.jpeg" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+<p><i class="bi bi-3-circle"></i> Copy Client ID + secret to secure location</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/spotify_settings.jpeg" class="quarto-figure quarto-figure-center" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="managing-secrets-with-.env" class="slide level2 crunch-title">
+<h2>Managing Secrets with <code>.env</code></h2>
+<ul>
+<li>🚨 <strong>Sensitive data (like the <em>client secret</em>) should never be included directly in your code!</strong> 🚨</li>
+<li>Instead, use <code>.env</code> file to define <strong>environment vars</strong>, then load via <code>library(dotenv)</code> [<a href="https://github.com/gaborcsardi/dotenv" target="_blank">documentation <i class="bi bi-box-arrow-up-right" style="font-size: 75%;"></i></a>]</li>
+<li>Just make sure to include <code>.env</code> in your <code>.gitignore</code> file! (More on <code>.gitignore</code> next week 🙂)</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>.env</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename=".env"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a></a><span class="va">SECRET_PASSWORD</span><span class="op">=</span>plsdonttell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>mycode.r</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(dotenv)</span>
+<span id="cb6-2"><a></a><span class="fu">Sys.getenv</span>(<span class="st">"SECRET_PASSWORD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "plsdonttell"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><em>(Now you can share <code>mycode.r</code> without revealing password!)</em></p>
+</section>
+<section id="spotifyr-spotify-api-continued" class="slide level2 smaller">
+<h2><code>spotifyr</code>: Spotify API Continued</h2>
+<ul>
+<li>After storing your client ID+secret in <code>.env</code>, as <code>SPOTIFY_CLIENT_ID</code> and <code>SPOTIFY_CLIENT_SECRET</code> (respectively), the <a href="https://www.rcharlie.com/spotifyr/" target="_blank"><code>spotifyr</code> library <i class="bi bi-box-arrow-up-right"></i></a> can be used as an R “wrapper” around Spotify’s Web API (see <a href="https://www.rcharlie.com/spotifyr/reference/" target="_blank"><code>spotifyr</code> list of functions <i class="bi bi-box-arrow-up-right"></i></a>)</li>
+</ul>
+<!-- you can use them to obtain an **Acccess Token** (or, just start using `spotifyr`, which will obtain this token for you automatically) -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(dotenv) <span class="co"># Loads the client ID+secret from .env</span></span>
+<span id="cb8-2"><a></a><span class="fu">library</span>(spotifyr)</span>
+<span id="cb8-3"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-4"><a></a><span class="co">#access_token &lt;- get_spotify_access_token()</span></span>
+<span id="cb8-5"><a></a>nba_id <span class="ot">&lt;-</span> <span class="fu">search_spotify</span>(<span class="st">"nba youngboy"</span>, <span class="at">type=</span><span class="st">"artist"</span>, <span class="at">limit=</span><span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">pull</span>(id)</span>
+<span id="cb8-6"><a></a><span class="fu">get_artist_top_tracks</span>(nba_id) <span class="sc">|&gt;</span> <span class="fu">select</span>(id, name) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">id</th>
+<th style="text-align: left;">name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1cMMVJ4FDqhCci9efd1BU6</td>
+<td style="text-align: left;">Need It (feat. YoungBoy Never Broke Again)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1oWM79mUVdZGCGYjSirHZR</td>
+<td style="text-align: left;">Bandit (with YoungBoy Never Broke Again)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6klLvorLoo1sxvZcjJIY8I</td>
+<td style="text-align: left;">Make No Sense</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5B0kgjHULYJhAQkK5XsMoC</td>
+<td style="text-align: left;">WUSYANAME (feat. Youngboy Never Broke Again &amp; Ty Dolla $ign)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3sA7HKGzcKTVscdiTCrWpX</td>
+<td style="text-align: left;">Outside Today</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="appendix-1-web-scraping-via-xpath" class="title-slide slide level1 center" data-stack-name="Appendix">
+<h1>Appendix 1: Web Scraping via XPath</h1>
+
+</section>
+<section id="scraping-html-with-httr2-and-xml2" class="slide level2 smaller crunch-title crunch-details">
 <h2>Scraping HTML with <code>httr2</code> and <code>xml2</code></h2>
-<a href="https://httr2.r-lib.org/" target="_blank">`httr2` Documentation</a> | <a href="https://xml2.r-lib.org/" target="_blank">`xml2` Documentation</a>
+<p><a href="https://httr2.r-lib.org/" target="_blank"><code>httr2</code> Documentation</a> | <a href="https://xml2.r-lib.org/" target="_blank"><code>xml2</code> Documentation</a></p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Get HTML</span></span>
-<span id="cb3-2"><a></a><span class="fu">library</span>(httr2)</span>
-<span id="cb3-3"><a></a>request_obj <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://en.wikipedia.org/wiki/Data_science"</span>)</span>
-<span id="cb3-4"><a></a>response_obj <span class="ot">&lt;-</span> <span class="fu">req_perform</span>(request_obj)</span>
-<span id="cb3-5"><a></a><span class="co"># Parse HTML</span></span>
-<span id="cb3-6"><a></a><span class="fu">library</span>(xml2)</span>
-<span id="cb3-7"><a></a>html_obj <span class="ot">&lt;-</span> response_obj <span class="sc">%&gt;%</span> <span class="fu">resp_body_html</span>()</span>
-<span id="cb3-8"><a></a>html_obj <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">'//h2//span[@class="mw-headline"]'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Get HTML</span></span>
+<span id="cb9-2"><a></a><span class="fu">library</span>(httr2)</span>
+<span id="cb9-3"><a></a>request_obj <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://en.wikipedia.org/wiki/Data_science"</span>)</span>
+<span id="cb9-4"><a></a>response_obj <span class="ot">&lt;-</span> <span class="fu">req_perform</span>(request_obj)</span>
+<span id="cb9-5"><a></a><span class="co"># Parse HTML</span></span>
+<span id="cb9-6"><a></a><span class="fu">library</span>(xml2)</span>
+<span id="cb9-7"><a></a>html_obj <span class="ot">&lt;-</span> response_obj <span class="sc">|&gt;</span> <span class="fu">resp_body_html</span>()</span>
+<span id="cb9-8"><a></a>html_obj <span class="sc">|&gt;</span> <span class="fu">xml_find_all</span>(<span class="st">'//h2//span[@class="mw-headline"]'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (7)}
@@ -679,17 +898,27 @@ Logarithm   /log/2l8    3 -->
 [7] &lt;span class="mw-headline" id="References"&gt;References&lt;/span&gt;</code></pre>
 </div>
 </div>
-
-<aside><div>
+<aside class="notes">
 <p>Note: <code>httr2</code> is a re-written version of the original <code>httr</code> package, which is now deprecated. You’ll still see lots of code using <code>httr</code>, however, so it’s good to know how both versions work. <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" target="_blank">Click here for a helpful vignette</a> on the original <code>httr</code> library.</p>
-</div></aside></section>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="navigating-html-with-xpath" class="slide level2">
 <h2>Navigating HTML with XPath</h2>
 <p><a href="https://devhints.io/xpath" target="_blank">XPath Cheatsheet</a></p>
 <ul>
 <li>Notice the last line on the previous slide:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>html_obj <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">'//h2//span[@class="mw-headline"]'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>html_obj <span class="sc">%&gt;%</span> <span class="fu">xml_find_all</span>(<span class="st">'//h2//span[@class="mw-headline"]'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>The string passed to <code>xml_find_all()</code> is an <strong>XPath selector</strong></li>
 </ul>
@@ -703,21 +932,21 @@ Logarithm   /log/2l8    3 -->
 <div class="code-with-filename-file">
 <pre><strong>mypage.html</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="mypage.html"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
-<span id="cb6-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb6-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb6-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
-<span id="cb6-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-filename="mypage.html"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
+<span id="cb12-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb12-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb12-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
+<span id="cb12-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><code>'//div'</code> matches all elements <code>&lt;div&gt;</code> in the document:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
-<span id="cb7-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb7-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb7-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
-<span id="cb7-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
+<span id="cb13-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb13-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb13-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
+<span id="cb13-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><code>'//div//img'</code> matches <code>&lt;img&gt;</code> elements which are <strong>children of</strong> <code>&lt;div&gt;</code> elements:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="xpath-ii-filtering-by-attributes" class="slide level2 smaller scrollable">
@@ -726,48 +955,34 @@ Logarithm   /log/2l8    3 -->
 <div class="code-with-filename-file">
 <pre><strong>mypage.html</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="mypage.html"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
-<span id="cb9-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb9-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb9-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
-<span id="cb9-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15" data-filename="mypage.html"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb15-1"><a></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"container"</span><span class="dt">&gt;</span></span>
+<span id="cb15-2"><a></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb15-3"><a></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb15-4"><a></a>  <span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span>
+<span id="cb15-5"><a></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><code>'//p[id="page-content"]'</code> matches all <code>&lt;p&gt;</code> elements with id <code>page-content</code><sup>1</sup>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb16-1"><a></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"page-content"</span><span class="dt">&gt;</span>Content<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Matching <strong>classes</strong> is a bit trickier:</p>
 <p><span class="small-codeblock"><code>'//img[contains(concat(" ", normalize-space(@class), " "), " footer-image ")]'</code></span></p>
 <p>matches all <code>&lt;img&gt;</code> elements with <code>page-content</code> as one of their classes<sup>2</sup></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource html number-lines code-with-copy"><code class="sourceCode html"><span id="cb17-1"><a></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> class</span><span class="op">=</span><span class="st">"footer-image m-5"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"footer.png"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>In HTML, <code>id</code>s are required to be <strong>unique</strong> to particular elements (and elements cannot have more than one <code>id</code>), meaning that this should only return a <strong>single</strong> element, for valid HTML code (not followed by all webpages!). Also note the <strong>double-quotes</strong> after <code>id=</code>, which are required in XPath.</p></li><li id="fn2"><p>Your intuition may be to just use <code>'//img[@class="footer-image"]'</code>. Sadly, however, this will match only elements with <code>footer-image</code> as their <strong>only</strong> class. i.e., it will match <code>&lt;img class="footer-image"&gt;</code> but not <code>&lt;img class="footer-image another-class"&gt;</code>. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap</a>, <code>&lt;p class="p-5 m-3"&gt;&lt;/p&gt;</code> creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.</p></li></ol></aside></section>
-<section id="example-math-api-1" class="slide level2">
-<h2>Example: Math API</h2>
-<ul>
-<li>Base URL: <a href="https://newton.vercel.app/api/v2/" target="_blank"><code>https://newton.vercel.app/api/v2/</code></a></li>
-<li>The <strong>endpoint</strong>: <code>factor</code></li>
-<li>The <strong>argument</strong>: <code>"x^2 - 1"</code></li>
-<li>The <strong>request</strong>: <a href="https://newton.vercel.app/api/v2/factor/x^2-1" target="_blank"><code>https://newton.vercel.app/api/v2/factor/x^2-1</code></a></li>
-</ul>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(httr2)</span>
-<span id="cb12-2"><a></a>request_obj <span class="ot">&lt;-</span> <span class="fu">request</span>(<span class="st">"https://newton.vercel.app/api/v2/factor/x^2-1"</span>)</span>
-<span id="cb12-3"><a></a>response_obj <span class="ot">&lt;-</span> <span class="fu">req_perform</span>(request_obj)</span>
-<span id="cb12-4"><a></a><span class="fu">writeLines</span>(response_obj <span class="sc">%&gt;%</span> <span class="fu">resp_body_string</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>{"operation":"factor","expression":"x^2-1","result":"(x - 1) (x + 1)"}</code></pre>
-</div>
-</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>In HTML, <code>id</code>s are required to be <strong>unique</strong> to particular elements (and elements cannot have more than one <code>id</code>), meaning that this should only return a <strong>single</strong> element, for valid HTML code (not followed by all webpages!). Also note the <strong>double-quotes</strong> after <code>id=</code>, which are required in XPath.</p></li><li id="fn2"><p>Your intuition may be to just use <code>'//img[@class="footer-image"]'</code>. Sadly, however, this will match only elements with <code>footer-image</code> as their <strong>only</strong> class. i.e., it will match <code>&lt;img class="footer-image"&gt;</code> but not <code>&lt;img class="footer-image another-class"&gt;</code>. This will usually fail, since most elements on modern webpages have several classes. For example, if the site is using <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank">Bootstrap</a>, <code>&lt;p class="p-5 m-3"&gt;&lt;/p&gt;</code> creates a paragraph element with a padding of 5 pixels and a margin of 3 pixels.</p></li></ol></aside></section></section>
+<section id="appendix-2-python-versions-of-r-code" class="title-slide slide level1 center">
+<h1>Appendix 2: Python versions of R code</h1>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="im">import</span> requests</span>
+<span id="cb18-2"><a></a>response <span class="op">=</span> requests.get(<span class="st">"https://newton.vercel.app/api/v2/factor/x^2-1"</span>)</span>
+<span id="cb18-3"><a></a><span class="bu">print</span>(response.json())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>2024 DSAN Bootcamp W08-2: Using APIs in R</p>
 </div>
 </div>
-</section></section>
+</section>
+
 
     </div>
   </div>

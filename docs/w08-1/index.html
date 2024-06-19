@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -165,9 +194,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#base-r-vs.-tidyverse" id="toc-base-r-vs.-tidyverse" class="nav-link" data-scroll-target="#base-r-vs.-tidyverse">Base R vs.&nbsp;Tidyverse</a></li>
   <li><a href="#plus-way-wider-range-of-plot-types" id="toc-plus-way-wider-range-of-plot-types" class="nav-link" data-scroll-target="#plus-way-wider-range-of-plot-types">Plus Way Wider Range of Plot Types!</a></li>
   </ul></li>
+  <li><a href="#why-do-data-scientists-have-to-know-visualization" id="toc-why-do-data-scientists-have-to-know-visualization" class="nav-link" data-scroll-target="#why-do-data-scientists-have-to-know-visualization">Why Do Data Scientists Have To Know Visualization?</a>
+  <ul class="collapse">
+  <li><a href="#cant-we-just-use-fancy-statistical-methods" id="toc-cant-we-just-use-fancy-statistical-methods" class="nav-link" data-scroll-target="#cant-we-just-use-fancy-statistical-methods">…Can’t We Just Use Fancy Statistical Methods?</a></li>
+  <li><a href="#the-scariest-dataset-of-all-time" id="toc-the-scariest-dataset-of-all-time" class="nav-link" data-scroll-target="#the-scariest-dataset-of-all-time">The Scariest Dataset of All Time</a></li>
+  <li><a href="#it-gets-worse" id="toc-it-gets-worse" class="nav-link" data-scroll-target="#it-gets-worse">It Gets Worse…</a></li>
+  </ul></li>
   <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a>
   <ul class="collapse">
   <li><a href="#intuition" id="toc-intuition" class="nav-link" data-scroll-target="#intuition">Intuition</a></li>
+  <li><a href="#graphical-primitives" id="toc-graphical-primitives" class="nav-link" data-scroll-target="#graphical-primitives">Graphical Primitives</a></li>
+  <li><a href="#ggplot2-in-practice" id="toc-ggplot2-in-practice" class="nav-link" data-scroll-target="#ggplot2-in-practice"><code>ggplot2</code> In Practice</a></li>
+  <li><a href="#common-geometries" id="toc-common-geometries" class="nav-link" data-scroll-target="#common-geometries">Common Geometries</a></li>
+  <li><a href="#combining-geometries" id="toc-combining-geometries" class="nav-link" data-scroll-target="#combining-geometries">Combining Geometries</a></li>
+  <li><a href="#titles-axis-labels" id="toc-titles-axis-labels" class="nav-link" data-scroll-target="#titles-axis-labels">Titles + Axis Labels</a></li>
+  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables">Categorical Variables</a></li>
+  <li><a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets">Facets</a></li>
+  </ul></li>
+  <li><a href="#visualizing-text-data" id="toc-visualizing-text-data" class="nav-link" data-scroll-target="#visualizing-text-data">Visualizing Text Data</a>
+  <ul class="collapse">
+  <li><a href="#wordclouds-in-r" id="toc-wordclouds-in-r" class="nav-link" data-scroll-target="#wordclouds-in-r">Wordclouds in R</a></li>
+  <li><a href="#custom-text" id="toc-custom-text" class="nav-link" data-scroll-target="#custom-text">Custom Text</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -191,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
-            DSAN Summer Bootcamp 2024<br>Georgetown University
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a><br>DSAN Summer Bootcamp 2024<br>Georgetown University
           </p>
       </div>
   </div>
@@ -310,8 +357,8 @@ dbl (3): year, ward, life_exp
 </div>
 </div>
 </section>
-<section id="plus-way-wider-range-of-plot-types" class="level2">
-<h2 class="anchored" data-anchor-id="plus-way-wider-range-of-plot-types">Plus Way Wider Range of Plot Types!</h2>
+<section id="plus-way-wider-range-of-plot-types" class="level2 crunch-title smaller crunch-details">
+<h2 class="crunch-title smaller crunch-details anchored" data-anchor-id="plus-way-wider-range-of-plot-types">Plus Way Wider Range of Plot Types!</h2>
 <p>(All using the same syntax)</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -342,11 +389,440 @@ dbl (3): year, ward, life_exp
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
+<div id="fig-ward-choropleth" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ward-choropleth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ward-choropleth-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ward-choropleth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Life expectancy by ward; Shapefile from <a href="https://opendata.dc.gov/datasets/c5cd8b40fb784548a6680aead5f919ed/explore">OpenData.DC.gov</a>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="why-do-data-scientists-have-to-know-visualization" class="level1" data-stack-name="Why Visualize?">
+<h1 data-stack-name="Why Visualize?">Why Do Data Scientists Have To Know Visualization?</h1>
+<section id="cant-we-just-use-fancy-statistical-methods" class="level2 title-10 smaller">
+<h2 class="title-10 smaller anchored" data-anchor-id="cant-we-just-use-fancy-statistical-methods">…Can’t We Just Use Fancy Statistical Methods?</h2>
+<ul>
+<li>…Enter <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" target="_blank">Anscombe’s Quartet</a></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>anscombe_df <span class="ot">&lt;-</span> datasets<span class="sc">::</span>anscombe <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(id = row_number()) |&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">everything</span>(),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols_vary =</span> <span class="st">"slowest"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">".value"</span>, <span class="st">"Dataset"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.)(.)"</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>anscombe_plot_base <span class="ot">&lt;-</span> anscombe_df <span class="sc">|&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">color=</span>Dataset)) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">fullrange=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>) <span class="sc">+</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">20</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">14</span>))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>anscombe_plot_base <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Dataset), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">scales=</span><span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/ward-choropleth-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Shapefile from <a href="https://opendata.dc.gov/datasets/c5cd8b40fb784548a6680aead5f919ed/explore">OpenData.DC.gov</a></figcaption>
+<p><img src="index_files/figure-html/r-anscombe-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-scariest-dataset-of-all-time" class="level2 smaller crunch-title crunch-details small-captions">
+<h2 class="smaller crunch-title crunch-details small-captions anchored" data-anchor-id="the-scariest-dataset-of-all-time">The Scariest Dataset of All Time</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/anscombe-again-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<center>
+<strong>Means</strong>
+</center>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>anscombe_df <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Dataset) <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x), <span class="dv">2</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(y), <span class="dv">2</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-anscombe-means" class="cell-output-display quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anscombe-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: right;">x_mean</th>
+<th style="text-align: right;">y_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anscombe-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Column means for each dataset
+</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<center>
+<strong>Standard Deviations</strong>
+</center>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>anscombe_df <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Dataset) <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(x), <span class="dv">2</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(y), <span class="dv">2</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-anscombe-sds" class="cell-output-display quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anscombe-sds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: right;">x_sd</th>
+<th style="text-align: right;">y_sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">3.32</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">3.32</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">3.32</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">3.32</td>
+<td style="text-align: right;">2.03</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anscombe-sds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Standard deviations for each dataset
+</figcaption>
+</figure>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<center>
+<strong>Correlations</strong>
+</center>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>corr_df <span class="ot">&lt;-</span> anscombe_df <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dataset) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">r =</span> <span class="fu">round</span>(<span class="fu">cor</span>(x, y), <span class="dv">2</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>corr_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-anscombe-corrs" class="cell-output-display quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anscombe-corrs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: right;">r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anscombe-corrs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for each dataset
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="it-gets-worse" class="level2 smaller crunch-title smaller-table crunch-details">
+<h2 class="smaller crunch-title smaller-table crunch-details anchored" data-anchor-id="it-gets-worse">It Gets Worse…</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/anscombe-yet-again-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lm_df <span class="ot">&lt;-</span> anscombe_df <span class="sc">|&gt;</span> <span class="fu">group_by</span>(Dataset) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(<span class="fu">tidy</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> .))) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), round, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">"Intercept"</span>,<span class="st">"Int"</span>, term)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `across(where(is.numeric), round, 2)`.
+ℹ In group 1: `Dataset = "1"`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lm_df <span class="sc">|&gt;</span> <span class="fu">filter</span>(Dataset <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>Dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Int)</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.24</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lm_df <span class="sc">|&gt;</span> <span class="fu">filter</span>(Dataset <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>Dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Int)</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.13</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.24</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lm_df <span class="sc">|&gt;</span> <span class="fu">filter</span>(Dataset <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>Dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Int)</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.24</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>lm_df <span class="sc">|&gt;</span> <span class="fu">filter</span>(Dataset <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>Dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Int)</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.12</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">4.24</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -354,12 +830,1194 @@ dbl (3): year, ward, life_exp
 </section>
 <section id="grammar-of-graphics" class="level1" data-stack-name="Grammar of Graphics">
 <h1 data-stack-name="Grammar of Graphics">Grammar of Graphics</h1>
-<section id="intuition" class="level2">
-<h2 class="anchored" data-anchor-id="intuition">Intuition</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/grammar-of-graphics.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<section id="intuition" class="level2 crunch-title crunch-ul-0">
+<h2 class="crunch-title crunch-ul-0 anchored" data-anchor-id="intuition">Intuition</h2>
 <ul>
-<li><strong>Sentences</strong> are made up of <em>subjects</em>, <em>verbs</em>, <em>objects</em> (grammatical structure)</li>
+<li><strong>Sentences</strong> are made up of <em>subjects</em>, <em>verbs</em>, <em>objects</em></li>
+</ul>
+<div class="cell" data-fig-height="1.5" data-layout-align="default">
+<div class="cell-output-display">
+<div id="sentence-diagram">
+<div>
+<svg width="672" height="144" viewbox="0.00 0.00 277.99 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-97 273.99,-97 273.99,4 -4,4"></polygon>
+<g id="clust3" class="cluster">
+<title>cluster_2</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="191.99,-8 191.99,-85 261.99,-85 261.99,-8 191.99,-8"></polygon>
+<text text-anchor="middle" x="226.99" y="-16.2" font-family="Courier,monospace" font-size="14.00">Biko</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_1</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="101.99,-8 101.99,-85 171.99,-85 171.99,-8 101.99,-8"></polygon>
+<text text-anchor="middle" x="136.99" y="-16.2" font-family="Courier,monospace" font-size="14.00">hugged</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_0</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="8,-8 8,-85 81.99,-85 81.99,-8 8,-8"></polygon>
+<text text-anchor="middle" x="45" y="-16.2" font-family="Courier,monospace" font-size="14.00">Jeff</text>
+</g>
+<!-- data -->
+<g id="node1" class="node">
+<title>data</title>
+<polygon fill="none" stroke="black" points="73.99,-77 16,-77 16,-41 73.99,-41 73.99,-77"></polygon>
+<text text-anchor="middle" x="45" y="-54.8" font-family="Times" font-size="14.00">Subject</text>
+</g>
+<!-- aes -->
+<g id="node2" class="node">
+<title>aes</title>
+<polygon fill="none" stroke="black" points="163.99,-77 109.99,-77 109.99,-41 163.99,-41 163.99,-77"></polygon>
+<text text-anchor="middle" x="136.99" y="-54.8" font-family="Times,serif" font-size="14.00">Verb</text>
+</g>
+<!-- data&#45;&gt;aes -->
+<g id="edge1" class="edge">
+<title>data-&gt;aes</title>
+<path fill="none" stroke="black" d="M74.47,-59C82.44,-59 91.21,-59 99.56,-59"></path>
+<polygon fill="black" stroke="black" points="99.84,-62.5 109.84,-59 99.84,-55.5 99.84,-62.5"></polygon>
+</g>
+<!-- geom -->
+<g id="node3" class="node">
+<title>geom</title>
+<polygon fill="none" stroke="black" points="253.99,-77 199.99,-77 199.99,-41 253.99,-41 253.99,-77"></polygon>
+<text text-anchor="middle" x="226.99" y="-54.8" font-family="Times,serif" font-size="14.00">Object</text>
+</g>
+<!-- aes&#45;&gt;geom -->
+<g id="edge2" class="edge">
+<title>aes-&gt;geom</title>
+<path fill="none" stroke="black" d="M164.4,-59C172.39,-59 181.3,-59 189.82,-59"></path>
+<polygon fill="black" stroke="black" points="189.91,-62.5 199.91,-59 189.91,-55.5 189.91,-62.5"></polygon>
+</g>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<ul>
 <li><strong>Visualizations</strong> are made up of <em>encodings</em>, <em>coordinate systems</em>, <em>aesthetic mappings</em></li>
 </ul>
+<div class="cell" data-fig-height="2" data-layout-align="default">
+<div class="cell-output-display">
+<div id="ggplot-diagram">
+<div>
+<svg width="672" height="192" viewbox="0.00 0.00 548.30 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-97 544.3,-97 544.3,4 -4,4"></polygon>
+<g id="clust3" class="cluster">
+<title>cluster_2</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="424.32,-8 424.32,-85 540.3,-85 540.3,-8 424.32,-8"></polygon>
+<text text-anchor="middle" x="482.31" y="-16.2" font-family="Courier,monospace" font-size="14.00">geom_point()</text>
+</g>
+<g id="clust1" class="cluster">
+<title>cluster_0</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="0,-8 0,-85 100,-85 100,-8 0,-8"></polygon>
+<text text-anchor="middle" x="50" y="-16.2" font-family="Courier,monospace" font-size="14.00">my_data |&gt;</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_1</title>
+<polygon fill="none" stroke="black" stroke-width="0" points="120,-8 120,-85 404.32,-85 404.32,-8 120,-8"></polygon>
+<text text-anchor="middle" x="262.16" y="-16.2" font-family="Courier,monospace" font-size="14.00">ggplot(aes(x=year, y=height)) |&gt;</text>
+</g>
+<!-- data -->
+<g id="node1" class="node">
+<title>data</title>
+<polygon fill="none" stroke="black" points="77,-77 23,-77 23,-41 77,-41 77,-77"></polygon>
+<text text-anchor="middle" x="50" y="-54.8" font-family="Times" font-size="14.00">Data</text>
+</g>
+<!-- aes -->
+<g id="node2" class="node">
+<title>aes</title>
+<polygon fill="none" stroke="black" points="299.48,-77 224.84,-77 224.84,-41 299.48,-41 299.48,-77"></polygon>
+<text text-anchor="middle" x="262.16" y="-54.8" font-family="Times,serif" font-size="14.00">Aesthetics</text>
+</g>
+<!-- data&#45;&gt;aes -->
+<g id="edge1" class="edge">
+<title>data-&gt;aes</title>
+<path fill="none" stroke="black" d="M77.19,-59C111.55,-59 172.43,-59 214.69,-59"></path>
+<polygon fill="black" stroke="black" points="214.74,-62.5 224.74,-59 214.74,-55.5 214.74,-62.5"></polygon>
+</g>
+<!-- geom -->
+<g id="node3" class="node">
+<title>geom</title>
+<polygon fill="none" stroke="black" points="518.29,-77 446.33,-77 446.33,-41 518.29,-41 518.29,-77"></polygon>
+<text text-anchor="middle" x="482.31" y="-54.8" font-family="Times,serif" font-size="14.00">Geometry</text>
+</g>
+<!-- aes&#45;&gt;geom -->
+<g id="edge2" class="edge">
+<title>aes-&gt;geom</title>
+<path fill="none" stroke="black" d="M299.67,-59C337.16,-59 395.58,-59 436,-59"></path>
+<polygon fill="black" stroke="black" points="436.12,-62.5 446.12,-59 436.12,-55.5 436.12,-62.5"></polygon>
+</g>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="graphical-primitives" class="level2 crunch-title smaller-table-18">
+<h2 class="crunch-title smaller-table-18 anchored" data-anchor-id="graphical-primitives">Graphical Primitives</h2>
+<p><span style="font-size: 90%">Split the visualization task into discrete steps, joined by <code>|&gt;</code>!</span></p>
+<div>
+<table data-quarto-postprocess="true" class="table">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="width: 18%">Layer</th>
+<th data-quarto-table-cell-role="th" style="width: 30%">Function</th>
+<th data-quarto-table-cell-role="th" style="width: 52%">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="width: 18%">Data</td>
+<td><code>ggplot(df)</code></td>
+<td>Raw data you want to visualize</td>
+</tr>
+<tr class="even">
+<td>Aesthetics</td>
+<td><code>aes(x=xcol,y=ycol)</code></td>
+<td>Mapping of <code>df</code> columns onto geometries</td>
+</tr>
+<tr class="odd">
+<td>Geometries</td>
+<td><code>geom_*()</code></td>
+<td>Which geometric objects to use</td>
+</tr>
+<tr class="even">
+<td>Facets</td>
+<td><code>facet_*()</code></td>
+<td>Arrangement of plots into a grid</td>
+</tr>
+<tr class="odd">
+<td>Theme</td>
+<td><code>theme()</code>, <code>labs()</code></td>
+<td>Overall visual defaults, titles, axis labels</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="font-size: 90%"><em>(See the official <a href="https://ggplot2-book.org" target="_blank"><code>ggplot2</code> book</a> for more!)</em></span></p>
+</section>
+<section id="ggplot2-in-practice" class="level2 smaller crunch-p">
+<h2 class="smaller crunch-p anchored" data-anchor-id="ggplot2-in-practice"><code>ggplot2</code> In Practice</h2>
+<p><em>(In practice, a few central graphical primitives you’ll use over and over again)</em></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<code>geom_bar()</code>
+</center>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bar_data <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Category, <span class="sc">~</span>Value,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A"</span>, <span class="dv">100</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"B"</span>, <span class="dv">200</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bar_data, <span class="fu">aes</span>(<span class="at">x=</span>Category, <span class="at">y=</span>Value)) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geom-bar-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<center>
+<code>stat_function()</code>
+</center>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>)), <span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm, <span class="at">linewidth=</span>g_linewidth) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/stat-function-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-geometries" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="common-geometries">Common Geometries</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><code>geom_point()</code> for scatterplots</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>N_scatter <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>random_points <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">runif</span>(N_scatter,<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">y=</span><span class="fu">runif</span>(N_scatter,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(random_points, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> g_pointsize) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geom-point-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>and <code>geom_line()</code> for line graphs</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>N_line <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>rand_line <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">1</span>,N_line),<span class="at">y=</span><span class="fu">runif</span>(N_line,<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rand_line, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> g_linewidth) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geom-line-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="combining-geometries" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="combining-geometries">Combining Geometries</h2>
+<p>…Which can be used together in a single plot:</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rand_line, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span>g_linewidth) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"full"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/geom-line-point-demo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="titles-axis-labels" class="level2">
+<h2 class="anchored" data-anchor-id="titles-axis-labels">Titles + Axis Labels</h2>
+<p>Can all be accomplished using the <code>labs()</code> function!</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>rand_plot <span class="ot">&lt;-</span> rand_line <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth=</span>g_linewidth) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"quarter"</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"My Cool Plot"</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"The x value"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"The y value"</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rand_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ggplot-labs-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-variables" class="level2 smaller crunch-details">
+<h2 class="smaller crunch-details anchored" data-anchor-id="categorical-variables">Categorical Variables</h2>
+<p>Use the <strong>color</strong> aesthetic with <code>factor()</code> to differentiate categories</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>(Clustered data generation code)</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>cluster_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.05</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(centroids)) {</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  cur_centroid <span class="ot">&lt;-</span> centroids[[i]]</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate N points from this centroid</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  cur_data <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(N, cur_centroid, Sigma)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(cur_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  cur_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(cur_data)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  cur_df <span class="ot">&lt;-</span> cur_df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster =</span> i</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  cluster_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(cluster_df, cur_df)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Without <code>factor()</code> <img src="images/50.png" class="img-fluid" width="25"></p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cluster_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">color=</span>cluster)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span><span class="st">"Cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ggplot-plot-clusters-nofactor-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>With <code>factor()</code> 💯</p>
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cluster_df <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">color=</span><span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span><span class="st">"Cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ggplot-plot-clusters-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="facets" class="level2">
+<h2 class="anchored" data-anchor-id="facets">Facets</h2>
+<p>If individual plot gets too busy, <strong>facets</strong> provide an easy way to split data into multiple (automatically-labeled) plots!</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>facet_plot <span class="ot">&lt;-</span> cluster_df <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span>x, <span class="at">y=</span>y,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="fu">factor</span>(cluster)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span>g_pointsize <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dsan_theme</span>(<span class="st">"half"</span>) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span><span class="st">"Cluster"</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(cluster),<span class="at">nrow=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>facet_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/ggplot-show-facets-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><span style="font-size: 80%"><em>(Much more on this in DSAN 5200: Advanced Data Visualization</em> 😉<em>)</em></span></p>
+</section>
+</section>
+<section id="visualizing-text-data" class="level1" data-stack-name="Wordclouds">
+<h1 data-stack-name="Wordclouds">Visualizing Text Data</h1>
+<section id="wordclouds-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="wordclouds-in-r">Wordclouds in R</h2>
+<p>Using the <code>ggwordcloud</code> add-on to <code>ggplot2</code>!</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sysfonts</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: showtextdb</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggwordcloud' was built under R version 4.3.3</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"love_words_latin"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>love_words_latin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 32%">
+<col style="width: 21%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">iso_639_3</th>
+<th style="text-align: left;">word</th>
+<th style="text-align: left;">name</th>
+<th style="text-align: right;">native_speakers</th>
+<th style="text-align: right;">speakers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">eng</td>
+<td style="text-align: left;">Love</td>
+<td style="text-align: left;">English</td>
+<td style="text-align: right;">400.0000</td>
+<td style="text-align: right;">800.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">spa</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Spanish</td>
+<td style="text-align: right;">480.0000</td>
+<td style="text-align: right;">555.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fra</td>
+<td style="text-align: left;">Amour</td>
+<td style="text-align: left;">French</td>
+<td style="text-align: right;">76.8000</td>
+<td style="text-align: right;">350.8000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">msa</td>
+<td style="text-align: left;">Cinta</td>
+<td style="text-align: left;">Malay</td>
+<td style="text-align: right;">77.0000</td>
+<td style="text-align: right;">277.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">por</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Portuguese</td>
+<td style="text-align: right;">220.0000</td>
+<td style="text-align: right;">243.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ind</td>
+<td style="text-align: left;">Cinta</td>
+<td style="text-align: left;">Indonesian</td>
+<td style="text-align: right;">43.0000</td>
+<td style="text-align: right;">199.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ita</td>
+<td style="text-align: left;">Amore</td>
+<td style="text-align: left;">Italian</td>
+<td style="text-align: right;">90.0000</td>
+<td style="text-align: right;">114.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">deu</td>
+<td style="text-align: left;">Liebe</td>
+<td style="text-align: left;">German</td>
+<td style="text-align: right;">95.0000</td>
+<td style="text-align: right;">107.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">swa</td>
+<td style="text-align: left;">Pendo</td>
+<td style="text-align: left;">Swahili</td>
+<td style="text-align: right;">8.0000</td>
+<td style="text-align: right;">98.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tur</td>
+<td style="text-align: left;">Ask</td>
+<td style="text-align: left;">Turkish</td>
+<td style="text-align: right;">78.5000</td>
+<td style="text-align: right;">88.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">jav</td>
+<td style="text-align: left;">Tresna</td>
+<td style="text-align: left;">Javanese</td>
+<td style="text-align: right;">82.0000</td>
+<td style="text-align: right;">82.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vie</td>
+<td style="text-align: left;">Tinh yeu</td>
+<td style="text-align: left;">Vietnamese</td>
+<td style="text-align: right;">75.0000</td>
+<td style="text-align: right;">75.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tgl</td>
+<td style="text-align: left;">Pag-ibig</td>
+<td style="text-align: left;">Tagalog</td>
+<td style="text-align: right;">28.0000</td>
+<td style="text-align: right;">73.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hau</td>
+<td style="text-align: left;">Soyayya</td>
+<td style="text-align: left;">Hausa</td>
+<td style="text-align: right;">43.7000</td>
+<td style="text-align: right;">63.2000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ibo</td>
+<td style="text-align: left;">Ihunanya</td>
+<td style="text-align: left;">Igbo</td>
+<td style="text-align: right;">50.0000</td>
+<td style="text-align: right;">50.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pol</td>
+<td style="text-align: left;">Milosc</td>
+<td style="text-align: left;">Polish</td>
+<td style="text-align: right;">45.0000</td>
+<td style="text-align: right;">50.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hak</td>
+<td style="text-align: left;">Oi</td>
+<td style="text-align: left;">Hakka Chinese</td>
+<td style="text-align: right;">47.8000</td>
+<td style="text-align: right;">47.8000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">uzb</td>
+<td style="text-align: left;">Sevgi</td>
+<td style="text-align: left;">Uzbek</td>
+<td style="text-align: right;">32.0000</td>
+<td style="text-align: right;">32.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ron</td>
+<td style="text-align: left;">Dragoste</td>
+<td style="text-align: left;">Romanian</td>
+<td style="text-align: right;">25.0000</td>
+<td style="text-align: right;">29.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">nld</td>
+<td style="text-align: left;">Liefde</td>
+<td style="text-align: left;">Dutch</td>
+<td style="text-align: right;">22.0000</td>
+<td style="text-align: right;">28.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">kur</td>
+<td style="text-align: left;">Evin</td>
+<td style="text-align: left;">Kurdish</td>
+<td style="text-align: right;">25.0000</td>
+<td style="text-align: right;">25.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hbs</td>
+<td style="text-align: left;">Ljubav</td>
+<td style="text-align: left;">Serbo-Croatian</td>
+<td style="text-align: right;">21.0000</td>
+<td style="text-align: right;">21.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">afr</td>
+<td style="text-align: left;">Liefde</td>
+<td style="text-align: left;">Afrikaans</td>
+<td style="text-align: right;">7.2000</td>
+<td style="text-align: right;">17.5000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tso</td>
+<td style="text-align: left;">Rirhandzu</td>
+<td style="text-align: left;">Tsonga</td>
+<td style="text-align: right;">12.0000</td>
+<td style="text-align: right;">15.4000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">som</td>
+<td style="text-align: left;">Jacayl</td>
+<td style="text-align: left;">Somali</td>
+<td style="text-align: right;">15.0000</td>
+<td style="text-align: right;">15.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bar</td>
+<td style="text-align: left;">Liab</td>
+<td style="text-align: left;">Bavarian</td>
+<td style="text-align: right;">14.0000</td>
+<td style="text-align: right;">14.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hun</td>
+<td style="text-align: left;">Szeretet</td>
+<td style="text-align: left;">Hungarian</td>
+<td style="text-align: right;">13.0000</td>
+<td style="text-align: right;">13.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lin</td>
+<td style="text-align: left;">Bolingo</td>
+<td style="text-align: left;">Lingala</td>
+<td style="text-align: right;">5.5000</td>
+<td style="text-align: right;">12.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">aze</td>
+<td style="text-align: left;">Sevgi</td>
+<td style="text-align: left;">Azerbaijani</td>
+<td style="text-align: right;">12.0000</td>
+<td style="text-align: right;">12.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ilo</td>
+<td style="text-align: left;">Ayat</td>
+<td style="text-align: left;">Iloko</td>
+<td style="text-align: right;">9.1000</td>
+<td style="text-align: right;">11.1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ces</td>
+<td style="text-align: left;">Laska</td>
+<td style="text-align: left;">Czech</td>
+<td style="text-align: right;">10.7000</td>
+<td style="text-align: right;">10.7000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cat</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Catalan</td>
+<td style="text-align: right;">4.1000</td>
+<td style="text-align: right;">10.1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">swe</td>
+<td style="text-align: left;">Karlek</td>
+<td style="text-align: left;">Swedish</td>
+<td style="text-align: right;">9.6000</td>
+<td style="text-align: right;">9.6000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cdo</td>
+<td style="text-align: left;">Ai</td>
+<td style="text-align: left;">Min Dong Chinese</td>
+<td style="text-align: right;">9.5000</td>
+<td style="text-align: right;">9.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">que</td>
+<td style="text-align: left;">Khuyay</td>
+<td style="text-align: left;">Quechua</td>
+<td style="text-align: right;">9.0000</td>
+<td style="text-align: right;">9.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tuk</td>
+<td style="text-align: left;">Soygi</td>
+<td style="text-align: left;">Turkmen</td>
+<td style="text-align: right;">6.7000</td>
+<td style="text-align: right;">6.7000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hrv</td>
+<td style="text-align: left;">Ljubav</td>
+<td style="text-align: left;">Croatian</td>
+<td style="text-align: right;">5.6000</td>
+<td style="text-align: right;">5.6000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dan</td>
+<td style="text-align: left;">Karlighed</td>
+<td style="text-align: left;">Danish</td>
+<td style="text-align: right;">5.5000</td>
+<td style="text-align: right;">5.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fij</td>
+<td style="text-align: left;">Rakkaus</td>
+<td style="text-align: left;">Fijian</td>
+<td style="text-align: right;">5.4000</td>
+<td style="text-align: right;">5.4000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sqi</td>
+<td style="text-align: left;">Dashuria</td>
+<td style="text-align: left;">Albanian</td>
+<td style="text-align: right;">5.4000</td>
+<td style="text-align: right;">5.4000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">slk</td>
+<td style="text-align: left;">Laska</td>
+<td style="text-align: left;">Slovak</td>
+<td style="text-align: right;">5.2000</td>
+<td style="text-align: right;">5.2000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gug</td>
+<td style="text-align: left;">Mborayhu</td>
+<td style="text-align: left;">Paraguayan Guaraní</td>
+<td style="text-align: right;">4.8500</td>
+<td style="text-align: right;">4.8500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">scn</td>
+<td style="text-align: left;">Amuri</td>
+<td style="text-align: left;">Sicilian</td>
+<td style="text-align: right;">4.7000</td>
+<td style="text-align: right;">4.7000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ssw</td>
+<td style="text-align: left;">Lutsandvo</td>
+<td style="text-align: left;">Swati</td>
+<td style="text-align: right;">2.3000</td>
+<td style="text-align: right;">4.7000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lmo</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Lombard</td>
+<td style="text-align: right;">3.9000</td>
+<td style="text-align: right;">3.9000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">jam</td>
+<td style="text-align: left;">Lob</td>
+<td style="text-align: left;">Jamaican Creole English</td>
+<td style="text-align: right;">3.2000</td>
+<td style="text-align: right;">3.2000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bos</td>
+<td style="text-align: left;">Ljubav</td>
+<td style="text-align: left;">Bosnian</td>
+<td style="text-align: right;">3.0000</td>
+<td style="text-align: right;">3.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lit</td>
+<td style="text-align: left;">Meile</td>
+<td style="text-align: left;">Lithuanian</td>
+<td style="text-align: right;">3.0000</td>
+<td style="text-align: right;">3.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nno</td>
+<td style="text-align: left;">Kjarleik</td>
+<td style="text-align: left;">Norwegian Nynorsk</td>
+<td style="text-align: right;">2.6000</td>
+<td style="text-align: right;">2.6000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">nob</td>
+<td style="text-align: left;">Kjarlighet</td>
+<td style="text-align: left;">Norwegian Bokmål</td>
+<td style="text-align: right;">2.6000</td>
+<td style="text-align: right;">2.6000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">war</td>
+<td style="text-align: left;">Higugma</td>
+<td style="text-align: left;">Waray</td>
+<td style="text-align: right;">2.6000</td>
+<td style="text-align: right;">2.6000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">slv</td>
+<td style="text-align: left;">Ljubezen</td>
+<td style="text-align: left;">Slovenian</td>
+<td style="text-align: right;">2.5000</td>
+<td style="text-align: right;">2.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">gom</td>
+<td style="text-align: left;">Mog</td>
+<td style="text-align: left;">Goan Konkani</td>
+<td style="text-align: right;">2.3000</td>
+<td style="text-align: right;">2.3000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">epo</td>
+<td style="text-align: left;">Amo</td>
+<td style="text-align: left;">Esperanto</td>
+<td style="text-align: right;">0.0001</td>
+<td style="text-align: right;">2.0001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eus</td>
+<td style="text-align: left;">Maitasun</td>
+<td style="text-align: left;">Basque</td>
+<td style="text-align: right;">0.7500</td>
+<td style="text-align: right;">1.8500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">als</td>
+<td style="text-align: left;">Liebe</td>
+<td style="text-align: left;">Tosk Albanian</td>
+<td style="text-align: right;">1.8000</td>
+<td style="text-align: right;">1.8000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lav</td>
+<td style="text-align: left;">Milestiba</td>
+<td style="text-align: left;">Latvian</td>
+<td style="text-align: right;">1.7500</td>
+<td style="text-align: right;">1.7500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">nah</td>
+<td style="text-align: left;">Tlazohtiliztli</td>
+<td style="text-align: left;">Nahuatl languages</td>
+<td style="text-align: right;">1.7400</td>
+<td style="text-align: right;">1.7400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sco</td>
+<td style="text-align: left;">Luve</td>
+<td style="text-align: left;">Scots</td>
+<td style="text-align: right;">0.1200</td>
+<td style="text-align: right;">1.6200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">glg</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Galician</td>
+<td style="text-align: right;">1.5600</td>
+<td style="text-align: right;">1.5600</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lim</td>
+<td style="text-align: left;">Leefde</td>
+<td style="text-align: left;">Limburgan</td>
+<td style="text-align: right;">1.3000</td>
+<td style="text-align: right;">1.3000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">est</td>
+<td style="text-align: left;">Armastus</td>
+<td style="text-align: left;">Estonian</td>
+<td style="text-align: right;">1.1000</td>
+<td style="text-align: right;">1.1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">srd</td>
+<td style="text-align: left;">Amore</td>
+<td style="text-align: left;">Sardinian</td>
+<td style="text-align: right;">1.0000</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cym</td>
+<td style="text-align: left;">Cariad</td>
+<td style="text-align: left;">Welsh</td>
+<td style="text-align: right;">0.7000</td>
+<td style="text-align: right;">0.7000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">pms</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Piemontese</td>
+<td style="text-align: right;">0.7000</td>
+<td style="text-align: right;">0.7000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ast</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Asturian</td>
+<td style="text-align: right;">0.3500</td>
+<td style="text-align: right;">0.6400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">isl</td>
+<td style="text-align: left;">Ast</td>
+<td style="text-align: left;">Icelandic</td>
+<td style="text-align: right;">0.3500</td>
+<td style="text-align: right;">0.6400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wln</td>
+<td style="text-align: left;">Amour</td>
+<td style="text-align: left;">Walloon</td>
+<td style="text-align: right;">0.6000</td>
+<td style="text-align: right;">0.6000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mlt</td>
+<td style="text-align: left;">Imhabba</td>
+<td style="text-align: left;">Maltese</td>
+<td style="text-align: right;">0.5200</td>
+<td style="text-align: right;">0.5200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lij</td>
+<td style="text-align: left;">Amo</td>
+<td style="text-align: left;">Ligurian</td>
+<td style="text-align: right;">0.5000</td>
+<td style="text-align: right;">0.5000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">oci</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Occitan</td>
+<td style="text-align: right;">0.5000</td>
+<td style="text-align: right;">0.5000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fry</td>
+<td style="text-align: left;">Leafde</td>
+<td style="text-align: left;">Western Frisian</td>
+<td style="text-align: right;">0.4700</td>
+<td style="text-align: right;">0.4700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hif</td>
+<td style="text-align: left;">Pyar</td>
+<td style="text-align: left;">Fiji Hindi</td>
+<td style="text-align: right;">0.4600</td>
+<td style="text-align: right;">0.4600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lad</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Ladino</td>
+<td style="text-align: right;">0.1000</td>
+<td style="text-align: right;">0.4500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ltz</td>
+<td style="text-align: left;">Leift</td>
+<td style="text-align: left;">Luxembourgish</td>
+<td style="text-align: right;">0.3900</td>
+<td style="text-align: right;">0.3900</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cos</td>
+<td style="text-align: left;">Amore</td>
+<td style="text-align: left;">Corsican</td>
+<td style="text-align: right;">0.3250</td>
+<td style="text-align: right;">0.3250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ksh</td>
+<td style="text-align: left;">Leevde</td>
+<td style="text-align: left;">Kölsch</td>
+<td style="text-align: right;">0.2500</td>
+<td style="text-align: right;">0.2500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bre</td>
+<td style="text-align: left;">Karantez</td>
+<td style="text-align: left;">Breton</td>
+<td style="text-align: right;">0.2200</td>
+<td style="text-align: right;">0.2200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ext</td>
+<td style="text-align: left;">Amol</td>
+<td style="text-align: left;">Extremaduran</td>
+<td style="text-align: right;">0.2000</td>
+<td style="text-align: right;">0.2000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">gla</td>
+<td style="text-align: left;">Gradh</td>
+<td style="text-align: left;">Scottish Gaelic</td>
+<td style="text-align: right;">0.0570</td>
+<td style="text-align: right;">0.0570</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">arg</td>
+<td style="text-align: left;">Aimor</td>
+<td style="text-align: left;">Aragonese</td>
+<td style="text-align: right;">0.0250</td>
+<td style="text-align: right;">0.0250</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mwl</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Mirandese</td>
+<td style="text-align: right;">0.0150</td>
+<td style="text-align: right;">0.0150</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vep</td>
+<td style="text-align: left;">Armastuz</td>
+<td style="text-align: left;">Veps</td>
+<td style="text-align: right;">0.0016</td>
+<td style="text-align: right;">0.0016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ina</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Interlingua</td>
+<td style="text-align: right;">0.0015</td>
+<td style="text-align: right;">0.0015</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ang</td>
+<td style="text-align: left;">Lufu</td>
+<td style="text-align: left;">Old English</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sgs</td>
+<td style="text-align: left;">Meile</td>
+<td style="text-align: left;">Samogitian</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lat</td>
+<td style="text-align: left;">Amor</td>
+<td style="text-align: left;">Latin</td>
+<td style="text-align: right;">0.0000</td>
+<td style="text-align: right;">0.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(love_words_latin, <span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">size =</span> speakers)) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :
+Some words could not fit on page. They have been placed at their original
+positions.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/r-wordcloud-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="custom-text" class="level2">
+<h2 class="anchored" data-anchor-id="custom-text">Custom Text</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read_lines</span>(<span class="st">"assets/finn.txt"</span>))</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># |&gt;</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  unnest_tokens(word, text)</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">read_lines(“assets/finn.txt”)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">riverrun, past Eve and Adam’s, from swerve of shore to bend</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">of bay, brings us by a commodius vicus of recirculation back to</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Howth Castle and Environs.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sir Tristram, violer d’amores, fr’over the short sea, had passencore</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rearrived from North Armorica on this side the scraggy</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 
 
 </section>

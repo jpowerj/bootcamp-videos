@@ -546,10 +546,10 @@ table1 |>
 
 * Let's walk through a common data-analysis task (data cleaning and merging), seeing how the `readr`, `tibble` and `dplyr` functions help us!
 
-## Merging Data {.smaller .crunch-title}
+## <i class='bi bi-1-circle'></i> Merging Data {.smaller .crunch-title}
 
 * The task: Analyze relationship between population and GDP (in 2000)
-* The data: One dataset on population in 2000, another on GDP in 2000
+* The data: One dataset on population in 2000, another on GDP in 2000 and 2010
 * Let's get the data **ready for merging** using R
 
 ::: columns
@@ -579,7 +579,9 @@ gdp_df |> head(5)
 
 :::
 
-## Selecting/Filtering in Action {.smaller}
+## Selecting/Filtering in Action {.smaller .crunch-title .crunch-details}
+
+Let's keep just the **rows** containing data from 2000, drop extraneous **columns**, and then **rename** the remaining columns to get rid of the spaces
 
 ```{r}
 #| label: clean-gdp-data
@@ -592,29 +594,23 @@ gdp_2000_df |> write_csv("assets/gdp_2000.csv")
 gdp_2000_df |> head()
 ```
 
-## Recommended Language: Python {.smaller .crunch-title .crunch-ul .smaller-table}
+## Switching to Python for Merging! {.smaller .crunch-title .crunch-ul .smaller-table}
 
 * Remember that we're using **Quarto**, so we can switch to Python whenever we'd like!
-* Pandas provides an easy-to-use `df.merge(other_df)`
-* *(see [Appendix Slides](#appendix-the-rest-of-the-tidyverse) for merging via Tidyverse)*
-
-::: columns
-::: {.column width="50%"}
+* Pandas provides an easy-to-use `df.merge(other_df)`, let's use it 😎
 
 ```{python}
 #| label: py-load-pop-data
-#| echo: false
+#| echo: true
 #| output: false
 import pandas as pd
 from IPython.display import Markdown
 pop_df = pd.read_csv("assets/pop_2000.csv")
-```
-
-```{python}
-#| label: py-load-gdp-data
-#| echo: false
 gdp_df = pd.read_csv("assets/gdp_2000.csv")
 ```
+
+::: columns
+::: {.column width="50%"}
 
 <center>
 **Left Join**
@@ -648,12 +644,14 @@ Markdown(merged_df.to_markdown())
 :::
 :::
 
-## Reshaping Data {.smaller}
+*(see [Appendix Slides &rarr;](#appendix-the-rest-of-the-tidyverse) for merging via Tidyverse)*
 
-Sometimes you can't merge because one of the datasets looks like the table on the left, but we want it to look like the table on the right
+## <i class='bi bi-2-circle'></i> Reshaping Data {.smaller .smaller-table}
+
+Sometimes you **can't merge** because one of the datasets looks like the table on the left (non-tidy), but we need it to look like the table on the right (tidy)...
 
 ::: columns
-::: {.column width="55%"}
+::: {.column width="50%"}
 
 In data-cleaning jargon, this dataset is **long** (more than one row per observation)
 
@@ -664,7 +662,7 @@ table2 |> head()
 ```
 
 :::
-::: {.column width="45%"}
+::: {.column width="50%"}
 
 In data-cleaning jargon, this dataset is **wide** (one row per obs; usually **tidy**)
 
@@ -677,27 +675,55 @@ table1 |> head()
 :::
 :::
 
-## Wide-to-Long in R: `gather()` {.smaller}
+## Long-to-Wide: `pivot_wider()` {.smaller .smaller-table}
 
-::: columns
-::: {.column width="40%"}
+[`pivot_wider()` Documentation (part of `tidyr`) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://tidyr.tidyverse.org/reference/pivot_wider.html){target='_blank'}
+
+::: {.columns}
+::: {.column width="50%"}
 
 ```{r}
-#| label: r-display-wide-for-reshape
-#| code-fold: show
-table1
+#| label: r-pre-pivot-wider
+table2 |> head()
 ```
 
 :::
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 ```{r}
-#| label: r-reshape
-#| code-fold: show
-long_df <- gather(table1,
-  key = "variable",
-  value = cases,
-  -c(country, year)
+#| label: r-post-pivot-wider
+wide_df <- table2 |> pivot_wider(
+  id_cols = c(country, year),
+  names_from = type,
+  values_from = count
+)
+wide_df
+```
+
+:::
+:::
+
+## Wide-to-Long: `pivot_longer()` {.smaller .smaller-table}
+
+[`pivot_longer()` Documentation (part of `tidyr`) <i class='bi bi-box-arrow-up-right' style='font-size: 1.5rem;'></i>](https://tidyr.tidyverse.org/reference/pivot_wider.html){target='_blank'}
+
+::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| label: r-pre-pivot-longer
+wide_df |> head()
+```
+
+:::
+::: {.column width="50%"}
+
+```{r}
+#| label: r-post-pivot-longer
+long_df <- wide_df |> pivot_longer(
+  cols = c(cases, population),
+  names_to = "var",
+  values_to = "val"
 )
 long_df |> head()
 ```
@@ -921,4 +947,32 @@ library(tidyverse)
 library(lubridate)
 ```
 
+:::
+
+## Appendix 2: Wide-to-Long in Base R with `gather()` {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+
+```{r}
+#| label: r-display-wide-for-reshape
+#| code-fold: show
+table1
+```
+
+:::
+::: {.column width="60%"}
+
+```{r}
+#| label: r-reshape
+#| code-fold: show
+long_df <- gather(table1,
+  key = "variable",
+  value = cases,
+  -c(country, year)
+)
+long_df |> head()
+```
+
+:::
 :::
