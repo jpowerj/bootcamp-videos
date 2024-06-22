@@ -237,7 +237,7 @@ window.Quarto = {
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
-            DSAN Summer Bootcamp 2024<br>Georgetown University
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a><br>DSAN Summer Bootcamp 2024<br>Georgetown University
           </p>
       </div>
   </div>
@@ -608,7 +608,7 @@ window.Quarto = {
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getSampleSize</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 4 7 5 6 6 5 5 5 4 3 3 4 6 4 6 5 5 6 5</code></pre>
+<pre><code> [1] 5 6 5 4 6 8 6 4 8 4 7 4 6 6 5 8 5 8 5 3</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -618,7 +618,7 @@ window.Quarto = {
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getNumTrials</span>() <span class="sc">|&gt;</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 44 59 46 53 50 43 48 36 54 53</code></pre>
+<pre><code> [1] 44 44 46 58 55 60 54 50 50 51</code></pre>
 </div>
 </div>
 </div>
@@ -1116,20 +1116,30 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </div></li>
 </ul>
 </section>
-<section id="filtering-selecting-rows" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="filtering-selecting-rows">Filtering (Selecting Rows)</h2>
+<section id="filtering-selecting-rows" class="level2 smaller crunch-title crunch-ul">
+<h2 class="smaller crunch-title crunch-ul anchored" data-anchor-id="filtering-selecting-rows">Filtering (Selecting Rows)</h2>
 <ul>
 <li><p>In Base R, <strong>filtering</strong> involves two steps:</p></li>
-<li><p><strong>First</strong>, create a <strong>boolean expression</strong> that will evaluate to <code>TRUE</code> for the rows/columns you want to keep, and <code>FALSE</code> otherwise</p></li>
-<li><p><strong>Then</strong>, use it in the correct “slot” of R’s <strong>access operator</strong> <code>[]</code>:</p>
+<li><p><i class="bi bi-1-circle"></i> Create a <strong>boolean expression</strong> that will evaluate to <code>TRUE</code> for the rows/columns you want to keep, and <code>FALSE</code> otherwise</p></li>
+<li><p><i class="bi bi-2-circle"></i> Use it in the correct “slot” of R’s <strong>access operator</strong> <code>[]</code>:</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> df[<span class="sc">&lt;</span>row filter<span class="sc">&gt;</span>, <span class="sc">&lt;</span>column filter<span class="sc">&gt;</span>] <span class="co"># Note: Either (or both) can be left blank!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>R will go through each row, evaluate <code>&lt;row filter&gt;</code>, and <strong>keep the row</strong> if and only if <code>&lt;row filter&gt;</code> evaluates to <code>TRUE</code></p></li>
 <li><p>Example: Selecting only rows with <strong>odd-numbered</strong> <code>id</code> values:</p>
+<div class="columns">
+<div class="column" style="width:42%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boolean expression which is TRUE for odd-numbered indices</span></span>
-<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>my_expression <span class="ot">&lt;-</span> df2<span class="sc">$</span>id <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span>
-<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> df2[my_expression,]</span>
-<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>filtered_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boolean expression which is TRUE for</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="co"># odd-numbered ids</span></span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>my_expression <span class="ot">&lt;-</span> df2<span class="sc">$</span>id <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>my_expression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE  TRUE</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:58%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> df2[my_expression,]</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>filtered_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1161,6 +1171,8 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </table>
 </div>
 </div>
+</div>
+</div>
 </div></li>
 </ul>
 <div class="notes">
@@ -1171,14 +1183,14 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 <h2 class="crunch-title smaller-table anchored" data-anchor-id="selecting-columns">Selecting Columns</h2>
 <ul>
 <li><p>Create a <strong>vector</strong> with names of columns you want to keep:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>, <span class="st">"var3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"var1"</span>, <span class="st">"var2"</span>, <span class="st">"var3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use as the <strong>sole</strong> argument to R’s <strong>access operator</strong> <code>[]</code>:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> df[cols_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> df[cols_to_keep]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Example: Keeping just the <code>name</code> and <code>fav_num</code> columns:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"fav_num"</span>)</span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> filtered_df[cols_to_keep]</span>
-<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>subset_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"fav_num"</span>)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>subset_df <span class="ot">&lt;-</span> filtered_df[cols_to_keep]</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>subset_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1218,9 +1230,9 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 <div class="column" style="width:50%;">
 <p><i class="bi bi-1-circle"></i> Sample row <strong>indices</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="dv">2</span>)</span>
-<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>indices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df), <span class="dv">2</span>)</span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>indices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 1</code></pre>
 </div>
@@ -1228,8 +1240,8 @@ incomplete final line found by readTableHeader on 'my_data_2.csv'</code></pre>
 </div><div class="column" style="width:50%;">
 <p><i class="bi bi-2-circle"></i> <strong>Select</strong> only these indices:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> df2[indices,]</span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>sample_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>sample_df <span class="ot">&lt;-</span> df2[indices,]</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>sample_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
