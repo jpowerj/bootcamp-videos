@@ -11,7 +11,7 @@
     "href": "w07-1/slides.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 18:40\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 18:40\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 17:32\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood afternoon!\n\n\n\n\nlibrary(lubridate)\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 17:32\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good afternoon!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/slides.html#the-ternary-operator",
@@ -53,7 +53,7 @@
     "href": "w07-1/slides.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003844023 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.417708 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003620863 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.33628 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/slides.html#how-is-it-that-much-faster",
@@ -109,7 +109,7 @@
     "href": "w07-1/index.html#if-statements",
     "title": "Control Flow in R",
     "section": "If Statements",
-    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 18:40\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood evening!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 18:40\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good evening!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
+    "text": "If Statements\n\n\n\nimport datetime\ncur_time = datetime.datetime.now()\nprint(f\"The current time is {cur_time.hour}:{cur_time.minute}\")\n\nThe current time is 17:32\n\nif cur_time.hour &lt; 12:\n    print(\"Good morning!\")\nelif cur_time.hour &lt; 18:\n    print(\"Good afternoon!\")\nelse:\n    print(\"Good evening!\")\n\nGood afternoon!\n\n\n\n\nlibrary(lubridate)\n\n\nAttaching package: 'lubridate'\n\n\nThe following objects are masked from 'package:base':\n\n    date, intersect, setdiff, union\n\ncur_time &lt;- Sys.time()\nwriteLines(paste0(\n    \"The current time is \",\n    hour(cur_time),\":\",\n    minute(cur_time)\n))\n\nThe current time is 17:32\n\nif (hour(cur_time) &lt; 12) {\n    print(\"Good morning!\")\n} else if (hour(cur_time) &lt; 18) {\n    print(\"Good afternoon!\")\n} else {\n    print(\"Good evening!\")\n}\n\n[1] \"Good afternoon!\"\n\n\n\n\n(We’ll learn about lubridate  soon!)"
   },
   {
     "objectID": "w07-1/index.html#the-ternary-operator",
@@ -151,7 +151,7 @@
     "href": "w07-1/index.html#vectorizing-your-brain",
     "title": "Control Flow in R",
     "section": "Vectorizing Your Brain",
-    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003840923 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.519329 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
+    "text": "Vectorizing Your Brain\n\nThinking in terms of vectors will be annoying at first! Many common algorithms are “naturally” described via loops…\nIt will pay off over the course of your career, I promise!\n\n\n\n\nN &lt;- 50000\nset.seed(2024)\nvec_start_time &lt;- Sys.time()\nbig_vec1 &lt;- rnorm(N, 0, 1)\nbig_vec2 &lt;- rnorm(N, 0, 1)\nproduct &lt;- big_vec1 * big_vec2\nvec_end_time &lt;- Sys.time()\nvec_end_time - vec_start_time\n\nTime difference of 0.003563881 secs\n\n\n\n\nloop_start_time &lt;- Sys.time()\nproduct &lt;- c()\nfor (i in 1:N) {\n  elt1 &lt;- big_vec1[i]\n  elt2 &lt;- big_vec2[i]\n  product &lt;- c(product, elt1 * elt2)\n}\nloop_end_time &lt;- Sys.time()\nloop_end_time - loop_start_time\n\nTime difference of 2.301572 secs\n\n\n\n\n\n(For \\(N = 100K\\), 0.006 vs. 9.08 seconds!)"
   },
   {
     "objectID": "w07-1/index.html#how-is-it-that-much-faster",
@@ -228,7 +228,7 @@
     "href": "w06-3/slides.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 6 2 2 6 6 2 6 7 5 7 4 4 6 3 3 4 8 5 3 6\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 44 53 45 53 53 48 45 50 48 53\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 3 5 7 3 4 5 5 8 3 5 5 2 6 5 2 2 5 6 6 4\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 51 47 50 55 45 43 46 58 60 53\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/slides.html#combining-strings",
@@ -354,7 +354,7 @@
     "href": "w06-3/index.html#good-news-and-bad-news",
     "title": "Introduction to R",
     "section": "|>: Good News and Bad News",
-    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 5 6 5 4 6 8 6 4 8 4 7 4 6 6 5 8 5 8 5 3\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 44 44 46 58 55 60 54 50 50 51\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
+    "text": "|&gt;: Good News and Bad News\n\nf() |&gt; g() just means: take the result of the call f() and pass it as the first argument to g()\nGood news: this means |&gt; is intuitively “backwards compatible” with many base R functions\nBad news: requires checking the first argument:\n\n\n\n\ngetSampleSize &lt;- function() {\n  return(20)\n}\ngetSampleSize() |&gt; rbinom(10, 0.5)\n\n [1] 4 3 5 5 4 6 4 6 7 5 5 5 6 6 6 6 8 6 6 7\n\n\n\n\ngetNumTrials &lt;- function() {\n  return(10)\n}\ngetNumTrials() |&gt; rbinom(100, 0.5)\n\n [1] 53 42 50 37 48 55 49 53 44 58\n\n\n\n\n[Quick Note:]\n\nIf you’ve used R before, you may have seen the %&gt;% operator from tidyverse\n…It got so popular that it is now built into R (as of 2023) as |&gt;!\n\\(\\implies\\) Switch from %&gt;% to |&gt; for instant efficiency boost 😎"
   },
   {
     "objectID": "w06-3/index.html#combining-strings",
@@ -787,18 +787,53 @@
     "text": "Facets\nIf individual plot gets too busy, facets provide an easy way to split data into multiple (automatically-labeled) plots!\n\n\n\n\nCode\nfacet_plot &lt;- cluster_df |&gt;\n  ggplot(aes(\n    x=x, y=y,\n    color=factor(cluster)\n  )) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\") +\n  facet_wrap(vars(cluster),nrow=2)\n\n\n\n\nfacet_plot\n\n\n\n\n\n\n\n\n\n\n(Much more on this in DSAN 5200: Advanced Data Visualization 😉)"
   },
   {
-    "objectID": "w08-1/index.html#wordclouds-in-r",
-    "href": "w08-1/index.html#wordclouds-in-r",
+    "objectID": "w08-1/index.html#loading-text-data",
+    "href": "w08-1/index.html#loading-text-data",
     "title": "Data Visualization in R",
-    "section": "Wordclouds in R",
-    "text": "Wordclouds in R\nUsing the ggwordcloud add-on to ggplot2!\n\n\nCode\nlibrary(showtext)\n\n\nLoading required package: sysfonts\n\n\nLoading required package: showtextdb\n\n\nCode\nshowtext_auto()\nlibrary(ggwordcloud)\n\n\nWarning: package 'ggwordcloud' was built under R version 4.3.3\n\n\nCode\ndata(\"love_words_latin\")\nlove_words_latin\n\n\n\n\n\n\n\n\n\n\n\n\n\niso_639_3\nword\nname\nnative_speakers\nspeakers\n\n\n\n\neng\nLove\nEnglish\n400.0000\n800.0000\n\n\nspa\nAmor\nSpanish\n480.0000\n555.0000\n\n\nfra\nAmour\nFrench\n76.8000\n350.8000\n\n\nmsa\nCinta\nMalay\n77.0000\n277.0000\n\n\npor\nAmor\nPortuguese\n220.0000\n243.0000\n\n\nind\nCinta\nIndonesian\n43.0000\n199.0000\n\n\nita\nAmore\nItalian\n90.0000\n114.0000\n\n\ndeu\nLiebe\nGerman\n95.0000\n107.5000\n\n\nswa\nPendo\nSwahili\n8.0000\n98.0000\n\n\ntur\nAsk\nTurkish\n78.5000\n88.0000\n\n\njav\nTresna\nJavanese\n82.0000\n82.0000\n\n\nvie\nTinh yeu\nVietnamese\n75.0000\n75.0000\n\n\ntgl\nPag-ibig\nTagalog\n28.0000\n73.0000\n\n\nhau\nSoyayya\nHausa\n43.7000\n63.2000\n\n\nibo\nIhunanya\nIgbo\n50.0000\n50.0000\n\n\npol\nMilosc\nPolish\n45.0000\n50.0000\n\n\nhak\nOi\nHakka Chinese\n47.8000\n47.8000\n\n\nuzb\nSevgi\nUzbek\n32.0000\n32.0000\n\n\nron\nDragoste\nRomanian\n25.0000\n29.0000\n\n\nnld\nLiefde\nDutch\n22.0000\n28.0000\n\n\nkur\nEvin\nKurdish\n25.0000\n25.0000\n\n\nhbs\nLjubav\nSerbo-Croatian\n21.0000\n21.0000\n\n\nafr\nLiefde\nAfrikaans\n7.2000\n17.5000\n\n\ntso\nRirhandzu\nTsonga\n12.0000\n15.4000\n\n\nsom\nJacayl\nSomali\n15.0000\n15.0000\n\n\nbar\nLiab\nBavarian\n14.0000\n14.0000\n\n\nhun\nSzeretet\nHungarian\n13.0000\n13.0000\n\n\nlin\nBolingo\nLingala\n5.5000\n12.5000\n\n\naze\nSevgi\nAzerbaijani\n12.0000\n12.0000\n\n\nilo\nAyat\nIloko\n9.1000\n11.1000\n\n\nces\nLaska\nCzech\n10.7000\n10.7000\n\n\ncat\nAmor\nCatalan\n4.1000\n10.1000\n\n\nswe\nKarlek\nSwedish\n9.6000\n9.6000\n\n\ncdo\nAi\nMin Dong Chinese\n9.5000\n9.5000\n\n\nque\nKhuyay\nQuechua\n9.0000\n9.0000\n\n\ntuk\nSoygi\nTurkmen\n6.7000\n6.7000\n\n\nhrv\nLjubav\nCroatian\n5.6000\n5.6000\n\n\ndan\nKarlighed\nDanish\n5.5000\n5.5000\n\n\nfij\nRakkaus\nFijian\n5.4000\n5.4000\n\n\nsqi\nDashuria\nAlbanian\n5.4000\n5.4000\n\n\nslk\nLaska\nSlovak\n5.2000\n5.2000\n\n\ngug\nMborayhu\nParaguayan Guaraní\n4.8500\n4.8500\n\n\nscn\nAmuri\nSicilian\n4.7000\n4.7000\n\n\nssw\nLutsandvo\nSwati\n2.3000\n4.7000\n\n\nlmo\nAmor\nLombard\n3.9000\n3.9000\n\n\njam\nLob\nJamaican Creole English\n3.2000\n3.2000\n\n\nbos\nLjubav\nBosnian\n3.0000\n3.0000\n\n\nlit\nMeile\nLithuanian\n3.0000\n3.0000\n\n\nnno\nKjarleik\nNorwegian Nynorsk\n2.6000\n2.6000\n\n\nnob\nKjarlighet\nNorwegian Bokmål\n2.6000\n2.6000\n\n\nwar\nHigugma\nWaray\n2.6000\n2.6000\n\n\nslv\nLjubezen\nSlovenian\n2.5000\n2.5000\n\n\ngom\nMog\nGoan Konkani\n2.3000\n2.3000\n\n\nepo\nAmo\nEsperanto\n0.0001\n2.0001\n\n\neus\nMaitasun\nBasque\n0.7500\n1.8500\n\n\nals\nLiebe\nTosk Albanian\n1.8000\n1.8000\n\n\nlav\nMilestiba\nLatvian\n1.7500\n1.7500\n\n\nnah\nTlazohtiliztli\nNahuatl languages\n1.7400\n1.7400\n\n\nsco\nLuve\nScots\n0.1200\n1.6200\n\n\nglg\nAmor\nGalician\n1.5600\n1.5600\n\n\nlim\nLeefde\nLimburgan\n1.3000\n1.3000\n\n\nest\nArmastus\nEstonian\n1.1000\n1.1000\n\n\nsrd\nAmore\nSardinian\n1.0000\n1.0000\n\n\ncym\nCariad\nWelsh\n0.7000\n0.7000\n\n\npms\nAmor\nPiemontese\n0.7000\n0.7000\n\n\nast\nAmor\nAsturian\n0.3500\n0.6400\n\n\nisl\nAst\nIcelandic\n0.3500\n0.6400\n\n\nwln\nAmour\nWalloon\n0.6000\n0.6000\n\n\nmlt\nImhabba\nMaltese\n0.5200\n0.5200\n\n\nlij\nAmo\nLigurian\n0.5000\n0.5000\n\n\noci\nAmor\nOccitan\n0.5000\n0.5000\n\n\nfry\nLeafde\nWestern Frisian\n0.4700\n0.4700\n\n\nhif\nPyar\nFiji Hindi\n0.4600\n0.4600\n\n\nlad\nAmor\nLadino\n0.1000\n0.4500\n\n\nltz\nLeift\nLuxembourgish\n0.3900\n0.3900\n\n\ncos\nAmore\nCorsican\n0.3250\n0.3250\n\n\nksh\nLeevde\nKölsch\n0.2500\n0.2500\n\n\nbre\nKarantez\nBreton\n0.2200\n0.2200\n\n\next\nAmol\nExtremaduran\n0.2000\n0.2000\n\n\ngla\nGradh\nScottish Gaelic\n0.0570\n0.0570\n\n\narg\nAimor\nAragonese\n0.0250\n0.0250\n\n\nmwl\nAmor\nMirandese\n0.0150\n0.0150\n\n\nvep\nArmastuz\nVeps\n0.0016\n0.0016\n\n\nina\nAmor\nInterlingua\n0.0015\n0.0015\n\n\nang\nLufu\nOld English\n0.0000\n0.0000\n\n\nsgs\nMeile\nSamogitian\n0.0000\n0.0000\n\n\nlat\nAmor\nLatin\n0.0000\n0.0000\n\n\n\n\n\n\nCode\nset.seed(2024)\nggplot(love_words_latin, aes(label = word, size = speakers)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 40) +\n  theme_minimal()\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in min(box[, 1]): no non-missing arguments to min; returning Inf\n\n\nWarning in min(box[, 2]): no non-missing arguments to min; returning Inf\n\n\nWarning in max(box[, 3]): no non-missing arguments to max; returning -Inf\n\n\nWarning in max(box[, 4]): no non-missing arguments to max; returning -Inf\n\n\nWarning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :\nSome words could not fit on page. They have been placed at their original\npositions."
+    "section": "Loading Text Data",
+    "text": "Loading Text Data\n\n\nCode\nlibrary(tidyverse)\nlibrary(tidytext)\ntext_url &lt;- \"https://gist.githubusercontent.com/jpowerj/493e395c2688ea72eabd0277e8e7a392/raw/6f882d95f3a1dc21c3b7e0b18b68d64b165c6367/eggs.txt\"\nresult_df &lt;- as_tibble(read_lines(text_url))\nresult_df &lt;- result_df |&gt; filter(value != \"\")\nresult_df |&gt; head(5)\n\n\n\n\n\n\nvalue\n\n\n\n\nI am Sam\n\n\nSam I am\n\n\nThat Sam-I-am!\n\n\nThat Sam-I-am!\n\n\nI do not like that Sam-I-am!"
   },
   {
-    "objectID": "w08-1/index.html#custom-text",
-    "href": "w08-1/index.html#custom-text",
+    "objectID": "w08-1/index.html#tokenization",
+    "href": "w08-1/index.html#tokenization",
     "title": "Data Visualization in R",
-    "section": "Custom Text",
-    "text": "Custom Text\n\n\nCode\nlibrary(tidytext)\nresult &lt;- tibble(read_lines(\"assets/finn.txt\"))\n# |&gt;\n#  unnest_tokens(word, text)\nhead(result)\n\n\n\n\n\n\nread_lines(“assets/finn.txt”)\n\n\n\n\nriverrun, past Eve and Adam’s, from swerve of shore to bend\n\n\nof bay, brings us by a commodius vicus of recirculation back to\n\n\nHowth Castle and Environs.\n\n\n\n\n\nSir Tristram, violer d’amores, fr’over the short sea, had passencore\n\n\nrearrived from North Armorica on this side the scraggy"
+    "section": "Tokenization",
+    "text": "Tokenization\n\n\nCode\ntoken_df &lt;- result_df |&gt;\n  unnest_tokens(word, value)\ntoken_df |&gt; head()\n\n\n\n\n\n\nword\n\n\n\n\ni\n\n\nam\n\n\nsam\n\n\nsam\n\n\ni\n\n\nam"
+  },
+  {
+    "objectID": "w08-1/index.html#removing-stopwords",
+    "href": "w08-1/index.html#removing-stopwords",
+    "title": "Data Visualization in R",
+    "section": "Removing Stopwords",
+    "text": "Removing Stopwords\n\n\nCode\nlibrary(stopwords)\ncleaned_df &lt;- token_df |&gt;\n  anti_join(get_stopwords())\n\n\nJoining with `by = join_by(word)`\n\n\nCode\ncleaned_df |&gt; head()\n\n\n\n\n\n\nword\n\n\n\n\nsam\n\n\nsam\n\n\nsam\n\n\nsam\n\n\nlike\n\n\nsam"
+  },
+  {
+    "objectID": "w08-1/index.html#computing-token-counts",
+    "href": "w08-1/index.html#computing-token-counts",
+    "title": "Data Visualization in R",
+    "section": "Computing Token Counts",
+    "text": "Computing Token Counts\n\n\nCode\ncount_df &lt;- cleaned_df |&gt;\n  count(word, sort = TRUE)\ncount_df |&gt; head()\n\n\n\n\n\n\nword\nn\n\n\n\n\nlike\n45\n\n\neat\n24\n\n\nsam\n18\n\n\neggs\n11\n\n\ngreen\n11\n\n\nham\n10"
+  },
+  {
+    "objectID": "w08-1/index.html#basic-wordcloud",
+    "href": "w08-1/index.html#basic-wordcloud",
+    "title": "Data Visualization in R",
+    "section": "Basic Wordcloud",
+    "text": "Basic Wordcloud\n\n\nCode\nset.seed(2024)\nlibrary(ggwordcloud)\n\n\nWarning: package 'ggwordcloud' was built under R version 4.3.3\n\n\nCode\ncount_df |&gt;\n  ggplot(aes(label = word)) +\n  geom_text_wordcloud(size = 20) +\n  theme_minimal()\n\n\nWarning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :\nSome words could not fit on page. They have been placed at their original\npositions."
+  },
+  {
+    "objectID": "w08-1/index.html#with-color",
+    "href": "w08-1/index.html#with-color",
+    "title": "Data Visualization in R",
+    "section": "With Color!",
+    "text": "With Color!\n\n\nCode\n# The wordclouds\nset.seed(2024)\nlibrary(ggwordcloud)\ncount_df |&gt;\n  ggplot(aes(label = word, color = n)) +\n  geom_text_wordcloud(size = 20) +\n  theme_minimal()\n\n\nWarning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :\nSome words could not fit on page. They have been placed at their original\npositions."
+  },
+  {
+    "objectID": "w08-1/index.html#the-size-aesthetic",
+    "href": "w08-1/index.html#the-size-aesthetic",
+    "title": "Data Visualization in R",
+    "section": "The Size Aesthetic",
+    "text": "The Size Aesthetic\n\n\nCode\ncount_df |&gt;\n  ggplot(aes(label = word, size = n, color = n)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 50) +\n  theme_minimal()\n\n\nWarning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :\nSome words could not fit on page. They have been placed at their original\npositions."
   },
   {
     "objectID": "w08-1/slides.html#base-r-vs.-tidyverse",
@@ -892,18 +927,53 @@
     "text": "Facets\nIf individual plot gets too busy, facets provide an easy way to split data into multiple (automatically-labeled) plots!\n\n\n\n\nCode\nfacet_plot &lt;- cluster_df |&gt;\n  ggplot(aes(\n    x=x, y=y,\n    color=factor(cluster)\n  )) +\n  geom_point(size=g_pointsize / 2) +\n  dsan_theme(\"half\") +\n  labs(color=\"Cluster\") +\n  facet_wrap(vars(cluster),nrow=2)\n\n\n\n\nfacet_plot\n\n\n\n\n\n\n\n\n\n\n(Much more on this in DSAN 5200: Advanced Data Visualization 😉)"
   },
   {
-    "objectID": "w08-1/slides.html#wordclouds-in-r",
-    "href": "w08-1/slides.html#wordclouds-in-r",
+    "objectID": "w08-1/slides.html#loading-text-data",
+    "href": "w08-1/slides.html#loading-text-data",
     "title": "Data Visualization in R",
-    "section": "Wordclouds in R",
-    "text": "Wordclouds in R\nUsing the ggwordcloud add-on to ggplot2!\n\nlibrary(showtext)\nshowtext_auto()\nlibrary(ggwordcloud)\ndata(\"love_words_latin\")\nlove_words_latin\n\n\n\n\n\n\n\n\n\n\n\n\niso_639_3\nword\nname\nnative_speakers\nspeakers\n\n\n\n\neng\nLove\nEnglish\n400.0000\n800.0000\n\n\nspa\nAmor\nSpanish\n480.0000\n555.0000\n\n\nfra\nAmour\nFrench\n76.8000\n350.8000\n\n\nmsa\nCinta\nMalay\n77.0000\n277.0000\n\n\npor\nAmor\nPortuguese\n220.0000\n243.0000\n\n\nind\nCinta\nIndonesian\n43.0000\n199.0000\n\n\nita\nAmore\nItalian\n90.0000\n114.0000\n\n\ndeu\nLiebe\nGerman\n95.0000\n107.5000\n\n\nswa\nPendo\nSwahili\n8.0000\n98.0000\n\n\ntur\nAsk\nTurkish\n78.5000\n88.0000\n\n\njav\nTresna\nJavanese\n82.0000\n82.0000\n\n\nvie\nTinh yeu\nVietnamese\n75.0000\n75.0000\n\n\ntgl\nPag-ibig\nTagalog\n28.0000\n73.0000\n\n\nhau\nSoyayya\nHausa\n43.7000\n63.2000\n\n\nibo\nIhunanya\nIgbo\n50.0000\n50.0000\n\n\npol\nMilosc\nPolish\n45.0000\n50.0000\n\n\nhak\nOi\nHakka Chinese\n47.8000\n47.8000\n\n\nuzb\nSevgi\nUzbek\n32.0000\n32.0000\n\n\nron\nDragoste\nRomanian\n25.0000\n29.0000\n\n\nnld\nLiefde\nDutch\n22.0000\n28.0000\n\n\nkur\nEvin\nKurdish\n25.0000\n25.0000\n\n\nhbs\nLjubav\nSerbo-Croatian\n21.0000\n21.0000\n\n\nafr\nLiefde\nAfrikaans\n7.2000\n17.5000\n\n\ntso\nRirhandzu\nTsonga\n12.0000\n15.4000\n\n\nsom\nJacayl\nSomali\n15.0000\n15.0000\n\n\nbar\nLiab\nBavarian\n14.0000\n14.0000\n\n\nhun\nSzeretet\nHungarian\n13.0000\n13.0000\n\n\nlin\nBolingo\nLingala\n5.5000\n12.5000\n\n\naze\nSevgi\nAzerbaijani\n12.0000\n12.0000\n\n\nilo\nAyat\nIloko\n9.1000\n11.1000\n\n\nces\nLaska\nCzech\n10.7000\n10.7000\n\n\ncat\nAmor\nCatalan\n4.1000\n10.1000\n\n\nswe\nKarlek\nSwedish\n9.6000\n9.6000\n\n\ncdo\nAi\nMin Dong Chinese\n9.5000\n9.5000\n\n\nque\nKhuyay\nQuechua\n9.0000\n9.0000\n\n\ntuk\nSoygi\nTurkmen\n6.7000\n6.7000\n\n\nhrv\nLjubav\nCroatian\n5.6000\n5.6000\n\n\ndan\nKarlighed\nDanish\n5.5000\n5.5000\n\n\nfij\nRakkaus\nFijian\n5.4000\n5.4000\n\n\nsqi\nDashuria\nAlbanian\n5.4000\n5.4000\n\n\nslk\nLaska\nSlovak\n5.2000\n5.2000\n\n\ngug\nMborayhu\nParaguayan Guaraní\n4.8500\n4.8500\n\n\nscn\nAmuri\nSicilian\n4.7000\n4.7000\n\n\nssw\nLutsandvo\nSwati\n2.3000\n4.7000\n\n\nlmo\nAmor\nLombard\n3.9000\n3.9000\n\n\njam\nLob\nJamaican Creole English\n3.2000\n3.2000\n\n\nbos\nLjubav\nBosnian\n3.0000\n3.0000\n\n\nlit\nMeile\nLithuanian\n3.0000\n3.0000\n\n\nnno\nKjarleik\nNorwegian Nynorsk\n2.6000\n2.6000\n\n\nnob\nKjarlighet\nNorwegian Bokmål\n2.6000\n2.6000\n\n\nwar\nHigugma\nWaray\n2.6000\n2.6000\n\n\nslv\nLjubezen\nSlovenian\n2.5000\n2.5000\n\n\ngom\nMog\nGoan Konkani\n2.3000\n2.3000\n\n\nepo\nAmo\nEsperanto\n0.0001\n2.0001\n\n\neus\nMaitasun\nBasque\n0.7500\n1.8500\n\n\nals\nLiebe\nTosk Albanian\n1.8000\n1.8000\n\n\nlav\nMilestiba\nLatvian\n1.7500\n1.7500\n\n\nnah\nTlazohtiliztli\nNahuatl languages\n1.7400\n1.7400\n\n\nsco\nLuve\nScots\n0.1200\n1.6200\n\n\nglg\nAmor\nGalician\n1.5600\n1.5600\n\n\nlim\nLeefde\nLimburgan\n1.3000\n1.3000\n\n\nest\nArmastus\nEstonian\n1.1000\n1.1000\n\n\nsrd\nAmore\nSardinian\n1.0000\n1.0000\n\n\ncym\nCariad\nWelsh\n0.7000\n0.7000\n\n\npms\nAmor\nPiemontese\n0.7000\n0.7000\n\n\nast\nAmor\nAsturian\n0.3500\n0.6400\n\n\nisl\nAst\nIcelandic\n0.3500\n0.6400\n\n\nwln\nAmour\nWalloon\n0.6000\n0.6000\n\n\nmlt\nImhabba\nMaltese\n0.5200\n0.5200\n\n\nlij\nAmo\nLigurian\n0.5000\n0.5000\n\n\noci\nAmor\nOccitan\n0.5000\n0.5000\n\n\nfry\nLeafde\nWestern Frisian\n0.4700\n0.4700\n\n\nhif\nPyar\nFiji Hindi\n0.4600\n0.4600\n\n\nlad\nAmor\nLadino\n0.1000\n0.4500\n\n\nltz\nLeift\nLuxembourgish\n0.3900\n0.3900\n\n\ncos\nAmore\nCorsican\n0.3250\n0.3250\n\n\nksh\nLeevde\nKölsch\n0.2500\n0.2500\n\n\nbre\nKarantez\nBreton\n0.2200\n0.2200\n\n\next\nAmol\nExtremaduran\n0.2000\n0.2000\n\n\ngla\nGradh\nScottish Gaelic\n0.0570\n0.0570\n\n\narg\nAimor\nAragonese\n0.0250\n0.0250\n\n\nmwl\nAmor\nMirandese\n0.0150\n0.0150\n\n\nvep\nArmastuz\nVeps\n0.0016\n0.0016\n\n\nina\nAmor\nInterlingua\n0.0015\n0.0015\n\n\nang\nLufu\nOld English\n0.0000\n0.0000\n\n\nsgs\nMeile\nSamogitian\n0.0000\n0.0000\n\n\nlat\nAmor\nLatin\n0.0000\n0.0000\n\n\n\n\n\nset.seed(2024)\nggplot(love_words_latin, aes(label = word, size = speakers)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 40) +\n  theme_minimal()"
+    "section": "Loading Text Data",
+    "text": "Loading Text Data\n\nlibrary(tidyverse)\nlibrary(tidytext)\ntext_url &lt;- \"https://gist.githubusercontent.com/jpowerj/493e395c2688ea72eabd0277e8e7a392/raw/6f882d95f3a1dc21c3b7e0b18b68d64b165c6367/eggs.txt\"\nresult_df &lt;- as_tibble(read_lines(text_url))\nresult_df &lt;- result_df |&gt; filter(value != \"\")\nresult_df |&gt; head(5)\n\n\n\n\n\nvalue\n\n\n\n\nI am Sam\n\n\nSam I am\n\n\nThat Sam-I-am!\n\n\nThat Sam-I-am!\n\n\nI do not like that Sam-I-am!"
   },
   {
-    "objectID": "w08-1/slides.html#custom-text",
-    "href": "w08-1/slides.html#custom-text",
+    "objectID": "w08-1/slides.html#tokenization",
+    "href": "w08-1/slides.html#tokenization",
     "title": "Data Visualization in R",
-    "section": "Custom Text",
-    "text": "Custom Text\n\nlibrary(tidytext)\nresult &lt;- tibble(read_lines(\"assets/finn.txt\"))\n# |&gt;\n#  unnest_tokens(word, text)\nhead(result)\n\n\n\n\n\nread_lines(“assets/finn.txt”)\n\n\n\n\nriverrun, past Eve and Adam’s, from swerve of shore to bend\n\n\nof bay, brings us by a commodius vicus of recirculation back to\n\n\nHowth Castle and Environs.\n\n\n\n\n\nSir Tristram, violer d’amores, fr’over the short sea, had passencore\n\n\nrearrived from North Armorica on this side the scraggy\n\n\n\n\n\n\n\n\n\n2024 DSAN Bootcamp W08-1: Visualization"
+    "section": "Tokenization",
+    "text": "Tokenization\n\ntoken_df &lt;- result_df |&gt;\n  unnest_tokens(word, value)\ntoken_df |&gt; head()\n\n\n\n\n\nword\n\n\n\n\ni\n\n\nam\n\n\nsam\n\n\nsam\n\n\ni\n\n\nam"
+  },
+  {
+    "objectID": "w08-1/slides.html#removing-stopwords",
+    "href": "w08-1/slides.html#removing-stopwords",
+    "title": "Data Visualization in R",
+    "section": "Removing Stopwords",
+    "text": "Removing Stopwords\n\nlibrary(stopwords)\ncleaned_df &lt;- token_df |&gt;\n  anti_join(get_stopwords())\ncleaned_df |&gt; head()\n\n\n\n\n\nword\n\n\n\n\nsam\n\n\nsam\n\n\nsam\n\n\nsam\n\n\nlike\n\n\nsam"
+  },
+  {
+    "objectID": "w08-1/slides.html#computing-token-counts",
+    "href": "w08-1/slides.html#computing-token-counts",
+    "title": "Data Visualization in R",
+    "section": "Computing Token Counts",
+    "text": "Computing Token Counts\n\ncount_df &lt;- cleaned_df |&gt;\n  count(word, sort = TRUE)\ncount_df |&gt; head()\n\n\n\n\n\nword\nn\n\n\n\n\nlike\n45\n\n\neat\n24\n\n\nsam\n18\n\n\neggs\n11\n\n\ngreen\n11\n\n\nham\n10"
+  },
+  {
+    "objectID": "w08-1/slides.html#basic-wordcloud",
+    "href": "w08-1/slides.html#basic-wordcloud",
+    "title": "Data Visualization in R",
+    "section": "Basic Wordcloud",
+    "text": "Basic Wordcloud\n\nset.seed(2024)\nlibrary(ggwordcloud)\ncount_df |&gt;\n  ggplot(aes(label = word)) +\n  geom_text_wordcloud(size = 20) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "w08-1/slides.html#with-color",
+    "href": "w08-1/slides.html#with-color",
+    "title": "Data Visualization in R",
+    "section": "With Color!",
+    "text": "With Color!\n\n# The wordclouds\nset.seed(2024)\nlibrary(ggwordcloud)\ncount_df |&gt;\n  ggplot(aes(label = word, color = n)) +\n  geom_text_wordcloud(size = 20) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "w08-1/slides.html#the-size-aesthetic",
+    "href": "w08-1/slides.html#the-size-aesthetic",
+    "title": "Data Visualization in R",
+    "section": "The Size Aesthetic",
+    "text": "The Size Aesthetic\n\ncount_df |&gt;\n  ggplot(aes(label = word, size = n, color = n)) +\n  geom_text_wordcloud() +\n  scale_size_area(max_size = 50) +\n  theme_minimal()\n\n\n\n\n\n2024 DSAN Bootcamp W08-1: Visualization"
   },
   {
     "objectID": "w07-2/index.html",
@@ -1134,14 +1204,14 @@
     "href": "w07-2/slides.html#merging-data",
     "title": "Introduction to the Tidyverse",
     "section": " Merging Data",
-    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000 and 2010\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\n\nCode\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
+    "text": "Merging Data\n\nThe task: Analyze relationship between population and GDP (in 2000)\nThe data: One dataset on population in 2000, another on GDP in 2000 and 2010\nLet’s get the data ready for merging using R\n\n\n\n\ndf &lt;- table1 |&gt;\n  select(country, year, population) |&gt;\n  filter(year == 2000)\ndf |&gt; write_csv(\"assets/pop_2000.csv\")\ndf\n\n\n\n\n\ncountry\nyear\npopulation\n\n\n\n\nAfghanistan\n2000\n20595360\n\n\nBrazil\n2000\n174504898\n\n\nChina\n2000\n1280428583\n\n\n\n\n\n\n\n\ngdp_df &lt;- read_csv(\"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv\")\ngdp_df |&gt; head(5)\n\n\n\n\n\nCountry Name\nCountry Code\nYear\nValue\n\n\n\n\nAfghanistan\nAFG\n2010\n15936800636\n\n\nAlbania\nALB\n2000\n3632043908\n\n\nAlbania\nALB\n2010\n11926953259\n\n\nAlgeria\nDZA\n2000\n54790245601\n\n\nAlgeria\nDZA\n2010\n161207268655"
   },
   {
     "objectID": "w07-2/slides.html#selectingfiltering-in-action",
     "href": "w07-2/slides.html#selectingfiltering-in-action",
     "title": "Introduction to the Tidyverse",
     "section": "Selecting/Filtering in Action",
-    "text": "Selecting/Filtering in Action\nLet’s keep just the rows containing data from 2000, drop extraneous columns, and then rename the remaining columns to get rid of the spaces\n\n\nCode\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
+    "text": "Selecting/Filtering in Action\nLet’s keep just the rows containing data from 2000, drop extraneous columns, and then rename the remaining columns to get rid of the spaces\n\ngdp_2000_df &lt;- gdp_df |&gt;\n  select(`Country Name`,Year,Value) |&gt;\n  filter(Year == \"2000\") |&gt;\n  rename(country=`Country Name`, year=`Year`, gdp=`Value`)\ngdp_2000_df |&gt; write_csv(\"assets/gdp_2000.csv\")\ngdp_2000_df |&gt; head()\n\n\n\n\n\ncountry\nyear\ngdp\n\n\n\n\nAlbania\n2000\n3632043908\n\n\nAlgeria\n2000\n54790245601\n\n\nAndorra\n2000\n1434429703\n\n\nAngola\n2000\n9129594819\n\n\nAntigua and Barbuda\n2000\n830158769\n\n\nArgentina\n2000\n284203750000"
   },
   {
     "objectID": "w07-2/slides.html#switching-to-python-for-merging",

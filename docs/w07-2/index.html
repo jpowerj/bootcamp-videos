@@ -245,7 +245,7 @@ window.Quarto = {
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
-            DSAN Summer Bootcamp 2024<br>Georgetown University
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a><br>DSAN Summer Bootcamp 2024<br>Georgetown University
           </p>
       </div>
   </div>
@@ -1443,7 +1443,7 @@ dbl (2): year, value
 </div>
 </div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1457,7 +1457,7 @@ dbl (2): Year, Value
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gdp_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1515,7 +1515,7 @@ dbl (2): Year, Value
 <h2 class="smaller crunch-title crunch-details anchored" data-anchor-id="selectingfiltering-in-action">Selecting/Filtering in Action</h2>
 <p>Let’s keep just the <strong>rows</strong> containing data from 2000, drop extraneous <strong>columns</strong>, and then <strong>rename</strong> the remaining columns to get rid of the spaces</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gdp_2000_df <span class="ot">&lt;-</span> gdp_df <span class="sc">|&gt;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>,Year,Value) <span class="sc">|&gt;</span></span>

@@ -213,8 +213,13 @@ window.Quarto = {
   </ul></li>
   <li><a href="#visualizing-text-data" id="toc-visualizing-text-data" class="nav-link" data-scroll-target="#visualizing-text-data">Visualizing Text Data</a>
   <ul class="collapse">
-  <li><a href="#wordclouds-in-r" id="toc-wordclouds-in-r" class="nav-link" data-scroll-target="#wordclouds-in-r">Wordclouds in R</a></li>
-  <li><a href="#custom-text" id="toc-custom-text" class="nav-link" data-scroll-target="#custom-text">Custom Text</a></li>
+  <li><a href="#loading-text-data" id="toc-loading-text-data" class="nav-link" data-scroll-target="#loading-text-data">Loading Text Data</a></li>
+  <li><a href="#tokenization" id="toc-tokenization" class="nav-link" data-scroll-target="#tokenization">Tokenization</a></li>
+  <li><a href="#removing-stopwords" id="toc-removing-stopwords" class="nav-link" data-scroll-target="#removing-stopwords">Removing Stopwords</a></li>
+  <li><a href="#computing-token-counts" id="toc-computing-token-counts" class="nav-link" data-scroll-target="#computing-token-counts">Computing Token Counts</a></li>
+  <li><a href="#basic-wordcloud" id="toc-basic-wordcloud" class="nav-link" data-scroll-target="#basic-wordcloud">Basic Wordcloud</a></li>
+  <li><a href="#with-color" id="toc-with-color" class="nav-link" data-scroll-target="#with-color">With Color!</a></li>
+  <li><a href="#the-size-aesthetic" id="toc-the-size-aesthetic" class="nav-link" data-scroll-target="#the-size-aesthetic">The Size Aesthetic</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -1257,710 +1262,206 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </section>
 <section id="visualizing-text-data" class="level1" data-stack-name="Wordclouds">
 <h1 data-stack-name="Wordclouds">Visualizing Text Data</h1>
-<section id="wordclouds-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="wordclouds-in-r">Wordclouds in R</h2>
-<p>Using the <code>ggwordcloud</code> add-on to <code>ggplot2</code>!</p>
+<section id="loading-text-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-text-data">Loading Text Data</h2>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>text_url <span class="ot">&lt;-</span> <span class="st">"https://gist.githubusercontent.com/jpowerj/493e395c2688ea72eabd0277e8e7a392/raw/6f882d95f3a1dc21c3b7e0b18b68d64b165c6367/eggs.txt"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">read_lines</span>(text_url))</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> result_df <span class="sc">|&gt;</span> <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="st">""</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>result_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">I am Sam</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sam I am</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">That Sam-I-am!</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">That Sam-I-am!</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">I do not like that Sam-I-am!</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="tokenization" class="level2">
+<h2 class="anchored" data-anchor-id="tokenization">Tokenization</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>token_df <span class="ot">&lt;-</span> result_df <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, value)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>token_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">i</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">am</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">i</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">am</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="removing-stopwords" class="level2">
+<h2 class="anchored" data-anchor-id="removing-stopwords">Removing Stopwords</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stopwords)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cleaned_df <span class="ot">&lt;-</span> token_df <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: sysfonts</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: showtextdb</code></pre>
+<pre><code>Joining with `by = join_by(word)`</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cleaned_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sam</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">like</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="computing-token-counts" class="level2">
+<h2 class="anchored" data-anchor-id="computing-token-counts">Computing Token Counts</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>count_df <span class="ot">&lt;-</span> cleaned_df <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>count_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">word</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">like</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">eat</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sam</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">eggs</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">green</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ham</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-wordcloud" class="level2">
+<h2 class="anchored" data-anchor-id="basic-wordcloud">Basic Wordcloud</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggwordcloud' was built under R version 4.3.3</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"love_words_latin"</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>love_words_latin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>count_df <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> word)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>(<span class="at">size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div class="kable-table">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 20%">
-<col style="width: 32%">
-<col style="width: 21%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">iso_639_3</th>
-<th style="text-align: left;">word</th>
-<th style="text-align: left;">name</th>
-<th style="text-align: right;">native_speakers</th>
-<th style="text-align: right;">speakers</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">eng</td>
-<td style="text-align: left;">Love</td>
-<td style="text-align: left;">English</td>
-<td style="text-align: right;">400.0000</td>
-<td style="text-align: right;">800.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">spa</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Spanish</td>
-<td style="text-align: right;">480.0000</td>
-<td style="text-align: right;">555.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fra</td>
-<td style="text-align: left;">Amour</td>
-<td style="text-align: left;">French</td>
-<td style="text-align: right;">76.8000</td>
-<td style="text-align: right;">350.8000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">msa</td>
-<td style="text-align: left;">Cinta</td>
-<td style="text-align: left;">Malay</td>
-<td style="text-align: right;">77.0000</td>
-<td style="text-align: right;">277.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">por</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Portuguese</td>
-<td style="text-align: right;">220.0000</td>
-<td style="text-align: right;">243.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ind</td>
-<td style="text-align: left;">Cinta</td>
-<td style="text-align: left;">Indonesian</td>
-<td style="text-align: right;">43.0000</td>
-<td style="text-align: right;">199.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ita</td>
-<td style="text-align: left;">Amore</td>
-<td style="text-align: left;">Italian</td>
-<td style="text-align: right;">90.0000</td>
-<td style="text-align: right;">114.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">deu</td>
-<td style="text-align: left;">Liebe</td>
-<td style="text-align: left;">German</td>
-<td style="text-align: right;">95.0000</td>
-<td style="text-align: right;">107.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">swa</td>
-<td style="text-align: left;">Pendo</td>
-<td style="text-align: left;">Swahili</td>
-<td style="text-align: right;">8.0000</td>
-<td style="text-align: right;">98.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">tur</td>
-<td style="text-align: left;">Ask</td>
-<td style="text-align: left;">Turkish</td>
-<td style="text-align: right;">78.5000</td>
-<td style="text-align: right;">88.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">jav</td>
-<td style="text-align: left;">Tresna</td>
-<td style="text-align: left;">Javanese</td>
-<td style="text-align: right;">82.0000</td>
-<td style="text-align: right;">82.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">vie</td>
-<td style="text-align: left;">Tinh yeu</td>
-<td style="text-align: left;">Vietnamese</td>
-<td style="text-align: right;">75.0000</td>
-<td style="text-align: right;">75.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">tgl</td>
-<td style="text-align: left;">Pag-ibig</td>
-<td style="text-align: left;">Tagalog</td>
-<td style="text-align: right;">28.0000</td>
-<td style="text-align: right;">73.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hau</td>
-<td style="text-align: left;">Soyayya</td>
-<td style="text-align: left;">Hausa</td>
-<td style="text-align: right;">43.7000</td>
-<td style="text-align: right;">63.2000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ibo</td>
-<td style="text-align: left;">Ihunanya</td>
-<td style="text-align: left;">Igbo</td>
-<td style="text-align: right;">50.0000</td>
-<td style="text-align: right;">50.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">pol</td>
-<td style="text-align: left;">Milosc</td>
-<td style="text-align: left;">Polish</td>
-<td style="text-align: right;">45.0000</td>
-<td style="text-align: right;">50.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hak</td>
-<td style="text-align: left;">Oi</td>
-<td style="text-align: left;">Hakka Chinese</td>
-<td style="text-align: right;">47.8000</td>
-<td style="text-align: right;">47.8000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">uzb</td>
-<td style="text-align: left;">Sevgi</td>
-<td style="text-align: left;">Uzbek</td>
-<td style="text-align: right;">32.0000</td>
-<td style="text-align: right;">32.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ron</td>
-<td style="text-align: left;">Dragoste</td>
-<td style="text-align: left;">Romanian</td>
-<td style="text-align: right;">25.0000</td>
-<td style="text-align: right;">29.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">nld</td>
-<td style="text-align: left;">Liefde</td>
-<td style="text-align: left;">Dutch</td>
-<td style="text-align: right;">22.0000</td>
-<td style="text-align: right;">28.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">kur</td>
-<td style="text-align: left;">Evin</td>
-<td style="text-align: left;">Kurdish</td>
-<td style="text-align: right;">25.0000</td>
-<td style="text-align: right;">25.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">hbs</td>
-<td style="text-align: left;">Ljubav</td>
-<td style="text-align: left;">Serbo-Croatian</td>
-<td style="text-align: right;">21.0000</td>
-<td style="text-align: right;">21.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">afr</td>
-<td style="text-align: left;">Liefde</td>
-<td style="text-align: left;">Afrikaans</td>
-<td style="text-align: right;">7.2000</td>
-<td style="text-align: right;">17.5000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">tso</td>
-<td style="text-align: left;">Rirhandzu</td>
-<td style="text-align: left;">Tsonga</td>
-<td style="text-align: right;">12.0000</td>
-<td style="text-align: right;">15.4000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">som</td>
-<td style="text-align: left;">Jacayl</td>
-<td style="text-align: left;">Somali</td>
-<td style="text-align: right;">15.0000</td>
-<td style="text-align: right;">15.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">bar</td>
-<td style="text-align: left;">Liab</td>
-<td style="text-align: left;">Bavarian</td>
-<td style="text-align: right;">14.0000</td>
-<td style="text-align: right;">14.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hun</td>
-<td style="text-align: left;">Szeretet</td>
-<td style="text-align: left;">Hungarian</td>
-<td style="text-align: right;">13.0000</td>
-<td style="text-align: right;">13.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">lin</td>
-<td style="text-align: left;">Bolingo</td>
-<td style="text-align: left;">Lingala</td>
-<td style="text-align: right;">5.5000</td>
-<td style="text-align: right;">12.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">aze</td>
-<td style="text-align: left;">Sevgi</td>
-<td style="text-align: left;">Azerbaijani</td>
-<td style="text-align: right;">12.0000</td>
-<td style="text-align: right;">12.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ilo</td>
-<td style="text-align: left;">Ayat</td>
-<td style="text-align: left;">Iloko</td>
-<td style="text-align: right;">9.1000</td>
-<td style="text-align: right;">11.1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ces</td>
-<td style="text-align: left;">Laska</td>
-<td style="text-align: left;">Czech</td>
-<td style="text-align: right;">10.7000</td>
-<td style="text-align: right;">10.7000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cat</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Catalan</td>
-<td style="text-align: right;">4.1000</td>
-<td style="text-align: right;">10.1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">swe</td>
-<td style="text-align: left;">Karlek</td>
-<td style="text-align: left;">Swedish</td>
-<td style="text-align: right;">9.6000</td>
-<td style="text-align: right;">9.6000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cdo</td>
-<td style="text-align: left;">Ai</td>
-<td style="text-align: left;">Min Dong Chinese</td>
-<td style="text-align: right;">9.5000</td>
-<td style="text-align: right;">9.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">que</td>
-<td style="text-align: left;">Khuyay</td>
-<td style="text-align: left;">Quechua</td>
-<td style="text-align: right;">9.0000</td>
-<td style="text-align: right;">9.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">tuk</td>
-<td style="text-align: left;">Soygi</td>
-<td style="text-align: left;">Turkmen</td>
-<td style="text-align: right;">6.7000</td>
-<td style="text-align: right;">6.7000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hrv</td>
-<td style="text-align: left;">Ljubav</td>
-<td style="text-align: left;">Croatian</td>
-<td style="text-align: right;">5.6000</td>
-<td style="text-align: right;">5.6000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">dan</td>
-<td style="text-align: left;">Karlighed</td>
-<td style="text-align: left;">Danish</td>
-<td style="text-align: right;">5.5000</td>
-<td style="text-align: right;">5.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fij</td>
-<td style="text-align: left;">Rakkaus</td>
-<td style="text-align: left;">Fijian</td>
-<td style="text-align: right;">5.4000</td>
-<td style="text-align: right;">5.4000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">sqi</td>
-<td style="text-align: left;">Dashuria</td>
-<td style="text-align: left;">Albanian</td>
-<td style="text-align: right;">5.4000</td>
-<td style="text-align: right;">5.4000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">slk</td>
-<td style="text-align: left;">Laska</td>
-<td style="text-align: left;">Slovak</td>
-<td style="text-align: right;">5.2000</td>
-<td style="text-align: right;">5.2000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">gug</td>
-<td style="text-align: left;">Mborayhu</td>
-<td style="text-align: left;">Paraguayan Guaraní</td>
-<td style="text-align: right;">4.8500</td>
-<td style="text-align: right;">4.8500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">scn</td>
-<td style="text-align: left;">Amuri</td>
-<td style="text-align: left;">Sicilian</td>
-<td style="text-align: right;">4.7000</td>
-<td style="text-align: right;">4.7000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ssw</td>
-<td style="text-align: left;">Lutsandvo</td>
-<td style="text-align: left;">Swati</td>
-<td style="text-align: right;">2.3000</td>
-<td style="text-align: right;">4.7000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">lmo</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Lombard</td>
-<td style="text-align: right;">3.9000</td>
-<td style="text-align: right;">3.9000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">jam</td>
-<td style="text-align: left;">Lob</td>
-<td style="text-align: left;">Jamaican Creole English</td>
-<td style="text-align: right;">3.2000</td>
-<td style="text-align: right;">3.2000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">bos</td>
-<td style="text-align: left;">Ljubav</td>
-<td style="text-align: left;">Bosnian</td>
-<td style="text-align: right;">3.0000</td>
-<td style="text-align: right;">3.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">lit</td>
-<td style="text-align: left;">Meile</td>
-<td style="text-align: left;">Lithuanian</td>
-<td style="text-align: right;">3.0000</td>
-<td style="text-align: right;">3.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">nno</td>
-<td style="text-align: left;">Kjarleik</td>
-<td style="text-align: left;">Norwegian Nynorsk</td>
-<td style="text-align: right;">2.6000</td>
-<td style="text-align: right;">2.6000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">nob</td>
-<td style="text-align: left;">Kjarlighet</td>
-<td style="text-align: left;">Norwegian Bokmål</td>
-<td style="text-align: right;">2.6000</td>
-<td style="text-align: right;">2.6000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">war</td>
-<td style="text-align: left;">Higugma</td>
-<td style="text-align: left;">Waray</td>
-<td style="text-align: right;">2.6000</td>
-<td style="text-align: right;">2.6000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">slv</td>
-<td style="text-align: left;">Ljubezen</td>
-<td style="text-align: left;">Slovenian</td>
-<td style="text-align: right;">2.5000</td>
-<td style="text-align: right;">2.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">gom</td>
-<td style="text-align: left;">Mog</td>
-<td style="text-align: left;">Goan Konkani</td>
-<td style="text-align: right;">2.3000</td>
-<td style="text-align: right;">2.3000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">epo</td>
-<td style="text-align: left;">Amo</td>
-<td style="text-align: left;">Esperanto</td>
-<td style="text-align: right;">0.0001</td>
-<td style="text-align: right;">2.0001</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">eus</td>
-<td style="text-align: left;">Maitasun</td>
-<td style="text-align: left;">Basque</td>
-<td style="text-align: right;">0.7500</td>
-<td style="text-align: right;">1.8500</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">als</td>
-<td style="text-align: left;">Liebe</td>
-<td style="text-align: left;">Tosk Albanian</td>
-<td style="text-align: right;">1.8000</td>
-<td style="text-align: right;">1.8000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">lav</td>
-<td style="text-align: left;">Milestiba</td>
-<td style="text-align: left;">Latvian</td>
-<td style="text-align: right;">1.7500</td>
-<td style="text-align: right;">1.7500</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">nah</td>
-<td style="text-align: left;">Tlazohtiliztli</td>
-<td style="text-align: left;">Nahuatl languages</td>
-<td style="text-align: right;">1.7400</td>
-<td style="text-align: right;">1.7400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">sco</td>
-<td style="text-align: left;">Luve</td>
-<td style="text-align: left;">Scots</td>
-<td style="text-align: right;">0.1200</td>
-<td style="text-align: right;">1.6200</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">glg</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Galician</td>
-<td style="text-align: right;">1.5600</td>
-<td style="text-align: right;">1.5600</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">lim</td>
-<td style="text-align: left;">Leefde</td>
-<td style="text-align: left;">Limburgan</td>
-<td style="text-align: right;">1.3000</td>
-<td style="text-align: right;">1.3000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">est</td>
-<td style="text-align: left;">Armastus</td>
-<td style="text-align: left;">Estonian</td>
-<td style="text-align: right;">1.1000</td>
-<td style="text-align: right;">1.1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">srd</td>
-<td style="text-align: left;">Amore</td>
-<td style="text-align: left;">Sardinian</td>
-<td style="text-align: right;">1.0000</td>
-<td style="text-align: right;">1.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cym</td>
-<td style="text-align: left;">Cariad</td>
-<td style="text-align: left;">Welsh</td>
-<td style="text-align: right;">0.7000</td>
-<td style="text-align: right;">0.7000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">pms</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Piemontese</td>
-<td style="text-align: right;">0.7000</td>
-<td style="text-align: right;">0.7000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ast</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Asturian</td>
-<td style="text-align: right;">0.3500</td>
-<td style="text-align: right;">0.6400</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">isl</td>
-<td style="text-align: left;">Ast</td>
-<td style="text-align: left;">Icelandic</td>
-<td style="text-align: right;">0.3500</td>
-<td style="text-align: right;">0.6400</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">wln</td>
-<td style="text-align: left;">Amour</td>
-<td style="text-align: left;">Walloon</td>
-<td style="text-align: right;">0.6000</td>
-<td style="text-align: right;">0.6000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">mlt</td>
-<td style="text-align: left;">Imhabba</td>
-<td style="text-align: left;">Maltese</td>
-<td style="text-align: right;">0.5200</td>
-<td style="text-align: right;">0.5200</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">lij</td>
-<td style="text-align: left;">Amo</td>
-<td style="text-align: left;">Ligurian</td>
-<td style="text-align: right;">0.5000</td>
-<td style="text-align: right;">0.5000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">oci</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Occitan</td>
-<td style="text-align: right;">0.5000</td>
-<td style="text-align: right;">0.5000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fry</td>
-<td style="text-align: left;">Leafde</td>
-<td style="text-align: left;">Western Frisian</td>
-<td style="text-align: right;">0.4700</td>
-<td style="text-align: right;">0.4700</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hif</td>
-<td style="text-align: left;">Pyar</td>
-<td style="text-align: left;">Fiji Hindi</td>
-<td style="text-align: right;">0.4600</td>
-<td style="text-align: right;">0.4600</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">lad</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Ladino</td>
-<td style="text-align: right;">0.1000</td>
-<td style="text-align: right;">0.4500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ltz</td>
-<td style="text-align: left;">Leift</td>
-<td style="text-align: left;">Luxembourgish</td>
-<td style="text-align: right;">0.3900</td>
-<td style="text-align: right;">0.3900</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cos</td>
-<td style="text-align: left;">Amore</td>
-<td style="text-align: left;">Corsican</td>
-<td style="text-align: right;">0.3250</td>
-<td style="text-align: right;">0.3250</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ksh</td>
-<td style="text-align: left;">Leevde</td>
-<td style="text-align: left;">Kölsch</td>
-<td style="text-align: right;">0.2500</td>
-<td style="text-align: right;">0.2500</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">bre</td>
-<td style="text-align: left;">Karantez</td>
-<td style="text-align: left;">Breton</td>
-<td style="text-align: right;">0.2200</td>
-<td style="text-align: right;">0.2200</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ext</td>
-<td style="text-align: left;">Amol</td>
-<td style="text-align: left;">Extremaduran</td>
-<td style="text-align: right;">0.2000</td>
-<td style="text-align: right;">0.2000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">gla</td>
-<td style="text-align: left;">Gradh</td>
-<td style="text-align: left;">Scottish Gaelic</td>
-<td style="text-align: right;">0.0570</td>
-<td style="text-align: right;">0.0570</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">arg</td>
-<td style="text-align: left;">Aimor</td>
-<td style="text-align: left;">Aragonese</td>
-<td style="text-align: right;">0.0250</td>
-<td style="text-align: right;">0.0250</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">mwl</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Mirandese</td>
-<td style="text-align: right;">0.0150</td>
-<td style="text-align: right;">0.0150</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">vep</td>
-<td style="text-align: left;">Armastuz</td>
-<td style="text-align: left;">Veps</td>
-<td style="text-align: right;">0.0016</td>
-<td style="text-align: right;">0.0016</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ina</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Interlingua</td>
-<td style="text-align: right;">0.0015</td>
-<td style="text-align: right;">0.0015</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ang</td>
-<td style="text-align: left;">Lufu</td>
-<td style="text-align: left;">Old English</td>
-<td style="text-align: right;">0.0000</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">sgs</td>
-<td style="text-align: left;">Meile</td>
-<td style="text-align: left;">Samogitian</td>
-<td style="text-align: right;">0.0000</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">lat</td>
-<td style="text-align: left;">Amor</td>
-<td style="text-align: left;">Latin</td>
-<td style="text-align: right;">0.0000</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(love_words_latin, <span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">size =</span> speakers)) <span class="sc">+</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 1]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in min(box[, 2]): no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 3]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in max(box[, 4]): no non-missing arguments to max; returning -Inf</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :
 Some words could not fit on page. They have been placed at their original
@@ -1969,52 +1470,60 @@ positions.</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/r-wordcloud-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="index_files/figure-html/wordcloud-basic-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="custom-text" class="level2">
-<h2 class="anchored" data-anchor-id="custom-text">Custom Text</h2>
+<section id="with-color" class="level2">
+<h2 class="anchored" data-anchor-id="with-color">With Color!</h2>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="fu">read_lines</span>(<span class="st">"assets/finn.txt"</span>))</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># |&gt;</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  unnest_tokens(word, text)</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The wordclouds</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2024</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>count_df <span class="sc">|&gt;</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">color =</span> n)) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>(<span class="at">size =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :
+Some words could not fit on page. They have been placed at their original
+positions.</code></pre>
+</div>
 <div class="cell-output-display">
-<div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">read_lines(“assets/finn.txt”)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">riverrun, past Eve and Adam’s, from swerve of shore to bend</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">of bay, brings us by a commodius vicus of recirculation back to</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Howth Castle and Environs.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Sir Tristram, violer d’amores, fr’over the short sea, had passencore</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">rearrived from North Armorica on this side the scraggy</td>
-</tr>
-</tbody>
-</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/wordcloud-color-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-size-aesthetic" class="level2">
+<h2 class="anchored" data-anchor-id="the-size-aesthetic">The Size Aesthetic</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>count_df <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> word, <span class="at">size =</span> n, <span class="at">color =</span> n)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>() <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wordcloud_boxes(data_points = points_valid_first, boxes = boxes, :
+Some words could not fit on page. They have been placed at their original
+positions.</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/wordcloud-size-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>

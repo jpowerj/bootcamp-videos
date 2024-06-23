@@ -1,0 +1,27 @@
+```{r}
+# The wordclouds
+set.seed(2024)
+library(ggwordcloud)
+count_df |>
+  ggplot(aes(label = word, color = n)) +
+  geom_text_wordcloud(size = 20) +
+  theme_minimal()
+```
+
+## Wordclouds in R
+
+Using the `ggwordcloud` add-on to `ggplot2`!
+
+```{r}
+#| label: r-wordcloud
+library(showtext)
+showtext_auto()
+library(ggwordcloud)
+data("love_words_latin")
+love_words_latin
+set.seed(2024)
+ggplot(love_words_latin, aes(label = word, size = speakers)) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 40) +
+  theme_minimal()
+```

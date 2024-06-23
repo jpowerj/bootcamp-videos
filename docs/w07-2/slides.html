@@ -403,7 +403,7 @@
 Jeff Jacobs 
 </div>
         <p class="quarto-title-affiliation">
-            DSAN Summer Bootcamp 2024<br>Georgetown University
+            <a href="mailto:jj1088@georgetown.edu"><code>jj1088@georgetown.edu</code></a><br>DSAN Summer Bootcamp 2024<br>Georgetown University
           </p>
     </div>
 </div>
@@ -1532,11 +1532,8 @@ Table&nbsp;1: A tidy dataset, with observation IDs in <span class="cb1">orange</
 </div>
 </div><div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>gdp_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv"</span>)</span>
 <span id="cb17-2"><a></a>gdp_df <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div class="kable-table">
 <table>
@@ -1591,15 +1588,12 @@ Table&nbsp;1: A tidy dataset, with observation IDs in <span class="cb1">orange</
 <h2>Selecting/Filtering in Action</h2>
 <p>Let’s keep just the <strong>rows</strong> containing data from 2000, drop extraneous <strong>columns</strong>, and then <strong>rename</strong> the remaining columns to get rid of the spaces</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>gdp_2000_df <span class="ot">&lt;-</span> gdp_df <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>,Year,Value) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="st">"2000"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb18-4"><a></a>  <span class="fu">rename</span>(<span class="at">country=</span><span class="st">`</span><span class="at">Country Name</span><span class="st">`</span>, <span class="at">year=</span><span class="st">`</span><span class="at">Year</span><span class="st">`</span>, <span class="at">gdp=</span><span class="st">`</span><span class="at">Value</span><span class="st">`</span>)</span>
 <span id="cb18-5"><a></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"assets/gdp_2000.csv"</span>)</span>
 <span id="cb18-6"><a></a>gdp_2000_df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div class="kable-table">
 <table>

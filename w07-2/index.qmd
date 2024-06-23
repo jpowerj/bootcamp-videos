@@ -2,7 +2,7 @@
 title: "Introduction to the Tidyverse"
 subtitle: "Week 7, Part 2"
 author: "Jeff Jacobs"
-institute: "DSAN Summer Bootcamp 2024<br>Georgetown University"
+institute: "<a href='mailto:jj1088@georgetown.edu'>`jj1088@georgetown.edu`</a><br>DSAN Summer Bootcamp 2024<br>Georgetown University"
 format:
   revealjs:
     tbl-cap-location: bottom
@@ -570,7 +570,6 @@ df
 
 ```{r}
 #| label: load-gdp-data
-#| code-fold: show
 gdp_df <- read_csv("https://gist.githubusercontent.com/jpowerj/c83e87f61c166dea8ba7e4453f08a404/raw/29b03e6320bc3ffc9f528c2ac497a21f2d801c00/gdp_2000_2010.csv")
 gdp_df |> head(5)
 ```
@@ -585,7 +584,6 @@ Let's keep just the **rows** containing data from 2000, drop extraneous **column
 
 ```{r}
 #| label: clean-gdp-data
-#| code-fold: show
 gdp_2000_df <- gdp_df |>
   select(`Country Name`,Year,Value) |>
   filter(Year == "2000") |>

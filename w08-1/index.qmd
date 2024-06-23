@@ -642,31 +642,79 @@ facet_plot
 
 # Visualizing Text Data {data-stack-name="Wordclouds"}
 
-## Wordclouds in R
-
-Using the `ggwordcloud` add-on to `ggplot2`!
+## Loading Text Data
 
 ```{r}
-#| label: r-wordcloud
-library(showtext)
-showtext_auto()
-library(ggwordcloud)
-data("love_words_latin")
-love_words_latin
+#| label: load-text-data
+library(tidyverse)
+library(tidytext)
+text_url <- "https://gist.githubusercontent.com/jpowerj/493e395c2688ea72eabd0277e8e7a392/raw/6f882d95f3a1dc21c3b7e0b18b68d64b165c6367/eggs.txt"
+result_df <- as_tibble(read_lines(text_url))
+result_df <- result_df |> filter(value != "")
+result_df |> head(5)
+```
+
+## Tokenization
+
+```{r}
+#| label: tokenize-text-data
+token_df <- result_df |>
+  unnest_tokens(word, value)
+token_df |> head()
+```
+
+## Removing Stopwords
+
+```{r}
+#| label: remove-stopwords
+library(stopwords)
+cleaned_df <- token_df |>
+  anti_join(get_stopwords())
+cleaned_df |> head()
+```
+
+## Computing Token Counts
+
+```{r}
+#| label: compute-token-counts
+count_df <- cleaned_df |>
+  count(word, sort = TRUE)
+count_df |> head()
+```
+
+## Basic Wordcloud
+
+```{r}
+#| label: wordcloud-basic
 set.seed(2024)
-ggplot(love_words_latin, aes(label = word, size = speakers)) +
-  geom_text_wordcloud() +
-  scale_size_area(max_size = 40) +
+library(ggwordcloud)
+count_df |>
+  ggplot(aes(label = word)) +
+  geom_text_wordcloud(size = 20) +
   theme_minimal()
 ```
 
-## Custom Text
+## With Color!
 
 ```{r}
-#| label: r-custom-wordcloud
-library(tidytext)
-result <- tibble(read_lines("assets/finn.txt"))
-# |>
-#  unnest_tokens(word, text)
-head(result)
+#| label: wordcloud-color
+# The wordclouds
+set.seed(2024)
+library(ggwordcloud)
+count_df |>
+  ggplot(aes(label = word, color = n)) +
+  geom_text_wordcloud(size = 20) +
+  theme_minimal()
 ```
+
+## The Size Aesthetic
+
+```{r}
+#| label: wordcloud-size
+count_df |>
+  ggplot(aes(label = word, size = n, color = n)) +
+  geom_text_wordcloud() +
+  scale_size_area(max_size = 50) +
+  theme_minimal()
+```
+
